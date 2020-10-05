@@ -236,6 +236,44 @@
         </v-card>
       </v-col>
     </v-row>
+
+    
+    <v-row align="start" justify="space-around">
+     <h1>Writer Recruitement & Funding</h1>
+     <v-btn
+      color="deep-purple lighten-2"
+      text
+      
+    >더 보기</v-btn>
+    </v-row>
+    
+    <v-row
+      class="justify-center"
+      no-gutters
+      dense
+      
+    >
+      <Recruitment></Recruitment>
+      <Recruitment></Recruitment>
+      <Recruitment></Recruitment>
+      <Recruitment></Recruitment>
+      <!-- <Recruitment></Recruitment>
+      <Recruitment></Recruitment> -->
+    </v-row>
+    <v-row
+      class="justify-center"
+      no-gutters
+      dense
+      
+    >
+      <Recruitment></Recruitment>
+      <Recruitment></Recruitment>
+      <Recruitment></Recruitment>
+      <Recruitment></Recruitment>
+      <!-- <Recruitment></Recruitment>
+      <Recruitment></Recruitment> -->
+    </v-row>
+    
     <!-- <v-row
       class="ma-0 pa-0"
       no-gutters
@@ -266,13 +304,16 @@
 </template>
 
 <script>
+import Recruitment from './components/recruit';
 // import HelloWorld from './components/HelloWorld';
 
 export default {
   name: 'App',
 
   components: {
+    Recruitment
     // HelloWorld,
+    // 여기에 자기가 만든 component 를 써넣고 위에 템플릿에 추가하면됩니다
   },
 
   data: () => ({
