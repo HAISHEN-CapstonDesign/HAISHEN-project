@@ -99,11 +99,7 @@
 <script>
 
 export default {
-  name: 'App',
-
-  components: {
-
-  },
+  name: 'MyPageEdit',
 
   data: () => ({
     //

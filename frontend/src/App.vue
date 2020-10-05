@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <router-view></router-view>
+
   <v-card
     class="overflow-hidden"
     height="3000"
@@ -144,7 +144,11 @@
         </v-sheet>
       </v-carousel-item>
     </v-carousel>
-
+<div>
+    <!-- 라우터 링크를 추가 -->
+    
+    <router-view></router-view>
+  </div>
     <h1>Genre</h1>
     <v-row justify="center">
       <v-col>
@@ -236,7 +240,6 @@
         </v-card>
       </v-col>
     </v-row>
-
     
     <v-row align="start" justify="space-around">
      <h1>Writer Recruitement & Funding</h1>
@@ -311,7 +314,7 @@ export default {
   name: 'App',
 
   components: {
-    Recruitment
+    Recruitment,
     // HelloWorld,
     // 여기에 자기가 만든 component 를 써넣고 위에 템플릿에 추가하면됩니다
   },

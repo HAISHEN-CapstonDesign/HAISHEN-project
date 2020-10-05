@@ -2,22 +2,20 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import vuetify from './plugins/vuetify';
-import { MyPage } from './components/MyPage';
+import MyPage from './MyPage.vue'
 
 Vue.config.productionTip = false
 
 Vue.use(VueRouter);
 
-const routes = [{
-    path: '/My',
-    component: MyPage
-}];
-
 const router = new VueRouter({
-    routes
-});
+    routes: [
+        { path: "/MyPage", component: MyPage }
+    ]
+})
 
 new Vue({
     vuetify,
-    render: h => h(App)
+    render: h => h(App),
+    router
 }).$mount('#app')
