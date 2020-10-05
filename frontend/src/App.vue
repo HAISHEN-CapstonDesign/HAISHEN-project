@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <router-view></router-view>
   <v-card
     class="overflow-hidden"
     height="3000"
