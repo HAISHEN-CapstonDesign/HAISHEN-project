@@ -1,5 +1,5 @@
 <template>
-      <v-card
+    <v-card
         :loading="loading"
         class="mx-auto my-12 px-3"
         max-width="280"
@@ -14,31 +14,6 @@
     <v-card-subtitle>
       주제 간단하게 설명하기 주제 간단하게 설명하기 주제 간단하게 설명하기 주제 간단하게 설명하기 
     </v-card-subtitle>
-    <!-- <v-card-text>
-      <v-row
-        align="center"
-        class="mx-0"
-      >
-        <v-rating
-          :value="4.5"
-          color="amber"
-          dense
-          half-increments
-          readonly
-          size="14"
-        ></v-rating>
-
-        <div class="grey--text ml-4">
-          4.5 (413)
-        </div>
-      </v-row>
-
-      <div class="my-4 subtitle-1">
-        $ • Italian, Cafe
-      </div>
-
-      <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
-    </v-card-text> -->
 
     <v-divider ></v-divider>
 
@@ -90,13 +65,7 @@ export default {
     data : () => ({
         loading: false,
         // selection:2,
-    }),
-    methods: {
-      reserve () {
-        this.loading = true
+    })
 
-        setTimeout(() => (this.loading = false), 2000)
-      },
-    },
 }
 </script>
