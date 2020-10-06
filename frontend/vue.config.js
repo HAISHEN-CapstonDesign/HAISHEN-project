@@ -2,17 +2,16 @@ module.exports = {
     "transpileDependencies": [
         "vuetify"
     ],
-    devServer: {
-        proxy: {
-            '/api': {
-                target: 'http://localhost:3000/api',
-                changeOrigin: true,
-                pathRewrite: {
-                    '^/api': ''
-                }
-            }
-        }
-    },
-    outputDir: '../backend/public',
 
+    outputDir: "../backend/crunch_server/src/main/resources/static",
+    indexPath: "../static/index.html",
+
+    devServer: {
+        proxy: "http://localhost:3000"
+    },
+    chainWebpack: config => {
+        const svgRule = config.module.rule("svg");
+        svgRule.uses.clear();
+        svgRule.use("vue-svg-loader").loader("vue-svg-loader");
+    }
 }
