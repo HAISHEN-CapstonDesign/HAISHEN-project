@@ -40,10 +40,13 @@
 
     <br><br>
 
-  <v-container fluid>
-    <v-layout row wrap align-center>
-      <v-flex>
-      <v-card class="mx-auto" >
+  <v-container fluid grid-list-sm>
+    <v-row no-gutters>
+      <v-col
+        cols="6"
+        md="4"
+      >
+      <v-card class="mx-auto" max-width="344" outlined>
       <v-card-title>
        닉네임
       </v-card-title>
@@ -56,25 +59,28 @@
      <v-card-subtitle>
        집필 수 등등 나머지 세부사항
      </v-card-subtitle>
-            </v-card>
-    </v-flex>
-
+      </v-card>
+      </v-col>
     <!--집필중 글 목록-->
-      <v-flex>
-        <p>진행중인 집필 목록</p>
-        <v-layout row wrap>
+    <v-col
+      cols="12"
+      sm="6"
+      md="8"
+    >
+        <v-layout column wrap>
           <v-flex>
-            
+            <p>진행중인 집필 목록</p>
           </v-flex>
           <v-flex>
             <v-row>
             <Writing></Writing>
             <Writing></Writing>
+            <Writing></Writing>
             </v-row>
           </v-flex>
         </v-layout>
-      </v-flex>
-    </v-layout>
+    </v-col>
+    </v-row>
   </v-container>
 
   </v-app>
