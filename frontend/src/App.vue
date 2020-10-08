@@ -144,7 +144,6 @@
         </v-sheet>
       </v-carousel-item>
     </v-carousel>
-
     <h1>Genre</h1>
     <v-row justify="center">
       <v-col>
@@ -296,7 +295,11 @@
 
   </v-card>
 
-
+<div>
+    <!-- 라우터 링크를 추가 -->
+    
+    <router-view></router-view>
+  </div>
 
     
   </v-app>

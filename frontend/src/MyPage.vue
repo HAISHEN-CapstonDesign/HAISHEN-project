@@ -59,6 +59,12 @@
      <v-card-subtitle>
        집필 수 등등 나머지 세부사항
      </v-card-subtitle>
+     <v-btn
+      text
+      color="primary"
+    >
+      수정하기
+    </v-btn>
       </v-card>
       </v-col>
     <!--집필중 글 목록-->
@@ -77,26 +83,108 @@
             <Writing></Writing>
             <Writing></Writing>
             </v-row>
+
+            <div class="text-center">
+              <v-pagination
+                v-model="page"
+                :length="6"
+              ></v-pagination>
+            </div>
           </v-flex>
+          <v-flex>
+            <p>집필 완료 목록</p>
+          </v-flex>
+          <v-flex>
+            <v-row>
+            <Complete></Complete>
+            <Complete></Complete>
+            <Complete></Complete>
+            </v-row>
+            <div class="text-center">
+              <v-pagination
+                v-model="page"
+                :length="6"
+              ></v-pagination>
+            </div>
+          </v-flex>
+          <v-flex>
+            <p>구독하는 작가들/좋아요 한 글</p>
+          </v-flex>
+          <v-flex>
+            <v-row>
+              <v-col>
+              <v-row>
+    <v-col
+      cols="12"
+      sm="6"
+      offset-sm="3"
+    >
+      <v-card>
+        <v-list>         
+            <Subscribe></Subscribe>
+
+        </v-list>
+      </v-card>
+    </v-col>
+  </v-row>
+              </v-col>
+              <!--위>작가/아래>글-->
+              <v-col>
+<v-row justify="center">
+    <v-col
+      cols="12"
+      sm="8"
+    >
+      <v-card>
+
+        <v-list>
+          <Liked></Liked>
+          <Liked></Liked>
+          <Liked></Liked>
+        </v-list>
+
+      </v-card>
+    </v-col>
+  </v-row>
+
+              </v-col>
+            </v-row>
+          </v-flex>
+          <div class="text-center">
+              <v-pagination
+                v-model="page"
+                :length="6"
+              ></v-pagination>
+            </div>
         </v-layout>
     </v-col>
     </v-row>
-  </v-container>
 
+  </v-container>
   </v-app>
 </template>
 
 <script>
 import Writing from './components/WritingList'
+import Complete from './components/WritingCompleteList'
+import Liked from './components/Liked'
+import subscribe from './components/SubscribedWriter'
 
 export default {
     name: 'MyPage',
     components: {
         Writing,
-   
+        Complete,
+        Liked,
+        subscribe,
+
   },
-  data: () => ({
-    //
-  }),
+  data() {
+    return {
+      page: 1,
+    
+    }
+  },
+
 };
 </script>
