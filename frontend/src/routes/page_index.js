@@ -4,6 +4,10 @@ import VueRouter from 'vue-router'
 import aboutPage from '../views/about.vue';
 import MainPage from '../views/MainPage.vue';
 import loginPage from '../views/loginPage.vue';
+import myPage from '../views/MyPage.vue';
+import signUpPage from '../views/SignUpPage.vue';
+import postListPage from '../views/PostListPage.vue';
+import collaboProjMain from '../views/CollaboProjMainPage.vue';
 
 Vue.use(VueRouter);
 
@@ -28,6 +32,22 @@ export const router = new VueRouter({
         {
             path: '/login',
             component: loginPage,
+        },
+        {
+            path: '/mypage',
+            component: myPage,
+        },
+        {
+            path: '/signup',
+            component: signUpPage,
+        },
+        {
+            path: '/postlist',
+            component: postListPage,
+        },
+        {
+            path: '/collaboProjMain',
+            component: collaboProjMain,
         }
     ]
 })
