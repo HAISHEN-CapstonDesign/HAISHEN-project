@@ -63,9 +63,10 @@
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
           </v-flex>
+          <br>
           <v-flex>
           <span style="font-size:25px">Interests </span>
-          <div class="text-center">
+
     <v-btn
       v-if="!chip1 && !chip2 && !chip3 && !chip4"
       close
@@ -118,7 +119,7 @@
     >
       Complete
     </v-chip>
-  </div>
+
           <v-btn
             class="ma-2"
             outlined
@@ -129,6 +130,7 @@
             <v-icon>mdi-pencil</v-icon>
           </v-btn>
           </v-flex>
+          <br>
           <v-flex>
           <span style="font-size:25px">Career </span>
           <textarea v-model="message" placeholder="Career"></textarea>

@@ -8,11 +8,14 @@
     >
     <v-avatar
           color="blue"
-          size="270"
+          size="250"
         >
           <span class="white--text headline">profile</span>
-        </v-avatar>
-        <div style="float:right">
+    </v-avatar>
+    </v-img>
+
+  <v-container fluid grid-list-sm>
+      <div style="float:right;">
     <v-btn
       class="mx-2"
       fab
@@ -36,11 +39,7 @@
       </v-icon>
     </v-btn>
         </div>
-    </v-img>
-
-    <br><br>
-
-  <v-container fluid grid-list-sm>
+        <br><br>
     <v-row no-gutters>
       <v-col
         cols="6"
@@ -62,6 +61,7 @@
      <v-btn
       text
       color="primary"
+      to ="/MypageEdit"
     >
       수정하기
     </v-btn>
@@ -107,6 +107,7 @@
               ></v-pagination>
             </div>
           </v-flex>
+          <!--이거 크기조절 안됨.. 수정 필요-->
           <v-flex>
             <p>구독하는 작가들/좋아요 한 글</p>
           </v-flex>
@@ -114,34 +115,32 @@
             <v-row>
               <v-col>
               <v-row>
-    <v-col
-      cols="12"
-      sm="6"
-      offset-sm="3"
-    >
+    <v-col>
       <v-card>
-        <v-list>         
-            <Subscribe></Subscribe>
-
+        <v-list>
+            <v-subheader>구독한 작가</v-subheader>
+            <v-list-item-group v-model="model">
+            <Sub></Sub>
+            <Sub></Sub>
+            <Sub></Sub>
+            </v-list-item-group>
         </v-list>
       </v-card>
     </v-col>
   </v-row>
               </v-col>
-              <!--위>작가/아래>글-->
+     <!--위>작가/아래>글-->
               <v-col>
-<v-row justify="center">
-    <v-col
-      cols="12"
-      sm="8"
-    >
+    <v-row justify="center">
+    <v-col>
       <v-card>
 
-        <v-list>
-          <Liked></Liked>
-          <Liked></Liked>
-          <Liked></Liked>
-        </v-list>
+         <v-list subheader>
+      <v-subheader>좋아요 한 글</v-subheader>
+        <Liked></Liked>
+        <Liked></Liked>
+        <Liked></Liked>
+    </v-list>
 
       </v-card>
     </v-col>
@@ -165,18 +164,18 @@
 </template>
 
 <script>
-import Writing from './components/WritingList'
-import Complete from './components/WritingCompleteList'
-import Liked from './components/Liked'
-import subscribe from './components/SubscribedWriter'
+import Writing from '../components/WritingList'
+import Complete from '../components/WritingCompleteList'
+import Liked from '../components/Liked'
+import Sub from '../components/SubscribedWriter'
 
 export default {
-    name: 'MyPage',
+    name: 'myPage',
     components: {
         Writing,
         Complete,
         Liked,
-        subscribe,
+        Sub,
 
   },
   data() {

@@ -21,8 +21,8 @@
                     <router-link to="/llogin">llogin하기</router-link>
                     </div> -->
                     
-                    <v-btn small class="mr-2" >sign up</v-btn>
-                    <v-btn small class="mr-2" >My</v-btn>
+                    <v-btn small class="mr-2" to ="/signup" >sign up</v-btn>
+                    <v-btn small class="mr-2" to ="/mypage" >My</v-btn>
             </v-row>
             </v-app-bar>
 
@@ -146,7 +146,10 @@
                 </v-sheet>
             </v-carousel-item>
             </v-carousel>
+            
 
+            <v-btn to ="/postlist">글목록으로</v-btn>
+            <v-btn to ="/collaboProjMain">공동프로젝트 메인페이지로</v-btn>
             <h1>Genre</h1>
             <v-row justify="center">
             <v-col>

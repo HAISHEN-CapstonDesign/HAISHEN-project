@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-list-item max-height="300">
+        <v-list-item >
             <v-list-item-content>
             <v-list-item-title>제목</v-list-item-title>
             </v-list-item-content>
