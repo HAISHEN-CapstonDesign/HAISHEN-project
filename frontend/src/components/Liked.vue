@@ -25,8 +25,6 @@
           <span class="subheading">45</span>
         </v-row>
       </v-list-item>
-
-          <v-divider inset></v-divider>
         
     </v-app>
 </template>

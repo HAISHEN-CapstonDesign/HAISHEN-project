@@ -9,6 +9,7 @@ import signUpPage from '../views/SignUpPage.vue';
 import postListPage from '../views/PostListPage.vue';
 import collaboProjMain from '../views/CollaboProjMainPage.vue';
 import MyPageEdit from '../views/MyPageEdit';
+import ProjectStart from '../views/ProjectStart'
 
 Vue.use(VueRouter);
 
@@ -53,6 +54,10 @@ export const router = new VueRouter({
         {
             path: '/collaboProjMain',
             component: collaboProjMain,
+        },
+        {
+            path: '/projectStart',
+            component: ProjectStart,
         }
     ]
 })

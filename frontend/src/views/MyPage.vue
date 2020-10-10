@@ -116,16 +116,7 @@
               <v-col>
               <v-row>
     <v-col>
-      <v-card>
-        <v-list>
-            <v-subheader>구독한 작가</v-subheader>
-            <v-list-item-group v-model="model">
-            <Sub></Sub>
-            <Sub></Sub>
-            <Sub></Sub>
-            </v-list-item-group>
-        </v-list>
-      </v-card>
+        <Sub></Sub>
     </v-col>
   </v-row>
               </v-col>
@@ -133,7 +124,7 @@
               <v-col>
     <v-row justify="center">
     <v-col>
-      <v-card>
+      <v-card class="mx-auto">
 
          <v-list subheader>
       <v-subheader>좋아요 한 글</v-subheader>
