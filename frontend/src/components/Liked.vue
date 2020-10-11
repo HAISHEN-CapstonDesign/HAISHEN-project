@@ -34,8 +34,10 @@
   <script>
   export default {
       name: 'Liked',
-    data: () => ({
-      books: [
+
+    data() {
+      return{
+        books: [
         {
           title: '제목1',
           intro: '한줄소개한줄소개한줄소개',
@@ -57,7 +59,9 @@
           like:'142',
           subscribe:'63',
         },
-      ],
-    }),
+        ],
+      }
+
+    },
   }
 </script>

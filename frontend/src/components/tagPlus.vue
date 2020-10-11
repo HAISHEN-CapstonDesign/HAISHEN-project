@@ -1,7 +1,6 @@
 <template>
 <v-app>
   <v-combobox
-    v-model="chips"
     :items="items"
     chips
     clearable
@@ -30,8 +29,7 @@
       name:'tag',
     data () {
       return {
-        chips: ['Programming', 'Playing video games', 'Watching movies', 'Sleeping'],
-        items: ['Streaming', 'Eating'],
+        items: ['여행', '수학', '과학', 'IT', '요리'],
       }
     },
     methods: {

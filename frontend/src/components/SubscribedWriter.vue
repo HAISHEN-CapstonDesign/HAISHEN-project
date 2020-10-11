@@ -18,9 +18,8 @@
         <v-list-item-content>
           <v-list-item-title v-text="chat.title"></v-list-item-title>
         </v-list-item-content>
-        <!--tag 수정 -> 여러개 표시하도록 바꿔야함-->
-        <v-list-item-chip>
-          <v-chip v-text="chat.tag"></v-chip>
+        <v-list-item-chip >
+          <v-chip v-for="tags in chat.tag" :key="tags" v-text="tags"></v-chip>
         </v-list-item-chip>
       </v-list-item>
     </v-list>
@@ -30,30 +29,32 @@
 <script>
   export default {
       name: 'SubscribedWriter',
-   data: () => ({
-     recent: [
+   data() {
+     return{
+      recent: [
         {
           avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
           title: 'Jason Oner',
-          tag: '건강'
+          tag: ['건강','요리']
         },
         {
           avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
           title: 'Mike Carlson',
-          tag: '건강'
+          tag: ['건강','운동']
         },
         {
           avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
           title: 'Cindy Baker',
-          tag: '건강'
+          tag: ['건강']
         },
         {
           avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
           title: 'Ali Connors',
-          tag: '요리'
+          tag: ['요리']
         },
       ],
 
-    }),
+     }
+    },
   }
 </script>
