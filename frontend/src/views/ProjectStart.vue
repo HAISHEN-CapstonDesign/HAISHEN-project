@@ -1,79 +1,205 @@
 <template>
     <v-app>
+        <!--업로드 이미지-->
         <v-img
-        lazy-src="https://picsum.photos/id/11/10/6"
+        v-if="imageUrl" :src="imageUrl"
         max-height="200"
         max-width="100%"
-        src="https://picsum.photos/id/11/500/300"
-        >
-    </v-img>
+        ></v-img>
+        <!--기본 이미지-->
+        <v-img
+        v-else
+        max-height="200"
+        max-width="100%"
+        src="..\assets\banner.jpg"
+        ></v-img>
     <br>
+    <v-container style="width: 60%;">
     <v-layout column wrap>
         <v-flex>
             <v-row>
-                <v-col>
-                    <p style="font-size:25px" class="text-center">프로젝트 주제 </p>
+                <v-col cols="6" md="4">
+                    <p style="font-size:20px" class="text-center">프로젝트 주제</p>
                 </v-col>
-                <v-col>
-                    <input v-model="subject" placeholder="최대 100자" style="height:30px">
-                </v-col>
-            </v-row>
-        </v-flex>
-        <v-flex>
-            <v-row>
-                <v-col>
-                    <p class="text-center" style="font-size:25px">프로젝트 tag </p>
-                </v-col>
-                <v-col>
-                    <Tag></Tag>
+                <v-col cols="12" sm="6" md="8">
+                    <v-text-field
+                    label="프로젝트 주제"
+                    :rules="rules"
+                    counter="100"
+                    outlined
+                    ></v-text-field>
                 </v-col>
             </v-row>
         </v-flex>
         <v-flex>
             <v-row>
-                <v-col>
-                    <p style="font-size:25px" class="text-center">프로젝트 설명 </p>
+                <v-col cols="6" md="4">
+                    <p style="font-size:20px" class="text-center">프로젝트 tag</p>
                 </v-col>
-                <v-col>
-                    <textarea v-model="message" placeholder="최대 1000자"></textarea>
-                </v-col>
-            </v-row>
-        </v-flex>
-        <v-flex>
-            <v-row>
-                <v-col>
-                    <p style="font-size:25px" class="text-center">배너 이미지 </p>
-                </v-col>
-            </v-row>
-        </v-flex>
-        <v-flex>
-            <v-row>
-                <v-col>
-                    <p style="font-size:25px" class="text-center">내 프로필 </p>
+                <v-col cols="12" sm="6" md="8">
+                    <v-autocomplete
+                    :items="items"
+                    outlined
+                    dense
+                    chips
+                    small-chips
+                    label="장르"
+                    multiple
+                    ></v-autocomplete>
                 </v-col>
             </v-row>
         </v-flex>
         <v-flex>
             <v-row>
-                <v-col>
-                    <p style="font-size:25px" class="text-center">모집 인원 </p>
+                <v-col cols="6" md="4">
+                    <p style="font-size:20px" class="text-center">프로젝트 설명</p>
                 </v-col>
-                <v-col>
-                    <input type="text" v-model="onlyNumber" maxlength="5"/>
-                </v-col>
-            </v-row>
-        </v-flex>
-        <v-flex>
-            <v-row>
-                <v-col>
-                    <p style="font-size:25px" class="text-center">목표 작업 기한 </p>
+                <v-col cols="12" sm="6" md="8">
+                    <v-textarea
+                    counter="1000"
+                    outlined
+                    label="프로젝트 설명"
+                    :rules="area_rules"
+                    ></v-textarea>
                 </v-col>
             </v-row>
         </v-flex>
         <v-flex>
             <v-row>
-                <v-col>
-                    <p style="font-size:25px" class="text-center">목표 펀딩 금액 </p>
+                <v-col cols="6" md="4">
+                    <p style="font-size:20px" class="text-center">배너 이미지 </p>
+                </v-col>
+                <v-col cols="12" sm="6" md="8">
+                    <input ref="imageInput" type="file" hidden @change="onChangeImages">
+                    <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn>
+                </v-col>
+            </v-row>
+        </v-flex>
+        <v-flex>
+            <v-row>
+                <v-col cols="6" md="4">
+                    <p style="font-size:20px" class="text-center">내 프로필 </p>
+                </v-col>
+                <v-col cols="12" sm="6" md="8">
+                    <v-radio-group
+                    v-model="profile_radios"
+                    :mandatory="false"
+                    >
+                        <v-radio
+                        label="My페이지에서 가져오기"
+                        value="radio-1"
+                        ></v-radio>
+                        <v-radio
+                        label="새로 작성하기"
+                        value="radio-2"
+                        ></v-radio>
+                    </v-radio-group>
+                    <v-text-field
+                    label="닉네임"
+                    v-model="my.name"
+                    :disabled="profile_radios == 'radio-1'"
+                    outlined
+                    ></v-text-field>
+                    <v-autocomplete
+                    v-model="my.tag"
+                    :items="items"
+                    :disabled="profile_radios == 'radio-1'"
+                    outlined
+                    dense
+                    chips
+                    small-chips
+                    label="관심분야"
+                    multiple
+                    ></v-autocomplete>
+                    <v-textarea
+                    label="이력"
+                    v-model="my.career"
+                    :disabled="profile_radios == 'radio-1'"
+                    outlined
+                    ></v-textarea>
+                </v-col>
+            </v-row>
+        </v-flex>
+        <v-flex>
+            <v-row>
+                <v-col cols="6" md="4">
+                    <p style="font-size:20px" class="text-center">모집 인원 </p>
+                </v-col>
+                <v-col cols="12" sm="6" md="8">
+                    <v-radio-group
+                    v-model="num_radios"
+                    :mandatory="false"
+                    >
+                        <v-radio
+                        label="개인"
+                        value="radio-1"
+                        ></v-radio>
+                        <v-radio
+                        label="팀"
+                        value="radio-2"
+                        ></v-radio>
+                    </v-radio-group>
+                    <v-select
+                    :items="member_num"
+                    v-show="num_radios == 'radio-2'"
+                    label="인원 수"
+                    dense
+                    outlined
+                    ></v-select>
+                </v-col>
+            </v-row>
+        </v-flex>
+        <v-flex>
+            <v-row>
+                <v-col cols="6" md="4">
+                    <p style="font-size:20px" class="text-center">목표 펀딩 금액 </p>
+                </v-col>
+                <v-col cols="12" sm="6" md="8">
+                    <v-radio-group
+                    v-model="funding_radios"
+                    :mandatory="false"
+                    >
+                        <v-radio
+                        label="펀딩 등록 안함"
+                        value="radio-1"
+                        ></v-radio>
+                        <v-radio
+                        label="펀딩 등록하기"
+                        value="radio-2"
+                        ></v-radio>
+                    </v-radio-group>
+                    <v-text-field
+                    label="목표 펀딩 금액"
+                    suffix="point"
+                    v-show="funding_radios == 'radio-2'"
+                    value="0"
+                    style="width:35%"
+                    ></v-text-field>
+                </v-col>
+            </v-row>
+        </v-flex>
+        <v-flex>
+            <v-row>
+                <v-col cols="6" md="4">
+                    <p style="font-size:20px" class="text-center">목표 작업 기한 </p>
+                </v-col>
+                <v-col cols="12" sm="6" md="8">
+                    <v-radio-group
+                    v-model="deadline_radios"
+                    :mandatory="false"
+                    >
+                        <v-radio
+                        label="무기한"
+                        value="radio-1"
+                        ></v-radio>
+                        <v-radio
+                        label="기한 있음"
+                        value="radio-2"
+                        ></v-radio>
+                    </v-radio-group>
+                    <div v-show="deadline_radios == 'radio-2'">
+                    <Calendar></Calendar>
+                    </div>
                 </v-col>
             </v-row>
         </v-flex>
@@ -86,27 +212,47 @@
             </div>
         </v-flex>
     </v-layout>
+    </v-container>
     </v-app>
 </template>
 
 <script>
-import Tag from '../components/tagPlus'
+import Calendar from '../components/calendar'
 export default {
     name: 'projectStart',
     components: {
-        Tag
+        Calendar
     },
 
     data() {
         return{
-            onlyNumber: "",
+            items: ['여행', '수학', '과학', 'IT', '요리','건강','역사','건축','문화,예술'],
+            rules: [v => v.length <= 100 || 'Max 100 characters'],
+            area_rules: [v => v.length <= 1000 || 'Max 1000 characters'],
+            member_num: ['2','3','4','5','6','7','8','9','10'],
+            num_radios: 'radio-1',
+            profile_radios: 'radio-1',
+            deadline_radios: 'radio-1',
+            funding_radios: 'radio-1',
+            my: {
+                name: "김ㅇㅇ",
+                tag: ['여행', '요리'],
+                career: '대충 이력 내용'
+            },
+            imageUrl: null,
         }
-  },
-  watch: {
-      onlyNumber : function(){
-          return this.onlyNumber = this.onlyNumber.replace(/[^0-9]/g, '');
-      }
-  },
+    },
+    methods: {
+        onClickImageUpload() {
+            this.$refs.imageInput.click();
+        },
+        onChangeImages(e) {
+            console.log(e.target.files)
+            const file = e.target.files[0];
+            this.imageUrl = URL.createObjectURL(file);
+        }
+    },
+
 }
 </script>
 

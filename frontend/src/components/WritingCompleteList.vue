@@ -1,15 +1,31 @@
 <template>
     <v-app>
         <p>집필 완료 목록</p>
-      <v-row>
-      <v-card
-      v-for="chat in list"
-      :key="chat.title"
-      class="mx-auto"
-      max-width="344"
-      outlined
-      tile
+<v-sheet
+    class="mx-auto"
+    elevation="8"
+    max-width="800"
+  >
+    <v-slide-group
+      v-model="model"
+      class="pa-4"
+      active-class="success"
+      show-arrows
+    >
+      <v-slide-item
+        v-for="chat in list"
+        :key="chat.title"
+        v-slot:default="{ active, toggle }"
       >
+        <v-card
+          :color="active ? undefined : 'white lighten-1'"
+          class="mx-auto"
+          width="350"
+          outlined
+          tile
+          @click="toggle"
+        >
+
     <v-img
     :src="chat.image"
     height="200px"
@@ -24,14 +40,10 @@
     <v-card-text v-text="chat.progress"></v-card-text>
 
   </v-card>
-      </v-row>
-  <br>
-  <div class="text-center">
-    <v-pagination
-      v-model="page"
-      :length="6"
-    ></v-pagination>
-  </div>
+      </v-slide-item>
+    </v-slide-group>
+</v-sheet>
+
     </v-app>
 </template>
 

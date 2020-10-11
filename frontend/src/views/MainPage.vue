@@ -31,15 +31,14 @@
                 absolute
                 temporary
                 >
+        <!--나중에 로고 이미지로 변경-->
+                <img
+                src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+                height="70px"
+                width="100%"
+                dark
+                >
 
-            <v-list-item two-line>
-                <v-list-item-avatar>
-                    <img src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
-                </v-list-item-avatar>
-                <v-list-item-content>
-                    <v-list-item-title>logo...T-T change plz</v-list-item-title>
-                </v-list-item-content>
-                </v-list-item>
             <template>
                 <v-list-item two-line>
                 <v-list-item-avatar>
@@ -65,11 +64,11 @@
                 <v-list-item-title>My</v-list-item-title>
                 </template> 
 
-                <v-list-item>
+                <v-list-item to="/login">
                 <v-list-item-title>Login/Sign up</v-list-item-title>
                 </v-list-item>
 
-                <v-list-item>
+                <v-list-item to="/MyPage">
                 <v-list-item-title>Info</v-list-item-title>
                 </v-list-item>
 

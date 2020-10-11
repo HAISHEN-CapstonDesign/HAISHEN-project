@@ -18,6 +18,7 @@
         >Avatar</v-avatar>
         </v-flex>
         <v-flex>
+          <!--이미지 업로드 연결 필요-->
           <v-file-input
           accept="image/png, image/jpeg, image/bmp"
           placeholder="Avatar Upload"
@@ -151,6 +152,14 @@ export default {
       remove (item) {
         const index = this.friends.indexOf(item.name)
         if (index >= 0) this.friends.splice(index, 1)
+      },
+      onClickImageUpload() {
+            this.$refs.imageInput.click();
+        },
+      onChangeImages(e) {
+            console.log(e.target.files)
+            const file = e.target.files[0];
+            this.imageUrl = URL.createObjectURL(file);
       },
     },
 };
