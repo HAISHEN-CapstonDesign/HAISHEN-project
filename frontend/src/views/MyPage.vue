@@ -6,12 +6,14 @@
       max-width="100%"
       src="https://picsum.photos/id/11/500/300"
     >
-    <v-avatar
-          color="blue"
-          size="250"
-        >
-          <span class="white--text headline">profile</span>
-    </v-avatar>
+    <div style="position: absolute; top: 30px; left: 10%;">
+      <v-avatar
+        color="blue"
+        size="250"
+      >
+        <span class="white--text headline">Avatar</span>
+      </v-avatar>
+    </div>
     </v-img>
 
   <v-container fluid grid-list-sm>
@@ -22,6 +24,7 @@
       dark
       small
       color="success"
+      to='/profitCheck'
     >
       <v-icon dark>
         mdi-currency-usd
@@ -75,74 +78,46 @@
     >
         <v-layout column wrap>
           <v-flex>
-            <p>진행중인 집필 목록</p>
-          </v-flex>
-          <v-flex>
-            <v-row>
             <Writing></Writing>
-            <Writing></Writing>
-            <Writing></Writing>
-            </v-row>
-
-            <div class="text-center">
-              <v-pagination
-                v-model="page"
-                :length="6"
-              ></v-pagination>
-            </div>
-          </v-flex>
-          <v-flex>
-            <p>집필 완료 목록</p>
           </v-flex>
           <v-flex>
             <v-row>
             <Complete></Complete>
-            <Complete></Complete>
-            <Complete></Complete>
             </v-row>
-            <div class="text-center">
-              <v-pagination
-                v-model="page"
-                :length="6"
-              ></v-pagination>
-            </div>
           </v-flex>
           <v-flex>
             <p>구독하는 작가들/좋아요 한 글</p>
+            <!--페이징 필요-->
           </v-flex>
           <v-flex>
             <v-row>
               <v-col>
               <v-row>
-    <v-col>
-      <v-card class="mx-auto">
-        <Sub></Sub>
-      </v-card>
-    </v-col>
-  </v-row>
-      </v-col>
-     <!--위>작가/아래>글-->
-          <v-col>
-    <v-row justify="center">
-    <v-col>
-      <v-card class="mx-auto">
-
-        <Liked></Liked>
-
-      </v-card>
-    </v-col>
-  </v-row>
-
+                <v-col>
+                  <v-card class="mx-auto">
+                  <Sub></Sub>
+                  </v-card>
+                </v-col>
+              </v-row>
               </v-col>
+              <v-col>
+                <v-row justify="center">
+                  <v-col>
+                    <v-card class="mx-auto">
+                      <Liked></Liked>
+                    </v-card>
+                  </v-col>
+                </v-row>
+             </v-col>
             </v-row>
           </v-flex>
           <div class="text-center">
-              <v-pagination
-                v-model="page"
-                :length="6"
-              ></v-pagination>
-            </div>
-        </v-layout>
+          <v-pagination
+          v-model="page"
+          :length="6"
+          ></v-pagination>
+          </div>
+    </v-layout>
     </v-col>
     </v-row>
 

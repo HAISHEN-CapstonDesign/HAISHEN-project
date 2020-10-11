@@ -10,6 +10,7 @@ import postListPage from '../views/PostListPage.vue';
 import collaboProjMain from '../views/CollaboProjMainPage.vue';
 import MyPageEdit from '../views/MyPageEdit';
 import ProjectStart from '../views/ProjectStart'
+import ProfitCheck from '../views/ProfitCheck'
 
 Vue.use(VueRouter);
 
@@ -58,6 +59,10 @@ export const router = new VueRouter({
         {
             path: '/projectStart',
             component: ProjectStart,
-        }
+        },
+        {
+            path: '/profitCheck',
+            component: ProfitCheck,
+        },
     ]
 })
