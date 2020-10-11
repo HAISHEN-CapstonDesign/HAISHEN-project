@@ -37,118 +37,100 @@
           </v-icon>
         </v-btn>
         </v-flex>
-        <v-flex>
-        <v-btn
-          color="secondary"
-          medium
-        >
-        Info update
-        </v-btn>
-        </v-flex>
         </v-layout>
         </v-flex>
     <!--좌측 끝 / 우측 시작-->
       <v-flex>
-        <v-layout column wrap>
-          <v-flex>
-        <span style="font-size:25px">Nickname: </span>
-        <input v-model="nickname" placeholder="nickname" style="height:30px">
-        <v-btn
-          class="ma-2"
-          outlined
-          small
-          fab
-          color="indigo"
-        >
-          <v-icon>mdi-pencil</v-icon>
-        </v-btn>
-          </v-flex>
-          <br>
-          <v-flex>
-          <span style="font-size:25px">Interests </span>
-
-    <v-btn
-      v-if="!chip1 && !chip2 && !chip3 && !chip4"
-      close
-      color="primary"
-      dark
-      @click="chip1 = true, chip2 = true, chip3 = true, chip4= true"
-    >
-      Reset Chips
-    </v-btn>
-
-    <v-chip
-      v-if="chip1"
-      class="ma-2"
-      close
-      @click:close="chip1 = false"
-    >
-      Closable
-    </v-chip>
-
-    <v-chip
-      v-if="chip2"
-      class="ma-2"
-      close
-      color="red"
-      text-color="white"
-      @click:close="chip2 = false"
-    >
-      Remove
-    </v-chip>
-
-    <v-chip
-      v-if="chip3"
-      class="ma-2"
-      close
-      color="green"
-      outlined
-      @click:close="chip3 = false"
-    >
-      Success
-    </v-chip>
-
-    <v-chip
-      v-if="chip4"
-      class="ma-2"
-      close
-      color="orange"
-      label
-      outlined
-      @click:close="chip4 = false"
-    >
-      Complete
-    </v-chip>
-
-          <v-btn
-            class="ma-2"
-            outlined
-            small
-            fab
-            color="indigo"
+        
+<v-card
+    color="blue darken-1"
+    dark
+    :loading="isUpdating"
+  >  
+    <v-form>
+      <v-container>
+        <v-row>
+          <v-col
+            cols="12"
           >
-            <v-icon>mdi-pencil</v-icon>
-          </v-btn>
-          </v-flex>
-          <br>
-          <v-flex>
-          <span style="font-size:25px">Career </span>
-          <textarea v-model="message" placeholder="Career"></textarea>
-          <v-btn
-            class="ma-2"
-            outlined
-            small
-            fab
-            color="indigo"
+            <v-text-field
+              v-model="name"
+              :disabled="isUpdating"
+              filled
+              color="blue lighten-2"
+              label="닉네임"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-autocomplete
+              v-model="interests"
+              :disabled="isUpdating"
+              :items="interest"
+              filled
+              chips
+              color="blue lighten-2"
+              label="관심분야"
+              item-text="name"
+              item-value="name"
+              multiple
+            >
+              <template v-slot:selection="data">
+                <v-chip
+                  v-bind="data.attrs"
+                  :input-value="data.selected"
+                  close
+                  @click="data.select"
+                  @click:close="remove(data.item)"
+                >
+                  {{ data.item.name }}
+                </v-chip>
+              </template>
+              <template v-slot:item="data">
+                <template v-if="typeof data.item !== 'object'">
+                  <v-list-item-content v-text="data.item"></v-list-item-content>
+                </template>
+                <template v-else>
+                  <v-list-item-content>
+                    <v-list-item-title v-html="data.item.name"></v-list-item-title>
+                  </v-list-item-content>
+                </template>
+              </template>
+            </v-autocomplete>
+          </v-col>
+          <v-col
+            cols="12"
           >
-            <v-icon>mdi-pencil</v-icon>
-          </v-btn>
-          </v-flex>
-        </v-layout>
+            <v-textarea
+              v-model="career"
+              :disabled="isUpdating"
+              filled
+              color="blue lighten-2"
+              label="이력"
+            ></v-textarea>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-form>
+    <v-divider></v-divider>
+    <v-card-actions>
+      <v-btn
+        :loading="isUpdating"
+        color="blue-grey darken-3"
+        depressed
+        @click="isUpdating = true"
+      >
+        <v-icon left>
+          mdi-update
+        </v-icon>
+        Update
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+
+
       </v-flex>
     </v-layout>
   </v-container>
-
   </v-app>
 </template>
 
@@ -157,13 +139,32 @@
 export default {
   name: 'MyPageEdit',
 
-  data() {
-    return{
-      chip1: true,
-        chip2: true,
-        chip3: true,
-        chip4: true,
-    }
-  },
+  data () {
+      return {
+        isUpdating: false,
+        name:'',
+        career:'',
+        interests:[],
+        interest: [
+          { name: '여행'},
+          { name: '수학'},
+          { name: '과학'},
+          { name: '경제'},
+        ],
+      }
+    },
+    watch: {
+      isUpdating (val) {
+        if (val) {
+          setTimeout(() => (this.isUpdating = false), 3000)
+        }
+      },
+    },
+    methods: {
+      remove (item) {
+        const index = this.friends.indexOf(item.name)
+        if (index >= 0) this.friends.splice(index, 1)
+      },
+    },
 };
 </script>

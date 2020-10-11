@@ -58,6 +58,9 @@
                 <v-col>
                     <p style="font-size:25px" class="text-center">모집 인원 </p>
                 </v-col>
+                <v-col>
+                    <input type="text" v-model="onlyNumber" maxlength="5"/>
+                </v-col>
             </v-row>
         </v-flex>
         <v-flex>
@@ -87,17 +90,23 @@
 </template>
 
 <script>
-//import Tag from '../components/tagPlus'
+import Tag from '../components/tagPlus'
 export default {
     name: 'projectStart',
     components: {
-   //     Tag
+        Tag
     },
 
-    data: () => ({
-    //
-  
-  }),
+    data() {
+        return{
+            onlyNumber: "",
+        }
+  },
+  watch: {
+      onlyNumber : function(){
+          return this.onlyNumber = this.onlyNumber.replace(/[^0-9]/g, '');
+      }
+  },
 }
 </script>
 

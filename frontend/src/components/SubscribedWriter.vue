@@ -1,11 +1,9 @@
 <template>
 <v-app>
-  <v-card
-    class="mx-auto"
-    max-width="500"
-  >
+
     <v-list subheader>
       <v-subheader>구독한 작가</v-subheader>
+      <v-divider></v-divider>
       <v-list-item
         v-for="chat in recent"
         :key="chat.title"
@@ -26,26 +24,6 @@
         </v-list-item-chip>
       </v-list-item>
     </v-list>
-  </v-card>
-  <!--
-    <v-list-item >
-        <v-list-item-avatar>
-          <v-img
-            src = 'https://cdn.vuetifyjs.com/images/lists/4.jpg'
-          ></v-img>
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-list-item-title>Ali Connors</v-list-item-title>
-        </v-list-item-content>
-
-        <v-list-item-chip>
-            <v-chip>수학</v-chip>
-            <v-chip>과학</v-chip>
-            <v-chip>IT</v-chip>
-        </v-list-item-chip>
-      </v-list-item>
-      -->
 </v-app>
 </template>
 

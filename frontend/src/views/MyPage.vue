@@ -107,7 +107,6 @@
               ></v-pagination>
             </div>
           </v-flex>
-          <!--이거 크기조절 안됨.. 수정 필요-->
           <v-flex>
             <p>구독하는 작가들/좋아요 한 글</p>
           </v-flex>
@@ -116,22 +115,19 @@
               <v-col>
               <v-row>
     <v-col>
+      <v-card class="mx-auto">
         <Sub></Sub>
+      </v-card>
     </v-col>
   </v-row>
-              </v-col>
+      </v-col>
      <!--위>작가/아래>글-->
-              <v-col>
+          <v-col>
     <v-row justify="center">
     <v-col>
       <v-card class="mx-auto">
 
-         <v-list subheader>
-      <v-subheader>좋아요 한 글</v-subheader>
         <Liked></Liked>
-        <Liked></Liked>
-        <Liked></Liked>
-    </v-list>
 
       </v-card>
     </v-col>
