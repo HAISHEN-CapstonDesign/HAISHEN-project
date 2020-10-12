@@ -8,6 +8,9 @@ import myPage from '../views/MyPage.vue';
 import signUpPage from '../views/SignUpPage.vue';
 import postListPage from '../views/PostListPage.vue';
 import collaboProjMain from '../views/CollaboProjMainPage.vue';
+import MyPageEdit from '../views/MyPageEdit';
+import ProjectStart from '../views/ProjectStart'
+import ProfitCheck from '../views/ProfitCheck'
 
 Vue.use(VueRouter);
 
@@ -38,6 +41,10 @@ export const router = new VueRouter({
             component: myPage,
         },
         {
+            path: "/MyPageEdit",
+            component: MyPageEdit,
+        },
+        {
             path: '/signup',
             component: signUpPage,
         },
@@ -48,6 +55,14 @@ export const router = new VueRouter({
         {
             path: '/collaboProjMain',
             component: collaboProjMain,
-        }
+        },
+        {
+            path: '/projectStart',
+            component: ProjectStart,
+        },
+        {
+            path: '/profitCheck',
+            component: ProfitCheck,
+        },
     ]
 })
