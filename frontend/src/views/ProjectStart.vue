@@ -94,12 +94,6 @@
                         value="radio-2"
                         ></v-radio>
                     </v-radio-group>
-                    <v-text-field
-                    label="닉네임"
-                    v-model="my.name"
-                    :disabled="profile_radios == 'radio-1'"
-                    outlined
-                    ></v-text-field>
                     <v-autocomplete
                     v-model="my.tag"
                     :items="items"
@@ -235,7 +229,6 @@ export default {
             deadline_radios: 'radio-1',
             funding_radios: 'radio-1',
             my: {
-                name: "김ㅇㅇ",
                 tag: ['여행', '요리'],
                 career: '대충 이력 내용'
             },

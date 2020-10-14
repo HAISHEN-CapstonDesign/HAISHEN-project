@@ -12,18 +12,24 @@
       <v-flex>
         <v-layout column wrap align-center>
           <v-flex>
+        <!--업로드 아바타-->
         <v-avatar
+          v-if="imageUrl"
+          size="270">
+          <img
+            v-if="imageUrl" :src="imageUrl"
+          ></v-avatar>
+        <!--업로드 전 아바타-->
+        <v-avatar
+          v-else
           color="blue"
           size="270"
-        >Avatar</v-avatar>
+        >avatar</v-avatar>
         </v-flex>
+        <br>
         <v-flex>
-          <!--이미지 업로드 연결 필요-->
-          <v-file-input
-          accept="image/png, image/jpeg, image/bmp"
-          placeholder="Avatar Upload"
-          prepend-icon="mdi-camera"
-          ></v-file-input>
+          <input ref="imageInput" type="file" hidden @change="onChangeImages">
+          <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn>
         </v-flex>
         </v-layout>
         </v-flex>
@@ -132,6 +138,7 @@ export default {
         isUpdating: false,
         name:'',
         career:'',
+        imageUrl:'',
         interests:[],
         interest: [
           { name: '여행'},
@@ -155,7 +162,7 @@ export default {
       },
       onClickImageUpload() {
             this.$refs.imageInput.click();
-        },
+      },
       onChangeImages(e) {
             console.log(e.target.files)
             const file = e.target.files[0];
