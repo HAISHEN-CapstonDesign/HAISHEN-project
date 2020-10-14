@@ -5,14 +5,14 @@ import store from '../store'
 
 Vue.use(Router);
 
-const rejectAuthUser = (to, from, next) => {
-    if (store.state.isLogin === true) {
-        alert('이미 로그인 되어 있습니다.')
-        next('/')
-    } else {
-        next()
-    }
-}
+// const rejectAuthUser = (to, from, next) => {
+//     if (store.state.isLogin === true) {
+//         alert('이미 로그인 되어 있습니다.')
+//         next('/')
+//     } else {
+//         next()
+//     }
+// }
 
 const onlyAuthUser = (to, from, next) => {
     if (store.state.isLogin === false) {
@@ -47,7 +47,7 @@ export default new Router({
         {
             path: '/login',
             name: 'LoginPage',
-            beforeEnter: rejectAuthUser,
+            //beforeEnter: rejectAuthUser,
             component: LoginPage
         },
         {

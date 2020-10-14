@@ -1,8 +1,7 @@
 <template>
     <div>
-        <!-- <router-link to="/about">about</router-link> -->
         <v-app>
-            <v-app-bar
+            <!-- <v-app-bar
                 color="deep-purple"
                 dark
                 absolute
@@ -20,9 +19,9 @@
                     <v-btn small class="mr-2" >sign up</v-btn>
                     <v-btn small class="mr-2" router :to="{name:'MyPage'}">My</v-btn>
             </v-row>
-            </v-app-bar>
+            </v-app-bar> -->
 
-            <v-navigation-drawer
+            <!-- <v-navigation-drawer
                 v-model="drawer"
                 absolute
                 temporary
@@ -116,7 +115,7 @@
             </v-list-item>
 
             </v-list>
-            </v-navigation-drawer>
+            </v-navigation-drawer> -->
 
             <v-carousel
             cycle

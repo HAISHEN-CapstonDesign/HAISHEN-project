@@ -1,7 +1,7 @@
 <template>
   <v-container fill-height style="max-width:450px;">
-    <v-layout align-center row wrap>
-      <v-flex xs12>
+    <v-layout align-center row wrap class="mt-15">
+      <v-flex xs12 >
         <v-alert
         class="mb-3"
           :value="isLoginError"
@@ -36,8 +36,7 @@
               depressed
               block
               large
-              @click="login({ email, password })"
-            >
+              @click="login({ email, password })">
               로그인
             </v-btn>
             <!-- <v-btn @click="test">테스트</v-btn>

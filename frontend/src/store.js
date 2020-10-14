@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import router from './routes/page_index.js'
 import axios from "axios"
 
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -12,6 +13,8 @@ export default new Vuex.Store({
             { id: 1, name: 'hunmin', email: 'gnsals0904@ajou.ac.kr', password: '123456' },
             { id: 2, name: 'test', email: 'test@ajou.ac.kr', password: '123456' }
         ],
+        //eve.holt@reqres.in
+        //cityslicka
         isLogin: false,
         isLoginError: false
     },
@@ -21,6 +24,7 @@ export default new Vuex.Store({
             state.isLogin = true
             state.isLoginError = false
             state.userInfo = payload
+
         },
         // 로그인이 실패했을 때
         loginError(state) {
@@ -67,6 +71,7 @@ export default new Vuex.Store({
                         last_name: response.data.data.last_name,
                         avatar: response.data.data.avatar
                     }
+                    console.log(response)
                     commit('loginSuccess', userInfo)
                 })
                 .catch(() => {
