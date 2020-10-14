@@ -133,13 +133,15 @@
                         value="radio-2"
                         ></v-radio>
                     </v-radio-group>
-                    <v-select
-                    :items="member_num"
-                    v-show="num_radios == 'radio-2'"
-                    label="인원 수"
-                    dense
-                    outlined
-                    ></v-select>
+                    <v-text-field
+                        v-model="membar_num"
+                        v-show="num_radios == 'radio-2'"
+                        type="number"
+                        label="인원 수"
+                        min="2"
+                        max="10"
+                        outlined
+                    ></v-text-field>
                 </v-col>
             </v-row>
         </v-flex>
@@ -164,7 +166,7 @@
                     </v-radio-group>
                     <v-text-field
                     label="목표 펀딩 금액"
-                    suffix="point"
+                    suffix="원"
                     v-show="funding_radios == 'radio-2'"
                     value="0"
                     style="width:35%"
@@ -228,7 +230,7 @@ export default {
             items: ['여행', '수학', '과학', 'IT', '요리','건강','역사','건축','문화,예술'],
             rules: [v => v.length <= 100 || 'Max 100 characters'],
             area_rules: [v => v.length <= 1000 || 'Max 1000 characters'],
-            member_num: ['2','3','4','5','6','7','8','9','10'],
+            member_num: '2',
             num_radios: 'radio-1',
             profile_radios: 'radio-1',
             deadline_radios: 'radio-1',

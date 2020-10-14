@@ -1,33 +1,41 @@
 <template>
     <v-app>
-      <v-list
-      two-line
-      subheader
-    >
-      <v-subheader>좋아요 한 글</v-subheader>
-      <v-divider></v-divider>
-      <v-list-item
-        v-for="chat in books"
-        :key="chat.title">
-        <v-list-item-content>
-          <v-list-item-title v-text="chat.title"></v-list-item-title>
-          <v-list-item-subtitle v-text="chat.intro"></v-list-item-subtitle>
-          <v-list-item-subtitle v-text="chat.team"></v-list-item-subtitle>
-        </v-list-item-content>
-        <div>
-          <v-list-item-icon class="mr-1">
+    <v-simple-table height="720px">
+    <template v-slot:default>
+      <thead>
+        <tr>
+          <th class="text-left">
+            제목
+          </th>
+          <th class="text-left">
+            한줄소개
+          </th>
+          <th class="text-left">
+            팀이름
+          </th>
+          <th class="text-left">
+            좋아요/구독 수
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="item in books"
+          :key="item.title"
+        >
+          <td>{{ item.title }}</td>
+          <td>{{ item.intro }}</td>
+          <td>{{ item.team}}</td>
+          <td>
             <v-icon>mdi-heart</v-icon>
-          </v-list-item-icon>
-            <v-list-item-text v-text="chat.like"></v-list-item-text>
-            <v-list-item-icon class="mr-1">
-              <v-icon>mdi-bookmark</v-icon>
-            </v-list-item-icon>
-              <v-list-item-text v-text="chat.subscribe"></v-list-item-text>
-        </div>
-      </v-list-item>
-    </v-list>
-      
-        
+            {{ item.like }}
+            <v-icon>mdi-bookmark</v-icon>
+            {{ item.subscribe }}
+            </td>
+        </tr>
+      </tbody>
+    </template>
+  </v-simple-table>
     </v-app>
 </template>
 
@@ -60,41 +68,96 @@
           subscribe:'63',
         },
         {
-          title: '제목3',
+          title: '제목4',
           intro:'한줄소개한줄소개한줄소개',
           team:'팀이름',
           like:'142',
           subscribe:'63',
         },
         {
-          title: '제목3',
+          title: '제목5',
           intro:'한줄소개한줄소개한줄소개',
           team:'팀이름',
           like:'142',
           subscribe:'63',
         },
         {
-          title: '제목3',
+          title: '제목6',
           intro:'한줄소개한줄소개한줄소개',
           team:'팀이름',
           like:'142',
           subscribe:'63',
         },
         {
-          title: '제목3',
+          title: '제목7',
           intro:'한줄소개한줄소개한줄소개',
           team:'팀이름',
           like:'142',
           subscribe:'63',
         },
         {
-          title: '제목3',
+          title: '제목8',
           intro:'한줄소개한줄소개한줄소개',
           team:'팀이름',
           like:'142',
           subscribe:'63',
         },
-        
+        {
+          title: '제목8',
+          intro:'한줄소개한줄소개한줄소개',
+          team:'팀이름',
+          like:'142',
+          subscribe:'63',
+        },
+        {
+          title: '제목8',
+          intro:'한줄소개한줄소개한줄소개',
+          team:'팀이름',
+          like:'142',
+          subscribe:'63',
+        },
+        {
+          title: '제목8',
+          intro:'한줄소개한줄소개한줄소개',
+          team:'팀이름',
+          like:'142',
+          subscribe:'63',
+        },
+        {
+          title: '제목8',
+          intro:'한줄소개한줄소개한줄소개',
+          team:'팀이름',
+          like:'142',
+          subscribe:'63',
+        },
+        {
+          title: '제목8',
+          intro:'한줄소개한줄소개한줄소개',
+          team:'팀이름',
+          like:'142',
+          subscribe:'63',
+        },
+        {
+          title: '제목8',
+          intro:'한줄소개한줄소개한줄소개',
+          team:'팀이름',
+          like:'142',
+          subscribe:'63',
+        },
+        {
+          title: '제목8',
+          intro:'한줄소개한줄소개한줄소개',
+          team:'팀이름',
+          like:'142',
+          subscribe:'63',
+        },
+        {
+          title: '제목8',
+          intro:'한줄소개한줄소개한줄소개',
+          team:'팀이름',
+          like:'142',
+          subscribe:'63',
+        },
         ],
       }
 

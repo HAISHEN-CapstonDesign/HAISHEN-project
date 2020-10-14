@@ -11,6 +11,7 @@ import collaboProjMain from '../views/CollaboProjMainPage.vue';
 import MyPageEdit from '../views/MyPageEdit';
 import ProjectStart from '../views/ProjectStart'
 import ProfitCheck from '../views/ProfitCheck'
+import ChooseWriter from '../views/ChooseWriter'
 
 Vue.use(VueRouter);
 
@@ -63,6 +64,10 @@ export const router = new VueRouter({
         {
             path: '/profitCheck',
             component: ProfitCheck,
+        },
+        {
+            path: '/chooseWriter',
+            component: ChooseWriter,
         },
     ]
 })

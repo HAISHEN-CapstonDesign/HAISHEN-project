@@ -1,28 +1,41 @@
 <template>
 <v-app>
 
-    <v-list subheader>
-      <v-subheader>구독한 작가</v-subheader>
-      <v-divider></v-divider>
-      <v-list-item
-        v-for="chat in recent"
-        :key="chat.title"
-      >
-        <v-list-item-avatar>
-          <v-img
-            :alt="`${chat.title} avatar`"
-            :src="chat.avatar"
-          ></v-img>
-        </v-list-item-avatar>
+  <v-simple-table height="720px">
+    <template v-slot:default>
+      <thead>
+        <tr>
+          <th class="text-cneter">
+            구독한 작가들
+          </th>
+          <th class="text-left">
+          </th>
+          <th class="text-left">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="item in recent"
+          :key="item.title"
+        >
+          <td>
+            <v-avatar>
+              <v-img
+                :alt="`${item.title} avatar`"
+                :src="item.avatar"
+              ></v-img>
+            </v-avatar>
+          </td>
+          <td>{{ item.title }}</td>
+          <td>
+            <v-chip v-for="tags in item.tag" :key="tags" v-text="tags"></v-chip>
+            </td>
+        </tr>
+      </tbody>
+    </template>
+  </v-simple-table>
 
-        <v-list-item-content>
-          <v-list-item-title v-text="chat.title"></v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-chip >
-          <v-chip v-for="tags in chat.tag" :key="tags" v-text="tags"></v-chip>
-        </v-list-item-chip>
-      </v-list-item>
-    </v-list>
 </v-app>
 </template>
 
