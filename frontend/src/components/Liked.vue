@@ -59,6 +59,42 @@
           like:'142',
           subscribe:'63',
         },
+        {
+          title: '제목3',
+          intro:'한줄소개한줄소개한줄소개',
+          team:'팀이름',
+          like:'142',
+          subscribe:'63',
+        },
+        {
+          title: '제목3',
+          intro:'한줄소개한줄소개한줄소개',
+          team:'팀이름',
+          like:'142',
+          subscribe:'63',
+        },
+        {
+          title: '제목3',
+          intro:'한줄소개한줄소개한줄소개',
+          team:'팀이름',
+          like:'142',
+          subscribe:'63',
+        },
+        {
+          title: '제목3',
+          intro:'한줄소개한줄소개한줄소개',
+          team:'팀이름',
+          like:'142',
+          subscribe:'63',
+        },
+        {
+          title: '제목3',
+          intro:'한줄소개한줄소개한줄소개',
+          team:'팀이름',
+          like:'142',
+          subscribe:'63',
+        },
+        
         ],
       }
 

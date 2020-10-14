@@ -111,12 +111,6 @@
              </v-col>
             </v-row>
           </v-flex>
-          <div class="text-center">
-          <v-pagination
-          v-model="page"
-          :length="6"
-          ></v-pagination>
-          </div>
     </v-layout>
     </v-col>
     </v-row>

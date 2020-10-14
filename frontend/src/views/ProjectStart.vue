@@ -192,11 +192,16 @@
                         ></v-radio>
                     </v-radio-group>
                     <div v-show="deadline_radios == 'radio-2'">
-                    <Calendar></Calendar>
+                        <v-date-picker
+                            v-model="date"
+                            full-width
+                            class="mt-4"
+                        ></v-date-picker>
                     </div>
                 </v-col>
             </v-row>
         </v-flex>
+        <br>
         <v-flex>
             <div class="text-center">
             <v-btn
@@ -211,11 +216,11 @@
 </template>
 
 <script>
-import Calendar from '../components/calendar'
+
 export default {
     name: 'projectStart',
     components: {
-        Calendar
+
     },
 
     data() {
@@ -228,6 +233,7 @@ export default {
             profile_radios: 'radio-1',
             deadline_radios: 'radio-1',
             funding_radios: 'radio-1',
+            date: new Date().toISOString().substr(0, 10),
             my: {
                 tag: ['여행', '요리'],
                 career: '대충 이력 내용'
