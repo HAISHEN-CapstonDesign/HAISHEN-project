@@ -1,9 +1,18 @@
 import Vue from 'vue'
-import Router from 'vue-router'
 import store from '../store'
+import VueRouter from 'vue-router'
+// import LoginPage from '../components/LoginPage.vue';
+import aboutPage from '../views/about.vue';
+import myPage from '../views/MyPage.vue';
+import signUpPage from '../views/SignUpPage.vue';
+import postListPage from '../views/PostListPage.vue';
+import collaboProjMain from '../views/CollaboProjMainPage.vue';
+import MyPageEdit from '../views/MyPageEdit';
+import ProjectStart from '../views/ProjectStart'
+import ProfitCheck from '../views/ProfitCheck'
 
 
-Vue.use(Router);
+Vue.use(VueRouter);
 
 // const rejectAuthUser = (to, from, next) => {
 //     if (store.state.isLogin === true) {
@@ -31,12 +40,7 @@ const LoginPage = () => {
     return import ( /* webpackChunkName: "loginpage" */ '../views/LoginPage.vue')
 }
 
-const MyPage = () => {
-    return import ( /* webpackChunkName: "mypage" */ '../views/MyPage.vue')
-}
-
-
-export default new Router({
+export default new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [{
@@ -52,9 +56,31 @@ export default new Router({
         },
         {
             path: '/mypage',
-            name: 'MyPage',
-            beforeEnter: onlyAuthUser,
-            component: MyPage
-        }
+            component: myPage,
+        },
+        {
+            path: "/MyPageEdit",
+            component: MyPageEdit,
+        },
+        {
+            path: '/signup',
+            component: signUpPage,
+        },
+        {
+            path: '/postlist',
+            component: postListPage,
+        },
+        {
+            path: '/collaboProjMain',
+            component: collaboProjMain,
+        },
+        {
+            path: '/projectStart',
+            component: ProjectStart,
+        },
+        {
+            path: '/profitCheck',
+            component: ProfitCheck,
+        },
     ]
 })

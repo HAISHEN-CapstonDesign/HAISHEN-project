@@ -15,9 +15,8 @@
                     <v-icon>mdi-magnify</v-icon>
                     </v-btn>
                     <v-btn small class="mr-2" router :to="{name: 'LoginPage'}">login</v-btn>
-                    
-                    <v-btn small class="mr-2" >sign up</v-btn>
-                    <v-btn small class="mr-2" router :to="{name:'MyPage'}">My</v-btn>
+                    <v-btn small class="mr-2" to ="/signup" >sign up</v-btn>
+                    <v-btn small class="mr-2" to ="/mypage" >My</v-btn>
             </v-row>
             </v-app-bar> -->
 
@@ -26,15 +25,14 @@
                 absolute
                 temporary
                 >
+        <!--나중에 로고 이미지로 변경-->
+                <img
+                src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+                height="70px"
+                width="100%"
+                dark
+                >
 
-            <v-list-item two-line>
-                <v-list-item-avatar>
-                    <img src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
-                </v-list-item-avatar>
-                <v-list-item-content>
-                    <v-list-item-title>logo...T-T change plz</v-list-item-title>
-                </v-list-item-content>
-                </v-list-item>
             <template>
                 <v-list-item two-line>
                 <v-list-item-avatar>
@@ -60,11 +58,11 @@
                 <v-list-item-title>My</v-list-item-title>
                 </template> 
 
-                <v-list-item>
+                <v-list-item to="/login">
                 <v-list-item-title>Login/Sign up</v-list-item-title>
                 </v-list-item>
 
-                <v-list-item>
+                <v-list-item to="/MyPage">
                 <v-list-item-title>Info</v-list-item-title>
                 </v-list-item>
 
@@ -105,7 +103,13 @@
                 </v-list-item>
 
             </v-list-group>
+                <v-list-item to ="/projectStart">
+                <v-list-item-icon>
+                <v-icon>mdi-book-plus-multiple</v-icon>
+                </v-list-item-icon>
 
+                <v-list-item-title>project</v-list-item-title>
+            </v-list-item>
                 <v-list-item>
                 <v-list-item-icon>
                 <v-icon>mdi-bell</v-icon>
@@ -113,7 +117,7 @@
 
                 <v-list-item-title>alarm</v-list-item-title>
             </v-list-item>
-
+            
             </v-list>
             </v-navigation-drawer> -->
 
@@ -141,7 +145,10 @@
                 </v-sheet>
             </v-carousel-item>
             </v-carousel>
+            
 
+            <v-btn to ="/postlist">글목록으로</v-btn>
+            <v-btn to ="/collaboProjMain">공동프로젝트 메인페이지로</v-btn>
             <h1>Genre</h1>
             <v-row justify="center">
             <v-col>

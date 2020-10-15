@@ -18,6 +18,7 @@
           </v-row>
         </v-app-bar>
 
+
         <v-navigation-drawer
                 v-model="drawer"
                 absolute
@@ -125,7 +126,6 @@
 export default {
   name: 'App',
   data: () => ({
-    //
     drawer: false,
     collapseOnScroll: true,
     colors: [
