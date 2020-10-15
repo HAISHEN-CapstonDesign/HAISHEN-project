@@ -65,7 +65,11 @@
                 </template> 
 
                 <v-list-item to="/login">
-                <v-list-item-title>Login/Sign up</v-list-item-title>
+                <v-list-item-title>Login</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item to="/signup">
+                <v-list-item-title>Sign up</v-list-item-title>
                 </v-list-item>
 
                 <v-list-item to="/MyPage">

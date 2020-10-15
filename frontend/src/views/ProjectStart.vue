@@ -37,15 +37,26 @@
                     <p style="font-size:20px" class="text-center">프로젝트 tag</p>
                 </v-col>
                 <v-col cols="12" sm="6" md="8">
-                    <v-autocomplete
+                    <v-combobox
+                    v-model="model"
                     :items="items"
+                    :search-input.sync="search"
+                    hide-selected
                     outlined
-                    dense
-                    chips
-                    small-chips
-                    label="장르"
+                    label="Add some tags"
                     multiple
-                    ></v-autocomplete>
+                    small-chips
+                    >
+                        <template v-slot:no-data>
+                            <v-list-item>
+                                <v-list-item-content>
+                                    <v-list-item-title>
+                                        No results matching "<strong>{{ search }}</strong>". Press <kbd>enter</kbd> to create a new one
+                                    </v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </template>
+                    </v-combobox>
                 </v-col>
             </v-row>
         </v-flex>
@@ -231,6 +242,8 @@ export default {
             rules: [v => v.length <= 100 || 'Max 100 characters'],
             area_rules: [v => v.length <= 1000 || 'Max 1000 characters'],
             member_num: '2',
+            model:[],
+            search: null,
             num_radios: 'radio-1',
             profile_radios: 'radio-1',
             deadline_radios: 'radio-1',
