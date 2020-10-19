@@ -25,14 +25,12 @@
                 temporary
                 >
 
-            <v-list-item two-line>
-                <v-list-item-avatar>
-                    <img src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
-                </v-list-item-avatar>
-                <v-list-item-content>
-                    <v-list-item-title>logo...T-T change plz</v-list-item-title>
-                </v-list-item-content>
-                </v-list-item>
+            <img
+                src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+                height="70px"
+                width="100%"
+                dark
+                >
             <template>
                 <v-list-item two-line>
                 <v-list-item-avatar>
@@ -58,8 +56,12 @@
                 <v-list-item-title>My</v-list-item-title>
                 </template> 
 
-                <v-list-item>
-                <v-list-item-title>Login/Sign up</v-list-item-title>
+                <v-list-item to="/login">
+                <v-list-item-title>Login</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item to="/signup">
+                <v-list-item-title>Sign up</v-list-item-title>
                 </v-list-item>
 
                 <v-list-item>
@@ -103,7 +105,12 @@
                 </v-list-item>
 
             </v-list-group>
-
+            <v-list-item to ="/projectStart">
+                <v-list-item-icon>
+                <v-icon>mdi-book-plus-multiple</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>project</v-list-item-title>
+            </v-list-item>
                 <v-list-item>
                 <v-list-item-icon>
                 <v-icon>mdi-bell</v-icon>
@@ -111,7 +118,20 @@
 
                 <v-list-item-title>alarm</v-list-item-title>
             </v-list-item>
+            <v-list-item>
+                <v-list-item-icon>
+                <v-icon>mdi-currency-usd-circle-outline</v-icon>
+                </v-list-item-icon>
 
+                <v-list-item-title>결제</v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+                <v-list-item-icon>
+                <v-icon>mdi-alarm-light</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-title>신고 접수</v-list-item-title>
+            </v-list-item>
             </v-list>
             </v-navigation-drawer>
 
