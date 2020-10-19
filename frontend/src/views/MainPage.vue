@@ -25,7 +25,7 @@
                 absolute
                 temporary
                 >
-        <!--나중에 로고 이미지로 변경-->
+                
                 <img
                 src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
                 height="70px"

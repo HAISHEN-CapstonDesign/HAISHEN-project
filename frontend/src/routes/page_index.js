@@ -1,8 +1,5 @@
 import Vue from 'vue'
-import store from '../store'
 import VueRouter from 'vue-router'
-// import LoginPage from '../components/LoginPage.vue';
-import aboutPage from '../views/about.vue';
 import myPage from '../views/MyPage.vue';
 import signUpPage from '../views/SignUpPage.vue';
 import postListPage from '../views/PostListPage.vue';
@@ -23,14 +20,14 @@ Vue.use(VueRouter);
 //     }
 // }
 
-const onlyAuthUser = (to, from, next) => {
-    if (store.state.isLogin === false) {
-        alert('로그인이 필요한 기능입니다')
-        next('/')
-    } else {
-        next()
-    }
-}
+// const onlyAuthUser = (to, from, next) => {
+//     if (store.state.isLogin === false) {
+//         alert('로그인이 필요한 기능입니다')
+//         next('/')
+//     } else {
+//         next()
+//     }
+// }
 
 const MainPage = () => {
     return import ( /* webpackChunkName: "mainpage" */ '../views/MainPage.vue')
