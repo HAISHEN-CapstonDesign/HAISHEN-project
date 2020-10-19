@@ -120,14 +120,28 @@
 
                 <v-list-item-title>project</v-list-item-title>
             </v-list-item>
-                <v-list-item>
+            <v-list-item>
                 <v-list-item-icon>
                 <v-icon>mdi-bell</v-icon>
                 </v-list-item-icon>
 
                 <v-list-item-title>alarm</v-list-item-title>
             </v-list-item>
-            
+            <v-list-item>
+                <v-list-item-icon>
+                <v-icon>mdi-currency-usd-circle-outline</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-title>결제</v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+                <v-list-item-icon>
+                <v-icon>mdi-alarm-light</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-title>신고 접수</v-list-item-title>
+            </v-list-item>
+
             </v-list>
             </v-navigation-drawer>
 
