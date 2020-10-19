@@ -1,8 +1,7 @@
 <template>
     <div>
-        <!-- <router-link to="/about">about</router-link> -->
         <v-app>
-            <v-app-bar
+            <!-- <v-app-bar
                 color="deep-purple"
                 dark
                 absolute
@@ -15,23 +14,18 @@
                     <v-btn icon class="mr-2">
                     <v-icon>mdi-magnify</v-icon>
                     </v-btn>
-                    <v-btn small class="mr-2" to ="/login">login</v-btn>
-                    <!-- <div>
-                    <v-btn>Login</v-btn>
-                    <router-link to="/llogin">llogin하기</router-link>
-                    </div> -->
-                    
+                    <v-btn small class="mr-2" router :to="{name: 'LoginPage'}">login</v-btn>
                     <v-btn small class="mr-2" to ="/signup" >sign up</v-btn>
                     <v-btn small class="mr-2" to ="/mypage" >My</v-btn>
             </v-row>
-            </v-app-bar>
+            </v-app-bar> -->
 
-            <v-navigation-drawer
+            <!-- <v-navigation-drawer
                 v-model="drawer"
                 absolute
                 temporary
                 >
-        <!--나중에 로고 이미지로 변경-->
+                
                 <img
                 src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
                 height="70px"
@@ -143,7 +137,7 @@
             </v-list-item>
 
             </v-list>
-            </v-navigation-drawer>
+            </v-navigation-drawer> -->
 
             <v-carousel
             cycle
