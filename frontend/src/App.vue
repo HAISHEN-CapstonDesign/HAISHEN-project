@@ -13,7 +13,7 @@
               <v-icon>mdi-magnify</v-icon>
             </v-btn>
             <v-btn small class="mr-2" router :to="{name: 'LoginPage'}">login</v-btn>
-            <v-btn small class="mr-2" >sign up</v-btn>
+            <v-btn small class="mr-2" router :to="{name: 'SignUpPage'}">sign up</v-btn>
             <v-btn small class="mr-2" router :to="{name:'MyPage'}">My</v-btn>
           </v-row>
         </v-app-bar>
