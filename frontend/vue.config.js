@@ -3,11 +3,17 @@ module.exports = {
         "vuetify"
     ],
 
-    outputDir: "../backend/crunch_server/src/main/resources/static",
-    indexPath: "../static/index.html",
+    // outputDir: "../backend/crunch_server/src/main/resources/static",
+    // indexPath: "../static/index.html",
 
     devServer: {
-        proxy: "http://localhost:3000"
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3000',
+                ws: true,
+                changeOrigin: true
+            }
+        }
     },
     chainWebpack: config => {
         const svgRule = config.module.rule("svg");
