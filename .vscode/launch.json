@@ -10,13 +10,6 @@
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-CrunchServerApplication<crunch_server>",
-            "request": "launch",
-            "mainClass": "com.crunch.crunch_server.CrunchServerApplication",
-            "projectName": "crunch_server"
         }
     ]
 }
