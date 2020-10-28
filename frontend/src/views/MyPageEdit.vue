@@ -72,9 +72,7 @@
                 <v-chip
                   v-bind="data.attrs"
                   :input-value="data.selected"
-                  close
                   @click="data.select"
-                  @click:close="remove(data.item)"
                 >
                   {{ data.item.name }}
                 </v-chip>
@@ -156,10 +154,6 @@ export default {
       },
     },
     methods: {
-      remove (item) {
-        const index = this.friends.indexOf(item.name)
-        if (index >= 0) this.friends.splice(index, 1)
-      },
       onClickImageUpload() {
             this.$refs.imageInput.click();
       },

@@ -6,10 +6,10 @@
       max-width="100%"
       src="https://picsum.photos/id/11/500/300"
     >
-    <div style="position: absolute; top: 30px; left: 10%;">
+    <div style="position: absolute; top: 28%; left: 10%;">
       <v-avatar
         color="blue"
-        size="250"
+        size="200"
       >
         <span class="white--text headline">Avatar</span>
       </v-avatar>
@@ -87,7 +87,6 @@
           </v-flex>
           <v-flex>
             <p>구독하는 작가들/좋아요 한 글</p>
-            <!--페이징 필요-->
           </v-flex>
           <v-flex>
             <v-row>
@@ -136,7 +135,6 @@ export default {
   },
   data() {
     return {
-      page: 1,
     
     }
   },

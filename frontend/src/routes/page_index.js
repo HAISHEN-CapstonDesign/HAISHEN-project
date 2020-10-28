@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import myPage from '../views/MyPage.vue';
+import MyPage from '../views/MyPage.vue';
 import signUpPage from '../views/SignUpPage.vue';
 import postListPage from '../views/PostListPage.vue';
 import collaboProjMain from '../views/CollaboProjMainPage.vue';
@@ -53,8 +53,9 @@ export default new VueRouter({
             component: LoginPage
         },
         {
-            path: '/mypage',
-            component: myPage,
+            path: '/Mypage',
+            name: 'MyPage',
+            component: MyPage,
         },
         {
             path: "/MyPageEdit",

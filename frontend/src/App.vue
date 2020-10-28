@@ -7,7 +7,7 @@
         absolute
       >
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-        <v-toolbar-title>Title</v-toolbar-title>
+        
           <v-row align="center" justify="end">
             <v-btn icon class="mr-2">
               <v-icon>mdi-magnify</v-icon>
@@ -24,12 +24,11 @@
                 absolute
                 temporary
                 >
-
             <img
-                src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-                height="70px"
-                width="100%"
+                src='./assets/crunch_logo.png'
+                height="70px"              
                 dark
+                v-on:click="to_main"
                 >
             <template>
                 <v-list-item two-line>
@@ -64,7 +63,7 @@
                 <v-list-item-title>Sign up</v-list-item-title>
                 </v-list-item>
 
-                <v-list-item>
+                <v-list-item to="/MyPage">
                 <v-list-item-title>Info</v-list-item-title>
                 </v-list-item>
 
@@ -156,5 +155,10 @@ export default {
       'deep-purple accent-4',
     ]
   }),
+  methods:{
+    to_main(){
+      this.$router.push('/');
+    }
+  },
 };
 </script>
