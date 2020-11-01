@@ -104,7 +104,7 @@ export default new Vuex.Store({
         },
         signUp() {
             axios
-                .post('/user/account/signup', {
+                .post('/api/user/account/signup', {
                     identity: "성공",
                     password: "1234",
                     name: "크런치",
