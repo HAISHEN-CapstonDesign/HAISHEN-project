@@ -101,6 +101,23 @@ export default new Vuex.Store({
                 .catch(() => {
                     alert('이메일과 비밀번호를 확인하세요.2')
                 })
+        },
+        signUp() {
+            axios
+                .post('/user/account/signup', {
+                    identity: "성공",
+                    password: "1234",
+                    name: "크런치",
+                    nickname: "크런치",
+                    gender: "male"
+                })
+                .then(res => {
+                    console.log('성공' + res)
+                })
+                .catch((err) => {
+                    console.log(err)
+                    alert('post 요청 실패')
+                });
         }
-    }
+    },
 })

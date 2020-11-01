@@ -42,6 +42,7 @@
                 label="성별을 입력해주세요"
             ></v-autocomplete>
             <v-btn
+              @click="signUp"
               color="primary"
               depressed
               block
@@ -58,9 +59,13 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
   export default {
     data: () => ({
       gender: ['남자', '여자']
-    })
+    }),
+    methods: {
+      ...mapActions(['signUp'])
+    }
   }
 </script>
