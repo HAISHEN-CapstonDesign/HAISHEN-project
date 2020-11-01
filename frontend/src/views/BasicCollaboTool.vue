@@ -80,6 +80,12 @@
                     완료
                 </v-btn>
             </v-toolbar>
+            <v-toolbar
+            :hidden="!isEditing"
+            >
+                <v-toolbar-title>글쓰기 도구</v-toolbar-title>
+                
+            </v-toolbar>
             <v-textarea
             solo
             name="mainText"

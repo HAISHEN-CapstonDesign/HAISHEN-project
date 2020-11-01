@@ -2,9 +2,33 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from './routes/page_index.js'
 import axios from "axios"
-
+import { kakaoAPI } from "../vue.config";
 
 Vue.use(Vuex)
+
+
+export const KakaoLogin = (history) => {
+    window.Kakao.Auth.login({
+        success: (response) => {
+            axios
+                .get(`${kakaoAPI}/kakao`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: response.access_token,
+                    },
+                })
+                .then((res) => {
+                    localStorage.setItem("kakao_token", res.data.token);
+                    alert("로그인 되었습니다.");
+                    history.push("/");
+                });
+        },
+        fail: (error) => {
+            alert(JSON.stringify(error));
+        },
+    });
+};
+
 
 export default new Vuex.Store({
     state: {
@@ -77,6 +101,23 @@ export default new Vuex.Store({
                 .catch(() => {
                     alert('이메일과 비밀번호를 확인하세요.2')
                 })
+        },
+        signUp() {
+            axios
+                .post('/user/account/signup', {
+                    identity: "성공",
+                    password: "1234",
+                    name: "크런치",
+                    nickname: "크런치",
+                    gender: "male"
+                })
+                .then(res => {
+                    console.log('성공' + res)
+                })
+                .catch((err) => {
+                    console.log(err)
+                    alert('post 요청 실패')
+                });
         }
-    }
+    },
 })

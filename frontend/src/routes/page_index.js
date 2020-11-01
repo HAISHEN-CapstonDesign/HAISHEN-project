@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import myPage from '../views/MyPage.vue';
-import signUpPage from '../views/SignUpPage.vue';
 import postListPage from '../views/PostListPage.vue';
 import collaboProjMain from '../views/CollaboProjMainPage.vue';
 import myPageEdit from '../views/MyPageEdit';
@@ -40,6 +39,10 @@ const LoginPage = () => {
     return import ( /* webpackChunkName: "loginpage" */ '../views/LoginPage.vue')
 }
 
+const SignUpPage = () => {
+    return import ( /* webpackChunkName: "signuppage" */ '../views/SignUpPage.vue')
+}
+
 export default new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
@@ -65,7 +68,8 @@ export default new VueRouter({
         },
         {
             path: '/signup',
-            component: signUpPage,
+            name: 'SignUpPage',
+            component: SignUpPage
         },
         {
             path: '/postlist',

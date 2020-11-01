@@ -42,6 +42,20 @@
             <!-- <v-btn @click="test">테스트</v-btn>
             <v-btn @click="postTest">포스트 테스트</v-btn> -->
           </div>
+          <div id="app" class="pa-3">
+          <h2>카카오 로그인</h2>
+            <img 
+                alt="kakao logo" 
+                src="../assets/kakao_login_medium_wide.png" 
+                @click="loginWithKakao()"
+                />
+              <!-- <img 
+                alt="kakao logo" 
+                src="../assets/kakao_login_medium_wide.png" 
+                @click="KakaoLogin(history)"
+                /> -->
+           
+          </div>
         </v-card>
       </v-flex>
     </v-layout>
@@ -50,21 +64,43 @@
 
 <script>
 import { mapState, mapActions } from "vuex"
-
-
+// import { KakaoLogin } from "../store.js"
 
 export default {
-  data() {
-    return {
-      email: null,
-      password: null,
-    }
-  },
+  data: () => ({
+    email: null,
+    password: null,
+  }),
   computed: {
     ...mapState(['isLogin','isLoginError'])
   },
   methods: {
+    // KakaoLogin,
     ...mapActions(['login']),
+
+    loginWithKakao() {
+      window.Kakao.Auth.login({
+        scope: 'account_email,gender',
+        success: function(authObj) {
+          alert(JSON.stringify(authObj))
+          console.log(authObj.access_token) // 발급받은 토큰 확인
+          localStorage.setItem("kakao_token", authObj.access_token); // 로컬 저장소에 저장
+          window.Kakao.Auth.setAccessToken(authObj.access_token); // 발급받은 토큰 할당
+          window.Kakao.API.request({
+            url: '/v2/user/me',
+            success: function(response) {
+              console.log(response);
+            },
+            fail: function(error) {
+              console.log(error);
+            }
+          });
+        },
+        fail: function(err) {
+          alert(JSON.stringify(err))
+        },
+      })
+    }
     // test(){
     //   // Make a request for a user with a given ID
     //   axios
