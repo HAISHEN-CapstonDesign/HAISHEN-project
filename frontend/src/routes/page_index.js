@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MyPage from '../views/MyPage.vue';
+import myPage from '../views/MyPage.vue';
 import signUpPage from '../views/SignUpPage.vue';
 import postListPage from '../views/PostListPage.vue';
 import collaboProjMain from '../views/CollaboProjMainPage.vue';
-import MyPageEdit from '../views/MyPageEdit';
-import ProjectStart from '../views/ProjectStart'
-import ProfitCheck from '../views/ProfitCheck'
-import ChooseWriter from '../views/ChooseWriter'
-
+import myPageEdit from '../views/MyPageEdit';
+import projectStart from '../views/ProjectStart'
+import profitCheck from '../views/ProfitCheck'
+import chooseWriter from '../views/ChooseWriter'
+import basicCollaboTool from '../views/BasicCollaboTool'
+import VueMoment from 'vue-moment'
+Vue.use(VueMoment);
 
 Vue.use(VueRouter);
 
@@ -53,13 +55,13 @@ export default new VueRouter({
             component: LoginPage
         },
         {
-            path: '/Mypage',
+            path: '/mypage',
             name: 'MyPage',
-            component: MyPage,
+            component: myPage,
         },
         {
-            path: "/MyPageEdit",
-            component: MyPageEdit,
+            path: "/myPageEdit",
+            component: myPageEdit,
         },
         {
             path: '/signup',
@@ -67,23 +69,29 @@ export default new VueRouter({
         },
         {
             path: '/postlist',
+            name: 'PostListPage',
             component: postListPage,
         },
         {
             path: '/collaboProjMain',
+            name: 'CollaboProjMain',
             component: collaboProjMain,
         },
         {
             path: '/projectStart',
-            component: ProjectStart,
+            component: projectStart,
         },
         {
             path: '/profitCheck',
-            component: ProfitCheck,
+            component: profitCheck,
         },
         {
             path: '/chooseWriter',
-            component: ChooseWriter,
+            component: chooseWriter,
+        },
+        {
+            path: '/basicCollaboTool',
+            component: basicCollaboTool,
         },
     ]
 })

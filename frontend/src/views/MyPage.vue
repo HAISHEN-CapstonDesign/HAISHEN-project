@@ -64,7 +64,7 @@
      <v-btn
       text
       color="primary"
-      to ="/MypageEdit"
+      to ="/mypageEdit"
     >
       수정하기
     </v-btn>

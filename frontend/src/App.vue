@@ -15,6 +15,7 @@
             <v-btn small class="mr-2" router :to="{name: 'LoginPage'}">login</v-btn>
             <v-btn small class="mr-2" >sign up</v-btn>
             <v-btn small class="mr-2" router :to="{name:'MyPage'}">My</v-btn>
+           
           </v-row>
         </v-app-bar>
 
@@ -63,7 +64,7 @@
                 <v-list-item-title>Sign up</v-list-item-title>
                 </v-list-item>
 
-                <v-list-item to="/MyPage">
+                <v-list-item to="/myPage">
                 <v-list-item-title>Info</v-list-item-title>
                 </v-list-item>
 
@@ -133,7 +134,6 @@
             </v-list-item>
             </v-list>
             </v-navigation-drawer>
-
       <router-view></router-view>
     </div>
 
@@ -146,6 +146,7 @@ export default {
   name: 'App',
   data: () => ({
     drawer: false,
+    count: 0,
     collapseOnScroll: true,
     colors: [
       'indigo',
@@ -158,7 +159,7 @@ export default {
   methods:{
     to_main(){
       this.$router.push('/');
-    }
+    },
   },
 };
 </script>

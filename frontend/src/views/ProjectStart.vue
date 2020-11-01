@@ -219,6 +219,7 @@
             <div class="text-center">
             <v-btn
             v-model="fab"
+            router :to="{name: 'CollaboProjMain'}"
             >
             프로젝트 등록하기</v-btn>
             </div>

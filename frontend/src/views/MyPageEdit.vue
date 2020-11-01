@@ -129,7 +129,7 @@
 <script>
 
 export default {
-  name: 'MyPageEdit',
+  name: 'myPageEdit',
 
   data () {
       return {
