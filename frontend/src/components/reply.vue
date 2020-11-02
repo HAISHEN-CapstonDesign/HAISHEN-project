@@ -1,8 +1,8 @@
 <template>
     <v-card width="1000" class="pa-6">
         <v-row class="ml-3">
-            <h3 > 댓글 </h3>
-            <h3> {{replyNum}} </h3>
+            <h3> 댓글 </h3>
+            <h3> {{items.length}} </h3>
             
 
         </v-row>
@@ -10,9 +10,8 @@
 
         <v-row no-gutters>
             <v-col
-            v-model="items"
-            v-for="(item, i) in items"
-            :key="i"
+            v-for="(item) in items"
+            v-bind:key="item.subtitle"
             cols=12>
 
                 <v-card class="ma-0 pa-n3" flat  align="left" width="800">
@@ -40,18 +39,24 @@
                 </v-card>
                 <v-divider></v-divider>
             </v-col>
+     
+            <p>메시지: {{ message }}</p>
             <v-card flat width="1000">
             <v-textarea
-            clearable
             :rules="rules"
             :value="value"
             v-model="message"
+            onfocus="textClear()"
             ></v-textarea>
             
             </v-card>
             <v-col align="end">
-                <v-btn v-model="message" @click="replySubmit(message)" outlined>제출</v-btn>          
+                <!-- <v-btn v-model="message" @click="replySubmit(message)" outlined>제출</v-btn>           -->
+                <v-btn @click="pushSubmit">댓글개수</v-btn>
             </v-col>
+
+            
+
             <!-- <v-btn @click="alert('sdafasdf')">asfasfasf</v-btn> -->
 
         </v-row>
@@ -76,7 +81,7 @@ export default {
     data : () => ({
         message: '',
         value: '댓글을 입력하세요',
-        replyNum: 5,
+        // replyNum: ,
         items3: [
         {
           color: '#1F7087',
@@ -158,6 +163,23 @@ export default {
         },
         clickmethod: function(){
             alert("dsfsdf")
+        },
+        replyNum(){
+            alert(this.items.length)
+        },
+        pushSubmit(){
+            let today = new Date();   
+            this.items.push({
+                avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', 
+                title: this.message,
+                subtitle: 'hyejinJeon',
+                date: today.toLocaleString()
+            })
+            this.textClear()
+
+        },
+        textClear(){
+            this.message='';
         }
     }
 }

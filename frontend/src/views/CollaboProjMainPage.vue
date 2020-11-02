@@ -1,18 +1,7 @@
 <template>
 <div>
  <h1>공동협업 프로젝트 메인페이지</h1>
- <!-- <sidebar-menu :menu="menu" /> -->
-    <!-- <v-card
-        class="mx-auto" 
-    >
-        <v-img
-            class="white--text align-end"
-            height="350"
-            src="../assets/banner.jpg"
-        >
-        <v-card-title>Top 10 Australian beaches</v-card-title>
-        </v-img>
-    </v-card> -->
+
     <v-row>
         <v-img
         class="white--text align-end"
@@ -27,13 +16,7 @@
         <v-btn>서포터</v-btn>
         <v-btn>커뮤니티</v-btn>
     </v-col>
-     <!-- <v-btn
-            color="pink"
-            dark
-            @click.stop="drawer = !drawer"
-            >
-            Toggle
-    </v-btn> -->
+
     
     <v-row>
         <!-- <v-col cols=3><ProjIndex></ProjIndex></v-col> -->
@@ -76,6 +59,7 @@
         <v-col cols=4 align="center">
             <ProjContent></ProjContent>
             <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
+             
         </v-col>
 
         <v-col cols=4></v-col>

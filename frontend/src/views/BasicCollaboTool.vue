@@ -4,7 +4,7 @@
       <v-img
         max-height="200"
         max-width="100%"
-        src="..\assets\banner.jpg"
+        src="../assets/banner.jpg"
         >
         <br><br>
             <p class="text-center white--text headline">
