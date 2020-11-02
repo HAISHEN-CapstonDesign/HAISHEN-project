@@ -104,7 +104,7 @@ export default new Vuex.Store({
         },
         signUp(signUpObj) {
             axios
-                .post('/user/account/signup', signUpObj)
+                .post('/api/user/account/signup', signUpObj)
                 .then(res => {
                     console.log('성공' + res)
                     console.log(signUpObj)
