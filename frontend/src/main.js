@@ -6,10 +6,12 @@ import store from './store'
 import router from './routes/page_index.js'
 import VueMoment from 'vue-moment'
 
+
 Vue.config.productionTip = false
 
 Vue.use(VueMoment);
 Vue.use(VueRouter);
+
 
 new Vue({
     vuetify,

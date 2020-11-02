@@ -41,6 +41,10 @@ const SignUpPage = () => {
     return import ( /* webpackChunkName: "signuppage" */ '../views/SignUpPage.vue')
 }
 
+const AdvertisingPage = () => {
+    return import ( /* webpackChunkName: "advertisingpage" */ '../views/Advertising.vue')
+}
+
 export default new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
@@ -54,6 +58,12 @@ export default new VueRouter({
             name: 'LoginPage',
             //beforeEnter: rejectAuthUser,
             component: LoginPage
+        },
+        {
+            path: '/ad',
+            name: 'AdvertisingPage',
+            //beforeEnter: rejectAuthUser,
+            component: AdvertisingPage
         },
         {
             path: '/mypage',
