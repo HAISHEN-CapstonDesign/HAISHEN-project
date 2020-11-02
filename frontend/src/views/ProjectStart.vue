@@ -11,7 +11,7 @@
         v-else
         max-height="200"
         max-width="100%"
-        src="../assets/banner.jpg"
+        src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
         ></v-img>
     <br>
     <v-container style="width: 60%;">
