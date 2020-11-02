@@ -218,22 +218,26 @@ export default {
             const file = e.target.files[0];
             this.imageUrl = URL.createObjectURL(file);
         },
+        
         createProject(){
+            /*
             var data = {
                 title: this.title,
                 introduction: this.intro,
                 image: this.imageUrl,
+                //add tag or genre
                 mwn: this.member_num,
                // target_d-day: this.date, //d-day -> d_day
                 target_funding_money: this.target_funding_money,              
             }
             axios.post('/api/project/startup', data)
                 .then(res => {
-                    console.log('성공' + res)
+                    console.log(res)
                 })
                 .catch((err) => {
                     console.log(err)
                 });
+                */
             this.$router.push('/CollaboProjMain');
         }
     },
