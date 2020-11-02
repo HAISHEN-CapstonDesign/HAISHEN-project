@@ -8,8 +8,8 @@
           </v-toolbar>
           <div class="pa-3">
             <v-text-field
-              v-model="email"
-              label="이메일을 입력하세요"
+              v-model="identity"
+              label="아이디를 입력하세요"
             >
             </v-text-field>
             <v-text-field
@@ -42,7 +42,7 @@
                 label="성별을 입력해주세요"
             ></v-autocomplete>
             <v-btn
-              @click="signUp"
+              @click="signUp({ identity, password, name, nickname, gender })"
               color="primary"
               depressed
               block
@@ -62,7 +62,7 @@
 import { mapActions } from "vuex"
   export default {
     data: () => ({
-      gender: ['남자', '여자']
+      gender: ['male', 'female']
     }),
     methods: {
       ...mapActions(['signUp'])
