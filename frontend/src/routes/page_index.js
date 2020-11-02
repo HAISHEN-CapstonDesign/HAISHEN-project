@@ -8,8 +8,6 @@ import projectStart from '../views/ProjectStart'
 import profitCheck from '../views/ProfitCheck'
 import chooseWriter from '../views/ChooseWriter'
 import basicCollaboTool from '../views/BasicCollaboTool'
-import VueMoment from 'vue-moment'
-Vue.use(VueMoment);
 
 Vue.use(VueRouter);
 

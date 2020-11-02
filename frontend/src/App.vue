@@ -26,14 +26,14 @@
                 temporary
                 >
             <img
-                src='./assets/crunch_logo.png'
-                height="70px"              
+                src='./assets/crunch_logo2.png'
+                height="60px"              
                 dark
                 v-on:click="to_main"
                 >
             <template>
                 <v-list-item two-line>
-                <v-list-item-avatar>
+                <v-list-item-avatar size="50">
                     <img src="https://randomuser.me/api/portraits/women/81.jpg">
                 </v-list-item-avatar>
 

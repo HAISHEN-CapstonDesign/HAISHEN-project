@@ -27,6 +27,7 @@
                     :rules="rules"
                     counter="100"
                     outlined
+                    v-model="title"
                     ></v-text-field>
                 </v-col>
             </v-row>
@@ -37,26 +38,16 @@
                     <p style="font-size:20px" class="text-center">프로젝트 tag</p>
                 </v-col>
                 <v-col cols="12" sm="6" md="8">
-                    <v-combobox
-                    v-model="model"
+                    <v-autocomplete
+                    v-model="tags"
                     :items="items"
-                    :search-input.sync="search"
                     hide-selected
                     outlined
                     label="Add some tags"
                     multiple
                     small-chips
                     >
-                        <template v-slot:no-data>
-                            <v-list-item>
-                                <v-list-item-content>
-                                    <v-list-item-title>
-                                        No results matching "<strong>{{ search }}</strong>". Press <kbd>enter</kbd> to create a new one
-                                    </v-list-item-title>
-                                </v-list-item-content>
-                            </v-list-item>
-                        </template>
-                    </v-combobox>
+                    </v-autocomplete>
                 </v-col>
             </v-row>
         </v-flex>
@@ -71,6 +62,7 @@
                     outlined
                     label="프로젝트 설명"
                     :rules="area_rules"
+                    v-model="intro"
                     ></v-textarea>
                 </v-col>
             </v-row>
@@ -89,46 +81,7 @@
         <v-flex>
             <v-row>
                 <v-col cols="6" md="4">
-                    <p style="font-size:20px" class="text-center">내 프로필 </p>
-                </v-col>
-                <v-col cols="12" sm="6" md="8">
-                    <v-radio-group
-                    v-model="profile_radios"
-                    :mandatory="false"
-                    >
-                        <v-radio
-                        label="My페이지에서 가져오기"
-                        value="radio-1"
-                        ></v-radio>
-                        <v-radio
-                        label="새로 작성하기"
-                        value="radio-2"
-                        ></v-radio>
-                    </v-radio-group>
-                    <v-autocomplete
-                    v-model="my.tag"
-                    :items="items"
-                    :disabled="profile_radios == 'radio-1'"
-                    outlined
-                    dense
-                    chips
-                    small-chips
-                    label="관심분야"
-                    multiple
-                    ></v-autocomplete>
-                    <v-textarea
-                    label="이력"
-                    v-model="my.career"
-                    :disabled="profile_radios == 'radio-1'"
-                    outlined
-                    ></v-textarea>
-                </v-col>
-            </v-row>
-        </v-flex>
-        <v-flex>
-            <v-row>
-                <v-col cols="6" md="4">
-                    <p style="font-size:20px" class="text-center">모집 인원 </p>
+                    <p style="font-size:20px" class="text-center">모집 인원</p>
                 </v-col>
                 <v-col cols="12" sm="6" md="8">
                     <v-radio-group
@@ -145,7 +98,7 @@
                         ></v-radio>
                     </v-radio-group>
                     <v-text-field
-                        v-model="membar_num"
+                        v-model="member_num"
                         v-show="num_radios == 'radio-2'"
                         type="number"
                         label="인원 수"
@@ -179,7 +132,8 @@
                     label="목표 펀딩 금액"
                     suffix="원"
                     v-show="funding_radios == 'radio-2'"
-                    value="0"
+                    v-model="target_funding_money"
+                    type="number"
                     style="width:35%"
                     ></v-text-field>
                 </v-col>
@@ -218,8 +172,7 @@
         <v-flex>
             <div class="text-center">
             <v-btn
-            v-model="fab"
-            router :to="{name: 'CollaboProjMain'}"
+            @click="createProject()"
             >
             프로젝트 등록하기</v-btn>
             </div>
@@ -230,6 +183,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
     name: 'projectStart',
@@ -242,19 +196,17 @@ export default {
             items: ['여행', '수학', '과학', 'IT', '요리','건강','역사','건축','문화,예술'],
             rules: [v => v.length <= 100 || 'Max 100 characters'],
             area_rules: [v => v.length <= 1000 || 'Max 1000 characters'],
-            member_num: '2',
-            model:[],
+            tags:[],
             search: null,
             num_radios: 'radio-1',
-            profile_radios: 'radio-1',
             deadline_radios: 'radio-1',
             funding_radios: 'radio-1',
             date: new Date().toISOString().substr(0, 10),
-            my: {
-                tag: ['여행', '요리'],
-                career: '대충 이력 내용'
-            },
             imageUrl: null,
+            title: '',
+            intro: '',
+            member_num: '1',
+            target_funding_money: 0,
         }
     },
     methods: {
@@ -265,10 +217,76 @@ export default {
             console.log(e.target.files)
             const file = e.target.files[0];
             this.imageUrl = URL.createObjectURL(file);
+        },
+        createProject(){
+            var data = {
+                title: this.title,
+                introduction: this.intro,
+                image: this.imageUrl,
+                mwn: this.member_num,
+               // target_d-day: this.date, //d-day -> d_day
+                target_funding_money: this.target_funding_money,              
+            }
+            axios.post('/api/project/startup', data)
+                .then(res => {
+                    console.log('성공' + res)
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+            this.$router.push('/CollaboProjMain');
         }
     },
 
 }
+/*
+
+내 프로필 항목
+data - profile_radios: 'radio-1',
+            my: {
+                tag: ['여행', '요리'],
+                career: '대충 이력 내용'
+            },
+<v-flex>
+            <v-row>
+                <v-col cols="6" md="4">
+                    <p style="font-size:20px" class="text-center">내 프로필 </p>
+                </v-col>
+                <v-col cols="12" sm="6" md="8">
+                    <v-radio-group
+                    v-model="profile_radios"
+                    :mandatory="false"
+                    >
+                        <v-radio
+                        label="My페이지에서 가져오기"
+                        value="radio-1"
+                        ></v-radio>
+                        <v-radio
+                        label="새로 작성하기"
+                        value="radio-2"
+                        ></v-radio>
+                    </v-radio-group>
+                    <v-autocomplete
+                    v-model="my.tag"
+                    :items="items"
+                    :disabled="profile_radios == 'radio-1'"
+                    outlined
+                    dense
+                    chips
+                    small-chips
+                    label="관심분야"
+                    multiple
+                    ></v-autocomplete>
+                    <v-textarea
+                    label="이력"
+                    v-model="my.career"
+                    :disabled="profile_radios == 'radio-1'"
+                    outlined
+                    ></v-textarea>
+                </v-col>
+            </v-row>
+        </v-flex>
+*/
 </script>
 
         
