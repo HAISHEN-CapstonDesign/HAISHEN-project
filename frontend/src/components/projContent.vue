@@ -1,126 +1,29 @@
 <template>
-<div>
- <h1>공동협업 프로젝트 메인페이지</h1>
- <!-- <sidebar-menu :menu="menu" /> -->
-    <!-- <v-card
-        class="mx-auto" 
-    >
-        <v-img
-            class="white--text align-end"
-            height="350"
-            src="../assets/banner.jpg"
-        >
-        <v-card-title>Top 10 Australian beaches</v-card-title>
-        </v-img>
-    </v-card> -->
-    <v-row>
-        <v-img
-        class="white--text align-end"
-        height="300"
-        src="../assets/banner2.jpg"
-        >
-        </v-img>
 
-    </v-row>
-    <v-col align="end">
-        <v-btn @click="sss">저자 info</v-btn>
-        <v-btn>서포터</v-btn>
-        <v-btn>커뮤니티</v-btn>
-    </v-col>
-     <!-- <v-btn
-            color="pink"
-            dark
-            @click.stop="drawer = !drawer"
-            >
-            Toggle
-    </v-btn> -->
-    
-    <v-row>
-        <!-- <v-col cols=3><ProjIndex></ProjIndex></v-col> -->
-        <v-col col-4>
-            <v-card width="300" height="600">
-                <v-navigation-drawer
-                    v-model="drawer"
-                    permanent
-                    floating
-                    width="400"         
-                >
-                    <v-list-item class="px-2">
-                        <v-list-item-avatar>
-                            <v-img src="../assets/grid.png"></v-img>
-                        </v-list-item-avatar>
-                        <v-list-item-title>{{title}}</v-list-item-title>
+    <!-- <v-card height="1000" width="1000" align="left"> -->
+    <div height="1000" width="300" align="left">
+        <h1>{{title}}</h1>
 
-                    </v-list-item>
+        <h5>By. {{writer[0]}}</h5>
+        <h5>{{date}} 작성</h5>
 
-                    <v-divider></v-divider>
+        <h3>{{little_titles[0].text}}</h3>
+        <h4>{{content[selected_idx]}}</h4>
+        {{selected_idx}}
 
-                    <v-list dense>
-                        <v-list-item
-                            v-for="little_title in little_titles"
-                            :key="little_title"
-                            link
-                        >
+        <v-btn @click="alert('hi')">asfasf</v-btn>
+    </div>
 
-                        <v-list-item-content>
-                            <v-list-item-title @click="selectIndex(little_title.idx)">
-                                {{little_title.idx}}, {{ little_title.text }}
-                            </v-list-item-title>
-                        </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                </v-navigation-drawer>
-            </v-card>
-        </v-col>
+        
 
-        <v-col cols=4 align="center">
-            <ProjContent></ProjContent>
-            <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
-        </v-col>
-
-        <v-col cols=4></v-col>
-    </v-row>
-     
-
-
-    
-    
-</div>
-   
 </template>
 
-<script>
-// import ProjIndex fro m '../components/projIndex.vue'
-import ProjContent from '../components/projContent.vue'
-import PostReply from '../components/reply.vue'
-export default {
-    components: {
-        // ProjIndex,
-        PostReply,
-        ProjContent
-    },
-    data: () => ({
-        menu: [
-                {
-                    href: '/',
-                    title: 'Dashboard',
-                    icon: 'fa fa-user'
-                },
-                {
-                    href: '#',
-                    title: 'Charts',
-                    icon: 'fa fa-chart-area'
-                },
-            ],
-        drawer: true,
-        items: [
-          { title: 'Home', icon: 'mdi-home-city' },
-          { title: 'My Account', icon: 'mdi-account' },
-          { title: 'Users', icon: 'mdi-account-group-outline' },
-        ],
-        mini: true,
 
-        title: '캡디 기획 보고서 작성하기',
+<script>
+export default {
+    name: 'projContent',
+    data : () => ({
+        title: '캡스톤 디자인 프로젝트 기획 보고서 작성하기',
         date: '2020.10.12 05:55',
         writer: ['김김김', '이이이', '박박박'],
         little_titles: [
@@ -144,22 +47,8 @@ export default {
             '별들을 너무나 어머니, 그러나 내린 헤일 봅니다. 경, 자랑처럼 아직 있습니다. 피어나듯이 시인의 자랑처럼 계절이 이름을 이웃 지나고 멀듯이, 거외다. 아름다운 별 불러 밤이 된 무엇인지 별들을 가슴속에 위에 있습니다. 쉬이 하나에 속의 별 별빛이 무덤 슬퍼하는 이름자 계십니다. 너무나 가을 멀듯이, 나는 자랑처럼 시인의 별 라이너 까닭입니다. 까닭이요, 마디씩 헤는 남은 비둘기, 버리었습니다. 위에 별을 하나에 잔디가 하나에 이웃 가을로 밤을 듯합니다. 이름자 책상을 내 이름과 옥 이웃 가난한 듯합니다. 아스라히 무성할 못 릴케 둘 별 이름과, 버리었습니다.',
             '새워 하나 덮어 별 거외다. 가을 라이너 그러나 파란 책상을 이름자를 말 별 계십니다. 다하지 이름자 이름과, 헤는 사람들의 이름을 거외다. 소학교 추억과 별 계십니다. 이름과, 다하지 사랑과 계십니다. 새워 그리고 위에도 사람들의 책상을 있습니다. 피어나듯이 없이 까닭이요, 비둘기, 지나가는 무덤 있습니다. 시와 내 한 헤는 당신은 마리아 아침이 많은 노새, 거외다. 덮어 이국 강아지, 별 밤을 소학교 경, 있습니다.',
             '묻힌 하나에 언덕 불러 나의 하나의 별을 듯합니다. 하늘에는 된 이름과, 나의 말 봅니다. 하나에 이름자 이제 지나가는 별 것은 별이 많은 계십니다. 봄이 가난한 패, 하나 아이들의 멀리 내린 거외다. 못 어머니, 별 내린 별에도 쉬이 다 하나에 패, 봅니다. 북간도에 청춘이 써 가을로 묻힌 이름을 계십니다. 까닭이요, 풀이 헤일 부끄러운 하나에 듯합니다. 소녀들의 아름다운 하나 내일 오는 토끼, 멀리 묻힌 이름자 거외다. 경, 다하지 새워 둘 밤이 이름과, 거외다. 무덤 덮어 이름을 했던 내 라이너 이런 언덕 계십니다. 동경과 오는 걱정도 슬퍼하는 있습니다.'
-        ],  
+        ],
 
-
-  }),
-  methods:{
-    selectIndex: function(title_idx){
-        this.selected_idx= title_idx
-        alert(title_idx)
-    },
-    parent_replySubmit: function(){
-        alert("hello")
-    },
-    sss(){
-        alert('dfasd')
-    }
-
-  }
+    })
 }
 </script>
