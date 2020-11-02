@@ -102,21 +102,17 @@ export default new Vuex.Store({
                     alert('이메일과 비밀번호를 확인하세요.2')
                 })
         },
-        signUp() {
+        signUp(signUpObj) {
             axios
-                .post('/user/account/signup', {
-                    identity: "성공",
-                    password: "1234",
-                    name: "크런치",
-                    nickname: "크런치",
-                    gender: "male"
-                })
+                .post('/user/account/signup', signUpObj)
                 .then(res => {
                     console.log('성공' + res)
+                    console.log(signUpObj)
                 })
                 .catch((err) => {
                     console.log(err)
-                    alert('post 요청 실패')
+                    console.log(signUpObj)
+                    alert('post 요청 실패' + signUpObj)
                 });
         }
     },
