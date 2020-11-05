@@ -163,6 +163,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-body, a:hover {cursor: url(../assets/cursor.cur), auto;}
-</style>
