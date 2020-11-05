@@ -8,6 +8,7 @@ import projectStart from '../views/ProjectStart'
 import profitCheck from '../views/ProfitCheck'
 import chooseWriter from '../views/ChooseWriter'
 import basicCollaboTool from '../views/BasicCollaboTool'
+//import test from '../views/test'
 
 Vue.use(VueRouter);
 
@@ -125,5 +126,9 @@ export default new VueRouter({
             path: '/basicCollaboTool',
             component: basicCollaboTool,
         },
+        // {
+        //      path: '/test',
+        //      component: test,
+        //  },
     ]
 })
