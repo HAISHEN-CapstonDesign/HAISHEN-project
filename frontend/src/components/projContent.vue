@@ -9,9 +9,16 @@
 
         <h3>{{little_titles[0].text}}</h3>
         <h4>{{content[selected_idx]}}</h4>
-        {{selected_idx}}
-
-        <v-btn @click="alert('hi')">asfasf</v-btn>
+        <h3>{{little_titles[1].text}}</h3>
+        <h4>{{content[selected_idx]}}</h4>
+        <h3>{{little_titles[2].text}}</h3>
+        <h4>{{content[selected_idx]}}</h4>
+        <h3>{{little_titles[3].text}}</h3>
+        {{selected_idx,}}
+        <h4>좋아요: {{ contents_like }}</h4>
+        <v-btn @click="increment" icon color="deep-orange">
+            <v-icon>mdi-thumb-up</v-icon>
+        </v-btn>
     </div>
 
         
@@ -23,11 +30,12 @@
 export default {
     name: 'projContent',
     data : () => ({
+        contents_like : 0,
         title: '캡스톤 디자인 프로젝트 기획 보고서 작성하기',
         date: '2020.10.12 05:55',
         writer: ['김김김', '이이이', '박박박'],
         little_titles: [
-            { idx:1, text:'기획보고서란'},
+            { idx:1, text:'기획보고서란'  },
             { idx:2, text:'유사 제품 서비스 동향'},
             { idx:3, text:'관련 기술 동향'},
             { idx:4, text:'유저 스토리'},
@@ -49,6 +57,16 @@ export default {
             '묻힌 하나에 언덕 불러 나의 하나의 별을 듯합니다. 하늘에는 된 이름과, 나의 말 봅니다. 하나에 이름자 이제 지나가는 별 것은 별이 많은 계십니다. 봄이 가난한 패, 하나 아이들의 멀리 내린 거외다. 못 어머니, 별 내린 별에도 쉬이 다 하나에 패, 봅니다. 북간도에 청춘이 써 가을로 묻힌 이름을 계십니다. 까닭이요, 풀이 헤일 부끄러운 하나에 듯합니다. 소녀들의 아름다운 하나 내일 오는 토끼, 멀리 묻힌 이름자 거외다. 경, 다하지 새워 둘 밤이 이름과, 거외다. 무덤 덮어 이름을 했던 내 라이너 이런 언덕 계십니다. 동경과 오는 걱정도 슬퍼하는 있습니다.'
         ],
 
-    })
+    }),
+    methods:{
+        increment() {
+            // 인스턴스 내부의 데이터모델에 접근 할 땐,
+            // this 를 사용한다
+            this.contents_like++;
+        },
+        decrement() {
+            this.contents_like--;
+        }
+    }
 }
 </script>
