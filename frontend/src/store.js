@@ -103,11 +103,13 @@ export default new Vuex.Store({
                 })
         },
         signUp(signUpObj) {
+            // const fd = new FormData()
+            // fd.append('info', signUpObj)
             axios
-                .post('/api/user/account/signup', signUpObj)
+                .post('http://localhost:3000/api/user/account/signup', signUpObj.allUsers)
                 .then(res => {
                     console.log('성공' + res)
-                    console.log(signUpObj)
+                    console.log(signUpObj.name)
                 })
                 .catch((err) => {
                     console.log(err)
