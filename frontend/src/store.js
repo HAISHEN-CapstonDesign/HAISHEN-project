@@ -101,19 +101,19 @@ export default new Vuex.Store({
                 .catch(() => {
                     alert('이메일과 비밀번호를 확인하세요.2')
                 })
-        },
-        signUp(signUpObj) {
-            axios
-                .post('/api/user/account/signup', signUpObj)
-                .then(res => {
-                    console.log('성공' + res)
-                    console.log(signUpObj)
-                })
-                .catch((err) => {
-                    console.log(err)
-                    console.log(signUpObj)
-                    alert('post 요청 실패' + signUpObj)
-                });
         }
+        // signUp(signUpObj) {
+        //     axios
+        //         .post('/api/user/account/signup', signUpObj)
+        //         .then(res => {
+        //             console.log('성공' + res)
+        //             console.log(signUpObj)
+        //         })
+        //         .catch((err) => {
+        //             console.log(err)
+        //             console.log(signUpObj)
+        //             alert('post 요청 실패' + signUpObj)
+        //         });
+        // }
     },
 })
