@@ -117,5 +117,18 @@ export default new Vuex.Store({
                     alert('post 요청 실패' + signUpObj)
                 });
         }
+        // signUp(signUpObj) {
+        //     axios
+        //         .post('/api/user/account/signup', signUpObj)
+        //         .then(res => {
+        //             console.log('성공' + res)
+        //             console.log(signUpObj)
+        //         })
+        //         .catch((err) => {
+        //             console.log(err)
+        //             console.log(signUpObj)
+        //             alert('post 요청 실패' + signUpObj)
+        //         });
+        // }
     },
 })

@@ -8,6 +8,7 @@ import projectStart from '../views/ProjectStart'
 import profitCheck from '../views/ProfitCheck'
 import chooseWriter from '../views/ChooseWriter'
 import basicCollaboTool from '../views/BasicCollaboTool'
+//import test from '../views/test'
 
 Vue.use(VueRouter);
 
@@ -49,6 +50,10 @@ const ContentsReadingPage = () => {
     return import ( /* webpackChunkName: "contentsreadingpage" */ '../views/ContentsReading.vue')
 }
 
+const PaymentPage = () => {
+    return import ( /* webpackChunkName: "paymentpage" */ '../views/Payment.vue')
+}
+
 export default new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
@@ -74,6 +79,12 @@ export default new VueRouter({
             name: 'ContentsReadingPage',
             //beforeEnter: rejectAuthUser,
             component: ContentsReadingPage
+        },
+        {
+            path: '/payment',
+            name: 'PaymentPage',
+            //beforeEnter: rejectAuthUser,
+            component: PaymentPage
         },
         {
             path: '/mypage',
@@ -115,5 +126,9 @@ export default new VueRouter({
             path: '/basicCollaboTool',
             component: basicCollaboTool,
         },
+        // {
+        //      path: '/test',
+        //      component: test,
+        //  },
     ]
 })
