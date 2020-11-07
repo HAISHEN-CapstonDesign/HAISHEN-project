@@ -102,21 +102,21 @@ export default new Vuex.Store({
                     alert('이메일과 비밀번호를 확인하세요.2')
                 })
         },
-        signUp(signUpObj) {
-            // const fd = new FormData()
-            // fd.append('info', signUpObj)
-            axios
-                .post('http://localhost:3000/api/user/account/signup', signUpObj.allUsers)
-                .then(res => {
-                    console.log('성공' + res)
-                    console.log(signUpObj.name)
-                })
-                .catch((err) => {
-                    console.log(err)
-                    console.log(signUpObj)
-                    alert('post 요청 실패' + signUpObj)
-                });
-        }
+        // signUp(signUpObj) {
+        //     // const fd = new FormData()
+        //     // fd.append('info', signUpObj)
+        //     axios
+        //         .post('http://localhost:3000/api/user/account/signup', signUpObj.allUsers)
+        //         .then(res => {
+        //             console.log('성공' + res)
+        //             console.log(signUpObj.name)
+        //         })
+        //         .catch((err) => {
+        //             console.log(err)
+        //             console.log(signUpObj)
+        //             alert('post 요청 실패' + signUpObj)
+        //         });
+        // }
         // signUp(signUpObj) {
         //     axios
         //         .post('/api/user/account/signup', signUpObj)
@@ -130,5 +130,5 @@ export default new Vuex.Store({
         //             alert('post 요청 실패' + signUpObj)
         //         });
         // }
-    },
+    }
 })
