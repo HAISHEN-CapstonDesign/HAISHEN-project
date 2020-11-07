@@ -67,10 +67,9 @@ export default new Vuex.Store({
                 .post('/api/user/account/auth', loginObj)
                 .then(res => {
                     console.log('loginObj :' + loginObj)
-                    console.log('loginObj_id :' + loginObj.id)
+                    console.log('loginObj_id :' + loginObj.identity)
                     console.log('loginObj_password :' + loginObj.password)
                     let token = res.data.token
-
                     console.log('token :' + token)
                     localStorage.setItem('access_token', token)
                     dispatch("getMemberInfo")
@@ -78,7 +77,7 @@ export default new Vuex.Store({
                 .catch((err) => {
                     console.log(err)
                     console.log('loginObj :' + loginObj)
-                    console.log('loginObj_id :' + loginObj.id)
+                    console.log('loginObj_id :' + loginObj.identity)
                     console.log('loginObj_password :' + loginObj.password)
                     alert('아이디과 비밀번호를 확인하세요.')
                 });

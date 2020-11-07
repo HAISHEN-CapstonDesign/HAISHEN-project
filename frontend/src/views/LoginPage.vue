@@ -13,11 +13,11 @@
                     <v-toolbar-title>로그인</v-toolbar-title>
                 </v-toolbar>
                 <div class="pa-3">
-                    <v-text-field v-model="id" label="아이디를 입력하세요">
+                    <v-text-field v-model="identity" label="아이디를 입력하세요">
                     </v-text-field>
                     <v-text-field v-model="password" label="패스워드를 입력하세요" type="password">
                     </v-text-field>
-                    <v-btn color="primary" depressed block large @click="login({ id, password })">
+                    <v-btn color="primary" depressed block large @click="login({ identity, password })">
                         로그인
                     </v-btn>
                     <!-- <v-btn @click="test">테스트</v-btn>
