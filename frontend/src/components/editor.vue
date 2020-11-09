@@ -189,19 +189,20 @@ export default {
           new History(),
         ]
     }),
-      content: "<p>본문</p>",
+      content: this.mainText,
     }
   },
  
   beforeDestroy() {
     this.editor.destroy()
   },
-  props:['mainText', 'isClickSubmit'],
+  props:['mainText'],
   watch: {
-    
+    content() {
+      this.$emit('event-data', this.content);
+      console.log('change')
+    }
   },
-  mounted() {
-    console.log(this.$props.mainText);
-  },
+
 }
 </script>

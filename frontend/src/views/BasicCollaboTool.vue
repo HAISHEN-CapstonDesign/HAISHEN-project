@@ -104,7 +104,7 @@
           <p>{{$moment(lastEditedDate).format('YYYY-MM-DD h:mm:ss a')}}, {{finalEditor}}</p>               
 
           <v-divider></v-divider>
-          <Editor v-model="mainText"></Editor>
+          <Editor v-bind:mainText="mainText" @event-data="updateText"></Editor>
             
           </v-card>
           </v-container>
@@ -125,14 +125,9 @@
           <p>{{$moment(lastEditedDate).format('YYYY-MM-DD h:mm:ss a')}}, {{finalEditor}}</p>               
 
           <v-divider></v-divider>
-          
-            <v-textarea
-            flat
-            solo
-            name="mainText"
-            :disabled="!isEditing"
-            v-bind:label="mainText"
-            ></v-textarea>
+
+            <div v-html="mainText"></div>
+
           </v-card>
           </v-container>
           </div>
@@ -239,7 +234,7 @@ export default {
             isEditing: false,
             title: '제목',
             nowSubtitle: '현재 목차',
-            mainText: '본문',
+            mainText: '<p>본문</p>',
             projectImage: "https://cdn.vuetifyjs.com/images/parallax/material.jpg",
             little_titles: [
             { idx:1, text:'기획보고서란'},
@@ -278,9 +273,13 @@ export default {
           //history page로 이동
         }
       },
+      updateText(newText){
+        //본문 변경 내용 저장
+        this.mainText = newText;
+      },
       clickSubmit(){
         if(this.isEditing){
-          //내용 저장
+          //DB에 내용 저장
           this.isEditing = !this.isEditing
         }
       },
