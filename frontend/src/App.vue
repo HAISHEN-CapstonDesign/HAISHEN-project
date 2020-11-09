@@ -46,11 +46,15 @@
                         <v-list-item-title>My</v-list-item-title>
                     </template>
 
-                    <v-list-item to="/login">
+                    <v-list-item v-if="isLoginError" to="/login">
                         <v-list-item-title>Login</v-list-item-title>
                     </v-list-item>
 
-                    <v-list-item to="/signup">
+                    <v-list-item v-if="isLogin" @click="logout">
+                        <v-list-item-title>Logout</v-list-item-title>
+                    </v-list-item>
+
+                    <v-list-item v-if="isLoginError" to="/signup">
                         <v-list-item-title>Sign up</v-list-item-title>
                     </v-list-item>
 
