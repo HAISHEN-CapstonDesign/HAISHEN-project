@@ -196,5 +196,12 @@ export default {
   beforeDestroy() {
     this.editor.destroy()
   },
+  props:['mainText', 'isClickSubmit'],
+  watch: {
+    
+  },
+  mounted() {
+    console.log(this.$props.mainText);
+  },
 }
 </script>
