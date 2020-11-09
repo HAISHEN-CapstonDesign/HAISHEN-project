@@ -232,17 +232,18 @@ export default {
             finalEditor: "김ㅇㅇ",
             lastEditedDate: new Date(),
             isEditing: false,
+            nowIdx: 1,
             title: '제목',
             nowSubtitle: '현재 목차',
             mainText: '<p>본문</p>',
             projectImage: "https://cdn.vuetifyjs.com/images/parallax/material.jpg",
             little_titles: [
-            { idx:1, text:'기획보고서란'},
-            { idx:2, text:'유사 제품 서비스 동향'},
-            { idx:3, text:'관련 기술 동향'},
-            { idx:4, text:'유저 스토리'},
-            { idx:5, text:'UX/UI 설계'},
-            { idx:6, text:'시스템 설계'},        
+            { idx:1, text:'기획보고서란', main:'<p>목차1</p>'},
+            { idx:2, text:'유사 제품 서비스 동향', main:'<p>목차2</p>'},
+            { idx:3, text:'관련 기술 동향', main:'<p>목차3</p>'},
+            { idx:4, text:'유저 스토리', main:'<p>목차4</p>'},
+            { idx:5, text:'UX/UI 설계', main:'<p>목차5</p>'},
+            { idx:6, text:'시스템 설계', main:'<p>목차6</p>'},        
             ],
             infoBtnStyle: {
               color: 'black'
@@ -276,6 +277,7 @@ export default {
       updateText(newText){
         //본문 변경 내용 저장
         this.mainText = newText;
+        this.little_titles[this.nowIdx].main = this.mainText;
       },
       clickSubmit(){
         if(this.isEditing){
@@ -285,6 +287,8 @@ export default {
       },
       changeSubtitle(idx){
         this.nowSubtitle = this.little_titles[idx-1].text;
+        this.nowIdx = idx-1;
+        this.mainText = this.little_titles[this.nowIdx].main;
       },
       hoverSupporter(){
         this.supporterBtnStyle.color = 'brown'
