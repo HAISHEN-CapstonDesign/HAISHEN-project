@@ -50,6 +50,10 @@ const ContentsReadingPage = () => {
     return import ( /* webpackChunkName: "contentsreadingpage" */ '../views/ContentsReading.vue')
 }
 
+const PaymentPage = () => {
+    return import ( /* webpackChunkName: "paymentpage" */ '../views/Payment.vue')
+}
+
 export default new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
@@ -75,6 +79,12 @@ export default new VueRouter({
             name: 'ContentsReadingPage',
             //beforeEnter: rejectAuthUser,
             component: ContentsReadingPage
+        },
+        {
+            path: '/payment',
+            name: 'PaymentPage',
+            //beforeEnter: rejectAuthUser,
+            component: PaymentPage
         },
         {
             path: '/mypage',

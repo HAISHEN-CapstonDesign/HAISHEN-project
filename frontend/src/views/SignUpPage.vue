@@ -59,13 +59,26 @@
 </template>
 
 <script>
-import { mapActions } from "vuex"
+import axios from "axios"
+
   export default {
     data: () => ({
       gender: ['male', 'female']
     }),
     methods: {
-      ...mapActions(['signUp'])
+      signUp(signUpObj) {
+            axios
+                .post('http://localhost:3000/api/user/account/signup', signUpObj)
+                .then(res => {
+                    console.log('성공' + res)
+                    console.log(signUpObj)
+                })
+                .catch((err) => {
+                    console.log(err)
+                    console.log(signUpObj)
+                    alert('post 요청 실패' + signUpObj)
+                });
+        }
     }
   }
 </script>

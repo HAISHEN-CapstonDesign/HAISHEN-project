@@ -2,7 +2,7 @@ module.exports = {
     "transpileDependencies": [
         "vuetify"
     ],
-
+    // https: true,
     // outputDir: "../backend/crunch_server/src/main/resources/static",
     // indexPath: "../static/index.html",
 
@@ -13,7 +13,8 @@ module.exports = {
                 ws: true,
                 changeOrigin: true
             }
-        }
+        },
+        // https: true
     },
     chainWebpack: config => {
         const svgRule = config.module.rule("svg");

@@ -2,33 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from './routes/page_index.js'
 import axios from "axios"
-import { kakaoAPI } from "../vue.config";
 
 Vue.use(Vuex)
-
-
-export const KakaoLogin = (history) => {
-    window.Kakao.Auth.login({
-        success: (response) => {
-            axios
-                .get(`${kakaoAPI}/kakao`, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: response.access_token,
-                    },
-                })
-                .then((res) => {
-                    localStorage.setItem("kakao_token", res.data.token);
-                    alert("로그인 되었습니다.");
-                    history.push("/");
-                });
-        },
-        fail: (error) => {
-            alert(JSON.stringify(error));
-        },
-    });
-};
-
 
 export default new Vuex.Store({
     state: {
@@ -64,20 +39,28 @@ export default new Vuex.Store({
     actions: {
         login({ dispatch }, loginObj) {
             axios
-                .post('https://reqres.in/api/login', loginObj)
+                .post('http://localhost:3000/api/user/account/auth', loginObj)
                 .then(res => {
+                    console.log('loginObj :' + loginObj)
+                    console.log('loginObj_id :' + loginObj.identity)
+                    console.log('loginObj_password :' + loginObj.password)
                     let token = res.data.token
+                    console.log('token :' + token)
                     localStorage.setItem('access_token', token)
                     dispatch("getMemberInfo")
+                    router.push({ name: "MainPage" })
                 })
                 .catch((err) => {
                     console.log(err)
-                    alert('이메일과 비밀번호를 확인하세요.1')
+                    console.log('loginObj :' + loginObj)
+                    console.log('loginObj_id :' + loginObj.identity)
+                    console.log('loginObj_password :' + loginObj.password)
+                    alert('아이디과 비밀번호를 확인하세요.')
                 });
         },
         logout({ commit }) {
             commit('logout')
-            router.push({ name: "home" })
+            router.push({ name: "MainPage" })
         },
         getMemberInfo({ commit }) {
             let token = localStorage.getItem('access_token')
@@ -101,19 +84,19 @@ export default new Vuex.Store({
                 .catch(() => {
                     alert('이메일과 비밀번호를 확인하세요.2')
                 })
-        },
-        signUp(signUpObj) {
-            axios
-                .post('/api/user/account/signup', signUpObj)
-                .then(res => {
-                    console.log('성공' + res)
-                    console.log(signUpObj)
-                })
-                .catch((err) => {
-                    console.log(err)
-                    console.log(signUpObj)
-                    alert('post 요청 실패' + signUpObj)
-                });
         }
+        // signUp(signUpObj) {
+        //     axios
+        //         .post('/api/user/account/signup', signUpObj)
+        //         .then(res => {
+        //             console.log('성공' + res)
+        //             console.log(signUpObj)
+        //         })
+        //         .catch((err) => {
+        //             console.log(err)
+        //             console.log(signUpObj)
+        //             alert('post 요청 실패' + signUpObj)
+        //         });
+        // }
     },
 })
