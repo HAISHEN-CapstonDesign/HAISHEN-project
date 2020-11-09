@@ -40,11 +40,12 @@
 </template>
 
 <script>
+import router from '../routes/page_index.js'
+
 import {
     mapState,
     mapActions
 } from "vuex"
-// import { KakaoLogin } from "../store.js"
 
 export default {
     data: () => ({
@@ -55,9 +56,9 @@ export default {
         ...mapState(['isLogin', 'isLoginError'])
     },
     methods: {
-        // KakaoLogin,
         ...mapActions(['login']),
 
+        // KakaoLogin
         loginWithKakao() {
             window.Kakao.Auth.login({
                 scope: 'account_email,gender',
@@ -70,6 +71,7 @@ export default {
                         url: '/v2/user/me',
                         success: function (response) {
                             console.log(response);
+                            router.push({ name: "MainPage" })
                         },
                         fail: function (error) {
                             console.log(error);

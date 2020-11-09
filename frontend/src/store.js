@@ -2,33 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from './routes/page_index.js'
 import axios from "axios"
-import { kakaoAPI } from "../vue.config";
 
 Vue.use(Vuex)
-
-
-export const KakaoLogin = (history) => {
-    window.Kakao.Auth.login({
-        success: (response) => {
-            axios
-                .get(`${kakaoAPI}/kakao`, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: response.access_token,
-                    },
-                })
-                .then((res) => {
-                    localStorage.setItem("kakao_token", res.data.token);
-                    alert("로그인 되었습니다.");
-                    history.push("/");
-                });
-        },
-        fail: (error) => {
-            alert(JSON.stringify(error));
-        },
-    });
-};
-
 
 export default new Vuex.Store({
     state: {
@@ -64,7 +39,7 @@ export default new Vuex.Store({
     actions: {
         login({ dispatch }, loginObj) {
             axios
-                .post('/api/user/account/auth', loginObj)
+                .post('http://localhost:3000/api/user/account/auth', loginObj)
                 .then(res => {
                     console.log('loginObj :' + loginObj)
                     console.log('loginObj_id :' + loginObj.identity)
@@ -73,6 +48,7 @@ export default new Vuex.Store({
                     console.log('token :' + token)
                     localStorage.setItem('access_token', token)
                     dispatch("getMemberInfo")
+                    router.push({ name: "MainPage" })
                 })
                 .catch((err) => {
                     console.log(err)
@@ -84,7 +60,7 @@ export default new Vuex.Store({
         },
         logout({ commit }) {
             commit('logout')
-            router.push({ name: "home" })
+            router.push({ name: "MainPage" })
         },
         getMemberInfo({ commit }) {
             let token = localStorage.getItem('access_token')
