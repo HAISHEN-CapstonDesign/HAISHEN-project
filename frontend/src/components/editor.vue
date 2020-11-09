@@ -200,7 +200,6 @@ export default {
   watch: {
     content() {
       this.$emit('event-data', this.content);
-      console.log('change')
     }
   },
 

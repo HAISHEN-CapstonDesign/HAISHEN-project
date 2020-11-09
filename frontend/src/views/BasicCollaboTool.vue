@@ -47,6 +47,7 @@
         </v-btn>
       </v-col>
     </v-row>
+    <!-- 개별 작성 페이지-->
     <v-container>
     <v-row>
         <v-col
@@ -54,34 +55,7 @@
         sm="4"
         md="3"
         >
-            <v-card id="contents" style="top:300px; position: absolute;">
-            <v-navigation-drawer
-            floating
-            permanent
-            >
-        <v-list
-          dense
-          rounded
-        >
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>{{title}}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-divider></v-divider>
-          <v-list-item
-          v-for="little_title in little_titles"
-          :key="little_title"
-          @click="changeSubtitle(little_title.idx)"
-          link
-          >
-            <v-list-item-content>
-              <v-list-item-title>{{little_title.idx}}. {{ little_title.text }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-            </v-card>
+            <Subtitle v-bind:title="title"></Subtitle>
         </v-col>
         <v-col
         sm="8"
@@ -140,57 +114,7 @@
         sm="2"
         md="1"
         >
-          <v-card id="mode_menu" style="top:400px; position: absolute;" max-width="127">
-
-        <v-list
-          dense
-          rounded
-        >
-        <v-list-item-group active-class="brown--text">
-          <v-list-item
-          :disabled="isEditing"
-          @click="isEditing = !isEditing"
-          link
-          >
-            <v-list-item-content>
-            <v-list-item-title class="text-center">
-            <v-icon>mdi-pencil</v-icon>
-            </v-list-item-title>
-            <v-list-item-subtitle class="text-center">EDIT</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item @click="clickHistory" link>
-          <v-list-item-content>
-            <v-list-item-title class="text-center">
-            <v-icon>mdi-history</v-icon>
-            </v-list-item-title>
-            <v-list-item-subtitle class="text-center">HISTORY</v-list-item-subtitle>
-          </v-list-item-content>
-          </v-list-item>
-          <v-list-item @click="clickCommunity" link>
-          <v-list-item-content>
-            <v-list-item-title class="text-center">
-            <v-icon>mdi-forum</v-icon>
-            </v-list-item-title>
-            <v-list-item-subtitle class="text-center">COMMUNITY</v-list-item-subtitle>
-          </v-list-item-content>
-          </v-list-item>
-          <v-list-item
-          :disabled="!isEditing"
-          @click="clickSubmit"
-          link
-          >
-          <v-list-item-content>
-            <v-list-item-title class="text-center">
-            <v-icon>mdi-check-circle</v-icon>
-            </v-list-item-title>
-            <v-list-item-subtitle class="text-center">SUBMIT</v-list-item-subtitle>
-          </v-list-item-content>
-          </v-list-item>
-          </v-list-item-group>
-        </v-list>
-
-            </v-card>
+          <Menu v-model="isEditing" @changeEdit="editingChange"></Menu>
         </v-col>
     </v-row>
     </v-container>
@@ -199,44 +123,21 @@
 </template>
 
 <script>
-import $ from 'jquery';
 import Editor from '../components/editor';
 import Reply from '../components/reply';
+import Menu from '../components/modeMenu';
+import Subtitle from '../components/subtitleList';
 
 export default {
-    mounted(){
-    //list가 스크롤을 따라오게 하는 코드
-    $(document).ready(function() {
-  var floatPosition = parseInt($("#contents").css('top'));
-  var floatPosition_mode = parseInt($("#mode_menu").css('top'));
-	$(window).scroll(function() {
-	var scrollTop = $(window).scrollTop();
-  var newPosition = scrollTop + floatPosition + "px";
-  var newPosition_mode = scrollTop + floatPosition_mode + "px";
-	$("#contents").stop().animate({
-	"top" : newPosition
-  }, 500);
-  $("#mode_menu").stop().animate({
-	"top" : newPosition_mode
-	}, 500);
-	}).scroll();
-    });
-
-    },
     components: {
       Editor,
       Reply,
+      Menu,
+      Subtitle,
     },
     data() {
         return{
-            finalEditor: "김ㅇㅇ",
-            lastEditedDate: new Date(),
             isEditing: false,
-            nowIdx: 1,
-            title: '제목',
-            nowSubtitle: '현재 목차',
-            mainText: '<p>본문</p>',
-            projectImage: "https://cdn.vuetifyjs.com/images/parallax/material.jpg",
             little_titles: [
             { idx:1, text:'기획보고서란', main:'<p>목차1</p>'},
             { idx:2, text:'유사 제품 서비스 동향', main:'<p>목차2</p>'},
@@ -245,6 +146,12 @@ export default {
             { idx:5, text:'UX/UI 설계', main:'<p>목차5</p>'},
             { idx:6, text:'시스템 설계', main:'<p>목차6</p>'},        
             ],
+            finalEditor: "김ㅇㅇ",
+            lastEditedDate: new Date(),
+            title: '제목',
+            nowSubtitle: '현재 목차',
+            mainText: '<p>본문</p>',
+            projectImage: "https://cdn.vuetifyjs.com/images/parallax/material.jpg",
             infoBtnStyle: {
               color: 'black'
             },
@@ -260,30 +167,13 @@ export default {
         }
     },
     methods: {
-      clickCommunity(){
-        if(this.isEditing == true){
-          alert('수정한 내용이 저장되지 않습니다.');
-          this.isEditing = !this.isEditing
-          //해당 목차 채팅방으로 이동
-        }
-      },
-      clickHistory(){
-        if(this.isEditing){
-          alert('수정한 내용이 저장되지 않습니다.');
-          this.isEditing = !this.isEditing
-          //history page로 이동
-        }
-      },
       updateText(newText){
         //본문 변경 내용 저장
         this.mainText = newText;
         this.little_titles[this.nowIdx].main = this.mainText;
       },
-      clickSubmit(){
-        if(this.isEditing){
-          //DB에 내용 저장
-          this.isEditing = !this.isEditing
-        }
+      editingChange(state){
+        this.isEditing = state;
       },
       changeSubtitle(idx){
         this.nowSubtitle = this.little_titles[idx-1].text;
@@ -315,5 +205,6 @@ export default {
         this.endProjectBtnStyle.color = 'black'
       },
     },
+
 }
 </script>
