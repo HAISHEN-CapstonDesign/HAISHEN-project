@@ -15,29 +15,46 @@ export default new Vuex.Store({
         //eve.holt@reqres.in
         //cityslicka
         isLogin: false,
-        isLoginError: false
+        isLoginError: true,
     },
     mutations: {
         // 로그인이 성공했을 때,
         loginSuccess(state, payload) {
+            console.log('before login isLogin :' + state.isLogin)
+            console.log('before login isLoginError :' + state.isLoginError)
+            console.log('before login userInfo :' + state.userInfo)
             state.isLogin = true
             state.isLoginError = false
             state.userInfo = payload
-
+            console.log('login success')
+            console.log('after login isLogin :' + state.isLogin)
+            console.log('after login isLoginError :' + state.isLoginError)
+            console.log('after login userInfo :' + state.userInfo)
         },
         // 로그인이 실패했을 때
         loginError(state) {
+            console.log('before isLogin :' + state.isLogin)
+            console.log('before isLoginError :' + state.isLoginError)
+            console.log('before userInfo :' + state.userInfo)
             state.isLogin = false
             state.isLoginError = true
+            console.log('login fail')
+            console.log('after isLogin :' + state.isLogin)
+            console.log('after isLoginError :' + state.isLoginError)
+            console.log('after userInfo :' + state.userInfo)
         },
         logout(state) {
             state.isLogin = false
-            state.isLoginError = false
+            state.isLoginError = true
             state.userInfo = null
+            console.log('logout')
+            console.log('isLogin :' + state.isLogin)
+            console.log('isLoginError :' + state.isLoginError)
+            console.log('userInfo :' + state.userInfo)
         }
     },
     actions: {
-        login({ dispatch }, loginObj) {
+        login({ commit }, loginObj) {
             axios
                 .post('http://localhost:3000/api/user/account/auth', loginObj)
                 .then(res => {
@@ -47,8 +64,20 @@ export default new Vuex.Store({
                     let token = res.data.token
                     console.log('token :' + token)
                     localStorage.setItem('access_token', token)
-                    dispatch("getMemberInfo")
+                        // dispatch("getMemberInfo")
                     router.push({ name: "MainPage" })
+                    let userInfo = {
+                        // id: response.data.data.id,
+                        // first_name: response.data.data.first_name,
+                        // last_name: response.data.data.last_name,
+                        // avatar: response.data.data.avatar
+                        id: '1',
+                        identity: 'gnsals',
+                        name: '김훈민',
+                        nickname: 'vtz',
+                        gender: 'male'
+                    }
+                    commit('loginSuccess', userInfo)
                 })
                 .catch((err) => {
                     console.log(err)
@@ -62,29 +91,34 @@ export default new Vuex.Store({
             commit('logout')
             router.push({ name: "MainPage" })
         },
-        getMemberInfo({ commit }) {
-            let token = localStorage.getItem('access_token')
-            let config = {
-                headers: {
-                    "access-token": token
-                }
-            }
-            axios
-                .get("https://reqres.in/api/users/2", config)
-                .then(response => {
-                    let userInfo = {
-                        id: response.data.data.id,
-                        first_name: response.data.data.first_name,
-                        last_name: response.data.data.last_name,
-                        avatar: response.data.data.avatar
-                    }
-                    console.log(response)
-                    commit('loginSuccess', userInfo)
-                })
-                .catch(() => {
-                    alert('이메일과 비밀번호를 확인하세요.2')
-                })
-        }
+        // getMemberInfo({ commit }) {
+        //     let token = localStorage.getItem('access_token')
+        //     let config = {
+        //         headers: {
+        //             "access-token": token
+        //         }
+        //     }
+        //     axios
+        //         .get("https://reqres.in/api/users/2", config)
+        //         .then(response => {
+        //             let userInfo = {
+        //                 // id: response.data.data.id,
+        //                 // first_name: response.data.data.first_name,
+        //                 // last_name: response.data.data.last_name,
+        //                 // avatar: response.data.data.avatar
+        //                 id: '1',
+        //                 identity: 'gnsals',
+        //                 name: '김훈민',
+        //                 nickname: 'vtz',
+        //                 gender: 'male'
+        //             }
+        //             console.log(response)
+        //             commit('loginSuccess', userInfo)
+        //         })
+        //         .catch(() => {
+        //             alert('이메일과 비밀번호를 확인하세요.2')
+        //         })
+        // }
         // signUp(signUpObj) {
         //     axios
         //         .post('/api/user/account/signup', signUpObj)
