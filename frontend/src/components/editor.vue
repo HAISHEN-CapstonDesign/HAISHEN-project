@@ -139,7 +139,7 @@
 </template>
 
 <script>
-import { Editor, EditorMenuBar } from 'tiptap'
+import { Editor, EditorMenuBar } from 'tiptap';
 import EditorContent from "../components/editorContent.js";
 import {
   Blockquote,
@@ -189,12 +189,20 @@ export default {
           new History(),
         ]
     }),
-      content: "<p>본문</p>",
+      content: this.mainText,
     }
   },
  
   beforeDestroy() {
     this.editor.destroy()
   },
+  props:['mainText'],
+  watch: {
+    content() {
+      this.$emit('event-data', this.content);
+      console.log('change')
+    }
+  },
+
 }
 </script>
