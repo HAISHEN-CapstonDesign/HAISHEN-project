@@ -139,7 +139,7 @@
 </template>
 
 <script>
-import { Editor, EditorMenuBar } from 'tiptap'
+import { Editor, EditorMenuBar } from 'tiptap';
 import EditorContent from "../components/editorContent.js";
 import {
   Blockquote,

@@ -8,10 +8,11 @@
                 <v-btn icon class="mr-2">
                     <v-icon>mdi-magnify</v-icon>
                 </v-btn>
-                <v-btn small class="mr-2" router :to="{name: 'LoginPage'}">login</v-btn>
-                <v-btn small class="mr-2" router :to="{name: 'SignUpPage'}">sign up</v-btn>
-                <v-btn small class="mr-2" router :to="{name:'MyPage'}">My</v-btn>
-                <v-chip class="ma-2" color="orange" text-color="white" router :to="{name:'PaymentPage'}">
+                <v-btn small class="mr-2" v-if="isLoginError" router :to="{name: 'LoginPage'}">login</v-btn>
+                <v-btn small class="mr-2" v-if="isLogin" @click="logout">logout</v-btn>
+                <v-btn small class="mr-2" v-if="isLoginError" router :to="{name: 'SignUpPage'}">sign up</v-btn>
+                <v-btn small class="mr-2" v-if="isLogin" router :to="{name:'MyPage'}">My</v-btn>
+                <v-chip class="ma-2" color="orange" v-if="isLogin" text-color="white" router :to="{name:'PaymentPage'}">
                     <v-icon left>
                         mdi-currency-usd
                     </v-icon>
@@ -126,6 +127,11 @@
 </template>
 
 <script>
+import {
+    mapState,
+    mapActions
+} from "vuex"
+
 export default {
     name: 'App',
     data: () => ({
@@ -140,13 +146,17 @@ export default {
             'deep-purple accent-4',
         ]
     }),
+    computed: {
+        ...mapState(['isLogin', 'isLoginError'])
+    },
     methods: {
         to_main() {
             this.$router.push('/');
         },
         ask_charge_point() {
 
-        }
+        },
+        ...mapActions(['logout'])
     },
 };
 </script>
