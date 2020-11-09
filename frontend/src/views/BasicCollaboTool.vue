@@ -104,6 +104,7 @@
           <p>{{$moment(lastEditedDate).format('YYYY-MM-DD h:mm:ss a')}}, {{finalEditor}}</p>               
 
           <v-divider></v-divider>
+          <Editor></Editor>
             <v-textarea
             flat
             solo
@@ -131,6 +132,7 @@
           <p>{{$moment(lastEditedDate).format('YYYY-MM-DD h:mm:ss a')}}, {{finalEditor}}</p>               
 
           <v-divider></v-divider>
+          
             <v-textarea
             flat
             solo
@@ -144,6 +146,7 @@
           </div>
         </v-container>
         </div>
+        <Reply></Reply>
         </v-col>
 
         <v-col
@@ -210,6 +213,8 @@
 
 <script>
 import $ from 'jquery';
+import Editor from '../components/editor';
+import Reply from '../components/reply';
 
 export default {
     mounted(){
@@ -230,6 +235,10 @@ export default {
 	}).scroll();
     });
 
+    },
+    components: {
+      Editor,
+      Reply,
     },
     data() {
         return{
