@@ -8,10 +8,10 @@
         v-bind:src="projectImage"
         >
     </v-img>
-    <v-row md = "6">
+    <v-row md = "6" sm="6">
       <v-spacer></v-spacer>
       <v-col
-      md="4"
+      md="4" sm="4"
       >
         <v-btn
         v-bind:style="infoBtnStyle"
@@ -43,7 +43,7 @@
         @mouseout="endHoverEndProject"
         text
         >
-          프로젝트 종료하기
+          프로젝트 종료
         </v-btn>
       </v-col>
     </v-row>
@@ -104,14 +104,8 @@
           <p>{{$moment(lastEditedDate).format('YYYY-MM-DD h:mm:ss a')}}, {{finalEditor}}</p>               
 
           <v-divider></v-divider>
-            <v-textarea
-            flat
-            solo
-            name="mainText"
-            label="본문"
-            :disabled="!isEditing"
-            height="1500"
-            ></v-textarea>
+          <Editor v-bind:mainText="mainText" @event-data="updateText"></Editor>
+            
           </v-card>
           </v-container>
           </div>
@@ -131,19 +125,15 @@
           <p>{{$moment(lastEditedDate).format('YYYY-MM-DD h:mm:ss a')}}, {{finalEditor}}</p>               
 
           <v-divider></v-divider>
-            <v-textarea
-            flat
-            solo
-            name="mainText"
-            label="본문"
-            :disabled="!isEditing"
-            height="1500"
-            ></v-textarea>
+
+            <div v-html="mainText"></div>
+
           </v-card>
           </v-container>
           </div>
         </v-container>
         </div>
+        <Reply></Reply>
         </v-col>
 
         <v-col
@@ -187,7 +177,7 @@
           </v-list-item>
           <v-list-item
           :disabled="!isEditing"
-          @click="isEditing = !isEditing"
+          @click="clickSubmit"
           link
           >
           <v-list-item-content>
@@ -210,6 +200,8 @@
 
 <script>
 import $ from 'jquery';
+import Editor from '../components/editor';
+import Reply from '../components/reply';
 
 export default {
     mounted(){
@@ -231,6 +223,10 @@ export default {
     });
 
     },
+    components: {
+      Editor,
+      Reply,
+    },
     data() {
         return{
             finalEditor: "김ㅇㅇ",
@@ -238,6 +234,7 @@ export default {
             isEditing: false,
             title: '제목',
             nowSubtitle: '현재 목차',
+            mainText: '<p>본문</p>',
             projectImage: "https://cdn.vuetifyjs.com/images/parallax/material.jpg",
             little_titles: [
             { idx:1, text:'기획보고서란'},
@@ -276,8 +273,18 @@ export default {
           //history page로 이동
         }
       },
+      updateText(newText){
+        //본문 변경 내용 저장
+        this.mainText = newText;
+      },
+      clickSubmit(){
+        if(this.isEditing){
+          //DB에 내용 저장
+          this.isEditing = !this.isEditing
+        }
+      },
       changeSubtitle(idx){
-        this.nowSubtitle = this.little_titles[idx].text;
+        this.nowSubtitle = this.little_titles[idx-1].text;
       },
       hoverSupporter(){
         this.supporterBtnStyle.color = 'brown'

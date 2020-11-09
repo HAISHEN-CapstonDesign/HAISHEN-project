@@ -68,7 +68,7 @@ import axios from "axios"
     methods: {
       signUp(signUpObj) {
             axios
-                .post('/api/user/account/signup', signUpObj)
+                .post('http://localhost:3000/api/user/account/signup', signUpObj)
                 .then(res => {
                     console.log('성공' + res)
                     console.log(signUpObj)
