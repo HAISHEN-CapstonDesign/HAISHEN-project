@@ -2,7 +2,8 @@
   <div class="editor">
     <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
       <div class="menubar">
-
+        <v-row justify="center">
+          <v-col>
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.bold() }"
@@ -10,7 +11,8 @@
         >
           <v-icon>mdi-format-bold</v-icon>
         </button>
-
+          </v-col>
+          <v-col>
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.italic() }"
@@ -18,7 +20,8 @@
         >
             <v-icon>mdi-format-italic</v-icon>
         </button>
-
+          </v-col>
+          <v-col>
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.strike() }"
@@ -26,7 +29,8 @@
         >
           <v-icon>mdi-format-strikethrough</v-icon>
         </button>
-
+          </v-col>
+          <v-col>
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.underline() }"
@@ -34,7 +38,8 @@
         >
           <v-icon>mdi-format-underline</v-icon>
         </button>
-
+        </v-col>
+        <v-col>
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.code() }"
@@ -42,7 +47,8 @@
         >
           <v-icon>mdi-code-tags</v-icon>
         </button>
-
+        </v-col>
+        <v-col>
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.paragraph() }"
@@ -50,7 +56,8 @@
         >
           <v-icon>mdi-format-pilcrow</v-icon>
         </button>
-
+        </v-col>
+        <v-col>
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.heading({ level: 1 }) }"
@@ -58,7 +65,8 @@
         >
           <v-icon>mdi-format-header-1</v-icon>
         </button>
-
+        </v-col>
+        <v-col>
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.heading({ level: 2 }) }"
@@ -66,7 +74,8 @@
         >
           <v-icon>mdi-format-header-2</v-icon>
         </button>
-
+        </v-col>
+        <v-col>
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.heading({ level: 3 }) }"
@@ -74,7 +83,8 @@
         >
           <v-icon>mdi-format-header-3</v-icon>
         </button>
-
+        </v-col>
+        <v-col>
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.bullet_list() }"
@@ -82,7 +92,8 @@
         >
           <v-icon>mdi-format-list-bulleted</v-icon>
         </button>
-
+        </v-col>
+        <v-col>
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.ordered_list() }"
@@ -90,7 +101,8 @@
         >
           <v-icon>mdi-format-list-numbered</v-icon>
         </button>
-
+        </v-col>
+        <v-col>
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.blockquote() }"
@@ -98,7 +110,8 @@
         >
           <v-icon>mdi-format-quote-close</v-icon>
         </button>
-
+        </v-col>
+        <v-col>
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.code_block() }"
@@ -106,37 +119,28 @@
         >
           <v-icon>mdi-code-tags</v-icon>
         </button>
-
+        </v-col>
+        <v-col>
         <button
           class="menubar__button"
           @click="commands.horizontal_rule"
         >
           <v-icon>mdi-minus</v-icon>
         </button>
-
-        <button
-          class="menubar__button"
-          @click="commands.undo"
-        >
-          <v-icon>mdi-undo</v-icon>
-        </button>
-
-        <button
-          class="menubar__button"
-          @click="commands.redo"
-        >
-          <v-icon>mdi-redo</v-icon>
-        </button>
-
+        </v-col>
+        </v-row>
+        
       </div>
     </editor-menu-bar>
 
-    <editor-content class="editor__content" :editor="editor" />
+    <editor-content :editor="editor" v-model="content"/>
+
   </div>
 </template>
 
 <script>
-import { Editor, EditorContent, EditorMenuBar } from 'tiptap'
+import { Editor, EditorMenuBar } from 'tiptap'
+import EditorContent from "../components/editorContent.js";
 import {
   Blockquote,
   CodeBlock,
@@ -164,11 +168,7 @@ export default {
   },
   data() {
     return {
-      editor: null,
-    }
-  },
-  mounted(){
-    this.editor = new Editor({
+      editor: new Editor({
       extensions: [
           new Blockquote(),
           new BulletList(),
@@ -187,11 +187,12 @@ export default {
           new Strike(),
           new Underline(),
           new History(),
-        ],
-      content: 
-          " Hi there,this is a very",
-    })
+        ]
+    }),
+      content: "<p>본문</p>",
+    }
   },
+ 
   beforeDestroy() {
     this.editor.destroy()
   },
