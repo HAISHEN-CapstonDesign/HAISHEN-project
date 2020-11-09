@@ -1,49 +1,67 @@
 <template>
+<!-- <v-card height="1000" width="1000" align="left"> -->
+<div height="1000" width="300" align="left">
+    <h1>{{title}}</h1>
 
-    <!-- <v-card height="1000" width="1000" align="left"> -->
-    <div height="1000" width="300" align="left">
-        <h1>{{title}}</h1>
+    <h5>By. {{writer[0]}}</h5>
+    <h5>{{date}} 작성</h5>
 
-        <h5>By. {{writer[0]}}</h5>
-        <h5>{{date}} 작성</h5>
-
-        <h3>{{little_titles[0].text}}</h3>
-        <h4>{{content[selected_idx]}}</h4>
-        <h3>{{little_titles[1].text}}</h3>
-        <h4>{{content[selected_idx]}}</h4>
-        <h3>{{little_titles[2].text}}</h3>
-        <h4>{{content[selected_idx]}}</h4>
-        <h3>{{little_titles[3].text}}</h3>
-        {{selected_idx,}}
-        <h4>좋아요: {{ contents_like }}</h4>
-        <v-btn @click="increment" icon color="deep-orange">
-            <v-icon>mdi-thumb-up</v-icon>
-        </v-btn>
-    </div>
-
-        
-
+    <h3>{{little_titles[0].text}}</h3>
+    <h4>{{content[selected_idx]}}</h4>
+    <h3>{{little_titles[1].text}}</h3>
+    <h4>{{content[selected_idx]}}</h4>
+    <h3>{{little_titles[2].text}}</h3>
+    <h4>{{content[selected_idx]}}</h4>
+    <h3>{{little_titles[3].text}}</h3>
+    {{selected_idx,}}
+    <h4>좋아요: {{ contents_like }}</h4>
+    <v-btn @click="increment" icon color="deep-orange">
+        <v-icon>mdi-thumb-up</v-icon>
+    </v-btn>
+</div>
 </template>
-
 
 <script>
 export default {
     name: 'projContent',
-    data : () => ({
-        contents_like : 0,
+    data: () => ({
+        contents_like: 0,
         title: '캡스톤 디자인 프로젝트 기획 보고서 작성하기',
         date: '2020.10.12 05:55',
         writer: ['김김김', '이이이', '박박박'],
-        little_titles: [
-            { idx:1, text:'기획보고서란'  },
-            { idx:2, text:'유사 제품 서비스 동향'},
-            { idx:3, text:'관련 기술 동향'},
-            { idx:4, text:'유저 스토리'},
-            { idx:5, text:'UX/UI 설계'},
-            { idx:6, text:'시스템 설계'},
-            { idx:7, text:'청춘예찬'},
-            { idx:8, text:'별헤는밤'},
-           
+        little_titles: [{
+                idx: 1,
+                text: '기획보고서란'
+            },
+            {
+                idx: 2,
+                text: '유사 제품 서비스 동향'
+            },
+            {
+                idx: 3,
+                text: '관련 기술 동향'
+            },
+            {
+                idx: 4,
+                text: '유저 스토리'
+            },
+            {
+                idx: 5,
+                text: 'UX/UI 설계'
+            },
+            {
+                idx: 6,
+                text: '시스템 설계'
+            },
+            {
+                idx: 7,
+                text: '청춘예찬'
+            },
+            {
+                idx: 8,
+                text: '별헤는밤'
+            },
+
         ],
         selected_idx: 0,
         content: [
@@ -58,7 +76,7 @@ export default {
         ],
 
     }),
-    methods:{
+    methods: {
         increment() {
             // 인스턴스 내부의 데이터모델에 접근 할 땐,
             // this 를 사용한다
