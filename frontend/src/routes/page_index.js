@@ -9,6 +9,8 @@ import profitCheck from '../views/ProfitCheck'
 import chooseWriter from '../views/ChooseWriter'
 import basicCollaboTool from '../views/BasicCollaboTool'
 
+import diffTest from '../views/DiffTest'
+
 
 Vue.use(VueRouter);
 
@@ -126,6 +128,10 @@ export default new VueRouter({
             path: '/basicCollaboTool',
             component: basicCollaboTool,
         },
+        {
+            path: '/diffTest',
+            component: diffTest,
+        }
 
     ]
 })

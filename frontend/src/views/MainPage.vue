@@ -166,6 +166,7 @@
             
             <v-btn to ="/postlist">글목록으로</v-btn>
             <v-btn to ="/collaboProjMain">공동프로젝트 메인페이지로</v-btn>
+            <v-btn to ="/diffTest">diff test 페이지로</v-btn>
             <v-btn router :to="{name:'ContentsReadingPage'}">컨텐츠 열람 페이지</v-btn>
             <h1>Genre</h1>
             <v-row justify="center">
