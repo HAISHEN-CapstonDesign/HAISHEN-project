@@ -48,7 +48,7 @@ export default {
   methods:{
       blue_click(){
           alert(this.blue)
-          axios.post('/api/difftest/blue',{
+          axios.post('http://localhost:3000/api/difftest/blue',{
               headers:{
 
               },
@@ -60,7 +60,7 @@ export default {
 
       grey_click(){
           alert(this.grey)
-          axios.post('/api/difftest/grey',{
+          axios.post('http://localhost:3000/api/difftest/grey',{
               params:{
                   after:this.grey
               }
