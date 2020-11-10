@@ -20,7 +20,7 @@
                 </v-chip>
             </v-row>
         </v-app-bar>
-
+        
         <v-navigation-drawer v-model="drawer" absolute temporary>
             <img src='./assets/crunch_logo2.png' height="60px" dark v-on:click="to_main">
             <template>

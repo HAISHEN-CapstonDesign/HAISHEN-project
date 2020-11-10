@@ -1,7 +1,6 @@
 <template>
 <div>
  <h1>컨텐츠 열람 페이지</h1>
-
     <v-row>
         <v-img
         class="white--text align-end"
@@ -46,7 +45,7 @@
                         >
 
                         <v-list-item-content>
-                            <v-list-item-title @click="selectIndex(little_title.idx)">
+                            <v-list-item-title @click="showButtonsDialog()">
                                 {{little_title.idx}}, {{ little_title.text }}
                             </v-list-item-title>
                         </v-list-item-content>
@@ -77,6 +76,8 @@
 // import ProjIndex fro m '../components/projIndex.vue'
 import ProjContent from '../components/projContent.vue'
 import PostReply from '../components/reply.vue'
+// import store from '../store'
+
 export default {
     components: {
         // ProjIndex,
@@ -119,23 +120,52 @@ export default {
            
         ],
         selected_idx: 0
-        
-
-
   }),
   methods:{
-    selectIndex: function(title_idx){
-        // this.selected_idx= title_idx
-        if(title_idx > 2){
-            alert('유료컨텐츠 입니다. 광고페이지로 넘어갑니다')
-            this.$router.push({ name: 'AdvertisingPage' })
-        }
-        else{
-            alert(title_idx)
-        }
-        
-        
-    },
+      showButtonsDialog() {
+        this.$modal.show('dialog', {
+            title: 'The standard Lorem Ipsum passage',
+            text: 'Lorem ipsum dolor sit amet, ...',
+            buttons: [
+                {
+                    title: 'Cancel',
+                    handler: () => {
+                        this.$modal.hide('dialog')
+                    }
+                },
+                {
+                    title: 'Like',
+                    handler: () => {
+                        alert('Like action')
+                    }
+                },
+                {
+                    title: 'Repost',
+                    handler: () => {
+                        alert('Repost action')
+                    }
+                }
+            ]
+            })
+        },
+        dialogEvent(eventName) {
+            console.log('Dialog event: ' + eventName)
+        },
+    // selectIndex: function(title_idx){
+    //     // this.selected_idx= title_idx
+    //     if(title_idx > 2){
+    //         if( store.state.userInfo.point > 100 ){
+    //             alert('유료컨텐츠 입니다. 포인트 100을 차감하여 열람할까요?')
+    //         }
+    //         alert('유료컨텐츠 입니다. 광고페이지로 넘어갑니다')
+    //         this.$router.push({ name: 'AdvertisingPage' })
+    //         showButtonsDialog()
+    //     }
+    //     else{
+    //         alert('무료컨텐츠 입니다.')
+    //         alert(title_idx)
+    //     }
+    // },
     parent_replySubmit: function(){
         alert("hello")
     },
