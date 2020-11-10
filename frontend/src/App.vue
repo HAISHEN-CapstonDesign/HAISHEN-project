@@ -16,7 +16,7 @@
                     <v-icon left>
                         mdi-currency-usd
                     </v-icon>
-                    Point : 0
+                    Point : {{ $store.state.userInfo.point }} 
                 </v-chip>
             </v-row>
         </v-app-bar>
@@ -30,7 +30,8 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                        <v-list-item-title>Name ex)Amy</v-list-item-title>
+                        <v-list-item-title v-if="isLoginError">로그인 해주세요</v-list-item-title>
+                        <v-list-item-title v-if="isLogin">{{ $store.state.userInfo.nickname }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </template>
@@ -151,7 +152,7 @@ export default {
         ]
     }),
     computed: {
-        ...mapState(['isLogin', 'isLoginError'])
+        ...mapState(['isLogin', 'isLoginError','userInfo'])
     },
     methods: {
         to_main() {
