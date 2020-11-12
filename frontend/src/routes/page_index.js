@@ -54,6 +54,10 @@ const PaymentPage = () => {
     return import ( /* webpackChunkName: "paymentpage" */ '../views/Payment.vue')
 }
 
+const modaltest = () => {
+    return import ( /* webpackChunkName: "modaltest" */ '../views/modaltest.vue')
+}
+
 export default new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
@@ -67,6 +71,12 @@ export default new VueRouter({
             name: 'LoginPage',
             // beforeEnter: rejectAuthUser,
             component: LoginPage
+        },
+        {
+            path: '/modaltest',
+            name: 'modaltest',
+            // beforeEnter: rejectAuthUser,
+            component: modaltest
         },
         {
             path: '/ad',
