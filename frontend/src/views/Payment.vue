@@ -3,7 +3,6 @@
     <v-layout align-center row wrap class="mt-15">
         <v-flex xs12>
             <v-select :items="items" v-model="value" label="포인트 충전 금액" required></v-select>
-            <small>결제는 카카오페이로 진행됩니다</small>
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="dialog = false">취소</v-btn>
@@ -15,7 +14,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
     name: 'Payment',
@@ -26,39 +25,38 @@ export default {
     }),
     methods: {
         pay() {
-            let baseUrl = "http://localhost:3000/"
-            let form = new FormData()
-            form.append('amount',this.value)
-            axios.post(baseUrl+"accounts/kakaoPay",form)
-                // .post('https://kapi.kakao.com/v1/payment/ready', {
-                //     headers: {
-                //         'Authorization': "KakaoAK " + "7b12275e88617952b941794a3efd1693",
-                //         'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-                //     },
-                //     params: {
-                //         cid: "TC0ONETIME",
-                //         partner_order_id: '1001',
-                //         partner_user_id: 'Crunch',
-                //         item_name: '포인트',
-                //         quantity: 1,
-                //         total_amount: 0,
-                //         vat_amount: 200,
-                //         tax_free_amount: 0,
-                //         approval_url: 'http://localhost:8080',
-                //         fail_url: 'http://localhost:8080',
-                //         cancel_url: 'http://localhost:8080',
-                //     }
+            // axois
+            //     .post('http://localhost:3000/api/user/account/signup', signUpObj)
+            // // axios.post(baseUrl+"accounts/kakaoPay",form)
+            //     .post('https://kapi.kakao.com/v1/payment/ready', {
+            //         headers: {
+            //             'Authorization': "KakaoAK " + "7b12275e88617952b941794a3efd1693",
+            //             'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+            //         },
+            //         params: {
+            //             cid: "TC0ONETIME",
+            //             partner_order_id: '1001',
+            //             partner_user_id: 'Crunch',
+            //             item_name: '포인트',
+            //             quantity: 1,
+            //             total_amount: 0,
+            //             vat_amount: 200,
+            //             tax_free_amount: 0,
+            //             approval_url: 'http://localhost:8080',
+            //             fail_url: 'http://localhost:8080',
+            //             cancel_url: 'http://localhost:8080',
+            //         }
+            //     })
+                // .then(res => {
+                //     let payUrl = res.data.next_redirect_pc_url
+                //     console.log(res)
+                //     location.href = payUrl
                 // })
-                .then(res => {
-                    let payUrl = res.data.next_redirect_pc_url
-                    console.log(res)
-                    location.href = payUrl
-                })
-                .catch((err) => {
-                    console.log(err)
-                    alert("에러가 발생했습니다. 다시 시도해주세요")
-                    this.$router.push('/payment')
-                });
+                // .catch((err) => {
+                //     console.log(err)
+                //     alert("에러가 발생했습니다. 다시 시도해주세요")
+                //     this.$router.push('/payment')
+                // });
         }
     }
 }
