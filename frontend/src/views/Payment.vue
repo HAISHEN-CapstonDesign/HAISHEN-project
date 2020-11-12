@@ -26,26 +26,29 @@ export default {
     }),
     methods: {
         pay() {
-            axios
-                .post('https://kapi.kakao.com/v1/payment/ready', {
-                    headers: {
-                        'Authorization': "KakaoAK " + "7b12275e88617952b941794a3efd1693",
-                        'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-                    },
-                    params: {
-                        cid: "TC0ONETIME",
-                        partner_order_id: '1001',
-                        partner_user_id: 'Crunch',
-                        item_name: '포인트',
-                        quantity: 1,
-                        total_amount: 0,
-                        vat_amount: 200,
-                        tax_free_amount: 0,
-                        approval_url: 'http://localhost:8080',
-                        fail_url: 'http://localhost:8080',
-                        cancel_url: 'http://localhost:8080',
-                    }
-                })
+            let baseUrl = "http://localhost:3000/"
+            let form = new FormData()
+            form.append('amount',this.value)
+            axios.post(baseUrl+"accounts/kakaoPay",form)
+                // .post('https://kapi.kakao.com/v1/payment/ready', {
+                //     headers: {
+                //         'Authorization': "KakaoAK " + "7b12275e88617952b941794a3efd1693",
+                //         'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+                //     },
+                //     params: {
+                //         cid: "TC0ONETIME",
+                //         partner_order_id: '1001',
+                //         partner_user_id: 'Crunch',
+                //         item_name: '포인트',
+                //         quantity: 1,
+                //         total_amount: 0,
+                //         vat_amount: 200,
+                //         tax_free_amount: 0,
+                //         approval_url: 'http://localhost:8080',
+                //         fail_url: 'http://localhost:8080',
+                //         cancel_url: 'http://localhost:8080',
+                //     }
+                // })
                 .then(res => {
                     let payUrl = res.data.next_redirect_pc_url
                     console.log(res)
@@ -54,7 +57,7 @@ export default {
                 .catch((err) => {
                     console.log(err)
                     alert("에러가 발생했습니다. 다시 시도해주세요")
-                    this.$router.push('/Payment')
+                    this.$router.push('/payment')
                 });
         }
     }

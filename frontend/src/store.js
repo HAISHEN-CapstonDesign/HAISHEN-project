@@ -8,8 +8,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         userInfo: null,
-        allUsers: [
-            { id: 1, name: 'hunmin', email: 'gnsals0904@ajou.ac.kr', password: '123456' },
+        allUsers: [{
+                point: 100,
+                name: 'hunmin',
+                nickname: 'vtz',
+                gender: 'male',
+                s3key: 'null'
+            },
             { id: 2, name: 'test', email: 'test@ajou.ac.kr', password: '123456' }
         ],
         //eve.holt@reqres.in
@@ -22,26 +27,26 @@ export default new Vuex.Store({
         loginSuccess(state, payload) {
             console.log('before login isLogin :' + state.isLogin)
             console.log('before login isLoginError :' + state.isLoginError)
-            console.log('before login userInfo :' + state.userInfo)
+            console.log('before login userInfo :' + JSON.stringify(state.userInfo))
             state.isLogin = true
             state.isLoginError = false
             state.userInfo = payload
             console.log('login success')
             console.log('after login isLogin :' + state.isLogin)
             console.log('after login isLoginError :' + state.isLoginError)
-            console.log('after login userInfo :' + state.userInfo)
+            console.log('after login userInfo :' + JSON.stringify(state.userInfo))
         },
         // 로그인이 실패했을 때
         loginError(state) {
             console.log('before isLogin :' + state.isLogin)
             console.log('before isLoginError :' + state.isLoginError)
-            console.log('before userInfo :' + state.userInfo)
+            console.log('before userInfo :' + JSON.stringify(state.userInfo))
             state.isLogin = false
             state.isLoginError = true
             console.log('login fail')
             console.log('after isLogin :' + state.isLogin)
             console.log('after isLoginError :' + state.isLoginError)
-            console.log('after userInfo :' + state.userInfo)
+            console.log('after userInfo :' + JSON.stringify(state.userInfo))
         },
         logout(state) {
             state.isLogin = false
@@ -50,34 +55,42 @@ export default new Vuex.Store({
             console.log('logout')
             console.log('isLogin :' + state.isLogin)
             console.log('isLoginError :' + state.isLoginError)
-            console.log('userInfo :' + state.userInfo)
-        },
+            console.log('userInfo :' + JSON.stringify(state.userInfo))
+        }
     },
     actions: {
         login({ commit }, loginObj) {
             axios
                 .post('http://localhost:3000/api/user/account/auth', loginObj)
                 .then(res => {
-                    console.log('loginObj :' + loginObj)
+                    console.log('loginObj :' + JSON.stringify(loginObj))
                     console.log('loginObj_id :' + loginObj.identity)
                     console.log('loginObj_password :' + loginObj.password)
-                    let token = res.data.token
+                    let token = res.data.accessToken
                     console.log('token :' + token)
                     localStorage.setItem('access_token', token)
                         // dispatch("getMemberInfo")
-                    router.push({ name: "MainPage" })
+
                     let userInfo = {
                         // id: response.data.data.id,
                         // first_name: response.data.data.first_name,
                         // last_name: response.data.data.last_name,
                         // avatar: response.data.data.avatar
-                        id: '1',
-                        identity: 'gnsals',
-                        name: '김훈민',
-                        nickname: 'vtz',
-                        gender: 'male'
+                        point: res.data.userInfoDTO.point,
+                        s3key: res.data.userInfoDTO.s3key,
+                        name: res.data.userInfoDTO.name,
+                        nickname: res.data.userInfoDTO.nickname,
+                        gender: res.data.userInfoDTO.gender
                     }
+                    console.log('user Info :' + JSON.stringify(userInfo))
+                    console.log('user info point : ' + userInfo.point)
+                    console.log('user info s3key : ' + userInfo.s3key)
+                    console.log('user info name : ' + userInfo.name)
+                    console.log('user info nickname : ' + userInfo.nickname)
+                    console.log('user info gender : ' + userInfo.gender)
+
                     commit('loginSuccess', userInfo)
+                    router.push({ name: "MainPage" })
                 })
                 .catch((err) => {
                     console.log(err)

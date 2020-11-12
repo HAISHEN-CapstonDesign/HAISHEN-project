@@ -16,11 +16,11 @@
                     <v-icon left>
                         mdi-currency-usd
                     </v-icon>
-                    Point : 0
+                    Point : {{ $store.state.userInfo.point }} 
                 </v-chip>
             </v-row>
         </v-app-bar>
-
+        
         <v-navigation-drawer v-model="drawer" absolute temporary>
             <img src='./assets/crunch_logo2.png' height="60px" dark v-on:click="to_main">
             <template>
@@ -30,7 +30,8 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                        <v-list-item-title>Name ex)Amy</v-list-item-title>
+                        <v-list-item-title v-if="isLoginError">로그인 해주세요</v-list-item-title>
+                        <v-list-item-title v-if="isLogin">{{ $store.state.userInfo.nickname }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </template>
@@ -46,11 +47,15 @@
                         <v-list-item-title>My</v-list-item-title>
                     </template>
 
-                    <v-list-item to="/login">
+                    <v-list-item v-if="isLoginError" to="/login">
                         <v-list-item-title>Login</v-list-item-title>
                     </v-list-item>
 
-                    <v-list-item to="/signup">
+                    <v-list-item v-if="isLogin" @click="logout">
+                        <v-list-item-title>Logout</v-list-item-title>
+                    </v-list-item>
+
+                    <v-list-item v-if="isLoginError" to="/signup">
                         <v-list-item-title>Sign up</v-list-item-title>
                     </v-list-item>
 
@@ -147,7 +152,7 @@ export default {
         ]
     }),
     computed: {
-        ...mapState(['isLogin', 'isLoginError'])
+        ...mapState(['isLogin', 'isLoginError','userInfo'])
     },
     methods: {
         to_main() {

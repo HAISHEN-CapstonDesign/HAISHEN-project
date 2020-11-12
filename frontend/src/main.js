@@ -11,7 +11,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueMoment);
 Vue.use(VueRouter);
-Vue.use(VModal, { dynamic: true })
+Vue.use(VModal, { dynamic: true, dialog: true })
 
 new Vue({
     vuetify,

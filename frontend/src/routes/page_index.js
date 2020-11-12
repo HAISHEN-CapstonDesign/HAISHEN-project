@@ -10,6 +10,7 @@ import chooseWriter from '../views/ChooseWriter'
 import basicCollaboTool from '../views/BasicCollaboTool'
 import community from '../views/Community'
 
+// import store from '../store'
 
 Vue.use(VueRouter);
 
@@ -66,30 +67,30 @@ export default new VueRouter({
         {
             path: '/login',
             name: 'LoginPage',
-            //beforeEnter: rejectAuthUser,
+            // beforeEnter: rejectAuthUser,
             component: LoginPage
         },
         {
             path: '/ad',
             name: 'AdvertisingPage',
-            //beforeEnter: rejectAuthUser,
+            // beforeEnter: rejectAuthUser,
             component: AdvertisingPage
         },
         {
             path: '/contents',
             name: 'ContentsReadingPage',
-            //beforeEnter: rejectAuthUser,
             component: ContentsReadingPage
         },
         {
             path: '/payment',
             name: 'PaymentPage',
-            //beforeEnter: rejectAuthUser,
+            // beforeEnter: onlyAuthUser,
             component: PaymentPage
         },
         {
             path: '/mypage',
             name: 'MyPage',
+            // beforeEnter: onlyAuthUser,
             component: myPage,
         },
         {
@@ -113,6 +114,7 @@ export default new VueRouter({
         },
         {
             path: '/projectStart',
+            // beforeEnter: onlyAuthUser,
             component: projectStart,
         },
         {
