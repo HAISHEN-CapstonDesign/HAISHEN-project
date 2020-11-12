@@ -5,7 +5,7 @@
       <v-img
         max-height="200"
         max-width="100%"
-        v-bind:src="project.projectImage"
+        v-bind:src="project.s3key"
         >
     </v-img>
     <v-row md = "6" sm="6">
@@ -47,7 +47,7 @@
         sm="4"
         md="3"
         >
-            <Subtitle v-bind:title="project.title"></Subtitle>
+            <Subtitle v-bind:title="title"></Subtitle>
         </v-col>
         <v-col
         sm="8"
@@ -65,9 +65,9 @@
         flat
         tile
         >
-          <h3>{{project.title}}</h3>
-          <h1>{{project.subtitle}}</h1>
-          <p>{{$moment(project.lastEditedDate).format('YYYY-MM-DD h:mm:ss a')}}, {{project.finalEditor}}</p>               
+          <h3>{{title}}</h3>
+          <h1>{{subtitle}}</h1>
+          <p>{{$moment(project.time).format('YYYY-MM-DD h:mm:ss a')}}, {{project.writerName}}</p>               
 
           <v-divider></v-divider>
           <Editor v-bind:mainText="nowMainText" @event-data="updateText"></Editor>
@@ -86,9 +86,9 @@
         flat
         tile
         >
-          <h3>{{project.title}}</h3>
-          <h1>{{project.nowSubtitle}}</h1>
-          <p>{{$moment(project.lastEditedDate).format('YYYY-MM-DD h:mm:ss a')}}, {{project.finalEditor}}</p>               
+          <h3>{{title}}</h3>
+          <h1>{{subtitle}}</h1>
+          <p>{{$moment(project.time).format('YYYY-MM-DD h:mm:ss a')}}, {{project.writerName}}</p>               
 
           <v-divider></v-divider>
 
@@ -132,16 +132,34 @@ export default {
       var id = this.$route.params.id;
       axios.get(`/api/project/1/blob/basicTool/${id}`)
         .then((res) => {
-          this.project = res.data[0];
-          this.nowMainText = this.project.mainText;
+          this.project = res.data;
+          this.nowMainText = this.project.post;
           console.log(res);
         })
-        .catch(error => console.log(error))
+        .catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
     },
     data() {
         return{
             isEditing: false,
-            title: '',
+            title: '제목',
+            subtitle:'목차',
             nowMainText: '',
             project: {},
             infoBtnStyle: {
