@@ -1,0 +1,128 @@
+<template>
+    <v-app>
+        <br><br><br>
+        <v-container>
+            <v-row>
+                <v-col md="10">
+                    <div style="float:right; font-size:20px; color:#A06641;">HISTORY</div>
+                    <div style="display: inline-block; font-size:20px; color:#A06641;">Title</div>
+                    <v-card color="#FFEFD5">
+                        <v-list color="#FFEFD5">
+                            <v-list-item>
+                            <v-list-item-content>
+                                목차
+                            </v-list-item-content>
+                            </v-list-item>
+                            <v-divider></v-divider>
+                            <v-list-item>
+                                <v-list-item-content>
+                                    <v-list-item-title>시간</v-list-item-title>
+                                </v-list-item-content>
+                                <v-list-item-content>
+                                    <v-list-item-title>코멘트</v-list-item-title>
+                                </v-list-item-content>
+                                <v-list-item-content>
+                                    <v-list-item-title>작성자</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-divider></v-divider>
+                            <v-list-item
+                            v-for="tmp in histories"
+                            :key="tmp.time"
+                            >
+                                <v-list-item-content>
+                                    <v-list-item-title v-text="tmp.time"></v-list-item-title>
+                                </v-list-item-content>
+                                <v-list-item-content>
+                                    <v-list-item-title v-text="tmp.comment"></v-list-item-title>
+                                </v-list-item-content>
+                                <v-list-item-content>
+                                    <v-list-item-title v-text="tmp.name"></v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-list>
+                    </v-card>
+                </v-col>
+                <v-col md="2">
+                    <Menu></Menu>
+                </v-col>
+            </v-row>
+        </v-container>
+    </v-app>
+</template>
+
+<script>
+import Menu from '../components/modeMenu'
+export default {
+    name:'historyPage',
+    components:{
+        Menu,
+    },
+    data(){
+        return{
+            histories: [
+          {
+            idx: 1,
+            name: 'Frozen Yogurt',
+            comment: 'add sdfdf',
+            time:'2020-05-20 15:07:45',
+          },
+          {
+            idx: 2,
+            name: 'Ice cream sandwich',
+            comment: 'add rutghv',
+            time:'2020-05-28 19:34:35',
+          },
+          {
+              idx: 3,
+            name: 'Eclair',
+            comment: 'change augfgcc',
+            time:'2020-06-03 12:29:55',
+          },
+          {
+              idx: 4,
+            name: 'Cupcake',
+            comment: 'add rutghv',
+            time:'2020-06-28 19:34:35',
+          },
+          {
+              idx: 5,
+            name: 'Gingerbread',
+            comment: 'add rutghv',
+            time:'2020-07-10 19:34:35',
+          },
+          {
+              idx: 6,
+            name: 'Jelly bean',
+            comment: 'add rutghv',
+            time:'2020-07-28 19:34:35',
+          },
+          {
+              idx: 7,
+            name: 'Lollipop',
+            comment: 'add rutghv',
+            time:'2020-08-04 19:34:35',
+          },
+          {
+              idx: 8,
+            name: 'Honeycomb',
+            comment: 'add rutghv',
+            time:'2020-08-13 19:34:35',
+          },
+          {
+              idx: 9,
+            name: 'Donut',
+            comment: 'add rutghv',
+            time:'2020-08-28 19:34:35',
+          },
+          {
+              idx: 10,
+            name: 'KitKat',
+            comment: 'add rutghv',
+            time:'2020-09-28 19:34:35',
+          },
+        ],
+        }
+    },
+}
+</script>

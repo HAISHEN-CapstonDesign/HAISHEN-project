@@ -1,5 +1,5 @@
 <template>
-    <v-card id="mode_menu" style="top:400px; position: absolute;" max-width="127">
+    <v-card id="mode_menu" style="top:300px; position: absolute;" max-width="127">
 
         <v-list
           dense
@@ -80,19 +80,19 @@ export default {
           this.editing = !this.editing
           this.$emit('changeEdit', this.editing);
         }
-        this.$router.push('/Community');
+        this.$router.push('/community');
       },
       clickHistory(){
         if(this.editing){
           alert('수정한 내용이 저장되지 않습니다.');
           this.editing = !this.editing
           this.$emit('changeEdit', this.editing);
-          //history page로 이동
         }
+        this.$router.push('/historyPage');
       },
       clickSubmit(){
         if(this.editing){
-          //DB에 내용 저장
+          //DB에 내용 저장 추가 필요
           this.editing = !this.editing
           this.$emit('changeEdit', this.editing);
         }
