@@ -5,7 +5,7 @@
       <v-img
         max-height="200"
         max-width="100%"
-        v-bind:src="projectImage"
+        v-bind:src="project.projectImage"
         >
     </v-img>
     <v-row md = "6" sm="6">
@@ -30,14 +30,6 @@
           서포터
         </v-btn>
         <v-btn
-        v-bind:style="communityBtnStyle"
-        @mouseover="hoverCommunity"
-        @mouseout="endHoverCommunity"
-        text
-        >
-          커뮤니티
-        </v-btn>
-        <v-btn
         v-bind:style="endProjectBtnStyle"
         @mouseover="hoverEndProject"
         @mouseout="endHoverEndProject"
@@ -55,7 +47,7 @@
         sm="4"
         md="3"
         >
-            <Subtitle v-bind:title="title"></Subtitle>
+            <Subtitle v-bind:title="project.title"></Subtitle>
         </v-col>
         <v-col
         sm="8"
@@ -73,12 +65,12 @@
         flat
         tile
         >
-          <h3>{{title}}</h3>
-          <h1>{{nowSubtitle}}</h1>
-          <p>{{$moment(lastEditedDate).format('YYYY-MM-DD h:mm:ss a')}}, {{finalEditor}}</p>               
+          <h3>{{project.title}}</h3>
+          <h1>{{project.subtitle}}</h1>
+          <p>{{$moment(project.lastEditedDate).format('YYYY-MM-DD h:mm:ss a')}}, {{project.finalEditor}}</p>               
 
           <v-divider></v-divider>
-          <Editor v-bind:mainText="mainText" @event-data="updateText"></Editor>
+          <Editor v-bind:mainText="nowMainText" @event-data="updateText"></Editor>
             
           </v-card>
           </v-container>
@@ -94,13 +86,13 @@
         flat
         tile
         >
-          <h3>{{title}}</h3>
-          <h1>{{nowSubtitle}}</h1>
-          <p>{{$moment(lastEditedDate).format('YYYY-MM-DD h:mm:ss a')}}, {{finalEditor}}</p>               
+          <h3>{{project.title}}</h3>
+          <h1>{{project.nowSubtitle}}</h1>
+          <p>{{$moment(project.lastEditedDate).format('YYYY-MM-DD h:mm:ss a')}}, {{project.finalEditor}}</p>               
 
           <v-divider></v-divider>
 
-            <div v-html="mainText"></div>
+            <div v-html="nowMainText"></div>
 
           </v-card>
           </v-container>
@@ -127,6 +119,7 @@ import Editor from '../components/editor';
 import Reply from '../components/reply';
 import Menu from '../components/modeMenu';
 import Subtitle from '../components/subtitleList';
+import axios from "axios"
 
 export default {
     components: {
@@ -135,30 +128,26 @@ export default {
       Menu,
       Subtitle,
     },
+    created() {
+      var id = this.$route.params.id;
+      axios.get(`/api/project/1/blob/basicTool/${id}`)
+        .then((res) => {
+          this.project = res.data[0];
+          this.nowMainText = this.project.mainText;
+          console.log(res);
+        })
+        .catch(error => console.log(error))
+    },
     data() {
         return{
             isEditing: false,
-            little_titles: [
-            { idx:1, text:'기획보고서란', main:'<p>목차1</p>'},
-            { idx:2, text:'유사 제품 서비스 동향', main:'<p>목차2</p>'},
-            { idx:3, text:'관련 기술 동향', main:'<p>목차3</p>'},
-            { idx:4, text:'유저 스토리', main:'<p>목차4</p>'},
-            { idx:5, text:'UX/UI 설계', main:'<p>목차5</p>'},
-            { idx:6, text:'시스템 설계', main:'<p>목차6</p>'},        
-            ],
-            finalEditor: "김ㅇㅇ",
-            lastEditedDate: new Date(),
-            title: '제목',
-            nowSubtitle: '현재 목차',
-            mainText: '<p>본문</p>',
-            projectImage: "https://cdn.vuetifyjs.com/images/parallax/material.jpg",
+            title: '',
+            nowMainText: '',
+            project: {},
             infoBtnStyle: {
               color: 'black'
             },
             supporterBtnStyle: {
-              color: 'black'
-            },
-            communityBtnStyle: {
               color: 'black'
             },
             endProjectBtnStyle: {
@@ -169,25 +158,20 @@ export default {
     methods: {
       updateText(newText){
         //본문 변경 내용 저장
-        this.mainText = newText;
-        this.little_titles[this.nowIdx].main = this.mainText;
+        this.nowMainText = newText;
+        //this.little_titles[this.nowIdx].main = this.nowMainText;
       },
       editingChange(state){
         this.isEditing = state;
       },
-      changeSubtitle(idx){
-        this.nowSubtitle = this.little_titles[idx-1].text;
-        this.nowIdx = idx-1;
-        this.mainText = this.little_titles[this.nowIdx].main;
+      changeSubtitle(){
+        //목차 클릭시 페이지 변경
       },
       hoverSupporter(){
         this.supporterBtnStyle.color = 'brown'
       },
       hoverInfo(){
         this.infoBtnStyle.color = 'brown'
-      },
-      hoverCommunity(){
-        this.communityBtnStyle.color = 'brown'
       },
       hoverEndProject(){
         this.endProjectBtnStyle.color = 'brown'
@@ -198,13 +182,9 @@ export default {
       endHoverSupporter(){
         this.supporterBtnStyle.color = 'black'
       },
-      endHoverCommunity(){
-        this.communityBtnStyle.color = 'black'
-      },
       endHoverEndProject(){
         this.endProjectBtnStyle.color = 'black'
       },
     },
-
 }
 </script>

@@ -51,7 +51,7 @@ export default new Vuex.Store({
             console.log('isLogin :' + state.isLogin)
             console.log('isLoginError :' + state.isLoginError)
             console.log('userInfo :' + state.userInfo)
-        }
+        },
     },
     actions: {
         login({ commit }, loginObj) {
@@ -91,6 +91,7 @@ export default new Vuex.Store({
             commit('logout')
             router.push({ name: "MainPage" })
         },
+
         // getMemberInfo({ commit }) {
         //     let token = localStorage.getItem('access_token')
         //     let config = {

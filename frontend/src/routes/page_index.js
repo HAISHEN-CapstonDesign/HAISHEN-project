@@ -8,6 +8,7 @@ import projectStart from '../views/ProjectStart'
 import profitCheck from '../views/ProfitCheck'
 import chooseWriter from '../views/ChooseWriter'
 import basicCollaboTool from '../views/BasicCollaboTool'
+import community from '../views/Community'
 
 
 Vue.use(VueRouter);
@@ -123,8 +124,13 @@ export default new VueRouter({
             component: chooseWriter,
         },
         {
-            path: '/basicCollaboTool',
+            path: '/basicCollaboTool/:id',
             component: basicCollaboTool,
+        },
+        {
+            path: '/community',
+            name: 'Community',
+            component: community,
         },
 
     ]

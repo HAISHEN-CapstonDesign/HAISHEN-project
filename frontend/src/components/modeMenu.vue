@@ -79,8 +79,8 @@ export default {
           alert('수정한 내용이 저장되지 않습니다.');
           this.editing = !this.editing
           this.$emit('changeEdit', this.editing);
-          //해당 목차 채팅방으로 이동
         }
+        this.$router.push('/Community');
       },
       clickHistory(){
         if(this.editing){
