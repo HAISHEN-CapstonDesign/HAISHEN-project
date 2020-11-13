@@ -7,7 +7,7 @@
                     <div style="float:right; font-size:25px; color:#A06641;">HISTORY DETAIL</div>
                     <div style="display: inline-block; font-size:25px; color:#A06641;">Title</div>
                     <div style="display: inline-block; font-size:20px; color:#A06641;">-subtitle</div>
-                    <v-card height="500px" color="#FFEFD5">
+                    <v-card height="500px">
                         <v-simple-table>
                             <template v-slot:default>
                             <thead>
@@ -72,6 +72,15 @@
                             </tbody>
                             </template>
                         </v-simple-table>
+                        <br>
+                        <div class="text-center">
+                        <v-btn small>
+                            <v-icon>
+                                mdi-replay
+                            </v-icon>
+                            되돌리기
+                        </v-btn>
+                        </div>
                     </v-card>
                 </v-col>
                 <v-col md="2">
@@ -163,3 +172,15 @@ export default {
     },
 }
 </script>
+<!--
+되돌리기 버튼 추가
+<v-list-item-content class="text-center" style="flex-basis: 10%;">
+                                    <v-list-btn>
+                                        <v-btn fab small depressed color="#D7AC87">
+                                        <v-icon>
+                                            mdi-replay
+                                        </v-icon>
+                                        </v-btn>
+                                    </v-list-btn>
+                                </v-list-item-content>
+-->

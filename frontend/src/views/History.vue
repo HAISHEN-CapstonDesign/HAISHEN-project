@@ -22,9 +22,6 @@
                                 <v-list-item-content class="text-center" style="flex-basis: 10%;">
                                     <v-list-item-title>상세보기</v-list-item-title>
                                 </v-list-item-content>
-                                <v-list-item-content class="text-center" style="flex-basis: 10%;">
-                                    <v-list-item-title>되돌리기</v-list-item-title>
-                                </v-list-item-content>
                             </v-list-item>
                             <v-divider></v-divider>
                             <div
@@ -49,15 +46,6 @@
                                             mdi-magnify
                                         </v-icon>
                                     </v-btn>
-                                    </v-list-btn>
-                                </v-list-item-content>
-                                <v-list-item-content class="text-center" style="flex-basis: 10%;">
-                                    <v-list-btn>
-                                        <v-btn fab small depressed color="#D7AC87">
-                                        <v-icon>
-                                            mdi-replay
-                                        </v-icon>
-                                        </v-btn>
                                     </v-list-btn>
                                 </v-list-item-content>
                             </v-list-item>
