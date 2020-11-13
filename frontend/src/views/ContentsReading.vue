@@ -14,6 +14,9 @@
         <v-btn @click="sss">저자 info</v-btn>
         <v-btn>서포터</v-btn>
         <v-btn>커뮤니티</v-btn>
+        <div>
+            <v-btn  @click="handle_toggle">모달창</v-btn>
+        </div>
     </v-col>
 
     
@@ -45,7 +48,7 @@
                         >
 
                         <v-list-item-content>
-                            <v-list-item-title @click="showButtonsDialog()">
+                            <v-list-item-title @click="selectIndex(little_title.idx)">
                                 {{little_title.idx}}, {{ little_title.text }}
                             </v-list-item-title>
                         </v-list-item-content>
@@ -63,8 +66,6 @@
 
         <v-col cols=4></v-col>
     </v-row>
-     
-
 
     
     
@@ -76,7 +77,7 @@
 // import ProjIndex fro m '../components/projIndex.vue'
 import ProjContent from '../components/projContent.vue'
 import PostReply from '../components/reply.vue'
-// import store from '../store'
+import store from '../store'
 
 export default {
     components: {
@@ -84,7 +85,8 @@ export default {
         PostReply,
         ProjContent
     },
-    data: () => ({
+    data: () => (
+        {
         menu: [
                 {
                     href: '/',
@@ -122,50 +124,22 @@ export default {
         selected_idx: 0
   }),
   methods:{
-      showButtonsDialog() {
-        this.$modal.show('dialog', {
-            title: 'The standard Lorem Ipsum passage',
-            text: 'Lorem ipsum dolor sit amet, ...',
-            buttons: [
-                {
-                    title: 'Cancel',
-                    handler: () => {
-                        this.$modal.hide('dialog')
-                    }
-                },
-                {
-                    title: 'Like',
-                    handler: () => {
-                        alert('Like action')
-                    }
-                },
-                {
-                    title: 'Repost',
-                    handler: () => {
-                        alert('Repost action')
-                    }
-                }
-            ]
-            })
-        },
-        dialogEvent(eventName) {
-            console.log('Dialog event: ' + eventName)
-        },
-    // selectIndex: function(title_idx){
-    //     // this.selected_idx= title_idx
-    //     if(title_idx > 2){
-    //         if( store.state.userInfo.point > 100 ){
-    //             alert('유료컨텐츠 입니다. 포인트 100을 차감하여 열람할까요?')
-    //         }
-    //         alert('유료컨텐츠 입니다. 광고페이지로 넘어갑니다')
-    //         this.$router.push({ name: 'AdvertisingPage' })
-    //         showButtonsDialog()
-    //     }
-    //     else{
-    //         alert('무료컨텐츠 입니다.')
-    //         alert(title_idx)
-    //     }
-    // },
+    selectIndex: function(title_idx){
+        this.selected_idx= title_idx
+        if(title_idx > 2){
+            if( store.state.userInfo.point > 100 ){
+                alert('유료컨텐츠 입니다. 포인트 100을 차감하여 열람하겠습니다')
+                store.state.userInfo.point = store.state.userInfo.point - 100
+                //여기에 axios 요청 보내야함
+            }
+            alert('유료컨텐츠 입니다.\n포인트가 없으므로 광고 시청후 열람하도록 하겠습니다.\n광고페이지로 넘어갑니다')
+            this.$router.push({ name: 'AdvertisingPage' })
+        }
+        else{
+            alert('무료컨텐츠 입니다.')
+            alert(title_idx)
+        }
+    },
     parent_replySubmit: function(){
         alert("hello")
     },

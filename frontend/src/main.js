@@ -6,6 +6,7 @@ import store from './store'
 import router from './routes/page_index.js'
 import VueMoment from 'vue-moment'
 import VModal from 'vue-js-modal'
+// import VueJsModal from 'plugin'
 
 Vue.config.productionTip = false
 

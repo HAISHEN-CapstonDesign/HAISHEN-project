@@ -60,6 +60,7 @@
 
 <script>
 import axios from "axios"
+import router from '../routes/page_index.js'
 
   export default {
     data: () => ({
@@ -72,6 +73,8 @@ import axios from "axios"
                 .then(res => {
                     console.log('성공' + res)
                     console.log(signUpObj)
+                    alert('회원가입이 완료 되었습니다. 가입하신 아이디로 로그인해 주세요')
+                    router.push({ name: "MainPage" })
                 })
                 .catch((err) => {
                     console.log(err)

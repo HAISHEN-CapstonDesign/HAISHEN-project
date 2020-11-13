@@ -52,6 +52,7 @@ export default new Vuex.Store({
             state.isLogin = false
             state.isLoginError = true
             state.userInfo = null
+            localStorage.clear()
             console.log('logout')
             console.log('isLogin :' + state.isLogin)
             console.log('isLoginError :' + state.isLoginError)
@@ -82,6 +83,10 @@ export default new Vuex.Store({
                         nickname: res.data.userInfoDTO.nickname,
                         gender: res.data.userInfoDTO.gender
                     }
+                    localStorage.setItem('name', userInfo.name)
+                    localStorage.setItem('point', userInfo.point)
+                    localStorage.setItem('nickname', userInfo.nickname)
+                    localStorage.setItem('gender', userInfo.gender)
                     console.log('user Info :' + JSON.stringify(userInfo))
                     console.log('user info point : ' + userInfo.point)
                     console.log('user info s3key : ' + userInfo.s3key)
@@ -104,35 +109,44 @@ export default new Vuex.Store({
             commit('logout')
             router.push({ name: "MainPage" })
         },
-
-        // getMemberInfo({ commit }) {
-        //     let token = localStorage.getItem('access_token')
-        //     let config = {
-        //         headers: {
-        //             "access-token": token
-        //         }
-        //     }
-        //     axios
-        //         .get("https://reqres.in/api/users/2", config)
-        //         .then(response => {
-        //             let userInfo = {
-        //                 // id: response.data.data.id,
-        //                 // first_name: response.data.data.first_name,
-        //                 // last_name: response.data.data.last_name,
-        //                 // avatar: response.data.data.avatar
-        //                 id: '1',
-        //                 identity: 'gnsals',
-        //                 name: '김훈민',
-        //                 nickname: 'vtz',
-        //                 gender: 'male'
-        //             }
-        //             console.log(response)
-        //             commit('loginSuccess', userInfo)
-        //         })
-        //         .catch(() => {
-        //             alert('이메일과 비밀번호를 확인하세요.2')
-        //         })
-        // }
+        getMemberInfo({ commit }) {
+            // let token = localStorage.getItem('access_token')
+            let userInfo = {
+                // id: response.data.data.id,
+                // first_name: response.data.data.first_name,
+                // last_name: response.data.data.last_name,
+                // avatar: response.data.data.avatar
+                point: localStorage.getItem('point'),
+                name: localStorage.getItem('name'),
+                nickname: localStorage.getItem('nickname'),
+                gender: localStorage.getItem('gender')
+            }
+            if (localStorage.getItem("name") === null) {
+                console.log('이미 로그아웃 된것을 새로고침 해서 머하나')
+            } else {
+                commit('loginSuccess', userInfo)
+            }
+            // axios
+            //     .get("https://reqres.in/api/users/2", config)
+            //     .then(response => {
+            //         let userInfo = {
+            //             // id: response.data.data.id,
+            //             // first_name: response.data.data.first_name,
+            //             // last_name: response.data.data.last_name,
+            //             // avatar: response.data.data.avatar
+            //             id: '1',
+            //             identity: 'gnsals',
+            //             name: '김훈민',
+            //             nickname: 'vtz',
+            //             gender: 'male'
+            //         }
+            //         console.log(response)
+            //         commit('loginSuccess', userInfo)
+            //     })
+            //     .catch(() => {
+            //         alert('beforcreate error')
+            //     })
+        }
         // signUp(signUpObj) {
         //     axios
         //         .post('/api/user/account/signup', signUpObj)

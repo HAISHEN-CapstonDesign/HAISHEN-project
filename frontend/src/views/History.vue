@@ -4,16 +4,11 @@
         <v-container>
             <v-row>
                 <v-col md="10">
-                    <div style="float:right; font-size:20px; color:#A06641;">HISTORY</div>
-                    <div style="display: inline-block; font-size:20px; color:#A06641;">Title</div>
+                    <div style="float:right; font-size:25px; color:#A06641;">HISTORY</div>
+                    <div style="display: inline-block; font-size:25px; color:#A06641;">Title</div>
+                    <div style="display: inline-block; font-size:20px; color:#A06641;">-subtitle</div>
                     <v-card color="#FFEFD5">
                         <v-list color="#FFEFD5">
-                            <v-list-item>
-                            <v-list-item-content>
-                                목차
-                            </v-list-item-content>
-                            </v-list-item>
-                            <v-divider></v-divider>
                             <v-list-item>
                                 <v-list-item-content>
                                     <v-list-item-title>시간</v-list-item-title>
@@ -29,6 +24,7 @@
                             <v-list-item
                             v-for="tmp in histories"
                             :key="tmp.time"
+                            @click="$router.push(`/historyDetail/${tmp.idx}`)"
                             >
                                 <v-list-item-content>
                                     <v-list-item-title v-text="tmp.time"></v-list-item-title>
@@ -44,7 +40,7 @@
                     </v-card>
                 </v-col>
                 <v-col md="2">
-                    <Menu></Menu>
+                    <Menu v-bind:clicked="isHistory"></Menu>
                 </v-col>
             </v-row>
         </v-container>
@@ -52,7 +48,7 @@
 </template>
 
 <script>
-import Menu from '../components/modeMenu'
+import Menu from '../components/modeMenu2'
 export default {
     name:'historyPage',
     components:{
@@ -60,6 +56,7 @@ export default {
     },
     data(){
         return{
+            isHistory:2, //히스토리 페이지에서 클릭
             histories: [
           {
             idx: 1,
