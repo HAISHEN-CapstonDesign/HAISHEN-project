@@ -14,7 +14,8 @@
                                 <tr>
                                     <th class="text-left" style="width:5%;">b_idx</th>
                                     <th class="text-left" style="width:5%;">a_idx</th>
-                                    <th class="text-left" style="width:90%;">text</th>
+                                    <th class="text-left" style="width:5%;">+/-</th>
+                                    <th class="text-left" style="width:85%;">text</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,6 +44,18 @@
                                     v-else-if="tmp.state == '-'"
                                     style="background-color:#FAA8A8;"
                                     >{{afterIdx[tmp.idx-1]}}</td>
+                                    <td
+                                    v-if="tmp.state == ''"
+                                    style="background-color:white"
+                                    >{{tmp.state}}</td>
+                                    <td
+                                    v-else-if="tmp.state == '+'"
+                                    style="background-color:#AAEBAA;"
+                                    >{{tmp.state}}</td>
+                                    <td
+                                    v-else-if="tmp.state == '-'"
+                                    style="background-color:#FAA8A8; font-size:25px;"
+                                    >{{tmp.state}}</td>
                                     <td
                                     v-if="tmp.state == ''"
                                     style="background-color:white"
@@ -131,6 +144,16 @@ export default {
                     idx: 6,
                     state: '',
                     text: 'Jin'
+                },
+                {
+                    idx: 7,
+                    state: '-',
+                    text: 'World'
+                },
+                {
+                    idx: 8,
+                    state: '',
+                    text: 'World'
                 },
             ]
         }

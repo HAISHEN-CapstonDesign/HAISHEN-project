@@ -10,32 +10,58 @@
                     <v-card color="#FFEFD5">
                         <v-list color="#FFEFD5">
                             <v-list-item>
-                                <v-list-item-content>
+                                <v-list-item-content style="flex-basis: 25%;">
                                     <v-list-item-title>시간</v-list-item-title>
                                 </v-list-item-content>
-                                <v-list-item-content>
+                                <v-list-item-content style="flex-basis: 30%;">
                                     <v-list-item-title>코멘트</v-list-item-title>
                                 </v-list-item-content>
-                                <v-list-item-content>
+                                <v-list-item-content style="flex-basis: 25%;">
                                     <v-list-item-title>작성자</v-list-item-title>
+                                </v-list-item-content>
+                                <v-list-item-content class="text-center" style="flex-basis: 10%;">
+                                    <v-list-item-title>상세보기</v-list-item-title>
+                                </v-list-item-content>
+                                <v-list-item-content class="text-center" style="flex-basis: 10%;">
+                                    <v-list-item-title>되돌리기</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
                             <v-divider></v-divider>
-                            <v-list-item
+                            <div
                             v-for="tmp in histories"
                             :key="tmp.time"
-                            @click="$router.push(`/historyDetail/${tmp.idx}`)"
                             >
-                                <v-list-item-content>
+                            <v-divider></v-divider>
+                            <v-list-item>
+                                <v-list-item-content style="flex-basis: 25%;">
                                     <v-list-item-title v-text="tmp.time"></v-list-item-title>
                                 </v-list-item-content>
-                                <v-list-item-content>
+                                <v-list-item-content style="flex-basis: 30%;">
                                     <v-list-item-title v-text="tmp.comment"></v-list-item-title>
                                 </v-list-item-content>
-                                <v-list-item-content>
+                                <v-list-item-content style="flex-basis: 25%;">
                                     <v-list-item-title v-text="tmp.name"></v-list-item-title>
                                 </v-list-item-content>
+                                <v-list-item-content class="text-center" style="flex-basis: 10%;">
+                                    <v-list-btn @click="$router.push(`/historyDetail/${tmp.idx}`)">
+                                    <v-btn fab small depressed color="#D7AC87">
+                                        <v-icon>
+                                            mdi-magnify
+                                        </v-icon>
+                                    </v-btn>
+                                    </v-list-btn>
+                                </v-list-item-content>
+                                <v-list-item-content class="text-center" style="flex-basis: 10%;">
+                                    <v-list-btn>
+                                        <v-btn fab small depressed color="#D7AC87">
+                                        <v-icon>
+                                            mdi-replay
+                                        </v-icon>
+                                        </v-btn>
+                                    </v-list-btn>
+                                </v-list-item-content>
                             </v-list-item>
+                            </div>
                         </v-list>
                     </v-card>
                 </v-col>
