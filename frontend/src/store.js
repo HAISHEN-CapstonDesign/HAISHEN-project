@@ -22,6 +22,7 @@ export default new Vuex.Store({
         //cityslicka
         isLogin: false,
         isLoginError: true,
+
     },
     mutations: {
         // 로그인이 성공했을 때,

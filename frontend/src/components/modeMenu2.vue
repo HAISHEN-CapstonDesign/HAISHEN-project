@@ -76,7 +76,7 @@ export default {
         this.$router.push('/community');
       },
       clickHistory(){
-        this.$router.push('/historyPage');
+        this.$router.push(`/historyPage`);
       },
       clickMain(){
         //나중에 경로 수정

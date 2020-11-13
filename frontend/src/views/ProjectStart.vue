@@ -220,7 +220,7 @@ export default {
         },
         
         createProject(){
-            /*api 확인(put을 못찾음)
+            /*
             var data = {
                 "title": this.title,
                 "introduction": this.intro,

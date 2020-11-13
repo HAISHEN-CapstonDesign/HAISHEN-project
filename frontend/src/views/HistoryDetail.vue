@@ -1,6 +1,5 @@
 <template>
     <v-app>
-        <br><br><br>
         <v-container>
             <v-row>
                 <v-col md="10">
@@ -93,6 +92,7 @@
 
 <script>
 import Menu from '../components/modeMenu2'
+import axios from 'axios'
 export default {
     name:'historyDetail',
     components:{
@@ -100,6 +100,16 @@ export default {
 
     },
     created() {
+        //projectId, commitId
+        axios.get(`http://localhost:3000/api/project/1/commit/basicTool/1`)
+        .then((res) => {
+          
+          console.log(res.data);
+        })
+        .catch(function (error) {
+          console.log(error.config);
+        });
+
         for(var i=0, cnt=1; i<this.example.length; i++){
             if(this.example[i].state == '' || this.example[i].state == '-'){
                 this.beforeIdx[i] = cnt;

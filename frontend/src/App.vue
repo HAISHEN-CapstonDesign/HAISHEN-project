@@ -1,9 +1,10 @@
 <template>
 <v-app>
     <div>
-        <v-app-bar color="deep-purple" dark absolute>
+        <!-- color="~" 여기에 원하는 색깔 코드 넣으면 됨-->
+        <v-app-bar color="#14a0a0" dark absolute dense>
             <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-
+            <img src='./assets/crunch_logo2_1.png' height="60px" v-on:click="to_main"/>
             <v-row align="center" justify="end">
                 <v-btn icon class="mr-2">
                     <v-icon>mdi-magnify</v-icon>
@@ -22,7 +23,7 @@
         </v-app-bar>
         
         <v-navigation-drawer v-model="drawer" absolute temporary>
-            <img src='./assets/crunch_logo2.png' height="60px" dark v-on:click="to_main">
+            <img src='./assets/crunch_logo2.png' height="60px" dark v-on:click="to_main"/>
             <template>
                 <v-list-item two-line>
                     <v-list-item-avatar size="50">
@@ -125,6 +126,7 @@
                 </v-list-item>
             </v-list>
         </v-navigation-drawer>
+        <br><br>
         <router-view></router-view>
     </div>
 
