@@ -12,16 +12,22 @@
                 :key="i"
             >
                 <v-sheet
-                :color="colors[i]"
+                :color="indigo"
                 height="100%"
+                >
+                <v-img
+                max-width="100%"
+                max-height="100%"
+                v-bind:src="slide.img"
                 >
                 <v-row
                     class="fill-height"
                     align="center"
                     justify="center"
                 >
-                    <div class="display-3">{{ slide }} Slide</div>
+                    <div class="display-3">{{ slide.text }}</div>
                 </v-row>
+                </v-img>
                 </v-sheet>
             </v-carousel-item>
             </v-carousel>
@@ -34,93 +40,13 @@
                     <v-flex>
                         <h1>Genre</h1>
                         <v-row no-gutters>
-                            <v-col :key="1">
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                   <div style="position: absolute; top: 40%; left: 38%">
-                                    <h3>여행</h3>
-                                   </div>
-                                </v-card>
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                <div style="position: absolute; top: 40%; left: 38%">
-                                    <h3>역사</h3>
-                                   </div>
-                                </v-card>
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                   <div style="position: absolute; top: 40%; left: 38%">
-                                    <h3>연애</h3>
-                                   </div>
-                                    
-                                </v-card>
-                            </v-col>
-                            <v-col :key="2">
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                   <div style="position: absolute; top: 40%; left: 38%">
-                                    <h3>수학</h3>
-                                   </div>
-                                </v-card>
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                    <div style="position: absolute; top: 40%; left: 38%">
-                                    <h3>건축</h3>
-                                   </div>
-                                </v-card>
-                            </v-col>
-                            <v-col :key="3">
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                   <div style="position: absolute; top: 40%; left: 38%">
-                                    <h3>과학</h3>
-                                   </div>
-                                </v-card>
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                   <div style="position: absolute; top: 40%; left: 22%">
-                                    <h3>문화, 예술</h3>
-                                   </div>
-                                </v-card>
-                            </v-col>
-                            <v-col :key="4">
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                    <div style="position: absolute; top: 40%; left: 45%">
-                                    <h3>IT</h3>
-                                   </div>
-                                </v-card>
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                    <div style="position: absolute; top: 40%; left: 38%">
-                                    <h3>시사</h3>
-                                   </div>
-                                </v-card>
-                            </v-col>
-                            <v-col :key="5">
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                    <div style="position: absolute; top: 40%; left: 38%">
-                                    <h3>경제</h3>
-                                   </div>
-                                </v-card>
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                    <div style="position: absolute; top: 40%; left: 38%">
-                                    <h3>직장</h3>
-                                   </div>
-                                </v-card>
-                            </v-col>
-                            <v-col :key="6">
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                    <div style="position: absolute; top: 40%; left: 38%">
-                                    <h3>요리</h3>
-                                   </div>
-                                </v-card>
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                    <div style="position: absolute; top: 40%; left: 38%">
-                                    <h3>육아</h3>
-                                   </div>
-                                </v-card>
-                            </v-col>
-                            <v-col :key="7">
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                    <div style="position: absolute; top: 40%; left: 38%">
-                                    <h3>건강</h3>
-                                   </div>
-                                </v-card>
-                                <v-card width="150" height="150" outlined="false" hover="true">
-                                    <div style="position: absolute; top: 40%; left: 38%">
-                                    <h3>게임</h3>
+                            <v-col
+                            v-for="(genre, id) in genres"
+                            :key="id"
+                            >
+                                <v-card width="150" height="150" outlined="false" hover="true" class="text-center">
+                                   <div style="position: absolute; top: 40%; width:100%">
+                                    <h3>{{genre}}</h3>
                                    </div>
                                 </v-card>
                             </v-col>
@@ -185,22 +111,34 @@ export default {
     //
     drawer: false,
     collapseOnScroll: true,
-    colors: [
-      'indigo',
-      'warning',
-      'pink darken-2',
-      'red lighten-1',
-      'deep-purple accent-4',
-    ],
     slides: [
-      'First',
-      'Second',
-      'Third',
-      'Fourth',
-      'Fifth',
+        {
+            text: '분위기 있는 제목',
+            img: require('../assets/banner.jpg'),
+        },
+        {
+            text: '있어보이는 제목',
+            img: require('../assets/banner2.jpg'),
+        },
+        {
+            text: '멋있어보이는 제목',
+            img: require('../assets/sample_img.jpg'),
+        },
+        {
+            text: '일단 제목',
+            img: require('../assets/banner.jpg'),
+        },
+        {
+            text: '마지막 제목',
+            img: require('../assets/banner2.jpg'),
+        },
     ],
-    
-    genre_num: 8
+    genres:[
+        '여행', '수학', '과학', 'IT',
+        '경제', '요리', '건강', '역사',
+        '건축', '문화, 예술', '시사',
+        '직장', '육아', '게임', '연애'
+        ],
   }),
 }
 </script>

@@ -1,6 +1,5 @@
 <template>
     <v-app>
-        <br><br><br>
         <v-container>
             <v-row>
                 <v-col md="10">
@@ -40,7 +39,7 @@
                                     <v-list-item-title v-text="tmp.name"></v-list-item-title>
                                 </v-list-item-content>
                                 <v-list-item-content class="text-center" style="flex-basis: 10%;">
-                                    <v-list-btn @click="$router.push(`/historyDetail/${tmp.idx}`)">
+                                    <v-list-btn @click="showDetail(tmp.idx)">
                                     <v-btn fab small depressed color="#D7AC87">
                                         <v-icon>
                                             mdi-magnify
@@ -63,10 +62,22 @@
 
 <script>
 import Menu from '../components/modeMenu2'
+import axios from 'axios'
 export default {
     name:'historyPage',
     components:{
         Menu,
+    },
+    created() {
+        //projectId, indexId
+        axios.get(`http://localhost:3000/api/project/1/commit/basicTool/1`)
+        .then((res) => {
+          
+          console.log(res.data);
+        })
+        .catch(function (error) {
+          console.log(error.config);
+        });
     },
     data(){
         return{
@@ -133,6 +144,11 @@ export default {
             time:'2020-09-28 19:34:35',
           },
         ],
+        }
+    },
+    methods: {
+        showDetail(idx){
+            this.$router.push(`/historyDetail/${idx}`);
         }
     },
 }
