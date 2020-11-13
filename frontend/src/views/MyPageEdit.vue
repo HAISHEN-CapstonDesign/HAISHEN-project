@@ -37,8 +37,7 @@
       <v-flex>
         
 <v-card
-    color="blue darken-1"
-    dark
+    color="#FFDFB0"
     :loading="isUpdating"
   >  
     <v-form>
@@ -49,20 +48,18 @@
           >
             <v-text-field
               v-model="name"
-              :disabled="isUpdating"
+              :disabled="!isUpdating"
               filled
-              color="blue lighten-2"
               label="닉네임"
             ></v-text-field>
           </v-col>
           <v-col cols="12">
             <v-autocomplete
               v-model="interests"
-              :disabled="isUpdating"
+              :disabled="!isUpdating"
               :items="interest"
               filled
               chips
-              color="blue lighten-2"
               label="관심분야"
               item-text="name"
               item-value="name"
@@ -94,9 +91,8 @@
           >
             <v-textarea
               v-model="career"
-              :disabled="isUpdating"
+              :disabled="!isUpdating"
               filled
-              color="blue lighten-2"
               label="이력"
             ></v-textarea>
           </v-col>
@@ -104,19 +100,28 @@
       </v-container>
     </v-form>
     <v-divider></v-divider>
-    <v-card-actions>
+
       <v-btn
-        :loading="isUpdating"
-        color="blue-grey darken-3"
-        depressed
-        @click="isUpdating = true"
+      v-if="!isUpdating"
+        color="#FFDFB0"
+        @click="clickEdit"
       >
         <v-icon left>
-          mdi-update
+          mdi-lead-pencil
         </v-icon>
-        Update
+        Edit
       </v-btn>
-    </v-card-actions>
+      <v-btn
+      v-else
+        color="#FFDFB0"
+        @click="clickSave"
+      >
+        <v-icon left>
+          mdi-check-circle
+        </v-icon>
+        Save
+      </v-btn>
+
   </v-card>
 
 
@@ -130,7 +135,9 @@
 
 export default {
   name: 'myPageEdit',
-
+  created() {
+    this.name = this.$store.state.userInfo.nickname;
+  },
   data () {
       return {
         isUpdating: false,
@@ -146,13 +153,6 @@ export default {
         ],
       }
     },
-    watch: {
-      isUpdating (val) {
-        if (val) {
-          setTimeout(() => (this.isUpdating = false), 3000)
-        }
-      },
-    },
     methods: {
       onClickImageUpload() {
             this.$refs.imageInput.click();
@@ -162,6 +162,14 @@ export default {
             const file = e.target.files[0];
             this.imageUrl = URL.createObjectURL(file);
       },
+      clickEdit(){
+      this.isUpdating = true;
+      console.log(this.isUpdating)
+    },
+    clickSave(){
+      this.isUpdating = false;
+    },
+
     },
 };
 </script>

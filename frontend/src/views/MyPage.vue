@@ -72,13 +72,14 @@
       </v-col>
     <!--집필중 글 목록-->
     <v-col
-      cols="12"
       sm="6"
       md="8"
     >
         <v-layout column wrap>
           <v-flex>
+            <v-row>
             <Writing></Writing>
+            </v-row>
           </v-flex>
           <v-flex>
             <v-row>

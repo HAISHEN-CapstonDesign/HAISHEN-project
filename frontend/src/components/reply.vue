@@ -52,7 +52,7 @@
             </v-card>
             <v-col align="end">
                 <!-- <v-btn v-model="message" @click="replySubmit(message)" outlined>제출</v-btn>           -->
-                <v-btn @click="pushSubmit">댓글개수</v-btn>
+                <v-btn @click="pushSubmit">댓글등록</v-btn>
             </v-col>
 
             
