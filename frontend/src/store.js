@@ -13,7 +13,8 @@ export default new Vuex.Store({
                 name: 'hunmin',
                 nickname: 'vtz',
                 gender: 'male',
-                s3key: 'null'
+                s3key: 'null',
+                id: 'null'
             },
             { id: 2, name: 'test', email: 'test@ajou.ac.kr', password: '123456' }
         ],
@@ -81,7 +82,8 @@ export default new Vuex.Store({
                         s3key: res.data.userInfoDTO.s3key,
                         name: res.data.userInfoDTO.name,
                         nickname: res.data.userInfoDTO.nickname,
-                        gender: res.data.userInfoDTO.gender
+                        gender: res.data.userInfoDTO.gender,
+                        id: res.data.userInfoDTO.id
                     }
                     localStorage.setItem('name', userInfo.name)
                     localStorage.setItem('point', userInfo.point)
