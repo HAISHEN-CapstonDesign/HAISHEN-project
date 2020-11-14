@@ -72,6 +72,7 @@ export default new VueRouter({
             // beforeEnter: rejectAuthUser,
             component: LoginPage
         },
+        //광고 페이지는 component로 바꿔서 routing 안해도 됩니다!
         {
             path: '/ad',
             name: 'AdvertisingPage',

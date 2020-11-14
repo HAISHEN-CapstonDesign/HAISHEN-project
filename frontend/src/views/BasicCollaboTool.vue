@@ -133,7 +133,7 @@ export default {
         .then((res) => {
           //this.project = res.data[id-1];
          // this.nowMainText = this.project.post;
-          console.log(res);
+          console.log(res.data);
         })
         .catch(function (error) {
           console.log(error.config);

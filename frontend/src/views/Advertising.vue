@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import router from '../routes/page_index.js'
+//import router from '../routes/page_index.js'
 
 export default {
     data: () => ({
@@ -20,7 +20,8 @@ export default {
    onEnd: function () {
       console.log('video ended')
       alert('광고 시청이 완료되었습니다. 컨텐츠를 열람합니다')
-      router.push({ name: "ContentsReadingPage" })
+      //router.push({ name: "ContentsReadingPage" })
+      this.$emit('endAd', false);
     }  
   }
 }

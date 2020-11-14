@@ -6,6 +6,17 @@
             <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
             <img src='./assets/crunch_logo2_1.png' height="60px" v-on:click="to_main"/>
             <v-row align="center" justify="end">
+                <!--수정중(검색어 없을 때 items 안보이도록)-->
+                <div style="position: absolute; top: 8%; right:330px; width:30%;">
+                <v-combobox
+                v-model="select"
+                :items="items"
+                :menu-props="menuProps"
+                :search-input.sync="search"
+                dense
+                outlined
+                ></v-combobox>
+                </div>
                 <v-btn icon class="mr-2">
                     <v-icon>mdi-magnify</v-icon>
                 </v-btn>
@@ -145,6 +156,11 @@ export default {
         drawer: false,
         count: 0,
         collapseOnScroll: true,
+        autoselectMenu: false,
+        search: null,
+        items: ['foo', 'bar', 'fizz', 'buzz'],
+        value: null,
+        select: '',
         colors: [
             'indigo',
             'warning',
@@ -154,7 +170,19 @@ export default {
         ]
     }),
     computed: {
+        menuProps(){
+            return !this.search ? {value: false} : {}
+        },
         ...mapState(['isLogin', 'isLoginError','userInfo'])
+    },
+    watch: {
+        search (val) {
+            if(val && val !== this.select) {
+                //this.querySelections(val)
+            } else {
+                console.log(val)
+            }
+        }
     },
     methods: {
         to_main() {

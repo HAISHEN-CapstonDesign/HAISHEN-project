@@ -32,7 +32,6 @@
             </v-carousel-item>
             </v-carousel>
             
-            <v-btn to ="/postlist">글목록으로</v-btn>
             <v-btn to ="/collaboProjMain">공동프로젝트 메인페이지로</v-btn>
             <v-btn router :to="{name:'ContentsReadingPage'}">컨텐츠 열람 페이지</v-btn>
             <v-container style="max-width:1050px;">
@@ -44,7 +43,14 @@
                             v-for="(genre, id) in genres"
                             :key="id"
                             >
-                                <v-card width="150" height="150" outlined="false" hover="true" class="text-center">
+                                <v-card
+                                width="150"
+                                height="150"
+                                outlined="false"
+                                hover="true"
+                                class="text-center"
+                                @click="$router.push('/postlist')"
+                                >
                                    <div style="position: absolute; top: 40%; width:100%">
                                     <h3>{{genre}}</h3>
                                    </div>
@@ -53,12 +59,14 @@
                         </v-row>
                     </v-flex>
                 </v-layout>
+                <br>
                     <v-row
                     class="justify-center"
                     no-gutters
                     dense
                     >
                     <RecruitmentWriter></RecruitmentWriter>
+                    <br>
                     <RecruitmentFund></RecruitmentFund>
                 </v-row>
             </v-container>
@@ -116,4 +124,16 @@ export default {
   },
 }
 </script>
+<style>
+.v-application--wrap {
+    flex: 1 1 auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100px;
+    max-width: 100%;
+    position: relative;
+}
+</style>
 

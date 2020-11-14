@@ -66,7 +66,14 @@
 
         <v-col cols=4></v-col>
     </v-row>
-
+        <v-overlay
+          :z-index="zIndex"
+          :value="overlay"
+          :opacity="opacity"
+          color="#282828"
+        >
+          <Advertising @endAd="endAd"></Advertising>
+        </v-overlay>
     
     
 </div>
@@ -77,16 +84,21 @@
 // import ProjIndex fro m '../components/projIndex.vue'
 import ProjContent from '../components/projContent.vue'
 import PostReply from '../components/reply.vue'
+import Advertising from './Advertising'
 import store from '../store'
 
 export default {
     components: {
         // ProjIndex,
         PostReply,
-        ProjContent
+        ProjContent,
+        Advertising
     },
     data: () => (
         {
+        zIndex: 0,
+        opacity: 0.9,
+        overlay: false,
         menu: [
                 {
                     href: '/',
@@ -132,8 +144,9 @@ export default {
                 store.state.userInfo.point = store.state.userInfo.point - 100
                 //여기에 axios 요청 보내야함
             }
-            alert('유료컨텐츠 입니다.\n포인트가 없으므로 광고 시청후 열람하도록 하겠습니다.\n광고페이지로 넘어갑니다')
-            this.$router.push({ name: 'AdvertisingPage' })
+            alert('유료컨텐츠 입니다.\n포인트가 없으므로 광고 시청후 열람하도록 하겠습니다.')
+            //this.$router.push({ name: 'AdvertisingPage' })
+            this.overlay = !this.overlay
         }
         else{
             alert('무료컨텐츠 입니다.')
@@ -146,6 +159,9 @@ export default {
     sss(){
         alert('dfasd')
     },
+    endAd(over){
+        this.overlay = over;
+    }
   }
 }
 </script>
