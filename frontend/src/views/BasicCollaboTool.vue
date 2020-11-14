@@ -131,8 +131,8 @@ export default {
       var id = this.$route.params.id;
       axios.get(`/api/project/1/blob/basicTool/${id}`)
         .then((res) => {
-          this.project = res.data;
-          this.nowMainText = this.project.post;
+          //this.project = res.data[id-1];
+         // this.nowMainText = this.project.post;
           console.log(res);
         })
         .catch(function (error) {

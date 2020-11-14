@@ -53,83 +53,50 @@
                         </v-row>
                     </v-flex>
                 </v-layout>
+                    <v-row
+                    class="justify-center"
+                    no-gutters
+                    dense
+                    >
+                    <RecruitmentWriter></RecruitmentWriter>
+                    <RecruitmentFund></RecruitmentFund>
+                </v-row>
             </v-container>
-            <v-row align="start" justify="space-around">
-            <h1>Writer Recruitement & Funding</h1>
-            <v-btn
-            color="deep-purple lighten-2"
-            text
-            
-            >더 보기</v-btn>
-            </v-row>
-            
-            <v-row
-            class="justify-center"
-            no-gutters
-            dense
-            
-            >
-                <Recruitment></Recruitment>
-                <Recruitment></Recruitment>
-                <Recruitment></Recruitment>
-                <Recruitment></Recruitment>
-            <!-- <Recruitment></Recruitment>
-            <Recruitment></Recruitment> -->
-            </v-row>
-            <v-row
-            class="justify-center"
-            no-gutters
-            dense
-            
-            >
-                <Recruitment></Recruitment>
-                <Recruitment></Recruitment>
-                <Recruitment></Recruitment>
-                <Recruitment></Recruitment>
-            <!-- <Recruitment></Recruitment>
-            <Recruitment></Recruitment> -->
-            </v-row>
         </v-app>
-        
-
   </div>
-
 </template>
 
 <script>
-import Recruitment from '../components/recruit.vue'
+import RecruitmentWriter from '../components/recruitWriter.vue'
+import RecruitmentFund from '../components/recruitFund.vue'
 
 export default {
     components: {
-        Recruitment,
-    
-    // HelloWorld,
-    // 여기에 자기가 만든 component 를 써넣고 위에 템플릿에 추가하면됩니다
+        RecruitmentWriter,
+        RecruitmentFund,
     },
 
     data: () => ({
     //
-    drawer: false,
-    collapseOnScroll: true,
     slides: [
         {
-            text: '분위기 있는 제목',
+            text: '추천 주제1',
             img: require('../assets/banner.jpg'),
         },
         {
-            text: '있어보이는 제목',
+            text: '추천 주제2',
             img: require('../assets/banner2.jpg'),
         },
         {
-            text: '멋있어보이는 제목',
+            text: '추천 주제3',
             img: require('../assets/sample_img.jpg'),
         },
         {
-            text: '일단 제목',
+            text: '추천 주제4',
             img: require('../assets/banner.jpg'),
         },
         {
-            text: '마지막 제목',
+            text: '추천 주제5',
             img: require('../assets/banner2.jpg'),
         },
     ],
@@ -140,6 +107,13 @@ export default {
         '직장', '육아', '게임', '연애'
         ],
   }),
+  methods: {
+      getImage () {
+        const min = 550
+        const max = 560
+        return Math.floor(Math.random() * (max - min + 1)) + min
+      },
+  },
 }
 </script>
 
