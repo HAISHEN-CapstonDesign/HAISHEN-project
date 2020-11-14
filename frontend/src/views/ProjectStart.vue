@@ -222,23 +222,23 @@ export default {
         createProject(){
             /*
             var data = {
-                title: this.title,
-                introduction: this.intro,
-                image: this.imageUrl,
+                "title": this.title,
+                "introduction": this.intro,
+                "image": this.imageUrl,
                 //add tag or genre
-                mwn: this.member_num,
+                "mwn": this.member_num,
                // target_d-day: this.date, //d-day -> d_day
-                target_funding_money: this.target_funding_money,              
+                "target_funding_money": this.target_funding_money,              
             }
-            axios.post('/api/project/startup', data)
+            axios.put('/api/project/startup', data)
                 .then(res => {
                     console.log(res)
                 })
                 .catch((err) => {
                     console.log(err)
                 });
-                */
-            this.$router.push('/CollaboProjMain');
+                
+            this.$router.push('/CollaboProjMain');*/
         }
     },
 

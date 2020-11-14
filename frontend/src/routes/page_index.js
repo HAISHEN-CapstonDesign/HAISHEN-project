@@ -8,7 +8,11 @@ import projectStart from '../views/ProjectStart'
 import profitCheck from '../views/ProfitCheck'
 import chooseWriter from '../views/ChooseWriter'
 import basicCollaboTool from '../views/BasicCollaboTool'
+import community from '../views/Community'
+import historyPage from '../views/History'
+import historyDetail from '../views/HistoryDetail'
 
+// import store from '../store'
 
 Vue.use(VueRouter);
 
@@ -65,30 +69,31 @@ export default new VueRouter({
         {
             path: '/login',
             name: 'LoginPage',
-            //beforeEnter: rejectAuthUser,
+            // beforeEnter: rejectAuthUser,
             component: LoginPage
         },
+        //광고 페이지는 component로 바꿔서 routing 안해도 됩니다!
         {
             path: '/ad',
             name: 'AdvertisingPage',
-            //beforeEnter: rejectAuthUser,
+            // beforeEnter: rejectAuthUser,
             component: AdvertisingPage
         },
         {
             path: '/contents',
             name: 'ContentsReadingPage',
-            //beforeEnter: rejectAuthUser,
             component: ContentsReadingPage
         },
         {
             path: '/payment',
             name: 'PaymentPage',
-            //beforeEnter: rejectAuthUser,
+            // beforeEnter: onlyAuthUser,
             component: PaymentPage
         },
         {
             path: '/mypage',
             name: 'MyPage',
+            // beforeEnter: onlyAuthUser,
             component: myPage,
         },
         {
@@ -112,6 +117,7 @@ export default new VueRouter({
         },
         {
             path: '/projectStart',
+            // beforeEnter: onlyAuthUser,
             component: projectStart,
         },
         {
@@ -123,8 +129,23 @@ export default new VueRouter({
             component: chooseWriter,
         },
         {
-            path: '/basicCollaboTool',
+            path: '/basicCollaboTool/:id',
             component: basicCollaboTool,
+        },
+        {
+            path: '/historyPage',
+            name: 'historyPage',
+            component: historyPage,
+        },
+        {
+            path: '/historyDetail/:id',
+            name: 'historyDetail',
+            component: historyDetail,
+        },
+        {
+            path: '/community',
+            name: 'community',
+            component: community,
         },
 
     ]

@@ -50,7 +50,7 @@
       >
       <v-card class="mx-auto" max-width="344" outlined>
       <v-card-title>
-       닉네임
+       {{ $store.state.userInfo.nickname }}
       </v-card-title>
 
      <v-card-subtitle>
@@ -72,13 +72,14 @@
       </v-col>
     <!--집필중 글 목록-->
     <v-col
-      cols="12"
       sm="6"
       md="8"
     >
         <v-layout column wrap>
           <v-flex>
+            <v-row>
             <Writing></Writing>
+            </v-row>
           </v-flex>
           <v-flex>
             <v-row>
@@ -123,6 +124,9 @@ import Writing from '../components/WritingList'
 import Complete from '../components/WritingCompleteList'
 import Liked from '../components/Liked'
 import Sub from '../components/SubscribedWriter'
+import {
+    mapState
+} from "vuex"
 
 export default {
     name: 'myPage',
@@ -138,6 +142,9 @@ export default {
     
     }
   },
+  computed: {
+        ...mapState(['isLogin', 'isLoginError','userInfo'])
+    }
 
 };
 </script>

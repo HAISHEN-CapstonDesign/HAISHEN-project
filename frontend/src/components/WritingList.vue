@@ -15,7 +15,7 @@
       <v-slide-item
         v-for="chat in list"
         :key="chat.title"
-        v-slot:default="{ active, toggle }"
+        v-slot:default="{ active}"
       >
         <v-card
           :color="active ? undefined : 'white lighten-1'"
@@ -23,7 +23,7 @@
           width="350"
           outlined
           tile
-          @click="toggle"
+          @click="goDetailPage(chat.idx)"
         >
          
     <v-img
@@ -53,10 +53,15 @@
 <script>
   export default {
       name: 'Writing',
-
+    methods: {
+      goDetailPage(idx){
+        this.$router.push(`/basicCollaboTool/${idx}`);
+      }
+    },
     data: () => ({
       list: [
         {
+          idx: 1,
           title:'제목1',
           image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
           intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
@@ -64,6 +69,7 @@
           progress: '진행률'
         },
         {
+          idx: 2,
           title:'제목2',
           image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
           intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
@@ -71,6 +77,7 @@
           progress: '진행률'
         },
         {
+          idx: 3,
           title:'제목3',
           image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
           intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',

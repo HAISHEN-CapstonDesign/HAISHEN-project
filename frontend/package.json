@@ -9,6 +9,7 @@
     },
     "dependencies": {
         "core-js": "^3.6.5",
+        "plugin": "^0.3.3",
         "tiptap": "^1.26.4",
         "tiptap-extensions": "^1.33.2",
         "vue": "^2.6.11",
