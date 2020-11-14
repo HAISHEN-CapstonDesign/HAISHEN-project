@@ -15,15 +15,31 @@
                     <v-btn>작가 모집중</v-btn>
                 </v-col>
             </v-row>
+            <CompleteList v-if="showComplete"></CompleteList>
+            <RecruitList v-else></RecruitList>
         </v-container>
     </v-app>
 </template>
 <script>
+import CompleteList from '../components/bookList'
+import RecruitList from '../components/recruitList'
 export default {
+    components:{
+        CompleteList,
+        RecruitList,
+    },
     data(){
         return{
-
+            showComplete:true,
         }
+    },
+    methods: {
+        showCompleteList(){
+            this.showComplete = true
+        },
+        showRecruitList(){
+            this.showComplete = false
+        },
     },
 }
 </script>
