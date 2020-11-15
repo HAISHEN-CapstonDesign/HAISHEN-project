@@ -65,7 +65,7 @@ export default {
 	}).scroll();
     });
     },
-    props:['clicked'],
+    props:['clicked', 'subId'],
     data() {
         return {
             editing: false,
@@ -76,7 +76,7 @@ export default {
         this.$router.push('/community');
       },
       clickHistory(){
-        this.$router.push(`/historyPage`);
+        this.$router.push(`/${this.subId}/historyPage`);
       },
       clickMain(){
         //나중에 경로 수정

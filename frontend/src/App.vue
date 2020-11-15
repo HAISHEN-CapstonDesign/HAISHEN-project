@@ -138,7 +138,7 @@
             </v-list>
         </v-navigation-drawer>
         <br><br>
-        <router-view></router-view>
+        <router-view :key="$route.fullPath"></router-view>
     </div>
 
 </v-app>

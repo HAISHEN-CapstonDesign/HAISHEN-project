@@ -22,7 +22,16 @@ export default new Vuex.Store({
         //cityslicka
         isLogin: false,
         isLoginError: true,
-
+        title: '캡스톤 디자인 프로젝트',
+        subtitle: [
+            { idx: 1, text: '기획보고서란' },
+            { idx: 2, text: '유사 제품 서비스 동향' },
+            { idx: 3, text: '관련 기술 동향' },
+            { idx: 4, text: '유저 스토리' },
+            { idx: 5, text: 'UX/UI 설계' },
+            { idx: 6, text: '시스템 설계' },
+        ],
+        subId: 0,
     },
     mutations: {
         // 로그인이 성공했을 때,
@@ -59,7 +68,10 @@ export default new Vuex.Store({
             console.log('isLogin :' + state.isLogin)
             console.log('isLoginError :' + state.isLoginError)
             console.log('userInfo :' + JSON.stringify(state.userInfo))
-        }
+        },
+        changeSubId(state, payload) {
+            state.subId = payload
+        },
     },
     actions: {
         login({ commit }, loginObj) {

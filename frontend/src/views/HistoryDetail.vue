@@ -4,8 +4,8 @@
             <v-row>
                 <v-col md="10">
                     <div style="float:right; font-size:25px; color:#A06641;">HISTORY DETAIL</div>
-                    <div style="display: inline-block; font-size:25px; color:#A06641;">Title</div>
-                    <div style="display: inline-block; font-size:20px; color:#A06641;">-subtitle</div>
+                    <div style="display: inline-block; font-size:25px; color:#A06641;">{{this.$store.state.title}}</div>
+                    <div style="display: inline-block; font-size:20px; color:#A06641;">_{{this.$store.state.subtitle[this.subId-1].text}}</div>
                     <v-card height="500px">
                         <v-simple-table>
                             <template v-slot:default>
@@ -83,7 +83,9 @@
                     </v-card>
                 </v-col>
                 <v-col md="2">
-                    <Menu></Menu>
+                    <Menu
+                    v-bind:subId="subId"
+                    ></Menu>
                 </v-col>
             </v-row>
         </v-container>
@@ -100,6 +102,7 @@ export default {
 
     },
     created() {
+        this.subId = this.$store.state.subId;
         //projectId, commitId
         axios.get(`http://localhost:3000/api/project/1/commit/basicTool/1`)
         .then((res) => {
@@ -131,6 +134,7 @@ export default {
     },
     data(){
         return{
+            subId:0,
             beforeIdx: [],
             afterIdx: [],
             example: [
