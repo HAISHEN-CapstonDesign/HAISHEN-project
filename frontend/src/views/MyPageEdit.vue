@@ -1,11 +1,18 @@
 <template>
   <v-app>
-    <v-img
-      lazy-src="https://picsum.photos/id/11/10/6"
-      max-height="300"
-      max-width="100%"
-      src="https://picsum.photos/id/11/500/300"
-    ></v-img>
+    <!--업로드 이미지-->
+        <v-img
+        v-if="imageUrl" :src="imageUrl"
+        max-height="200"
+        max-width="100%"
+        ></v-img>
+        <!--기본 이미지-->
+        <v-img
+        v-else
+        max-height="200"
+        max-width="100%"
+        src="../assets/banner.jpg"
+        ></v-img>
     <br><br>
   <v-container fluid>
     <v-layout row wrap align-center>
@@ -14,10 +21,10 @@
           <v-flex>
         <!--업로드 아바타-->
         <v-avatar
-          v-if="imageUrl"
+          v-if="avatarImageUrl"
           size="270">
           <img
-            v-if="imageUrl" :src="imageUrl"
+            v-if="avatarImageUrl" :src="avatarImageUrl"
           ></v-avatar>
         <!--업로드 전 아바타-->
         <v-avatar
@@ -25,11 +32,6 @@
           color="blue"
           size="270"
         >avatar</v-avatar>
-        </v-flex>
-        <br>
-        <v-flex>
-          <input ref="imageInput" type="file" hidden @change="onChangeImages">
-          <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn>
         </v-flex>
         </v-layout>
         </v-flex>
@@ -86,15 +88,22 @@
               </template>
             </v-autocomplete>
           </v-col>
-          <v-col
-            cols="12"
-          >
+          <v-col cols="12">
             <v-textarea
               v-model="career"
               :disabled="!isUpdating"
               filled
               label="이력"
             ></v-textarea>
+          </v-col>
+          <v-col>
+          <v-row>
+            <input ref="avatarImageInput" type="file" hidden @change="onChangeAvatarImages">
+            <v-btn type="button" @click="onClickAvatarImageUpload">프로필 사진 업로드</v-btn>
+
+            <input ref="imageInput" type="file" hidden @change="onChangeImages">
+            <v-btn type="button" @click="onClickImageUpload">배경 이미지 업로드</v-btn>
+          </v-row>
           </v-col>
         </v-row>
       </v-container>
@@ -143,7 +152,7 @@ export default {
         isUpdating: false,
         name:'',
         career:'',
-        imageUrl:'',
+        avatarImageUrl:null,
         interests:[],
         interest: [
           { name: '여행'},
@@ -151,17 +160,26 @@ export default {
           { name: '과학'},
           { name: '경제'},
         ],
+        imageUrl: null,
       }
     },
     methods: {
+      onClickAvatarImageUpload() {
+            this.$refs.avatarImageInput.click();
+      },
+      onChangeAvatarImages(e) {
+            console.log(e.target.files)
+            const file = e.target.files[0];
+            this.avatarImageUrl = URL.createObjectURL(file);
+      },
       onClickImageUpload() {
             this.$refs.imageInput.click();
-      },
-      onChangeImages(e) {
+        },
+        onChangeImages(e) {
             console.log(e.target.files)
             const file = e.target.files[0];
             this.imageUrl = URL.createObjectURL(file);
-      },
+        },
       clickEdit(){
       this.isUpdating = true;
       console.log(this.isUpdating)
