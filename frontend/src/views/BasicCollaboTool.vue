@@ -70,7 +70,11 @@
 
           <v-divider></v-divider>
           <Editor v-bind:mainText="nowMainText" @event-data="updateText"></Editor>
-            
+          <v-text-field
+            v-model="comment"
+            label="Commemt"
+            outlined
+          ></v-text-field>
           </v-card>
           </v-container>
           </div>
@@ -129,11 +133,11 @@ export default {
     },
     created() {
       var id = this.$route.params.id;
-      axios.get(`/api/project/1/blob/basicTool/${id}`)
+      axios.get(`http://localhost:3000/api/project/1/blob/basicTool/${id}`)
         .then((res) => {
           //this.project = res.data[id-1];
          // this.nowMainText = this.project.post;
-          console.log(res.data);
+          console.log(res);
         })
         .catch(function (error) {
           console.log(error.config);
@@ -141,10 +145,12 @@ export default {
     },
     data() {
         return{
+            token: localStorage.getItem('access_token'),
             isEditing: false,
             title: '제목',
             subtitle:'목차',
             nowMainText: '',
+            comment:'',
             project: {},
             infoBtnStyle: {
               color: 'black'
