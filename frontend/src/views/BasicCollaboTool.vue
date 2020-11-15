@@ -186,7 +186,7 @@ export default {
       },
       changeSubtitle(idx){
         //목차 클릭시 페이지 변경
-        this.$router.push(`/basicCollaboTool/${idx}`);
+        this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
       },
       hoverSupporter(){
         this.supporterBtnStyle.color = 'brown'
