@@ -1,5 +1,5 @@
 <template>
-    <v-card id="contents" style="top:300px; position: absolute;">
+    <v-card id="contents" style="top:30px; max-width: 200">
             <v-navigation-drawer
             floating
             permanent
@@ -17,7 +17,7 @@
           <v-list-item
           v-for="little_title in little_titles"
           :key="little_title"
-          @click="changeSubtitle(little_title.idx)"
+          @click="$emit('changeSubtitle', little_title.idx)"
           link
           >
             <v-list-item-content>
@@ -45,17 +45,13 @@ export default {
     });
     },
     props: ['title'],
+    created() {
+      this.little_titles=this.$store.state.subtitle
+    },
     data() {
         return {
             //sample
-            little_titles: [
-            { idx:1, text:'기획보고서란', main:'<p>목차1</p>'},
-            { idx:2, text:'유사 제품 서비스 동향', main:'<p>목차2</p>'},
-            { idx:3, text:'관련 기술 동향', main:'<p>목차3</p>'},
-            { idx:4, text:'유저 스토리', main:'<p>목차4</p>'},
-            { idx:5, text:'UX/UI 설계', main:'<p>목차5</p>'},
-            { idx:6, text:'시스템 설계', main:'<p>목차6</p>'},        
-            ],
+            little_titles: [],
         }
     },
 }

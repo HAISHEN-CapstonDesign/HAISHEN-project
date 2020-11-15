@@ -133,12 +133,12 @@ export default new VueRouter({
             component: basicCollaboTool,
         },
         {
-            path: '/historyPage',
+            path: '/:id/historyPage',
             name: 'historyPage',
             component: historyPage,
         },
         {
-            path: '/historyDetail/:id',
+            path: '/:id/historyDetail/:idx',
             name: 'historyDetail',
             component: historyDetail,
         },

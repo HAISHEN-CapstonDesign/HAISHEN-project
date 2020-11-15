@@ -4,13 +4,13 @@
             <v-row>
                 <v-col md="10">
                     <div style="float:right; font-size:25px; color:#A06641;">HISTORY</div>
-                    <div style="display: inline-block; font-size:25px; color:#A06641;">Title</div>
-                    <div style="display: inline-block; font-size:20px; color:#A06641;">-subtitle</div>
+                    <div style="display: inline-block; font-size:25px; color:#A06641;">{{this.$store.state.title}}</div>
+                    <div style="display: inline-block; font-size:20px; color:#A06641;">_{{this.$store.state.subtitle[this.subId-1].text}}</div>
                     <v-card color="#FFEFD5">
                         <v-list color="#FFEFD5">
                             <v-list-item>
                                 <v-list-item-content style="flex-basis: 25%;">
-                                    <v-list-item-title>시간</v-list-item-title>
+                                    <v-list-item-title>시간 </v-list-item-title>
                                 </v-list-item-content>
                                 <v-list-item-content style="flex-basis: 30%;">
                                     <v-list-item-title>코멘트</v-list-item-title>
@@ -53,7 +53,9 @@
                     </v-card>
                 </v-col>
                 <v-col md="2">
-                    <Menu v-bind:clicked="isHistory"></Menu>
+                    <Menu
+                    v-bind:clicked="isHistory"
+                    ></Menu>
                 </v-col>
             </v-row>
         </v-container>
@@ -69,6 +71,7 @@ export default {
         Menu,
     },
     created() {
+        this.subId = this.$store.state.subId
         //projectId, indexId
         axios.get(`http://localhost:3000/api/project/1/commit/basicTool/1`)
         .then((res) => {
@@ -82,6 +85,7 @@ export default {
     data(){
         return{
             isHistory:2, //히스토리 페이지에서 클릭
+            subId: 0,
             histories: [
           {
             idx: 1,
@@ -148,7 +152,7 @@ export default {
     },
     methods: {
         showDetail(idx){
-            this.$router.push(`/historyDetail/${idx}`);
+            this.$router.push(`/${this.subId}/historyDetail/${idx}`);
         }
     },
 }

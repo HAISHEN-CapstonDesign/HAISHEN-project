@@ -14,9 +14,10 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios"
 
 export default {
+    
     name: 'Payment',
     data: () => ({
         dialog: false,
@@ -60,16 +61,7 @@ export default {
             //             cancel_url: 'http://localhost:8080',
             //         }
             //     })
-                // .then(res => {
-                //     let payUrl = res.data.next_redirect_pc_url
-                //     console.log(res)
-                //     location.href = payUrl
-                // })
-                // .catch((err) => {
-                //     console.log(err)
-                //     alert("에러가 발생했습니다. 다시 시도해주세요")
-                //     this.$router.push('/payment')
-                // });
+               
         }
     }
 }

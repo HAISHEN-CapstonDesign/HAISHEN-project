@@ -1,5 +1,5 @@
 <template>
-    <v-card id="mode_menu" style="top:300px; position: absolute;" max-width="127">
+    <v-card id="mode_menu" style="top:50px;" max-width="127">
 
         <v-list
           dense
@@ -36,7 +36,7 @@
           </v-list-item>
           <v-list-item
           :disabled="!editing"
-          @click="clickSubmit"
+          @click="clickSubmit({after, commit_comment, time:new Date()})"
           link
           >
           <v-list-item-content>
@@ -53,6 +53,7 @@
 </template>
 <script>
 import $ from 'jquery';
+import axios from 'axios'
 export default {
     mounted(){
     //list가 스크롤을 따라오게 하는 코드
@@ -67,10 +68,11 @@ export default {
 	}).scroll();
     });
     },
-    props:['isEditing'],
+    props:['isEditing', 'after', 'commit_comment', 'subId'],
     data() {
         return {
-            editing: false
+            editing: false,
+            token: localStorage.getItem('access_token')
         }
     },
     methods: {
@@ -88,14 +90,25 @@ export default {
           this.editing = !this.editing
           this.$emit('changeEdit', this.editing);
         }
-        this.$router.push('/historyPage');
+        this.$router.push(`/${this.subId}/historyPage`);
       },
-      clickSubmit(){
-        if(this.editing){
-          //DB에 내용 저장 추가 필요
-          this.editing = !this.editing
-          this.$emit('changeEdit', this.editing);
-        }
+      clickSubmit(submitObj){
+        console.log(submitObj)
+        axios.post(`http://localhost:3000/api/project/1/modify/basicTool/${this.subId}`, submitObj,
+          {
+            headers: {
+              'token': this.token
+            }
+          })
+        .then((res) => {
+          this.project = res.data;
+          console.log(res);
+        })
+        .catch(function (error) {
+          console.log(error.config);
+        });
+        this.editing = !this.editing
+        this.$emit('changeEdit', this.editing);
       },
       clickEdit(){
         if(!this.editing){

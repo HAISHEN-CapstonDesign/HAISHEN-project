@@ -4,13 +4,13 @@
       <v-img
         max-height="200"
         max-width="100%"
-        v-bind:src="project.s3key"
+        v-bind:src="imgUrl"
         >
     </v-img>
     <v-row md = "6" sm="6">
       <v-spacer></v-spacer>
       <v-col
-      md="4" sm="4"
+      md="4" sm="3"
       >
         <v-btn
         v-bind:style="infoBtnStyle"
@@ -46,11 +46,11 @@
         sm="4"
         md="3"
         >
-            <Subtitle v-bind:title="title"></Subtitle>
+            <Subtitle v-bind:title="title" @changeSubtitle="changeSubtitle"></Subtitle>
         </v-col>
         <v-col
-        sm="8"
-        md="8"
+        sm="6"
+        md="7"
         >
         <!-- isEditing -->
         <div v-if="isEditing" style="background-color: #FFD0A1">
@@ -94,7 +94,7 @@
           <p>{{$moment(project.time).format('YYYY-MM-DD h:mm:ss a')}}, {{project.writerName}}</p>               
 
           <v-divider></v-divider>
-
+          <br>
             <div v-html="nowMainText"></div>
 
           </v-card>
@@ -107,9 +107,14 @@
 
         <v-col
         sm="2"
-        md="1"
+        md="2"
         >
-          <Menu v-model="isEditing" @changeEdit="editingChange"></Menu>
+          <Menu
+          v-model="isEditing"
+          v-bind:subId="subId"
+          v-bind:after="nowMainText"
+          v-bind:commit_comment="comment"
+          @changeEdit="editingChange"></Menu>
         </v-col>
     </v-row>
     </v-container>
@@ -133,10 +138,15 @@ export default {
     },
     created() {
       var id = this.$route.params.id;
+      this.subId = id;
+      this.$store.commit('changeSubId', id)
+      this.subtitle=this.$store.state.subtitle[id-1].text
+      this.title=this.$store.state.title
       axios.get(`http://localhost:3000/api/project/1/blob/basicTool/${id}`)
         .then((res) => {
-          //this.project = res.data[id-1];
-         // this.nowMainText = this.project.post;
+          this.project = res.data;
+          this.nowMainText = this.project.post;
+          //this.imgUrl = this.project.s3key;
           console.log(res);
         })
         .catch(function (error) {
@@ -145,11 +155,13 @@ export default {
     },
     data() {
         return{
+            subId:0,
             token: localStorage.getItem('access_token'),
             isEditing: false,
-            title: '제목',
-            subtitle:'목차',
+            title: '',
+            subtitle:'',
             nowMainText: '',
+            imgUrl: require('../assets/banner2.jpg'),
             comment:'',
             project: {},
             infoBtnStyle: {
@@ -172,8 +184,9 @@ export default {
       editingChange(state){
         this.isEditing = state;
       },
-      changeSubtitle(){
+      changeSubtitle(idx){
         //목차 클릭시 페이지 변경
+        this.$router.push(`/basicCollaboTool/${idx}`);
       },
       hoverSupporter(){
         this.supporterBtnStyle.color = 'brown'
