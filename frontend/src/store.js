@@ -32,6 +32,7 @@ export default new Vuex.Store({
             { idx: 6, text: '시스템 설계' },
         ],
         subId: 0,
+        projectId: 1,
     },
     mutations: {
         // 로그인이 성공했을 때,
@@ -71,6 +72,9 @@ export default new Vuex.Store({
         },
         changeSubId(state, payload) {
             state.subId = payload
+        },
+        changeProjectId(state, payload) {
+            state.projectId = payload
         },
     },
     actions: {

@@ -90,7 +90,7 @@ export default {
           this.editing = !this.editing
           this.$emit('changeEdit', this.editing);
         }
-        this.$router.push(`/${this.subId}/historyPage`);
+        this.$router.push(`/${this.$store.state.projectId}/${this.subId}/historyPage`);
       },
       clickSubmit(submitObj){
         console.log(submitObj)

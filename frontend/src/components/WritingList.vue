@@ -55,7 +55,8 @@
       name: 'Writing',
     methods: {
       goDetailPage(idx){
-        this.$router.push(`/basicCollaboTool/${idx}`);
+        //projectId 받아와서 변경하기 추가 필요
+        this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
       }
     },
     data: () => ({

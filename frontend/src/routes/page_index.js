@@ -129,16 +129,16 @@ export default new VueRouter({
             component: chooseWriter,
         },
         {
-            path: '/basicCollaboTool/:id',
+            path: '/:idp/basicCollaboTool/:ids',
             component: basicCollaboTool,
         },
         {
-            path: '/:id/historyPage',
+            path: '/:idp/:ids/historyPage',
             name: 'historyPage',
             component: historyPage,
         },
         {
-            path: '/:id/historyDetail/:idx',
+            path: '/:idp/:ids/historyDetail/:idh',
             name: 'historyDetail',
             component: historyDetail,
         },

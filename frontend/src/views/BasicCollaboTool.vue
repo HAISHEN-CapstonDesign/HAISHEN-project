@@ -137,7 +137,7 @@ export default {
       Subtitle,
     },
     created() {
-      var id = this.$route.params.id;
+      var id = this.$route.params.ids;
       this.subId = id;
       this.$store.commit('changeSubId', id)
       this.subtitle=this.$store.state.subtitle[id-1].text
