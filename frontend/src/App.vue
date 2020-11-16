@@ -195,3 +195,15 @@ export default {
     },
 };
 </script>
+<!-- 글자 색 변경을 위한 style -->
+<style>
+.body-blue {
+  color: blue;
+}
+.body-red {
+  color: red;
+}
+.body-black {
+  color: black;
+}
+</style>

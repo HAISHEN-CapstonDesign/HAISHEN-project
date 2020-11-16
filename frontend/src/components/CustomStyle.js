@@ -8,7 +8,7 @@ export default class CustomStyle extends Mark {
 
     get defaultOptions() {
         return {
-            levels: ["body-green", "body-red", "body-blue"]
+            levels: ["body-black", "body-red", "body-blue"]
         };
     }
 
@@ -16,7 +16,7 @@ export default class CustomStyle extends Mark {
         return {
             attrs: {
                 level: {
-                    default: "body-green"
+                    default: "body-black"
                 }
             },
             parseDOM: [{

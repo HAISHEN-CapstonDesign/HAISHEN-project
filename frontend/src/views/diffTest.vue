@@ -1,4 +1,4 @@
-<!-- 글자 색 변경 tiptap -->
+
 <template>
   <div class="editor">
     <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
@@ -13,9 +13,9 @@
         <button
           class="menubar__button"
           :class="{
-            'is-active': isActive.customstyle({ level: 'body-green' }),
+            'is-active': isActive.customstyle({ level: 'body-black' }),
           }"
-          @click="commands.customstyle({ level: 'body-green' })"
+          @click="commands.customstyle({ level: 'body-black' })"
         >
           Body Green
         </button>
@@ -41,16 +41,14 @@
       style="background: rgba(100, 100, 0, 0.2)"
       :editor="editor"
     />
-
-    <pre>{{ localHTML }}</pre>
-    <pre>{{ localJSON }}</pre>
+    <pre>{{localHTML}}</pre>
   </div>
 </template>
 
 <script>
 import { Editor, EditorContent, EditorMenuBar } from "tiptap";
 import { Bold } from "tiptap-extensions";
-import CustomStyle from "./CustomStyle";
+import CustomStyle from "../components/CustomStyle";
 
 export default {
   components: {
@@ -113,7 +111,7 @@ pre {
 </style>
 
 
-<!--
+<!-- diff2html 예시 코드
 <template>
 <div>
   <span>기능설명, 추가기능: </span><a>https://github.com/rtfpessoa/diff2html#diff2htmlui-usage</a>
