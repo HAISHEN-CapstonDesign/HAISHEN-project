@@ -156,7 +156,7 @@
 </template>
 
 <script>
-import EventBus from '../EventBus';
+import EventBus from '../EventBus.js';
 import { Editor, EditorMenuBar, EditorContent } from 'tiptap';
 //import EditorContent from "../components/editorContent.js";
 import {

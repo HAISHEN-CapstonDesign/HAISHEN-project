@@ -64,7 +64,7 @@
             </v-card>
 </template>
 <script>
-import EventBus from '../EventBus';
+import EventBus from '../EventBus.js';
 import $ from 'jquery';
 
 export default {
