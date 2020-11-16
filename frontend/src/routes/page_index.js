@@ -12,6 +12,8 @@ import community from '../views/Community'
 import historyPage from '../views/History'
 import historyDetail from '../views/HistoryDetail'
 
+import diff from '../views/diffTest'
+
 // import store from '../store'
 
 Vue.use(VueRouter);
@@ -146,6 +148,10 @@ export default new VueRouter({
             path: '/community',
             name: 'community',
             component: community,
+        },
+        {
+            path: '/test',
+            component: diff,
         },
 
     ]

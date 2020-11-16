@@ -128,19 +128,37 @@
           <v-icon>mdi-minus</v-icon>
         </button>
         </v-col>
+        <v-col>
+          <button
+          class="menubar__button"
+          @click="commands.undo"
+        >
+          <v-icon>mdi-undo</v-icon>
+        </button>
+        </v-col>
+        <v-col>
+        <button
+          class="menubar__button"
+          @click="commands.redo"
+        >
+          <v-icon>mdi-redo</v-icon>
+        </button>
+        </v-col>
         </v-row>
         
       </div>
     </editor-menu-bar>
 
-    <editor-content :editor="editor" v-model="content"/>
-
+    <editor-content class="editor__content" :editor="editor" v-model="content"/>
+    
+    <pre>{{editor.content}}</pre>
   </div>
 </template>
 
 <script>
-import { Editor, EditorMenuBar } from 'tiptap';
-import EditorContent from "../components/editorContent.js";
+import EventBus from '../EventBus';
+import { Editor, EditorMenuBar, EditorContent } from 'tiptap';
+//import EditorContent from "../components/editorContent.js";
 import {
   Blockquote,
   CodeBlock,
@@ -169,7 +187,7 @@ export default {
   data() {
     return {
       editor: new Editor({
-      extensions: [
+        extensions: [
           new Blockquote(),
           new BulletList(),
           new CodeBlock(),
@@ -187,21 +205,32 @@ export default {
           new Strike(),
           new Underline(),
           new History(),
-        ]
-    }),
-      content: this.mainText,
+        ],
+        content: '',
+        onUpdate: ({ getHTML }) => {
+          this.contE = getHTML();
+          console.log(this.contE);
+        },
+      }),
+      contE:this.mainText,
     }
   },
- 
   beforeDestroy() {
     this.editor.destroy()
   },
   props:['mainText'],
-  watch: {
-    content() {
-      this.$emit('event-data', this.content);
+  created() {
+    EventBus.$on('submit',()=>{
+      this.$emit('event-data', this.contE);
+    })
+  },
+  mounted() {
+    this.setContent()
+  },
+  methods: {
+    setContent() {
+      this.editor.setContent(this.contE);
     }
   },
-
 }
 </script>

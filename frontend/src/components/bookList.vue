@@ -161,6 +161,9 @@ export default {
       calData() {
         return this.bookList.slice(this.startOffset, this.endOffset)
       },
+      numOfPages() {
+        return Math.ceil(this.bookList.length / this.dataPerPage);
+      },
     },
 }
 </script>
