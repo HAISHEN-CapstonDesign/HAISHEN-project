@@ -66,7 +66,6 @@
         >
           <h3>{{title}}</h3>
           <h1>{{subtitle}}</h1>
-          <p>{{$moment(project.time).format('YYYY-MM-DD h:mm:ss a')}}, {{project.writerName}}</p>               
 
           <v-divider></v-divider>
           <Editor v-bind:mainText="nowMainText" @event-data="updateText"></Editor>
