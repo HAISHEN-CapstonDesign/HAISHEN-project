@@ -71,7 +71,7 @@
                         <v-list-item-title>Sign up</v-list-item-title>
                     </v-list-item>
 
-                    <v-list-item to="/myPage">
+                    <v-list-item v-if="isLogin" to="/myPage">
                         <v-list-item-title>Info</v-list-item-title>
                     </v-list-item>
 
