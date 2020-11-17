@@ -198,6 +198,7 @@ export default {
         .catch(function (error) {
           console.log(error.response);
         });
+        this.comment = ''
         //this.little_titles[this.nowIdx].main = this.nowMainText;
       },
       editingChange(state){
