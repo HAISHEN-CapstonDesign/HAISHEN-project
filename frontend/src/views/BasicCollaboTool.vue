@@ -111,7 +111,11 @@
           <Menu
           v-model="isEditing"
           v-bind:subId="subId"
-          @changeEdit="editingChange"></Menu>
+          v-bind:mainText="nowMainText"
+          v-bind:title="title"
+          v-bind:subtitle="subtitle"
+          @changeEdit="editingChange"
+          @uploadFile="uploadFile"></Menu>
         </v-col>
     </v-row>
     </v-container>
@@ -207,6 +211,9 @@ export default {
       changeSubtitle(idx){
         //목차 클릭시 페이지 변경
         this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
+      },
+      uploadFile(fileText){
+        this.nowMainText = fileText;
       },
       hoverSupporter(){
         this.supporterBtnStyle.color = 'brown'

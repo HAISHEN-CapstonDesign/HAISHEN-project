@@ -1,5 +1,5 @@
 <template>
-    <v-card id="mode_menu" style="top:50px;" max-width="127">
+    <v-card id="mode_menu" style="top:10px;" max-width="127">
 
         <v-list
           dense
@@ -58,9 +58,34 @@
             <v-list-item-subtitle class="text-center">SUBMIT</v-list-item-subtitle>
           </v-list-item-content>
           </v-list-item>
+          <v-list-item
+          id="dwn-btn"
+          link
+          >
+          <v-list-item-content>
+            <v-list-item-title class="text-center">
+            <v-icon>mdi-download</v-icon>
+            </v-list-item-title>
+            <v-list-item-subtitle class="text-center">DOWNLOAD</v-list-item-subtitle>
+          </v-list-item-content>
+          </v-list-item>
+          <v-list-item
+          @click="onClickFileUpload"
+          link
+          >
+          <input ref="fileInput" type="file" hidden @change="importFile">
+          <v-list-item-content>
+            <v-list-item-title class="text-center">
+            <v-icon>mdi-upload</v-icon>
+            </v-list-item-title>
+            <v-list-item-subtitle class="text-center">UPLOAD</v-list-item-subtitle>
+          </v-list-item-content>
+          </v-list-item>
           </v-list-item-group>
         </v-list>
-
+        <div id="text-val" v-html="mainText" v-show="false"></div>
+        <div id="title" v-show="false">{{title}}</div>
+        <div id="subtitle" v-show="false">{{subtitle}}</div>
             </v-card>
 </template>
 <script>
@@ -80,11 +105,35 @@ export default {
         }, 500);
 	}).scroll();
     });
+    //download code
+    function download(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+      }
+      document.getElementById("dwn-btn").addEventListener("click", function(){
+        var text = document.getElementById("text-val").innerHTML;
+        var date = new Date().toLocaleString();
+        var title = document.getElementById("title").innerText;
+        var subtitle = document.getElementById("subtitle").innerText;
+        var filename = `${title}_${subtitle}_${date}.html`;
+    
+        download(filename, text);
+      }, false);
     },
-    props:['isEditing', 'after', 'commit_comment', 'subId'],
+    props:['isEditing', 'mainText', 'subId', 'title', 'subtitle'],
     data() {
         return {
             editing: false,
+            file: [],
+            data:'',
         }
     },
     methods: {
@@ -119,7 +168,19 @@ export default {
         this.editing = !this.editing
         this.$emit('changeEdit', this.editing);
       },
-
+      importFile(e) {
+        this.file = e.target.files[0];
+        if (!this.file) {this.data = "No File Chosen"}
+        var reader = new FileReader();
+        reader.readAsText(this.file);
+        reader.onload = () => {
+          this.data = reader.result;
+          this.$emit('uploadFile',this.data);
+        }
+      },
+      onClickFileUpload() {
+        this.$refs.fileInput.click();
+      },
     }, 
 }
 </script>

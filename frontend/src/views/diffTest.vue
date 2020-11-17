@@ -13,14 +13,12 @@
       <!--업로드-->
       <v-col>
         <p>파일 업로드 -> 수정중</p>
-        <v-file-input
-        accept=".html"
-        label="File input"
-        v-model="files"
-        ></v-file-input>
-        <v-btn right @click="importTxt">Read File</v-btn>
-        <p>File Name : {{ files.name }}</p>
-        <p>text: {{ data }}</p>
+        <input ref="fileInput" type="file" hidden @change="importFile">
+        <v-btn type="button" @click="onClickImageUpload">파일 업로드</v-btn>
+        
+        <p>File Name : {{ file.name }}</p>
+        <span>text: </span>
+        <span v-html="data"></span>
       </v-col>
     </v-row>
   </div>
@@ -41,11 +39,9 @@ export default {
 
         document.body.removeChild(element);
       }
-// Start file download.
       document.getElementById("dwn-btn").addEventListener("click", function(){
-    // Generate download of hello.txt file with some content
         var text = document.getElementById("text-val").innerHTML;
-        var filename = "hello.html";
+        var filename = "프로젝트-목차-현재날짜.html"; // 이후에 적용시킬 때 수정
     
         download(filename, text);
       }, false);
@@ -53,31 +49,27 @@ export default {
     data(){
       return{
         test:`<p>html 파일 다운로드 테스트</p>`,
-        files: [],
+        file: [],
         data:'',
       }
     },
     methods: {
-      importTxt() {
-      
-      if (!this.files) {this.data = "No File Chosen"}
-      var reader = new FileReader();
-      
-      // Use the javascript reader object to load the contents
-      // of the file in the v-model prop
-      reader.readAsText(this.files);
-      reader.onload = () => {
-        this.data = reader.result;
-      }
-    }
+      importFile(e) {
+        this.file = e.target.files[0];
+        if (!this.file) {this.data = "No File Chosen"}
+        var reader = new FileReader();
+        reader.readAsText(this.file);
+        reader.onload = () => {
+          this.data = reader.result;
+        }
+      },
+      onClickImageUpload() {
+        this.$refs.fileInput.click();
+      },
     },
 }
 </script>
-<style>
-#dwn-btn {
-  background-color: rgb(214, 190, 175);
-}
-</style>
+
 <!-- diff2html 예시 코드
 <template>
 <div>
