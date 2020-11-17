@@ -181,7 +181,6 @@
     <br>
     <editor-content class="editor__content" :editor="editor" v-model="content"/>
     
-    <pre>{{editor.content}}</pre>
   </div>
 </template>
 

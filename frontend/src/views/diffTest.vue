@@ -1,116 +1,83 @@
-
 <template>
-  <div class="editor">
-    <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
-      <div class="menubar">
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.bold() }"
-          @click="commands.bold"
-        >
-          Bold
-        </button>
-        <button
-          class="menubar__button"
-          :class="{
-            'is-active': isActive.customstyle({ level: 'body-black' }),
-          }"
-          @click="commands.customstyle({ level: 'body-black' })"
-        >
-          Body Green
-        </button>
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.customstyle({ level: 'body-blue' }) }"
-          @click="commands.customstyle({ level: 'body-blue' })"
-        >
-          Body Blue
-        </button>
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.customstyle({ level: 'body-red' }) }"
-          @click="commands.customstyle({ level: 'body-red' })"
-        >
-          Body Red
-        </button>
-      </div>
-    </editor-menu-bar>
-
-    <editor-content
-      class="editor__content"
-      style="background: rgba(100, 100, 0, 0.2)"
-      :editor="editor"
-    />
-    <pre>{{localHTML}}</pre>
+  <div>
+    <v-row>
+      <!--다운로드-->
+      <v-col>
+        <p>파일 다운로드</p>
+        <p>내용 수정은 코드의 data에서 text 값을 변경하세요!</p>
+        <v-divider></v-divider><br/>
+        <div id="text-val" rows="4" v-html="test"></div>
+        <br/>
+        <input type="button" id="dwn-btn" value="Download file button"/>
+      </v-col>
+      <!--업로드-->
+      <v-col>
+        <p>파일 업로드 -> 수정중</p>
+        <v-file-input
+        accept=".html"
+        label="File input"
+        v-model="files"
+        ></v-file-input>
+        <v-btn right @click="importTxt">Read File</v-btn>
+        <p>File Name : {{ files.name }}</p>
+        <p>text: {{ data }}</p>
+      </v-col>
+    </v-row>
   </div>
 </template>
-
 <script>
-import { Editor, EditorContent, EditorMenuBar } from "tiptap";
-import { Bold } from "tiptap-extensions";
-import CustomStyle from "../components/CustomStyle";
-
+//import $ from 'jquery';
 export default {
-  components: {
-    EditorContent,
-    EditorMenuBar,
-  },
-  data() {
-    return {
-      localJSON: "",
-      localHTML: "",
-      editor: new Editor({
-        extensions: [new Bold(), new CustomStyle()],
-        onUpdate: ({ getHTML, getJSON }) => {
-          this.localHTML = getHTML();
-          this.localJSON = getJSON();
-        },
-        content: `
-          <h2>
-            Hi there,
-          </h2>
-          <p>
-            this is a very <em>basic</em> example of tiptap.
-          </p>`,
-      }),
-    };
-  },
-  beforeDestroy() {
-    this.editor.destroy();
-  },
-};
-</script>
+    mounted(){
+      function download(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
 
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+      }
+// Start file download.
+      document.getElementById("dwn-btn").addEventListener("click", function(){
+    // Generate download of hello.txt file with some content
+        var text = document.getElementById("text-val").innerHTML;
+        var filename = "hello.html";
+    
+        download(filename, text);
+      }, false);
+    },
+    data(){
+      return{
+        test:`<p>html 파일 다운로드 테스트</p>`,
+        files: [],
+        data:'',
+      }
+    },
+    methods: {
+      importTxt() {
+      
+      if (!this.files) {this.data = "No File Chosen"}
+      var reader = new FileReader();
+      
+      // Use the javascript reader object to load the contents
+      // of the file in the v-model prop
+      reader.readAsText(this.files);
+      reader.onload = () => {
+        this.data = reader.result;
+      }
+    }
+    },
+}
+</script>
 <style>
-.menubar__button {
-  font-weight: 700;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  background: rgba(0, 0, 0, 0);
-  border: 0;
-  color: #000;
-  padding: 0.2rem 0.5rem;
-  margin-right: 0.2rem;
-  border-radius: 3px;
-  cursor: pointer;
-}
-.menubar__button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-.menubar__button.is-active {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-pre {
-  white-space: pre-wrap; /* Since CSS 2.1 */
-  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-  white-space: -pre-wrap; /* Opera 4-6 */
-  white-space: -o-pre-wrap; /* Opera 7 */
-  word-wrap: break-word; /* Internet Explorer 5.5+ */
+#dwn-btn {
+  background-color: rgb(214, 190, 175);
 }
 </style>
-
-
 <!-- diff2html 예시 코드
 <template>
 <div>
