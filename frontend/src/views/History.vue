@@ -25,7 +25,7 @@
                             <v-divider></v-divider>
                             <div
                             v-for="tmp in histories"
-                            :key="tmp.time"
+                            :key="tmp.commitId"
                             >
                             <v-divider></v-divider>
                             <v-list-item>
@@ -33,13 +33,13 @@
                                     <v-list-item-title v-text="tmp.time"></v-list-item-title>
                                 </v-list-item-content>
                                 <v-list-item-content style="flex-basis: 30%;">
-                                    <v-list-item-title v-text="tmp.comment"></v-list-item-title>
+                                    <v-list-item-title v-text="tmp.commit_comment"></v-list-item-title>
                                 </v-list-item-content>
                                 <v-list-item-content style="flex-basis: 25%;">
-                                    <v-list-item-title v-text="tmp.name"></v-list-item-title>
+                                    <v-list-item-title v-text="tmp.writerName"></v-list-item-title>
                                 </v-list-item-content>
                                 <v-list-item-content class="text-center" style="flex-basis: 10%;">
-                                    <v-list-btn @click="showDetail(tmp.idx)">
+                                    <v-list-btn @click="showDetail(tmp.commitId)">
                                     <v-btn fab small depressed color="#D7AC87">
                                         <v-icon>
                                             mdi-magnify
@@ -72,11 +72,10 @@ export default {
     },
     created() {
         this.subId = this.$store.state.subId
-        //projectId, indexId
         axios.get(`http://localhost:3000/api/project/1/commit/basicTool/${this.subId}`)
         .then((res) => {
-          
-          console.log(res.data);
+          this.histories = res.data;
+          console.log(res);
         })
         .catch(function (error) {
           console.log(error.config);
@@ -88,63 +87,63 @@ export default {
             subId: 0,
             histories: [
           {
-            idx: 1,
-            name: 'Frozen Yogurt',
-            comment: 'add sdfdf',
+            commitId: 1,
+            writerName: 'Frozen Yogurt',
+            commit_comment: 'test',
             time:'2020-05-20 15:07:45',
           },
           {
-            idx: 2,
-            name: 'Ice cream sandwich',
-            comment: 'add rutghv',
+            commitId: 2,
+            writerName: 'Ice cream sandwich',
+            commit_comment: 'add rutghv',
             time:'2020-05-28 19:34:35',
           },
           {
-              idx: 3,
-            name: 'Eclair',
-            comment: 'change augfgcc',
+            commitId: 3,
+            writerName: 'Eclair',
+            commit_comment: 'change augfgcc',
             time:'2020-06-03 12:29:55',
           },
           {
-              idx: 4,
-            name: 'Cupcake',
-            comment: 'add rutghv',
+            commitId: 4,
+            writerName: 'Cupcake',
+            commit_comment: 'add rutghv',
             time:'2020-06-28 19:34:35',
           },
           {
-              idx: 5,
-            name: 'Gingerbread',
-            comment: 'add rutghv',
+            commitId: 5,
+            writerName: 'Gingerbread',
+            commit_comment: 'add rutghv',
             time:'2020-07-10 19:34:35',
           },
           {
-              idx: 6,
-            name: 'Jelly bean',
-            comment: 'add rutghv',
+            commitId: 6,
+            writerName: 'Jelly bean',
+            commit_comment: 'add rutghv',
             time:'2020-07-28 19:34:35',
           },
           {
-              idx: 7,
-            name: 'Lollipop',
-            comment: 'add rutghv',
+            commitId: 7,
+            writerName: 'Lollipop',
+            commit_comment: 'add rutghv',
             time:'2020-08-04 19:34:35',
           },
           {
-              idx: 8,
-            name: 'Honeycomb',
-            comment: 'add rutghv',
+            commitId: 8,
+            writerName: 'Honeycomb',
+            commit_comment: 'add rutghv',
             time:'2020-08-13 19:34:35',
           },
           {
-              idx: 9,
-            name: 'Donut',
-            comment: 'add rutghv',
+            commitId: 9,
+            writerName: 'Donut',
+            commit_comment: 'add rutghv',
             time:'2020-08-28 19:34:35',
           },
           {
-              idx: 10,
-            name: 'KitKat',
-            comment: 'add rutghv',
+            commitId: 10,
+            writerName: 'KitKat',
+            commit_comment: 'add rutghv',
             time:'2020-09-28 19:34:35',
           },
         ],
