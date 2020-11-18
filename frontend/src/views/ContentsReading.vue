@@ -1,5 +1,4 @@
 <template>
-<v-app>
     <div>
     <v-img
         max-height="200"
@@ -7,6 +6,7 @@
         v-bind:src="imgUrl"
         >
     </v-img>
+    <v-container>
     <v-row md = "6" sm="6">
       <v-spacer></v-spacer>
       <v-col
@@ -32,8 +32,6 @@
         </v-btn>
       </v-col>
     </v-row>
-
-    <v-container>
     <v-row>
         <v-col
         cols="12"
@@ -64,49 +62,9 @@
           </v-container>
           </div>
         </v-col>
-            <!-- <v-card width="300" height="600">
-                <v-navigation-drawer
-                    v-model="drawer"
-                    permanent
-                    floating
-                    width="400"         
-                >
-                    <v-list-item class="px-2">
-                        <v-list-item-avatar>
-                            <v-img src="../assets/grid.png"></v-img>
-                        </v-list-item-avatar>
-                        <v-list-item-title>{{title}}</v-list-item-title>
-
-                    </v-list-item>
-
-                    <v-divider></v-divider>
-
-                    <v-list dense>
-                        <v-list-item
-                            v-for="little_title in little_titles"
-                            :key="little_title"
-                            link
-                        >
-
-                        <v-list-item-content>
-                            <v-list-item-title @click="selectIndex(little_title.idx)">
-                                {{little_title.idx}}, {{ little_title.text }}
-                            </v-list-item-title>
-                        </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                </v-navigation-drawer>
-            </v-card> -->
-        <!-- </v-col> -->
-
-        <!-- <v-col cols=4 align="center">
-            <ProjContent></ProjContent>
-            <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
-             
-        </v-col> -->
-
-        <v-col cols=4></v-col>
-    </v-row>
+        
+      </v-row>
+    </v-container>
         <v-overlay
           :z-index="zIndex"
           :value="overlay"
@@ -115,10 +73,10 @@
         >
           <Advertising @endAd="endAd"></Advertising>
         </v-overlay>
-    </v-container>
+    
     
 </div>
-</v-app>
+
 </template>
 
 <script>

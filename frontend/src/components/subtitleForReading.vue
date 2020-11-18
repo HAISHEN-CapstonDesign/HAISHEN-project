@@ -1,5 +1,5 @@
 <template>
-    <v-card id="contents" style="top:30px; max-width: 200">
+    <v-card id="contents" style="top:30px; max-width: 150">
             <v-navigation-drawer
             floating
             permanent
