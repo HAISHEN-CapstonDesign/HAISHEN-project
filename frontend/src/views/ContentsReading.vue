@@ -1,5 +1,4 @@
 <template>
-<v-app>
     <div>
     <v-img
         max-height="200"
@@ -38,45 +37,11 @@
         </v-btn>
       </v-col>
     </v-row>
-
-    <v-container>
+    <Subtitle v-bind:title="title" @changeSubtitle="changeSubtitle"></Subtitle>
     <v-row>
-        <v-col
-        cols="12"
-        sm="4"
-        md="3"
-        >
-            <Subtitle v-bind:title="title" @changeSubtitle="changeSubtitle"></Subtitle>
-        </v-col>
-        <v-col
-        sm="6"
-        md="7"
-        >
-        <div style="background-color: white">
-        <v-container>
-          <div style="background-color: white">
-          <v-container>
-        <v-card
-        flat
-        tile
-        >
-          <h3>{{title}}</h3>
-          <h1>{{subtitle}}</h1>
-          <p>{{$moment(project.time).format('YYYY-MM-DD h:mm:ss a')}}, {{project.writerName}}</p>               
-
-          <v-divider></v-divider>
-          <br>
-            <div v-html="nowMainText"></div>
-
-          </v-card>
-          </v-container>
-          </div>
-        </v-container>
-        </div>
-        </v-col>
-        <!-- <v-col cols=3><ProjIndex></ProjIndex></v-col> -->
-        <!-- <v-col col-4> -->
-            <!-- <v-card width="300" height="600">
+        <v-col cols=3><ProjIndex></ProjIndex></v-col>
+        <v-col col-4>
+            <v-card width="300" height="600">
                 <v-navigation-drawer
                     v-model="drawer"
                     permanent
@@ -108,17 +73,16 @@
                         </v-list-item>
                     </v-list>
                 </v-navigation-drawer>
-            </v-card> -->
-        <!-- </v-col> -->
+            </v-card>
+        </v-col>
 
-        <!-- <v-col cols=4 align="center">
+        <v-col cols=4 align="center">
             <ProjContent></ProjContent>
             <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
-             
-        </v-col> -->
+        </v-col>
 
         <v-col cols=4></v-col>
-    </v-row>
+</v-row>
         <v-overlay
           :z-index="zIndex"
           :value="overlay"
@@ -127,28 +91,28 @@
         >
           <Advertising @endAd="endAd"></Advertising>
         </v-overlay>
-    </v-container>
+    
     
 </div>
-</v-app>
+
 </template>
 
 <script>
 // import ProjIndex fro m '../components/projIndex.vue'
-// import ProjContent from '../components/projContent.vue'
-// import PostReply from '../components/reply.vue'
+import ProjContent from '../components/projContent.vue'
+import PostReply from '../components/reply.vue'
 import Advertising from './Advertising'
-import Subtitle from '../components/subtitleList';
+// import Subtitle from '../components/subtitleList';
 import axios from 'axios'
 import store from '../store'
 
 export default {
     components: {
         // ProjIndex,
-        // PostReply,
-        // ProjContent,
+        PostReply,
+        ProjContent,
         Advertising,
-        Subtitle
+        // Subtitle
     },
     created(){
         var id = this.$route.params.ids;
