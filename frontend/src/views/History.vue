@@ -30,7 +30,7 @@
                             <v-divider></v-divider>
                             <v-list-item>
                                 <v-list-item-content style="flex-basis: 25%;">
-                                    <v-list-item-title v-text="tmp.time"></v-list-item-title>
+                                    <v-list-item-title v-text="tmp.time.toLocaleString()"></v-list-item-title>
                                 </v-list-item-content>
                                 <v-list-item-content style="flex-basis: 30%;">
                                     <v-list-item-title v-text="tmp.commit_comment"></v-list-item-title>
