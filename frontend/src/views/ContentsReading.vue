@@ -1,29 +1,82 @@
 <template>
-<div>
- <h1>컨텐츠 열람 페이지</h1>
-    <v-row>
-        <v-img
-        class="white--text align-end"
-        height="300"
-        src="../assets/banner2.jpg"
+<v-app>
+    <div>
+    <v-img
+        max-height="200"
+        max-width="100%"
+        v-bind:src="imgUrl"
         >
-        </v-img>
-
+    </v-img>
+    <v-row md = "6" sm="6">
+      <v-spacer></v-spacer>
+      <v-col
+      md="4" sm="3"
+      >
+        <v-btn
+        v-bind:style="infoBtnStyle"
+        @mouseover="hoverInfo"
+        @mouseout="endHoverInfo"
+        text
+        >
+          저자Info
+        </v-btn>
+        <v-btn
+        v-bind:style="supporterBtnStyle"
+        @mouseover="hoverSupporter"
+        @mouseout="endHoverSupporter"
+        text
+        >
+          서포터
+        </v-btn>
+        <v-btn
+        v-bind:style="endProjectBtnStyle"
+        @mouseover="hoverEndProject"
+        @mouseout="endHoverEndProject"
+        text
+        >
+          프로젝트 종료
+        </v-btn>
+      </v-col>
     </v-row>
-    <v-col align="end">
-        <v-btn @click="sss">저자 info</v-btn>
-        <v-btn>서포터</v-btn>
-        <v-btn>커뮤니티</v-btn>
-        <div>
-            <v-btn  @click="handle_toggle">모달창</v-btn>
-        </div>
-    </v-col>
 
-    
+    <v-container>
     <v-row>
+        <v-col
+        cols="12"
+        sm="4"
+        md="3"
+        >
+            <Subtitle v-bind:title="title" @changeSubtitle="changeSubtitle"></Subtitle>
+        </v-col>
+        <v-col
+        sm="6"
+        md="7"
+        >
+        <div style="background-color: white">
+        <v-container>
+          <div style="background-color: white">
+          <v-container>
+        <v-card
+        flat
+        tile
+        >
+          <h3>{{title}}</h3>
+          <h1>{{subtitle}}</h1>
+          <p>{{$moment(project.time).format('YYYY-MM-DD h:mm:ss a')}}, {{project.writerName}}</p>               
+
+          <v-divider></v-divider>
+          <br>
+            <div v-html="nowMainText"></div>
+
+          </v-card>
+          </v-container>
+          </div>
+        </v-container>
+        </div>
+        </v-col>
         <!-- <v-col cols=3><ProjIndex></ProjIndex></v-col> -->
-        <v-col col-4>
-            <v-card width="300" height="600">
+        <!-- <v-col col-4> -->
+            <!-- <v-card width="300" height="600">
                 <v-navigation-drawer
                     v-model="drawer"
                     permanent
@@ -55,14 +108,14 @@
                         </v-list-item>
                     </v-list>
                 </v-navigation-drawer>
-            </v-card>
-        </v-col>
+            </v-card> -->
+        <!-- </v-col> -->
 
-        <v-col cols=4 align="center">
+        <!-- <v-col cols=4 align="center">
             <ProjContent></ProjContent>
             <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
              
-        </v-col>
+        </v-col> -->
 
         <v-col cols=4></v-col>
     </v-row>
@@ -74,27 +127,47 @@
         >
           <Advertising @endAd="endAd"></Advertising>
         </v-overlay>
-    
+    </v-container>
     
 </div>
-   
+</v-app>
 </template>
 
 <script>
 // import ProjIndex fro m '../components/projIndex.vue'
-import ProjContent from '../components/projContent.vue'
-import PostReply from '../components/reply.vue'
+// import ProjContent from '../components/projContent.vue'
+// import PostReply from '../components/reply.vue'
 import Advertising from './Advertising'
+import Subtitle from '../components/subtitleList';
+import axios from 'axios'
 import store from '../store'
 
 export default {
     components: {
         // ProjIndex,
-        PostReply,
-        ProjContent,
-        Advertising
+        // PostReply,
+        // ProjContent,
+        Advertising,
+        Subtitle
     },
-    data: () => (
+    created(){
+        var id = this.$route.params.ids;
+      this.subId = id;
+      this.$store.commit('changeSubId', id)
+      this.subtitle=this.$store.state.subtitle[id-1].text
+      this.title=this.$store.state.title
+      axios.get(`http://localhost:3000/api/project/1/blob/basicTool/${id}`)
+        .then((res) => {
+          this.project = res.data;
+          this.nowMainText = this.project.post;
+          //this.imgUrl = this.project.s3key;
+          console.log(res);
+        })
+        .catch(function (error) {
+          console.log(error.response);
+        });
+    },
+    data: () => ( 
         {
         zIndex: 0,
         opacity: 0.9,
@@ -118,7 +191,7 @@ export default {
           { title: 'Users', icon: 'mdi-account-group-outline' },
         ],
         mini: true,
-
+        imgUrl: require('../assets/banner2.jpg'),
         title: '캡디 기획 보고서 작성하기',
         date: '2020.10.12 05:55',
         writer: ['김김김', '이이이', '박박박'],
@@ -161,7 +234,29 @@ export default {
     },
     endAd(over){
         this.overlay = over;
-    }
+    },
+    hoverSupporter(){
+        this.supporterBtnStyle.color = 'brown'
+      },
+      hoverInfo(){
+        this.infoBtnStyle.color = 'brown'
+      },
+      hoverEndProject(){
+        this.endProjectBtnStyle.color = 'brown'
+      },
+      endHoverInfo(){
+        this.infoBtnStyle.color = 'black'
+      },
+      endHoverSupporter(){
+        this.supporterBtnStyle.color = 'black'
+      },
+      endHoverEndProject(){
+        this.endProjectBtnStyle.color = 'black'
+      },
+      changeSubtitle(idx){
+        //목차 클릭시 페이지 변경
+        this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
+      },
   }
 }
 </script>
