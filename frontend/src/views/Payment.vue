@@ -1,6 +1,7 @@
 <template>
 <v-container fill-height style="max-width:900px;">
     <v-layout align-center row wrap class="mt-15">
+        <h2>보유 중인 크런치 포인트 : {{ currentpoint }}</h2>
         <v-flex xs12>
             <v-select :items="items" v-model="chargePoint" label="포인트 충전 금액" required></v-select>
             <v-card-actions>
@@ -25,7 +26,7 @@ export default {
         items: [5000, 10000, 20000],
         chargePoint: 0,
         token: localStorage.getItem('access_token'),
-        
+        currentpoint: localStorage.getItem('point')
     }),
     methods: {
         pay() {
@@ -56,8 +57,8 @@ export default {
                 pg: 'html5_inicis',                           // PG사
                 pay_method: 'card',                           // 결제수단
                 merchant_uid: `mid_${new Date().getTime()}`,  // 주문번호
-                amount: 1000,                                 // 결제금액
-                name: '아임포트 결제 데이터 분석',                  // 주문명
+                amount: this.chargePoint,                                 // 결제금액
+                name: '크런치 포인트 구매',                     // 주문명
                 buyer_name: '홍길동',                           // 구매자 이름
                 buyer_tel: '01012341234',                     // 구매자 전화번호
                 buyer_email: 'example@example',               // 구매자 이메일

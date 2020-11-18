@@ -85,7 +85,7 @@ import ProjContent from '../components/projContent.vue'
 import PostReply from '../components/reply.vue'
 import Advertising from './Advertising'
 import Subtitle from '../components/subtitleForReading';
-// import axios from 'axios'
+import axios from 'axios'
 import store from '../store'
 
 export default {
@@ -119,7 +119,8 @@ export default {
         title: '캡디 기획 보고서 작성하기',
         date: '2020.10.12 05:55',
         writer: ['김김김', '이이이', '박박박'],
-        selected_idx: 0
+        selected_idx: 0,
+        temp_title_index:3
   }),
   methods:{
     selectIndex: function(title_idx){
@@ -139,6 +140,32 @@ export default {
             alert(title_idx)
         }
     },
+    getFee(title_idx){
+        console.log((title_idx))
+        axios
+            .post('http://localhost:3000/api/getfee',{ id: parseInt(title_idx), projectId: parseInt(1) })
+            .then(res => {
+                // localStorage.setItem('point',this.chargePoint)
+                console.log(res.data)
+                alert(res.data)
+                
+            })
+            .catch((err) => {
+                console.log(err)
+                alert("에러가 발생했습니다. 다시 시도해주세요")
+                this.$router.push('/payment')
+            });
+    },
+    request_minus_point(){
+        // fee: 300; // 위에서 getfee해서 받아온 fee 넣기 !
+        
+        axios
+            .post('http://localhost:3000/api/minuspoint', {postId:parseInt(this.temp_title_index), projectId:1, minusPoint: 300},{ headers: {'token': this.token}})
+            .then(res=> {
+                console.log(res.data)
+            })
+    },
+
     parent_replySubmit: function(){
         alert("hello")
     },
