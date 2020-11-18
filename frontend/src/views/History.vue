@@ -4,8 +4,8 @@
             <v-row>
                 <v-col md="10">
                     <div style="float:right; font-size:25px; color:#A06641;">HISTORY</div>
-                    <div style="display: inline-block; font-size:25px; color:#A06641;">{{this.$store.state.title}}</div>
-                    <div style="display: inline-block; font-size:20px; color:#A06641;">_{{this.$store.state.subtitle[this.subId-1].text}}</div>
+                    <div style="display: inline-block; font-size:25px; color:#A06641;">{{$store.state.title}}</div>
+                    <div style="display: inline-block; font-size:20px; color:#A06641;">_{{$store.state.subtitle[this.subId-1].text}}</div>
                     <v-card color="#FFEFD5">
                         <v-list color="#FFEFD5">
                             <v-list-item>
@@ -73,7 +73,7 @@ export default {
     created() {
         this.subId = this.$store.state.subId
         //projectId, indexId
-        axios.get(`http://localhost:3000/api/project/1/commit/basicTool/1`)
+        axios.get(`http://localhost:3000/api/project/1/commit/basicTool/${this.subId}`)
         .then((res) => {
           
           console.log(res.data);
@@ -152,7 +152,7 @@ export default {
     },
     methods: {
         showDetail(idx){
-            this.$router.push(`/${this.subId}/historyDetail/${idx}`);
+            this.$router.push(`/${this.$store.state.projectId}/${this.subId}/historyDetail/${idx}`);
         }
     },
 }

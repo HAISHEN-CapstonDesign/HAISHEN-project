@@ -12,6 +12,8 @@ import community from '../views/Community'
 import historyPage from '../views/History'
 import historyDetail from '../views/HistoryDetail'
 
+import diff from '../views/diffTest'
+
 // import store from '../store'
 
 Vue.use(VueRouter);
@@ -129,16 +131,16 @@ export default new VueRouter({
             component: chooseWriter,
         },
         {
-            path: '/basicCollaboTool/:id',
+            path: '/:idp/basicCollaboTool/:ids',
             component: basicCollaboTool,
         },
         {
-            path: '/:id/historyPage',
+            path: '/:idp/:ids/historyPage',
             name: 'historyPage',
             component: historyPage,
         },
         {
-            path: '/:id/historyDetail/:idx',
+            path: '/:idp/:ids/historyDetail/:idh',
             name: 'historyDetail',
             component: historyDetail,
         },
@@ -146,6 +148,10 @@ export default new VueRouter({
             path: '/community',
             name: 'community',
             component: community,
+        },
+        {
+            path: '/test',
+            component: diff,
         },
 
     ]

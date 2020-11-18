@@ -71,7 +71,7 @@
                         <v-list-item-title>Sign up</v-list-item-title>
                     </v-list-item>
 
-                    <v-list-item to="/myPage">
+                    <v-list-item v-if="isLogin" to="/myPage">
                         <v-list-item-title>Info</v-list-item-title>
                     </v-list-item>
 
@@ -195,3 +195,15 @@ export default {
     },
 };
 </script>
+<!-- 글자 색 변경을 위한 style -->
+<style>
+.body-blue {
+  color: blue;
+}
+.body-red {
+  color: red;
+}
+.body-black {
+  color: black;
+}
+</style>

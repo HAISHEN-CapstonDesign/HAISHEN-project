@@ -2,11 +2,11 @@
   <v-app>
     <v-img
       lazy-src="https://picsum.photos/id/11/10/6"
-      max-height="300"
+      max-height="250px"
       max-width="100%"
       src="https://picsum.photos/id/11/500/300"
     >
-    <div style="position: absolute; top: 28%; left: 10%;">
+    <div style="position: absolute; top: 12%; left: 10%;">
       <v-avatar
         color="blue"
         size="200"

@@ -17,7 +17,7 @@
           <v-list-item
           v-for="little_title in little_titles"
           :key="little_title"
-          @click="$emit('changeSubtitle', little_title.idx)"
+          @click="clickSub(little_title.idx)"
           link
           >
             <v-list-item-content>
@@ -53,6 +53,11 @@ export default {
             //sample
             little_titles: [],
         }
+    },
+    methods: {
+      clickSub(idx){
+        this.$emit('changeSubtitle', idx)
+      }
     },
 }
 </script>

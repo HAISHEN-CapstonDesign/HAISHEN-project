@@ -4,8 +4,8 @@
             <v-row>
                 <v-col md="10">
                     <div style="float:right; font-size:25px; color:#A06641;">HISTORY DETAIL</div>
-                    <div style="display: inline-block; font-size:25px; color:#A06641;">{{this.$store.state.title}}</div>
-                    <div style="display: inline-block; font-size:20px; color:#A06641;">_{{this.$store.state.subtitle[this.subId-1].text}}</div>
+                    <div style="display: inline-block; font-size:25px; color:#A06641;">{{$store.state.title}}</div>
+                    <div style="display: inline-block; font-size:20px; color:#A06641;">_{{$store.state.subtitle[subId-1].text}}</div>
                     <v-card height="500px">
                         <v-simple-table>
                             <template v-slot:default>

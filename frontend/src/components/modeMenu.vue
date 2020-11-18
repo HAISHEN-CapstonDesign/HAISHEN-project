@@ -7,7 +7,7 @@
         >
         <v-list-item-group active-class="brown--text">
           <v-list-item
-          :disabled="editing"
+          v-show="!editing"
           @click="clickEdit"
           link
           >
@@ -16,6 +16,18 @@
             <v-icon>mdi-pencil</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">EDIT</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item
+          v-show="editing"
+          @click="cancelEdit"
+          link
+          >
+            <v-list-item-content>
+            <v-list-item-title class="text-center">
+            <v-icon>mdi-pencil-off</v-icon>
+            </v-list-item-title>
+            <v-list-item-subtitle class="text-center">CANCEL</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-list-item @click="clickHistory" link>
@@ -36,7 +48,7 @@
           </v-list-item>
           <v-list-item
           :disabled="!editing"
-          @click="clickSubmit({after, commit_comment, time:new Date()})"
+          @click="clickSubmit"
           link
           >
           <v-list-item-content>
@@ -52,8 +64,9 @@
             </v-card>
 </template>
 <script>
+import EventBus from '../EventBus.js';
 import $ from 'jquery';
-import axios from 'axios'
+
 export default {
     mounted(){
     //list가 스크롤을 따라오게 하는 코드
@@ -72,7 +85,6 @@ export default {
     data() {
         return {
             editing: false,
-            token: localStorage.getItem('access_token')
         }
     },
     methods: {
@@ -90,23 +102,10 @@ export default {
           this.editing = !this.editing
           this.$emit('changeEdit', this.editing);
         }
-        this.$router.push(`/${this.subId}/historyPage`);
+        this.$router.push(`/${this.$store.state.projectId}/${this.subId}/historyPage`);
       },
-      clickSubmit(submitObj){
-        console.log(submitObj)
-        axios.post(`http://localhost:3000/api/project/1/modify/basicTool/${this.subId}`, submitObj,
-          {
-            headers: {
-              'token': this.token
-            }
-          })
-        .then((res) => {
-          this.project = res.data;
-          console.log(res);
-        })
-        .catch(function (error) {
-          console.log(error.config);
-        });
+      clickSubmit(){
+        EventBus.$emit('submit');       
         this.editing = !this.editing
         this.$emit('changeEdit', this.editing);
       },
@@ -116,7 +115,11 @@ export default {
           this.$emit('changeEdit', this.editing);
         }
       },
-    },
-    
+      cancelEdit(){
+        this.editing = !this.editing
+        this.$emit('changeEdit', this.editing);
+      },
+
+    }, 
 }
 </script>

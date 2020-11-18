@@ -56,7 +56,7 @@
         <div v-if="isEditing" style="background-color: #FFD0A1">
         <v-container>
           <div style="background-color: white">
-            <div v-show="isEditing" style="width: 70px; background-color: #FFD0A1; position: relative; left: 91%; text-align: center; color: white;">
+            <div v-show="isEditing" style="width: 70px; background-color: #FFD0A1; position: relative; left: 36vw; text-align: center; color: white;">
             수정중
             </div>
           <v-container>
@@ -66,7 +66,6 @@
         >
           <h3>{{title}}</h3>
           <h1>{{subtitle}}</h1>
-          <p>{{$moment(project.time).format('YYYY-MM-DD h:mm:ss a')}}, {{project.writerName}}</p>               
 
           <v-divider></v-divider>
           <Editor v-bind:mainText="nowMainText" @event-data="updateText"></Editor>
@@ -112,8 +111,6 @@
           <Menu
           v-model="isEditing"
           v-bind:subId="subId"
-          v-bind:after="nowMainText"
-          v-bind:commit_comment="comment"
           @changeEdit="editingChange"></Menu>
         </v-col>
     </v-row>
@@ -137,7 +134,7 @@ export default {
       Subtitle,
     },
     created() {
-      var id = this.$route.params.id;
+      var id = this.$route.params.ids;
       this.subId = id;
       this.$store.commit('changeSubId', id)
       this.subtitle=this.$store.state.subtitle[id-1].text
@@ -150,7 +147,7 @@ export default {
           console.log(res);
         })
         .catch(function (error) {
-          console.log(error.config);
+          console.log(error.response);
         });
     },
     data() {
@@ -173,12 +170,35 @@ export default {
             endProjectBtnStyle: {
               color: 'black'
             },
+            subObj:{
+              after:'',
+              time:new Date(),
+              commit_comment:'',
+            },
         }
     },
     methods: {
       updateText(newText){
         //본문 변경 내용 저장
         this.nowMainText = newText;
+        //post data
+        this.subObj.after = newText;
+        this.subObj.commit_comment = this.comment;
+        console.log(this.subObj)
+        axios.post(`http://localhost:3000/api/project/1/modify/basicTool/${this.subId}`, this.subObj,
+          {
+            headers: {
+              'token': localStorage.getItem('access_token')
+            }
+          })
+        .then((res) => {
+          this.project = res.data;
+          console.log(res);
+        })
+        .catch(function (error) {
+          console.log(error.response);
+        });
+        this.comment = ''
         //this.little_titles[this.nowIdx].main = this.nowMainText;
       },
       editingChange(state){
@@ -186,7 +206,7 @@ export default {
       },
       changeSubtitle(idx){
         //목차 클릭시 페이지 변경
-        this.$router.push(`/basicCollaboTool/${idx}`);
+        this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
       },
       hoverSupporter(){
         this.supporterBtnStyle.color = 'brown'
