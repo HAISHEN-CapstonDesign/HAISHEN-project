@@ -8,8 +8,18 @@
 <script>
 import * as Diff2Html from 'diff2html';
 import 'diff2html/bundles/css/diff2html.min.css';
-
+import axios from 'axios'
 export default {
+  created() {
+    axios.get(`http://localhost:3000/api/project/1/commit/basicTool/detail/27`)
+        .then((res) => {
+          this.diffs = res.data
+          console.log(res);
+        })
+        .catch(function (error) {
+          console.log(error.config);
+        });
+  },
   data() {
     return {
       diffs:
@@ -19,7 +29,7 @@ export default {
   computed: {
     prettyHtml() {
       return Diff2Html.html(this.diffs, {
-        drawFileList: false,
+        drawFileList: true,
         matching: 'lines',
         outputFormat: 'line-by-line',
       });

@@ -1,5 +1,5 @@
 <template>
-    <v-card id="mode_menu" style="top:300px; position: absolute;" max-width="127">
+    <v-card id="mode_menu" style="top:100px; position: absolute;" max-width="127">
 
         <v-list
           dense
@@ -44,6 +44,14 @@
             <v-list-item-subtitle class="text-center">COMMUNITY</v-list-item-subtitle>
           </v-list-item-content>
           </v-list-item>
+          <v-list-item @click="clickRevert" link>
+          <v-list-item-content>
+            <v-list-item-title class="text-center">
+            <v-icon>mdi-replay</v-icon>
+            </v-list-item-title>
+            <v-list-item-subtitle class="text-center">REVERT</v-list-item-subtitle>
+          </v-list-item-content>
+          </v-list-item>
           </v-list-item-group>
         </v-list>
 
@@ -84,6 +92,9 @@ export default {
       },
       clickWriter(){
 //페이지 이동
+      },
+      clickRevert(){
+//되돌리기
       },
     },
     
