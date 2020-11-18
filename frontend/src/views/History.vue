@@ -85,68 +85,7 @@ export default {
         return{
             isHistory:2, //히스토리 페이지에서 클릭
             subId: 0,
-            histories: [
-          {
-            commitId: 1,
-            writerName: 'Frozen Yogurt',
-            commit_comment: 'test',
-            time:'2020-05-20 15:07:45',
-          },
-          {
-            commitId: 2,
-            writerName: 'Ice cream sandwich',
-            commit_comment: 'add rutghv',
-            time:'2020-05-28 19:34:35',
-          },
-          {
-            commitId: 3,
-            writerName: 'Eclair',
-            commit_comment: 'change augfgcc',
-            time:'2020-06-03 12:29:55',
-          },
-          {
-            commitId: 4,
-            writerName: 'Cupcake',
-            commit_comment: 'add rutghv',
-            time:'2020-06-28 19:34:35',
-          },
-          {
-            commitId: 5,
-            writerName: 'Gingerbread',
-            commit_comment: 'add rutghv',
-            time:'2020-07-10 19:34:35',
-          },
-          {
-            commitId: 6,
-            writerName: 'Jelly bean',
-            commit_comment: 'add rutghv',
-            time:'2020-07-28 19:34:35',
-          },
-          {
-            commitId: 7,
-            writerName: 'Lollipop',
-            commit_comment: 'add rutghv',
-            time:'2020-08-04 19:34:35',
-          },
-          {
-            commitId: 8,
-            writerName: 'Honeycomb',
-            commit_comment: 'add rutghv',
-            time:'2020-08-13 19:34:35',
-          },
-          {
-            commitId: 9,
-            writerName: 'Donut',
-            commit_comment: 'add rutghv',
-            time:'2020-08-28 19:34:35',
-          },
-          {
-            commitId: 10,
-            writerName: 'KitKat',
-            commit_comment: 'add rutghv',
-            time:'2020-09-28 19:34:35',
-          },
-        ],
+            histories: [],
         }
     },
     methods: {
