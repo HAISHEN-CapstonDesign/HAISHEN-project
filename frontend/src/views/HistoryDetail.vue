@@ -105,7 +105,7 @@ export default {
         var idh = this.$route.params.idh;
         var idp = this.$route.params.idp;
         this.subId = this.$store.state.subId;
-        axios.get(`http://localhost:3000/api/${idp}/commit/basicTool/detail/${idh}`)
+        axios.get(`http://localhost:3000/api/project/${idp}/commit/basicTool/detail/${idh}`)
         .then((res) => {
           
           console.log(res);
