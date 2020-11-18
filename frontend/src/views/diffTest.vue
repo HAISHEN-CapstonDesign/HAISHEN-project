@@ -1,5 +1,3 @@
-
-
 <template>
 <div>
   <span>기능설명, 추가기능: </span><a>https://github.com/rtfpessoa/diff2html#diff2htmlui-usage</a>
@@ -21,9 +19,9 @@ export default {
   computed: {
     prettyHtml() {
       return Diff2Html.html(this.diffs, {
-        drawFileList: true,
+        drawFileList: false,
         matching: 'lines',
-        outputFormat: 'side-by-side',
+        outputFormat: 'line-by-line',
       });
     },
   },

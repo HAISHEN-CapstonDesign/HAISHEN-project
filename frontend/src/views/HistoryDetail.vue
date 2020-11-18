@@ -102,12 +102,12 @@ export default {
 
     },
     created() {
+        var id = this.$route.params.idh;
         this.subId = this.$store.state.subId;
-        //projectId, commitId
-        axios.get(`http://localhost:3000/api/project/1/commit/basicTool/1`)
+        axios.get(`http://localhost:3000/api/${this.$store.state.projectId}/commit/basicTool/detail/${id}`)
         .then((res) => {
           
-          console.log(res.data);
+          console.log(res);
         })
         .catch(function (error) {
           console.log(error.config);
