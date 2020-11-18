@@ -10,21 +10,19 @@
                     sm="4"
                     md="3"
                     >
-                        <v-card width="250px">
+                        <v-card width="270px">
                                 <v-img
                                 :src="`https://picsum.photos/200/300?image=${getImage()}`"
                                 height="100px"
                                 ></v-img>
-                                <div style="height:100px;">
-                                <v-card-title v-text="list.genre" class="justify-center"></v-card-title>
-                                <v-card-subtitle v-text="list.title" class="text-center"></v-card-subtitle>
-                                </div>
-                                <v-divider ></v-divider>
-                                <v-col align-content="center" >
+                                <v-card-title v-text="list.title" class="justify-center" style="font-size:15px"></v-card-title>
                                     <div class="text-center">
                                         <v-chip v-for="member in list.members" :key="member" v-text="member"></v-chip>
                                     </div>
-                                </v-col>
+                                    <v-card-title class="justify-center" style="font-size:15px">모집인원</v-card-title>
+                                <v-card-subtitle>
+                                    <h3 class="text-center">{{list.memberNum}} / {{list.targetNum}}</h3>
+                                </v-card-subtitle>
                                 <v-card-actions>
                                     <v-btn
                                     color="orange lighten-2"
@@ -53,7 +51,7 @@
                     <div class="text-center">
                         <v-pagination
                         v-model="page"
-                        :length="4"
+                        :length="numOfPages"
                         @input="changePage"
                         ></v-pagination>
                     </div>
@@ -69,74 +67,84 @@ export default {
             dataPerPage:8, //한 페이지에 나올 글의 수
             bookList: [
                 {
-                    genre:'여행',
                     title:'여행이란 무엇인가',
                     info:'여행이란 무엇인가, 여행에 대한 고찰',
                     members: ['철수'],
                     show: false,
+                    targetNum:6,
+                    memberNum:2,
                 },
                 {
-                    genre:'요리',
                     title:'라면 끓이는법',
                     info:'라면 끓이는법에 대한 글',
                     members: ['영희'],
                     show: false,
+                    targetNum:6,
+                    memberNum:2,
                 },
                 {
-                    genre:'역사',
                     title:'한 눈에 보는 한국사',
                     info:'한국사의 모든 것을 목표로 하는 프로젝트',
                     members: ['경수','미영'],
                     show: false,
+                    targetNum:6,
+                    memberNum:2,
                 },
                 {
-                    genre:'역사',
                     title:'한 눈에 보는 한국사',
                     info:'한국사의 모든 것을 목표로 하는 프로젝트',
                     members: ['경수','미영'],
                     show: false,
+                    targetNum:6,
+                    memberNum:2,
                 },
                 {
-                    genre:'역사',
                     title:'한 눈에 보는 한국사',
                     info:'한국사의 모든 것을 목표로 하는 프로젝트',
                     members: ['경수','미영'],
                     show: false,
+                    targetNum:6,
+                    memberNum:2,
                 },
                 {
-                    genre:'역사',
                     title:'한 눈에 보는 한국사',
                     info:'한국사의 모든 것을 목표로 하는 프로젝트',
                     members: ['경수','미영'],
                     show: false,
+                    targetNum:6,
+                    memberNum:2,
                 },
                 {
-                    genre:'역사',
                     title:'한 눈에 보는 한국사',
                     info:'한국사의 모든 것을 목표로 하는 프로젝트',
                     members: ['경수','미영'],
                     show: false,
+                    targetNum:6,
+                    memberNum:2,
                 },
                 {
-                    genre:'역사',
                     title:'한 눈에 보는 한국사',
                     info:'한국사의 모든 것을 목표로 하는 프로젝트',
                     members: ['경수','미영'],
                     show: false,
+                    targetNum:6,
+                    memberNum:2,
                 },
                 {
-                    genre:'역사',
                     title:'한 눈에 보는 한국사',
                     info:'한국사의 모든 것을 목표로 하는 프로젝트',
                     members: ['경수','미영'],
                     show: false,
+                    targetNum:6,
+                    memberNum:2,
                 },
                 {
-                    genre:'역사',
                     title:'한 눈에 보는 한국사',
                     info:'한국사의 모든 것을 목표로 하는 프로젝트',
                     members: ['경수','미영'],
                     show: false,
+                    targetNum:6,
+                    memberNum:2,
                 },
             ],
         }
@@ -160,6 +168,9 @@ export default {
       },
       calData() {
         return this.bookList.slice(this.startOffset, this.endOffset)
+      },
+      numOfPages() {
+        return Math.ceil(this.bookList.length / this.dataPerPage);
       },
     },
 }

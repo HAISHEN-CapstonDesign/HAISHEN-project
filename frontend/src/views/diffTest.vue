@@ -1,76 +1,5 @@
-<template>
-  <div>
-    <v-row>
-      <!--다운로드-->
-      <v-col>
-        <p>파일 다운로드</p>
-        <p>내용 수정은 코드의 data에서 text 값을 변경하세요!</p>
-        <v-divider></v-divider><br/>
-        <div id="text-val" rows="4" v-html="test"></div>
-        <br/>
-        <input type="button" id="dwn-btn" value="Download file button"/>
-      </v-col>
-      <!--업로드-->
-      <v-col>
-        <p>파일 업로드 -> 수정중</p>
-        <input ref="fileInput" type="file" hidden @change="importFile">
-        <v-btn type="button" @click="onClickImageUpload">파일 업로드</v-btn>
-        
-        <p>File Name : {{ file.name }}</p>
-        <span>text: </span>
-        <span v-html="data"></span>
-      </v-col>
-    </v-row>
-  </div>
-</template>
-<script>
-//import $ from 'jquery';
-export default {
-    mounted(){
-      function download(filename, text) {
-        var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(text));
-        element.setAttribute('download', filename);
 
-        element.style.display = 'none';
-        document.body.appendChild(element);
 
-        element.click();
-
-        document.body.removeChild(element);
-      }
-      document.getElementById("dwn-btn").addEventListener("click", function(){
-        var text = document.getElementById("text-val").innerHTML;
-        var filename = "프로젝트-목차-현재날짜.html"; // 이후에 적용시킬 때 수정
-    
-        download(filename, text);
-      }, false);
-    },
-    data(){
-      return{
-        test:`<p>html 파일 다운로드 테스트</p>`,
-        file: [],
-        data:'',
-      }
-    },
-    methods: {
-      importFile(e) {
-        this.file = e.target.files[0];
-        if (!this.file) {this.data = "No File Chosen"}
-        var reader = new FileReader();
-        reader.readAsText(this.file);
-        reader.onload = () => {
-          this.data = reader.result;
-        }
-      },
-      onClickImageUpload() {
-        this.$refs.fileInput.click();
-      },
-    },
-}
-</script>
-
-<!-- diff2html 예시 코드
 <template>
 <div>
   <span>기능설명, 추가기능: </span><a>https://github.com/rtfpessoa/diff2html#diff2htmlui-usage</a>
@@ -100,4 +29,3 @@ export default {
   },
 };
 </script>
--->

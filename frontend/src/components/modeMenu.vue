@@ -175,6 +175,7 @@ export default {
         reader.readAsText(this.file);
         reader.onload = () => {
           this.data = reader.result;
+          this.editing = !this.editing;
           this.$emit('uploadFile',this.data);
         }
       },

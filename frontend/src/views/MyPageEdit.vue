@@ -14,12 +14,10 @@
         src="../assets/banner.jpg"
         ></v-img>
     <br><br>
-  <v-container fluid>
-    <v-layout row wrap align-center>
-      <v-flex>
-        <v-layout column wrap align-center>
-          <v-flex>
-        <!--업로드 아바타-->
+    <v-container>
+      <v-row cols="12">
+        <v-col md="3" sm="4">
+          <!--업로드 아바타-->
         <v-avatar
           v-if="avatarImageUrl"
           size="270">
@@ -32,30 +30,26 @@
           color="blue"
           size="270"
         >avatar</v-avatar>
-        </v-flex>
-        </v-layout>
-        </v-flex>
-    <!--좌측 끝 / 우측 시작-->
-      <v-flex>
-        
-<v-card
-    color="#FFDFB0"
-    :loading="isUpdating"
-  >  
-    <v-form>
-      <v-container>
-        <v-row>
-          <v-col
-            cols="12"
-          >
-            <v-text-field
-              v-model="name"
-              :disabled="!isUpdating"
-              filled
-              label="닉네임"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12">
+        </v-col>
+        <v-col md="9" sm="8">
+          <v-card
+          color="#FFDFB0"
+          :loading="isUpdating"
+          >  
+          <v-form>
+            <v-container>
+              <v-row>
+              <v-col
+              cols="12"
+              >
+                <v-text-field
+                v-model="name"
+                :disabled="!isUpdating"
+                filled
+                label="닉네임"
+                ></v-text-field>
+              </v-col>
+            <v-col cols="12">
             <v-autocomplete
               v-model="interests"
               :disabled="!isUpdating"
@@ -99,44 +93,50 @@
           <v-col>
           <v-row>
             <input ref="avatarImageInput" type="file" hidden @change="onChangeAvatarImages">
-            <v-btn type="button" @click="onClickAvatarImageUpload">프로필 사진 업로드</v-btn>
+            <v-btn type="button" :disabled="!isUpdating" @click="onClickAvatarImageUpload">프로필 사진 업로드</v-btn>
 
             <input ref="imageInput" type="file" hidden @change="onChangeImages">
-            <v-btn type="button" @click="onClickImageUpload">배경 이미지 업로드</v-btn>
+            <v-btn type="button" :disabled="!isUpdating" @click="onClickImageUpload">배경 이미지 업로드</v-btn>
           </v-row>
           </v-col>
         </v-row>
       </v-container>
     </v-form>
     <v-divider></v-divider>
-
-      <v-btn
-      v-if="!isUpdating"
+        <v-btn
+        v-if="!isUpdating"
         color="#FFDFB0"
-        @click="clickEdit"
-      >
+        @click="isUpdating = true"
+        >
         <v-icon left>
           mdi-lead-pencil
         </v-icon>
-        Edit
-      </v-btn>
-      <v-btn
-      v-else
+          Edit
+        </v-btn>
+        <v-btn
+        v-else
         color="#FFDFB0"
         @click="clickSave"
-      >
+        >
         <v-icon left>
           mdi-check-circle
-        </v-icon>
-        Save
-      </v-btn>
-
-  </v-card>
-
-
-      </v-flex>
-    </v-layout>
-  </v-container>
+            </v-icon>
+              Save
+            </v-btn>
+            <v-btn
+            v-show="isUpdating"
+            color="#FFDFB0"
+            @click="isUpdating = false"
+            >
+              <v-icon left>
+                mdi-lead-pencil
+              </v-icon>
+              Cancel
+            </v-btn>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </v-app>
 </template>
 
@@ -180,13 +180,10 @@ export default {
             const file = e.target.files[0];
             this.imageUrl = URL.createObjectURL(file);
         },
-      clickEdit(){
-      this.isUpdating = true;
-      console.log(this.isUpdating)
-    },
-    clickSave(){
-      this.isUpdating = false;
-    },
+      clickSave(){
+        this.isUpdating = false;
+        // 변경 내용 저장 기능 추가 필요
+      },
 
     },
 };

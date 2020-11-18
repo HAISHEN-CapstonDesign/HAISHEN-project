@@ -13,25 +13,19 @@
       md="4" sm="3"
       >
         <v-btn
-        v-bind:style="infoBtnStyle"
-        @mouseover="hoverInfo"
-        @mouseout="endHoverInfo"
+        class="l_btn"
         text
         >
           저자Info
         </v-btn>
         <v-btn
-        v-bind:style="supporterBtnStyle"
-        @mouseover="hoverSupporter"
-        @mouseout="endHoverSupporter"
+        class="l_btn"
         text
         >
           서포터
         </v-btn>
         <v-btn
-        v-bind:style="endProjectBtnStyle"
-        @mouseover="hoverEndProject"
-        @mouseout="endHoverEndProject"
+        class="l_btn"
         text
         >
           프로젝트 종료
@@ -46,14 +40,12 @@
         sm="4"
         md="3"
         >
-            <Subtitle v-bind:title="title" @changeSubtitle="changeSubtitle"></Subtitle>
+            <Subtitle v-bind:title="title" @selectIndex="selectIndex"></Subtitle>
         </v-col>
         <v-col
         sm="6"
         md="7"
         >
-        <div style="background-color: white">
-        <v-container>
           <div style="background-color: white">
           <v-container>
         <v-card
@@ -62,20 +54,16 @@
         >
           <h3>{{title}}</h3>
           <h1>{{subtitle}}</h1>
-          <p>{{$moment(project.time).format('YYYY-MM-DD h:mm:ss a')}}, {{project.writerName}}</p>               
 
           <v-divider></v-divider>
           <br>
-            <div v-html="nowMainText"></div>
+            <ProjContent></ProjContent>
+            <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
 
           </v-card>
           </v-container>
           </div>
-        </v-container>
-        </div>
         </v-col>
-        <!-- <v-col cols=3><ProjIndex></ProjIndex></v-col> -->
-        <!-- <v-col col-4> -->
             <!-- <v-card width="300" height="600">
                 <v-navigation-drawer
                     v-model="drawer"
@@ -135,37 +123,20 @@
 
 <script>
 // import ProjIndex fro m '../components/projIndex.vue'
-// import ProjContent from '../components/projContent.vue'
-// import PostReply from '../components/reply.vue'
+import ProjContent from '../components/projContent.vue'
+import PostReply from '../components/reply.vue'
 import Advertising from './Advertising'
-import Subtitle from '../components/subtitleList';
-import axios from 'axios'
+import Subtitle from '../components/subtitleForReading';
+// import axios from 'axios'
 import store from '../store'
 
 export default {
     components: {
         // ProjIndex,
-        // PostReply,
-        // ProjContent,
+        PostReply,
+        ProjContent,
         Advertising,
         Subtitle
-    },
-    created(){
-        var id = this.$route.params.ids;
-      this.subId = id;
-      this.$store.commit('changeSubId', id)
-      this.subtitle=this.$store.state.subtitle[id-1].text
-      this.title=this.$store.state.title
-      axios.get(`http://localhost:3000/api/project/1/blob/basicTool/${id}`)
-        .then((res) => {
-          this.project = res.data;
-          this.nowMainText = this.project.post;
-          //this.imgUrl = this.project.s3key;
-          console.log(res);
-        })
-        .catch(function (error) {
-          console.log(error.response);
-        });
     },
     data: () => ( 
         {
@@ -185,27 +156,11 @@ export default {
                 },
             ],
         drawer: true,
-        items: [
-          { title: 'Home', icon: 'mdi-home-city' },
-          { title: 'My Account', icon: 'mdi-account' },
-          { title: 'Users', icon: 'mdi-account-group-outline' },
-        ],
         mini: true,
         imgUrl: require('../assets/banner2.jpg'),
         title: '캡디 기획 보고서 작성하기',
         date: '2020.10.12 05:55',
         writer: ['김김김', '이이이', '박박박'],
-        little_titles: [
-            { idx:1, text:'기획보고서란'},
-            { idx:2, text:'유사 제품 서비스 동향'},
-            { idx:3, text:'관련 기술 동향'},
-            { idx:4, text:'유저 스토리'},
-            { idx:5, text:'UX/UI 설계'},
-            { idx:6, text:'시스템 설계'},
-            { idx:7, text:'청춘예찬'},
-            { idx:8, text:'별헤는밤'},
-           
-        ],
         selected_idx: 0
   }),
   methods:{
@@ -235,28 +190,16 @@ export default {
     endAd(over){
         this.overlay = over;
     },
-    hoverSupporter(){
-        this.supporterBtnStyle.color = 'brown'
-      },
-      hoverInfo(){
-        this.infoBtnStyle.color = 'brown'
-      },
-      hoverEndProject(){
-        this.endProjectBtnStyle.color = 'brown'
-      },
-      endHoverInfo(){
-        this.infoBtnStyle.color = 'black'
-      },
-      endHoverSupporter(){
-        this.supporterBtnStyle.color = 'black'
-      },
-      endHoverEndProject(){
-        this.endProjectBtnStyle.color = 'black'
-      },
-      changeSubtitle(idx){
+//나중에 페이지 나누고 코드 수정 후 활성화
+    //  changeSubtitle(idx){
         //목차 클릭시 페이지 변경
-        this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
-      },
+        //this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
+     //},
   }
 }
 </script>
+<style scoped>
+.l_btn:hover{
+  color: brown;
+}
+</style>

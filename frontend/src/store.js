@@ -33,6 +33,7 @@ export default new Vuex.Store({
         ],
         subId: 0,
         projectId: 1,
+
     },
     mutations: {
         // 로그인이 성공했을 때,

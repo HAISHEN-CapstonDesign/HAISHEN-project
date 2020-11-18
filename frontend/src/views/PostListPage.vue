@@ -10,9 +10,11 @@
         </v-img>
         <v-container>
             <v-row>
-                <v-col>
-                    <v-btn>완결된 글</v-btn>
-                    <v-btn>작가 모집중</v-btn>
+                <v-col cols="auto">
+                    <v-btn @click="showCompleteList">완결된 글</v-btn>
+                </v-col>
+                <v-col cols="auto">
+                    <v-btn @click="showRecruitList">작가 모집중</v-btn>
                 </v-col>
             </v-row>
             <CompleteList v-if="showComplete"></CompleteList>

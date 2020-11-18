@@ -33,7 +33,6 @@
             </v-carousel>
             
             <v-btn to ="/collaboProjMain">공동프로젝트 메인페이지로</v-btn>
-            <v-btn router :to="{name:'ContentsReadingPage'}">컨텐츠 열람 페이지</v-btn>
             <v-container style="max-width:1050px;">
                 <v-layout align-center row wrap>
                     <v-flex>

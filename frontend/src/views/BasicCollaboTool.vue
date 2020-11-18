@@ -13,25 +13,19 @@
       md="4" sm="3"
       >
         <v-btn
-        v-bind:style="infoBtnStyle"
-        @mouseover="hoverInfo"
-        @mouseout="endHoverInfo"
+        class="l_btn"
         text
         >
           저자Info
         </v-btn>
         <v-btn
-        v-bind:style="supporterBtnStyle"
-        @mouseover="hoverSupporter"
-        @mouseout="endHoverSupporter"
+        class="l_btn"
         text
         >
           서포터
         </v-btn>
         <v-btn
-        v-bind:style="endProjectBtnStyle"
-        @mouseover="hoverEndProject"
-        @mouseout="endHoverEndProject"
+        class="l_btn"
         text
         >
           프로젝트 종료
@@ -165,15 +159,6 @@ export default {
             imgUrl: require('../assets/banner2.jpg'),
             comment:'',
             project: {},
-            infoBtnStyle: {
-              color: 'black'
-            },
-            supporterBtnStyle: {
-              color: 'black'
-            },
-            endProjectBtnStyle: {
-              color: 'black'
-            },
             subObj:{
               after:'',
               time:new Date(),
@@ -203,7 +188,6 @@ export default {
           console.log(error.response);
         });
         this.comment = ''
-        //this.little_titles[this.nowIdx].main = this.nowMainText;
       },
       editingChange(state){
         this.isEditing = state;
@@ -214,25 +198,13 @@ export default {
       },
       uploadFile(fileText){
         this.nowMainText = fileText;
-      },
-      hoverSupporter(){
-        this.supporterBtnStyle.color = 'brown'
-      },
-      hoverInfo(){
-        this.infoBtnStyle.color = 'brown'
-      },
-      hoverEndProject(){
-        this.endProjectBtnStyle.color = 'brown'
-      },
-      endHoverInfo(){
-        this.infoBtnStyle.color = 'black'
-      },
-      endHoverSupporter(){
-        this.supporterBtnStyle.color = 'black'
-      },
-      endHoverEndProject(){
-        this.endProjectBtnStyle.color = 'black'
+        this.isEditing = true;
       },
     },
 }
 </script>
+<style scoped>
+.l_btn:hover{
+  color: brown;
+}
+</style>

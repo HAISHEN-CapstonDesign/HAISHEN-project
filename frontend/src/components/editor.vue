@@ -248,6 +248,7 @@ export default {
   },
   beforeDestroy() {
     this.editor.destroy()
+    EventBus.$off('submit');
   },
   props:['mainText'],
   created() {
