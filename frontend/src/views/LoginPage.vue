@@ -37,6 +37,7 @@
 
 <script>
 import router from '../routes/page_index.js'
+import store from '../store.js'
 
 import {
     mapState,
@@ -67,6 +68,24 @@ export default {
                         url: '/v2/user/me',
                         success: function (response) {
                             console.log(response);
+                            let userInfo = {
+                                id: response.kakao_account.id,
+                                // first_name: response.data.first_name,
+                                // last_name: response.data.last_name,
+                                // avatar: response.data.avatar,
+                                nickname: response.kakao_account.nickname,
+                                gender: response.kakao_account.gender
+                                // point: res.data.userInfoDTO.point,
+                                // s3key: res.data.userInfoDTO.s3key,
+                                // name: res.data.userInfoDTO.name,
+                                // nickname: res.data.userInfoDTO.nickname,
+                                // gender: res.data.userInfoDTO.gender,
+                                // id: res.data.userInfoDTO.id
+                                
+                            }
+                            console.log('userInfo :' + userInfo)
+                            console.log('after userInfo :' + JSON.stringify(userInfo))
+                            store.commit('loginSuccess', userInfo)
                             router.push({
                                 name: "MainPage"
                             })
