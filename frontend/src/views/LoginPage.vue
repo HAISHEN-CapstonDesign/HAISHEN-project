@@ -5,7 +5,7 @@
         <v-flex xs12>      
             <v-card>
             <div style="text-align : center;"> 
-                <img src='../assets/LOGIN_FONT_IMG.png' height="100px"/>
+                <img src='../assets/login_img.png' height="100px"/>
             </div>
                 <div class="pa-3">
                     <v-text-field v-model="identity" label="아이디를 입력하세요">
