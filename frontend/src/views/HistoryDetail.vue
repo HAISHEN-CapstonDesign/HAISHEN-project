@@ -61,7 +61,7 @@ export default {
             comment:'',
             reObj:{
                 commit_comment:'',
-                time: new Date()
+                time: ''
             }
         }
     },

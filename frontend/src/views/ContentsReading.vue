@@ -7,31 +7,17 @@
         >
     </v-img>
     <v-container>
-    <v-row md = "6" sm="6">
-      <v-spacer></v-spacer>
-      <v-col
-      md="4" sm="3"
-      >
-        <v-btn
-        class="l_btn"
-        text
-        >
+    <v-col align="end">
+        <v-btn class="l_btn" text>
           저자Info
         </v-btn>
-        <v-btn
-        class="l_btn"
-        text
-        >
+        <v-btn class="l_btn" text>
           서포터
         </v-btn>
-        <v-btn
-        class="l_btn"
-        text
-        >
+        <v-btn class="l_btn" text>
           프로젝트 종료
         </v-btn>
       </v-col>
-    </v-row>
     <v-row>
         <v-col
         cols="12"
