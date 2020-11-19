@@ -73,7 +73,7 @@ export default {
 	}).scroll();
     });
     },
-    props:['subId'],
+    props:['ids', 'idp'],
     data() {
         return {
             editing: false,
@@ -84,14 +84,15 @@ export default {
         this.$router.push('/community');
       },
       clickHistory(){
-        this.$router.push(`/${this.$store.state.projectId}/${this.subId}/historyPage`);
+        this.$router.push(`/${this.idp}/${this.ids}/historyPage`);
       },
       clickMain(){
         //나중에 경로 수정
-        this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/1`);
+        this.$router.push(`/${this.idp}/basicCollaboTool/${this.ids}`);
       },
       clickWriter(){
 //페이지 이동
+       // this.$router.push('/writerList');
       },
       clickRevert(){
 //되돌리기

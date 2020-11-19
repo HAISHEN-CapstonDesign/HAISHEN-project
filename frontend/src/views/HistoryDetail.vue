@@ -6,7 +6,7 @@
                 <v-col md="10">
                     <div style="float:right; font-size:25px; color:#A06641;">HISTORY DETAIL</div>
                     <div style="display: inline-block; font-size:25px; color:#A06641;">{{$store.state.title}}</div>
-                    <div style="display: inline-block; font-size:20px; color:#A06641;">_{{$store.state.subtitle[subId-1].text}}</div>
+                    <div style="display: inline-block; font-size:20px; color:#A06641;">_{{$store.state.subtitle[ids-1].text}}</div>
                     <v-card>
                         <div v-html="prettyHtml" />
                     <v-text-field
@@ -18,7 +18,8 @@
                 </v-col>
                 <v-col md="2">
                     <Menu
-                    v-bind:subId="subId"
+                    v-bind:ids="ids"
+                    v-bind:idp="idp"
                     @revert="revert"
                     ></Menu>
                 </v-col>
@@ -42,7 +43,6 @@ export default {
         this.idh = this.$route.params.idh;
         this.idp = this.$route.params.idp;
         this.ids = this.$route.params.ids;
-        this.subId = this.$store.state.subId;
         axios.get(`http://localhost:3000/api/project/${this.idp}/commit/basicTool/detail/${this.idh}`)
         .then((res) => {
           this.diffs = res.data
@@ -57,7 +57,6 @@ export default {
             idp:0,
             ids:0,
             idh:0,
-            subId:0,
             diffs:'',
             comment:'',
             reObj:{
@@ -78,11 +77,12 @@ export default {
     methods: {
         revert(){
             this.reObj.commit_comment = this.comment;
+            this.reObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             console.log(this.reObj);
             axios.post(`http://localhost:3000/api/project/${this.idp}/commit/basicTool/detail/revert/${this.idh}`, this.reObj,
             {
                 headers: {
-                    'token': localStorage.getItem('access_token')
+                    token: localStorage.getItem('access_token')
                 }
             })
             .then((res) => {

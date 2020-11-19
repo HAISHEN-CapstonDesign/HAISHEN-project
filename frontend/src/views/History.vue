@@ -5,7 +5,7 @@
                 <v-col md="10">
                     <div style="float:right; font-size:25px; color:#A06641;">HISTORY</div>
                     <div style="display: inline-block; font-size:25px; color:#A06641;">{{$store.state.title}}</div>
-                    <div style="display: inline-block; font-size:20px; color:#A06641;">_{{$store.state.subtitle[this.subId-1].text}}</div>
+                    <div style="display: inline-block; font-size:20px; color:#A06641;">_{{$store.state.subtitle[this.ids-1].text}}</div>
                     <v-card color="#FFEFD5">
                         <v-list color="#FFEFD5">
                             <v-list-item>
@@ -55,6 +55,8 @@
                 <v-col md="2">
                     <Menu
                     v-bind:clicked="isHistory"
+                    v-bind:ids="ids"
+                    v-bind:idp="idp"
                     ></Menu>
                 </v-col>
             </v-row>
@@ -71,8 +73,9 @@ export default {
         Menu,
     },
     created() {
-        this.subId = this.$store.state.subId
-        axios.get(`http://localhost:3000/api/project/1/commit/basicTool/${this.subId}`)
+        this.idp = this.$route.params.idp;
+        this.ids = this.$route.params.ids;
+        axios.get(`http://localhost:3000/api/project/${this.idp}/commit/basicTool/${this.ids}`)
         .then((res) => {
           this.histories = res.data;
           
@@ -85,13 +88,15 @@ export default {
     data(){
         return{
             isHistory:2, //히스토리 페이지에서 클릭
-            subId: 0,
+            idp:0,
+            ids:0,
+            idh:0,
             histories: [],
         }
     },
     methods: {
         showDetail(idx){
-            this.$router.push(`/${this.$store.state.projectId}/${this.subId}/historyDetail/${idx}`);
+            this.$router.push(`/${this.idp}/${this.ids}/historyDetail/${idx}`);
         }
     },
 }

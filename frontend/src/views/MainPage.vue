@@ -87,23 +87,23 @@ export default {
     //
     slides: [
         {
-            text: '추천 주제1',
+            text: '아침 운동으로 인생이 바뀌진 않았지만',
             img: require('../assets/banner.jpg'),
         },
         {
-            text: '추천 주제2',
+            text: '미국과 대한민국, UX 디자이너 인재상의 차이',
             img: require('../assets/banner2.jpg'),
         },
         {
-            text: '추천 주제3',
+            text: '국내 IT회사의 업무방식 & 기술창업',
             img: require('../assets/sample_img.jpg'),
         },
         {
-            text: '추천 주제4',
+            text: '세상에 같은 고양이는 없어',
             img: require('../assets/banner.jpg'),
         },
         {
-            text: '추천 주제5',
+            text: '차곡차곡 추억을 담은 집',
             img: require('../assets/banner2.jpg'),
         },
     ],

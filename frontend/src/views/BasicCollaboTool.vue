@@ -84,7 +84,7 @@
         >
           <h3>{{title}}</h3>
           <h1>{{subtitle}}</h1>
-          <p>{{$moment(project.time).format('YYYY-MM-DD h:mm:ss a')}}, {{project.writerName}}</p>               
+          <p>{{$moment(project.time).format('YYYY-MM-DD HH:mm:ss')}}, {{project.writerName}}</p>               
 
           <v-divider></v-divider>
           <br>
@@ -173,11 +173,12 @@ export default {
         //post data
         this.subObj.after = newText;
         this.subObj.commit_comment = this.comment;
+        this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
         console.log(this.subObj)
         axios.post(`http://localhost:3000/api/project/1/modify/basicTool/${this.subId}`, this.subObj,
           {
             headers: {
-              'token': localStorage.getItem('access_token')
+              token: localStorage.getItem('access_token')
             }
           })
         .then((res) => {
