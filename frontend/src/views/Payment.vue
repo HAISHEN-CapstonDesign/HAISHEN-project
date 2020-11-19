@@ -1,15 +1,29 @@
 <template>
-<v-container fill-height style="max-width:900px;">
+<v-container fill-height style="max-width:600px;">
     <v-layout align-center row wrap class="mt-15">
-        <h2>보유 중인 크런치 포인트 : {{ currentpoint }}</h2>
+        <div style="text-align : center;">
+            <h2>현재 내가 보유 중인 크런치 포인트</h2>
+            <v-spacer class="pa-3"></v-spacer>
+            <v-card class="pa-3" width="600px">
+                <subtitle-2>{{ currentpoint }} 포인트</subtitle-2>
+            </v-card>
+        </div>
         <v-flex xs12>
-            <v-select :items="items" v-model="chargePoint" label="포인트 충전 금액" required></v-select>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">취소</v-btn>
-                <v-btn color="blue darken-1" text @click="pay()">결제</v-btn>
-                <v-btn color="blue darken-1" text @click="importpay()">아임포트결제</v-btn>
-            </v-card-actions>
+            <v-card>
+                <div class="pa-3" style="text-align : center;">
+                    <h2>크런치 포인트 충전하기</h2>
+                </div>
+                
+                <div class="pa-3" >
+                    <v-select :items="items" v-model="chargePoint" label="포인트 충전 금액" required></v-select>
+                </div>
+                <v-card-actions >
+                    <v-spacer class="pa-10"></v-spacer>
+                    <v-btn class="black white--text" text @click="dialog = false">취소</v-btn>
+                    <v-btn class="black white--text" text @click="pay()">결제</v-btn>
+                    <v-btn class="black white--text" text @click="importpay()">아임포트결제</v-btn>
+                </v-card-actions>
+            </v-card>
         </v-flex>
     </v-layout>
 </v-container>
