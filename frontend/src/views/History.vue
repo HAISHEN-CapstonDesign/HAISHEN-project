@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import Menu from '../components/modeMenu2'
+import Menu from '../components/modeMenu3'
 import axios from 'axios'
 export default {
     name:'historyPage',

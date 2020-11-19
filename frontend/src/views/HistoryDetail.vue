@@ -10,7 +10,6 @@
                     <v-card>
                         <div v-html="prettyHtml" />
                     <v-text-field
-                    :disabled="true"
                     v-model="comment"
                     label="Commemt"
                     outlined
@@ -20,6 +19,7 @@
                 <v-col md="2">
                     <Menu
                     v-bind:subId="subId"
+                    @revert="revert"
                     ></Menu>
                 </v-col>
             </v-row>
@@ -39,10 +39,11 @@ export default {
 
     },
     created() {
-        var idh = this.$route.params.idh;
-        var idp = this.$route.params.idp;
+        this.idh = this.$route.params.idh;
+        this.idp = this.$route.params.idp;
+        this.ids = this.$route.params.ids;
         this.subId = this.$store.state.subId;
-        axios.get(`http://localhost:3000/api/project/${idp}/commit/basicTool/detail/${idh}`)
+        axios.get(`http://localhost:3000/api/project/${this.idp}/commit/basicTool/detail/${this.idh}`)
         .then((res) => {
           this.diffs = res.data
           console.log(res);
@@ -53,9 +54,16 @@ export default {
     },
     data(){
         return{
+            idp:0,
+            ids:0,
+            idh:0,
             subId:0,
             diffs:'',
             comment:'',
+            reObj:{
+                commit_comment:'',
+                time: new Date()
+            }
         }
     },
     computed: {
@@ -66,6 +74,26 @@ export default {
                 outputFormat: 'line-by-line',
             });
         },
+    },
+    methods: {
+        revert(){
+            this.reObj.commit_comment = this.comment;
+            console.log(this.reObj);
+            axios.post(`http://localhost:3000/api/project/${this.idp}/commit/basicTool/detail/revert/${this.idh}`, this.reObj,
+            {
+                headers: {
+                    'token': localStorage.getItem('access_token')
+                }
+            })
+            .then((res) => {
+                console.log(res);
+            })
+            .catch(function (error) {
+                console.log(error.response);
+            });
+            this.comment = ''
+            this.$router.push(`/${this.idp}/basicCollaboTool/${this.ids}`);
+        }
     },
 }
 </script>
