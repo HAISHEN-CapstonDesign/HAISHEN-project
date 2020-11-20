@@ -73,7 +73,38 @@
         >
           <Advertising @endAd="endAd"></Advertising>
         </v-overlay>
-    
+
+        <!-- dialog area -->
+        <v-dialog
+          v-model="dialog"
+          persistent
+          max-width="500"
+        >
+      <v-card>
+        <v-card-title class="headline">
+          유료 컨텐츠 입니다. 포인트를 충전하거나 광고를 시청해야 열람하실 수 있습니다.
+        </v-card-title>
+        <v-card-text>광고를 시청하고 무료로 열람하시겠습니까?</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="green darken-1"
+            text
+            @click="dialog = false"
+          >
+            아니요
+          </v-btn>
+          <v-btn
+            color="green darken-1"
+            text
+            @click="dialogAd()"
+          >
+            네
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- dialog area endline -->
     
 </div>
 
@@ -100,6 +131,7 @@ export default {
         {
         zIndex: 0,
         opacity: 0.9,
+        dialog: false,
         overlay: false,
         menu: [
                 {
@@ -131,9 +163,10 @@ export default {
                 store.state.userInfo.point = store.state.userInfo.point - 100
                 //여기에 axios 요청 보내야함
             }
-            alert('유료컨텐츠 입니다.\n포인트가 없으므로 광고 시청후 열람하도록 하겠습니다.')
+            // alert('유료컨텐츠 입니다.\n포인트가 없으므로 광고 시청후 열람하도록 하겠습니다.')
             //this.$router.push({ name: 'AdvertisingPage' })
-            this.overlay = !this.overlay
+            // this.overlay = !this.overlay
+            this.dialog = true
         }
         else{
             alert('무료컨텐츠 입니다.')
@@ -175,6 +208,10 @@ export default {
     endAd(over){
         this.overlay = over;
     },
+    dialogAd(){
+      this.dialog = false
+      this.overlay = !this.overlay
+    }
 //나중에 페이지 나누고 코드 수정 후 활성화
     //  changeSubtitle(idx){
         //목차 클릭시 페이지 변경
