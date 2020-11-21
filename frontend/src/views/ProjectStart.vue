@@ -210,6 +210,7 @@ export default {
             intro: '',
             member_num: '1',
             target_funding_money: 0,
+            token: localStorage.getItem('access_token')
         }
     },
     methods: {
@@ -235,8 +236,8 @@ export default {
             }
             
             console.log(data)
-            /*
-            axios.post('/api/project/startup', data)
+            
+            axios.post('/api/project/startup', data, { headers: {'token': this.token}})
                 .then(res => {
                     console.log(res)
                 })
@@ -244,7 +245,7 @@ export default {
                     console.log(err)
                 });
                 
-            this.$router.push('/CollaboProjMain');*/
+            this.$router.push('/CollaboProjMain');
         }
     },
 
