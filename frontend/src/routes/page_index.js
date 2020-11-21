@@ -117,6 +117,7 @@ export default new VueRouter({
             path: '/collaboProjMain',
             name: 'CollaboProjMain',
             component: collaboProjMain,
+            // props: true
         },
         {
             path: '/projectStart',

@@ -210,7 +210,8 @@ export default {
             intro: '',
             member_num: '1',
             target_funding_money: 0,
-            token: localStorage.getItem('access_token')
+            token: localStorage.getItem('access_token'),
+            projectId: null,
         }
     },
     methods: {
@@ -240,12 +241,19 @@ export default {
             axios.post('/api/project/startup', data, { headers: {'token': this.token}})
                 .then(res => {
                     console.log(res)
+                    this.projectId = res.data
+                    alert(this.projectId)
+                    this.$router.push({path:'/CollaboProjMain', query: {projectId: res.data}})
+                    
                 })
                 .catch((err) => {
                     console.log(err)
                 });
                 
-            this.$router.push('/CollaboProjMain');
+            // this.$router.push('/CollaboProjMain');
+            // this.$router.push({path:'/CollaboProjMain', query: {name: 'cat'}})
+            // this.$router.push({path:'/CollaboProjMain',params: {projectId: this.projectId}})
+            // this.$router.push('/mypage');
         }
     },
 
