@@ -124,6 +124,7 @@ import Writing from '../components/WritingList'
 import Complete from '../components/WritingCompleteList'
 import Liked from '../components/Liked'
 import Sub from '../components/SubscribedWriter'
+
 import {
     mapState
 } from "vuex"
@@ -143,8 +144,11 @@ export default {
     }
   },
   computed: {
-        ...mapState(['isLogin', 'isLoginError','userInfo'])
-    }
+      ...mapState(['isLogin', 'isLoginError','userInfo'])
+  },
+  methods: {
+  
+  }
 
 };
 </script>

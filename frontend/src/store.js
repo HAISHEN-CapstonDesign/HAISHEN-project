@@ -137,6 +137,8 @@ export default new Vuex.Store({
                     localStorage.setItem('point', userInfo.point)
                     localStorage.setItem('nickname', userInfo.nickname)
                     localStorage.setItem('gender', userInfo.gender)
+                    localStorage.setItem('s3key', userInfo.s3key)
+                    localStorage.setItem('id', userInfo.id)
                     console.log('user Info :' + JSON.stringify(userInfo))
                     console.log('user info point : ' + userInfo.point)
                     console.log('user info s3key : ' + userInfo.s3key)
