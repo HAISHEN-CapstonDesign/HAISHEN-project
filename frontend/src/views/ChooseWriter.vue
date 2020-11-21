@@ -11,7 +11,112 @@
     </p>
     </div>
     </v-img>
-    <v-row justify="center">
+    <v-container>
+        <v-row cols="12">
+            <v-col md="9">
+                <v-card
+                v-for="applicant in applicants"
+                v-bind:key="applicant.name"
+                >
+                <v-card-title>
+                <v-card-avatar>
+                <v-avatar
+                class="ma-1"
+                size="70"
+                >
+                    <v-img :src="applicant.profile"></v-img>
+                </v-avatar>
+                </v-card-avatar>
+                <v-text>{{applicant.name}}</v-text>
+                <v-spacer></v-spacer>
+                <v-text>{{applicant.comment}}</v-text>
+                <v-spacer></v-spacer>
+                <v-btn
+                    icon
+                    @click="applicant.show = !applicant.show"
+                >
+                    <v-icon>{{ applicant.show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                </v-btn>
+                <v-btn icon @click="chooseList.push(applicant)">
+                    <v-icon>mdi-plus</v-icon>
+                </v-btn>
+                </v-card-title>
+                <v-expand-transition>
+                    <div v-show="applicant.show">
+                    <v-divider></v-divider>
+
+                    <v-card-text v-text="applicant.detail"></v-card-text>
+                    </div>
+                </v-expand-transition>
+                </v-card>
+            </v-col>
+            <v-col md="3">
+            <div>
+            <v-btn @click="start" color="success" large>
+                펀딩 시작하기
+                <v-icon right>
+                    mdi-check-circle-outline
+                </v-icon>
+            </v-btn>
+            </div>
+            </v-col>
+        </v-row>
+    </v-container>
+  </v-app>   
+</template>
+
+<script>
+export default {
+    name:'ChooseWriter',
+    data() {
+        return{
+            chooseList:[],
+            applicants:[
+                {
+                    profile:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+                    name:'김ㅇㅇ',
+                    comment:'잘 부탁드립니다!',
+                    show: false,
+                    detail:'세부사항들',
+                    id:1,
+                },
+                {
+                    profile:'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+                    name:'이ㅇㅇ',
+                    comment:'잘 부탁드립니다!',
+                    show: false,
+                    detail:'세부사항들',
+                    id:2,
+                },
+                {
+                    profile:'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+                    name:'박ㅇㅇ',
+                    comment:'잘 부탁드립니다!',
+                    show: false,
+                    detail:'세부사항들',
+                    id:3,
+                },
+                {
+                    profile:'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+                    name:'최ㅇㅇ',
+                    comment:'잘 부탁드립니다!',
+                    show: false,
+                    detail:'세부사항들',
+                    id:4,
+                },
+                
+            ],
+        }
+    },
+    methods: {
+        start(){
+            console.log(this.chooseList)
+        }
+    },
+}
+</script>
+<!--
+<v-row justify="center">
         <v-col cols="12" sm="6" md="10">
             <div
                 v-for="item in applicant"
@@ -47,7 +152,6 @@
                             </v-col>
                             <v-col
                                 class="text-no-wrap"
-                                cols="5"
                                 sm="3"
                             >
                                 <strong v-html="item.comment"></strong>
@@ -78,68 +182,4 @@
             </div>
  
     </v-col>
-        <v-col md="2">
-            <div style="position: absolute; top: 50%; left: 75%;">
-            <v-btn color="success" large>
-                완료
-                <v-icon right>
-                    mdi-check-circle-outline
-                </v-icon>
-            </v-btn>
-            </div>
-        </v-col>
-  </v-row>
-  </v-app>   
-</template>
-
-<script>
-export default {
-    name:'ChooseWriter',
-    data() {
-        return{
-            applicant:[
-                {
-                    profile:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-                    name:'김ㅇㅇ',
-                    comment:'잘 부탁드립니다!',
-                },
-                {
-                    profile:'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-                    name:'이ㅇㅇ',
-                    comment:'잘 부탁드립니다!',
-                },
-                {
-                    profile:'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-                    name:'박ㅇㅇ',
-                    comment:'잘 부탁드립니다!',
-                },
-                {
-                    profile:'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-                    name:'최ㅇㅇ',
-                    comment:'잘 부탁드립니다!',
-                },
-                {
-                    profile:'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-                    name:'김ㅇㅇ',
-                    comment:'잘 부탁드립니다!',
-                },
-                {
-                    profile:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-                    name:'김ㅇㅇ',
-                    comment:'잘 부탁드립니다!',
-                },
-                {
-                    profile:'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-                    name:'이ㅇㅇ',
-                    comment:'잘 부탁드립니다!',
-                },
-                {
-                    profile:'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-                    name:'박ㅇㅇ',
-                    comment:'잘 부탁드립니다!',
-                },
-            ],
-        }
-    },
-}
-</script>
+-->

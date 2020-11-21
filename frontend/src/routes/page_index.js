@@ -129,7 +129,7 @@ export default new VueRouter({
             component: profitCheck,
         },
         {
-            path: '/chooseWriter',
+            path: '/:idp/chooseWriter',
             component: chooseWriter,
         },
         {
