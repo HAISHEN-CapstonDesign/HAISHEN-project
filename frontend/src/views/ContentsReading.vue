@@ -172,7 +172,7 @@ export default {
         }
     },
     getFee_minuspoint(title_idx){
-        console.log((title_idx))
+        console.log('title_idx'+title_idx)
         axios
             .post('http://localhost:3000/api/getfee',{ id: parseInt(title_idx), projectId: parseInt(1) })
             .then(res => {
@@ -193,7 +193,6 @@ export default {
             .catch((err) => {
                 console.log(err)
                 alert("에러가 발생했습니다. 다시 시도해주세요")
-                this.$router.push('/payment')
             });
     },
     request_minus_point(){
