@@ -10,19 +10,6 @@
             </v-img>
 
         </v-row>
-        <!--
-        <v-row>
-            <v-btn @click="getAlldata()">getAlldata</v-btn>            
-        </v-row>
-        <v-col>
-            <div>title: {{ title }}</div>
-            <div>introduction: {{ introduction }}</div>
-            <div>mwn: {{ mwn }}</div>
-            <div>target_d_day: {{ target_d_day }}</div>
-            <div>target_funding_money: {{ target_funding_money }}</div>
-            <div>image: {{ image }}</div>
-        </v-col>
-        -->
         <v-container>
             <v-row cols="12">
                 <v-col md="8">
@@ -81,23 +68,8 @@ export default {
 
         }
     },
-        
-  methods:{
-    selectIndex: function(title_idx){
-        this.selected_idx= title_idx
-        alert(title_idx)
-    },
-    parent_replySubmit: function(){
-        alert("hello")
-    },
-    writerInfo(){
-        this.nowList = 'writer'
-    },
-    getAlldata(){
-        // var data = {
-
-        // }
-         axios
+    created() {
+        axios
             .post('http://localhost:3000/api/collaboProj',{id:this.$route.query.projectId}, { headers: {'token': this.token}})
             .then(res => {
                 this.title = res.data.title
@@ -114,6 +86,18 @@ export default {
                 console.log(err)
                 
             });
+    },
+        
+  methods:{
+    selectIndex: function(title_idx){
+        this.selected_idx= title_idx
+        alert(title_idx)
+    },
+    parent_replySubmit: function(){
+        alert("hello")
+    },
+    writerInfo(){
+        this.nowList = 'writer'
     },
     router_get(){
         alert(this.$route.query.projectId)

@@ -232,7 +232,7 @@ export default {
                 image: this.imageUrl,
                 //add tag or genre
                 mwn: this.member_num,
-                target_d_day: this.date, //d-day -> d_day
+                target_d_day: this.date,
                 target_funding_money: this.target_funding_money,              
             }
             
@@ -240,20 +240,13 @@ export default {
                 .then(res => {
                     console.log(res)
                     this.projectId = res.data
-                    alert(this.projectId)
-                    this.$router.push({path:'/CollaboProjMain', query: {projectId: res.data}})
+                    this.$router.push({path:`/${res.data}/CollaboProjMain`, query: {projectId: res.data}})
                     
                 })
                 .catch((err) => {
                     console.log(err)
                 });
                 
-            this.$router.push('/1/CollaboProjMain'); //나중에 바꿀 것
-                
-            // this.$router.push('/CollaboProjMain');
-            // this.$router.push({path:'/CollaboProjMain', query: {name: 'cat'}})
-            // this.$router.push({path:'/CollaboProjMain',params: {projectId: this.projectId}})
-            // this.$router.push('/mypage');
         }
     },
 

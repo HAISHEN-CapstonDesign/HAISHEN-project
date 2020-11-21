@@ -12,8 +12,8 @@
     </div>
     </v-img>
     <v-container>
-        <v-row cols="12">
-            <v-col md="9">
+        <v-row cols="12" justify="center">
+            <v-col md="10">
                 <v-card
                 v-for="applicant in applicants"
                 v-bind:key="applicant.name"
@@ -49,16 +49,18 @@
                     </div>
                 </v-expand-transition>
                 </v-card>
-            </v-col>
-            <v-col md="3">
-            <div>
-            <v-btn @click="start" color="success" large>
-                펀딩 시작하기
-                <v-icon right>
-                    mdi-check-circle-outline
-                </v-icon>
-            </v-btn>
-            </div>
+                <br/>
+                <div class="text-center">
+                    <v-btn @click="start" large class="ma-2">
+                        메인으로 돌아가기
+                    </v-btn>
+                    <v-btn @click="start" large class="ma-2">
+                        펀딩 시작하기
+                        <v-icon right>
+                            mdi-check-circle-outline
+                        </v-icon>
+                    </v-btn>
+                </div>
             </v-col>
         </v-row>
     </v-container>

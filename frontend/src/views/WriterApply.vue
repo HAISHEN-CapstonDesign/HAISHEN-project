@@ -1,39 +1,40 @@
 <template>
     <v-app>
+        <v-img
+        max-height="200"
+        max-width="100%"
+        src="../assets/banner.jpg"
+        >
+        <p style="position: absolute; top: 32%; left:45%; font-size:50px; color: white;">주제</p>
+        </v-img>
         <v-container>
-
-        <v-row>
-            <v-col>
-                <p> id:</p>
+            <v-card>
+            <v-row cols="12" align="center" justify="center">
+                <v-col md="8">
+                    <v-text-field
+                    label="닉네임"
+                    placeholder= store.state.userInfo.nickname
+                    ></v-text-field>
+                    <p> id: {{$store.state.userInfo.nickname}}</p>
                 
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col>
-                <p> comment:</p>
-            </v-col>
-            <v-col>
-                <v-text-field
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col>
+                    <p> comment:</p>
+                </v-col>
+                <v-col>
+                    <v-text-field
                     v-model="comment"
-                ></v-text-field>
-            </v-col>
+                    ></v-text-field>
+                </v-col>
             
-        </v-row>
-        <v-row>
-            <v-btn @click="submit()">submit</v-btn>
-        </v-row>
-        <v-row>
-            
-        </v-row>
-        <v-row>
-            
-        </v-row>
-
-        </v-container>
-        
-       
-
-        
+            </v-row>
+            </v-card>
+            <v-row>
+                <v-btn @click="submit()">submit</v-btn>
+            </v-row>
+        </v-container>   
     </v-app>
 </template>
 <script>

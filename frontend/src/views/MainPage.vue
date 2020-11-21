@@ -12,7 +12,7 @@
                 :key="i"
             >
                 <v-sheet
-                :color="indigo"
+                :color="white"
                 height="100%"
                 >
                 <v-img
