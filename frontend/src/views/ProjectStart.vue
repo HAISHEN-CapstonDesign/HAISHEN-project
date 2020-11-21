@@ -91,6 +91,7 @@
                         <v-radio
                         label="개인"
                         value="radio-1"
+                        @click="member_num=1"
                         ></v-radio>
                         <v-radio
                         label="팀"
@@ -122,6 +123,7 @@
                         <v-radio
                         label="펀딩 등록 안함"
                         value="radio-1"
+                        @click="target_funding_money=0"
                         ></v-radio>
                         <v-radio
                         label="펀딩 등록하기"
@@ -152,6 +154,7 @@
                         <v-radio
                         label="무기한"
                         value="radio-1"
+                        @click="date=null"
                         ></v-radio>
                         <v-radio
                         label="기한 있음"
@@ -201,12 +204,13 @@ export default {
             num_radios: 'radio-1',
             deadline_radios: 'radio-1',
             funding_radios: 'radio-1',
-            date: new Date().toISOString().substr(0, 10),
+            date: null,
             imageUrl: null,
             title: '',
             intro: '',
             member_num: '1',
             target_funding_money: 0,
+            token: localStorage.getItem('access_token')
         }
     },
     methods: {
@@ -220,17 +224,18 @@ export default {
         },
         
         createProject(){
-            /*
+            
             var data = {
                 title: this.title,
                 introduction: this.intro,
                 image: this.imageUrl,
                 //add tag or genre
                 mwn: this.member_num,
-               // target_d-day: this.date, //d-day -> d_day
+                target_d_day: this.date, //d-day -> d_day
                 target_funding_money: this.target_funding_money,              
             }
-            axios.put('/api/project/startup', data)
+            
+            axios.post('/api/project/startup', data, { headers: {'token': this.token}})
                 .then(res => {
                     console.log(res)
                 })
@@ -238,7 +243,7 @@ export default {
                     console.log(err)
                 });
                 
-            this.$router.push('/CollaboProjMain');*/
+            this.$router.push('/CollaboProjMain');
         }
     },
 

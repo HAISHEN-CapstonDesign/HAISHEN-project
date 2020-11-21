@@ -7,36 +7,21 @@
         v-bind:src="imgUrl"
         >
     </v-img>
-    <v-row md = "6" sm="6">
-      <v-spacer></v-spacer>
-      <v-col
-      md="4" sm="3"
-      >
-        <v-btn
-        class="l_btn"
-        text
-        >
+      <v-col align="end">
+        <v-btn class="l_btn" text>
           저자Info
         </v-btn>
-        <v-btn
-        class="l_btn"
-        text
-        >
+        <v-btn class="l_btn" text>
           서포터
         </v-btn>
-        <v-btn
-        class="l_btn"
-        text
-        >
+        <v-btn class="l_btn" text>
           프로젝트 종료
         </v-btn>
       </v-col>
-    </v-row>
     <!-- 개별 작성 페이지-->
     <v-container>
-    <v-row>
+    <v-row cols="12">
         <v-col
-        cols="12"
         sm="4"
         md="3"
         >
@@ -84,7 +69,7 @@
         >
           <h3>{{title}}</h3>
           <h1>{{subtitle}}</h1>
-          <p>{{$moment(project.time).format('YYYY-MM-DD h:mm:ss a')}}, {{project.writerName}}</p>               
+          <p>{{$moment(project.time).format('YYYY-MM-DD HH:mm:ss')}}, {{project.writerName}}</p>               
 
           <v-divider></v-divider>
           <br>
@@ -161,7 +146,7 @@ export default {
             project: {},
             subObj:{
               after:'',
-              time:new Date(),
+              time:'',
               commit_comment:'',
             },
         }
@@ -173,11 +158,12 @@ export default {
         //post data
         this.subObj.after = newText;
         this.subObj.commit_comment = this.comment;
+        this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
         console.log(this.subObj)
         axios.post(`http://localhost:3000/api/project/1/modify/basicTool/${this.subId}`, this.subObj,
           {
             headers: {
-              'token': localStorage.getItem('access_token')
+              token: localStorage.getItem('access_token')
             }
           })
         .then((res) => {

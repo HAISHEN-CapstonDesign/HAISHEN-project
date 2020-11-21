@@ -244,6 +244,7 @@ export default {
         },
       }),
       contE:this.mainText,
+      test:'',
     }
   },
   beforeDestroy() {

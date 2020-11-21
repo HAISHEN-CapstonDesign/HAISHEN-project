@@ -11,6 +11,7 @@ import basicCollaboTool from '../views/BasicCollaboTool'
 import community from '../views/Community'
 import historyPage from '../views/History'
 import historyDetail from '../views/HistoryDetail'
+import writerList from '../views/WriterList'
 
 import diff from '../views/diffTest'
 
@@ -148,6 +149,11 @@ export default new VueRouter({
             path: '/community',
             name: 'community',
             component: community,
+        },
+        {
+            path: '/writerList',
+            name: 'writerList',
+            component: writerList,
         },
         {
             path: '/test',
