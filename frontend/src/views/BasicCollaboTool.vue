@@ -8,7 +8,11 @@
         >
     </v-img>
       <v-col align="end">
-        <v-btn class="l_btn" text>
+        <v-btn
+        class="l_btn"
+        text
+        @click="$router.push(`/${idp}/writerList`)"
+        >
           저자Info
         </v-btn>
         <v-btn class="l_btn" text>
@@ -80,7 +84,6 @@
           </div>
         </v-container>
         </div>
-        <Reply></Reply>
         </v-col>
 
         <v-col
@@ -89,7 +92,7 @@
         >
           <Menu
           v-model="isEditing"
-          v-bind:subId="subId"
+          v-bind:ids="ids"
           v-bind:mainText="nowMainText"
           v-bind:title="title"
           v-bind:subtitle="subtitle"
@@ -104,7 +107,6 @@
 
 <script>
 import Editor from '../components/editor';
-import Reply from '../components/reply';
 import Menu from '../components/modeMenu';
 import Subtitle from '../components/subtitleList';
 import axios from 'axios'
@@ -112,17 +114,16 @@ import axios from 'axios'
 export default {
     components: {
       Editor,
-      Reply,
       Menu,
       Subtitle,
     },
     created() {
-      var id = this.$route.params.ids;
-      this.subId = id;
-      this.$store.commit('changeSubId', id)
-      this.subtitle=this.$store.state.subtitle[id-1].text
+      this.idp = this.$route.params.idp;
+      this.ids = this.$route.params.ids;
+      this.$store.commit('changeids', this.ids)
+      this.subtitle=this.$store.state.subtitle[this.ids-1].text
       this.title=this.$store.state.title
-      axios.get(`http://localhost:3000/api/project/1/blob/basicTool/${id}`)
+      axios.get(`http://localhost:3000/api/project/1/blob/basicTool/${this.ids}`)
         .then((res) => {
           this.project = res.data;
           this.nowMainText = this.project.post;
@@ -135,7 +136,8 @@ export default {
     },
     data() {
         return{
-            subId:0,
+            idp:0,
+            ids:0,
             token: localStorage.getItem('access_token'),
             isEditing: false,
             title: '',
@@ -160,7 +162,7 @@ export default {
         this.subObj.commit_comment = this.comment;
         this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
         console.log(this.subObj)
-        axios.post(`http://localhost:3000/api/project/1/modify/basicTool/${this.subId}`, this.subObj,
+        axios.post(`http://localhost:3000/api/project/1/modify/basicTool/${this.ids}`, this.subObj,
           {
             headers: {
               token: localStorage.getItem('access_token')

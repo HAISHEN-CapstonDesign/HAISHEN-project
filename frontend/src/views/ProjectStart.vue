@@ -242,8 +242,16 @@ export default {
                 .catch((err) => {
                     console.log(err)
                 });
-                
-            this.$router.push('/CollaboProjMain');
+            /* project id 받아오기
+            axios.get('/api/project/')
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            */
+            this.$router.push('/1/CollaboProjMain'); //나중에 바꿀 것
         }
     },
 
