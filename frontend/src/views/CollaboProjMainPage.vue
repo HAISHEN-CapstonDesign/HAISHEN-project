@@ -41,6 +41,11 @@
 import Writer from '../components/writerCard'
 import Toolbar from '../components/collaboMainBar'
 import axios from "axios"
+import {
+    mapState
+} from "vuex"
+import store from "../store.js"
+
 export default {
     components: {
         // ProjIndex,
@@ -78,7 +83,11 @@ export default {
                 this.image = res.data.image
                 this.target_d_day = res.data.target_d_day
                 this.target_funding_money = res.data.target_funding_money
-
+                if(res.data.mainornot == 1){
+                    store.state.mainornot = true
+                }else if(res.data.mainornot == 0){
+                    store.state.mainornot = false
+                }
                 console.log(res)
                 
             })
@@ -87,7 +96,9 @@ export default {
                 
             });
     },
-        
+    computed:{
+        ...mapState(['mainornot']) //mainornot 안바뀌면 mapaction 만들어야함
+    },
   methods:{
     selectIndex: function(title_idx){
         this.selected_idx= title_idx
