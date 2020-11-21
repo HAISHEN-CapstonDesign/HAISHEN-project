@@ -18,9 +18,6 @@
         <v-btn class="l_btn" text>
           서포터
         </v-btn>
-        <v-btn class="l_btn" text>
-          프로젝트 종료
-        </v-btn>
       </v-col>
     <v-row>
         <v-col
@@ -40,14 +37,15 @@
         flat
         tile
         >
-          <h3>{{title}}</h3>
-          <h1>{{subtitle}}</h1>
-
+          <h2>{{title}}</h2>
           <v-divider></v-divider>
-          <br>
-            <ProjContent></ProjContent>
-            <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
-
+          <div class="pt-10">
+           <h3>{{subtitle_1}}</h3>
+           <subtitle-2>{{contents_1}}</subtitle-2>
+          </div>
+           <br>
+             <!-- <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
+-->
           </v-card>
           </v-container>
           </div>
@@ -102,18 +100,19 @@
 
 <script>
 // import ProjIndex fro m '../components/projIndex.vue'
-import ProjContent from '../components/projContent.vue'
-import PostReply from '../components/reply.vue'
+// import PostReply from '../components/reply.vue'
 import Advertising from './Advertising'
 import Subtitle from '../components/subtitleForReading';
 import axios from 'axios'
 import store from '../store'
+import {
+    mapActions
+} from "vuex"
 
 export default {
     components: {
         // ProjIndex,
-        PostReply,
-        ProjContent,
+        // PostReply,
         Advertising,
         Subtitle
     },
@@ -140,52 +139,67 @@ export default {
         drawer: true,
         mini: true,
         imgUrl: require('../assets/banner2.jpg'),
-        title: '캡디 기획 보고서 작성하기',
+        title: '기획자의 트렌드, 소통, 배움, 이타심',
+        subtitle_1: '트렌드와 소통, 끊임없는 배움',
+        contents_1:'흔히 트렌드란 뭔가 재빠르게 세상을 따라가고, 핫플레이스를 좋아하는 패피들로 연상됩니다. 하지만 저는 트렌드를, 팀원과의 소통에 관한 관점으로 얘기해보려 합니다.',
         date: '2020.10.12 05:55',
         writer: ['김김김', '이이이', '박박박'],
         selected_idx: 0,
         temp_title_index:3
   }),
   methods:{
+    ...mapActions(['paymentpoint']),
     selectIndex: function(title_idx){
         this.selected_idx= title_idx
         if(title_idx > 2){
             if( store.state.userInfo.point > 100 ){
-                alert('유료컨텐츠 입니다. 포인트 100을 차감하여 열람하겠습니다')
-                store.state.userInfo.point = store.state.userInfo.point - 100
+                alert('유료컨텐츠 입니다. 포인트를 차감하여 열람하겠습니다') //진짜 결제할건지 dialog창 띄우기
+                this.getFee_minuspoint(title_idx)
+                
                 //여기에 axios 요청 보내야함
+            }
+            else{
+              this.dialog = true
             }
             // alert('유료컨텐츠 입니다.\n포인트가 없으므로 광고 시청후 열람하도록 하겠습니다.')
             //this.$router.push({ name: 'AdvertisingPage' })
             // this.overlay = !this.overlay
-            this.dialog = true
+            
         }
         else{
             alert('무료컨텐츠 입니다.')
             alert(title_idx)
         }
     },
-    getFee(title_idx){
-        console.log((title_idx))
+    getFee_minuspoint(title_idx){
+        console.log('title_idx'+title_idx)
         axios
             .post('http://localhost:3000/api/getfee',{ id: parseInt(title_idx), projectId: parseInt(1) })
             .then(res => {
                 // localStorage.setItem('point',this.chargePoint)
                 console.log(res.data)
-                alert(res.data)
-                
+                axios
+                  .post('http://localhost:3000/api/minuspoint', {postId:parseInt(this.temp_title_index), projectId:1, minusPoint: res.data},{ headers: {'token': this.token}})
+                  .then(request=> {
+                      console.log(request.data)
+                      localStorage.setItem('point',res.data) //local storage 에 바뀐 포인트 저장해야함 수정필요
+                      console.log(res.data)
+                      this.paymentpoint(res.data)
+                  })
+                  .catch((error) => {
+                      console.log(error)
+                  });
             })
             .catch((err) => {
                 console.log(err)
                 alert("에러가 발생했습니다. 다시 시도해주세요")
-                this.$router.push('/payment')
             });
     },
     request_minus_point(){
         // fee: 300; // 위에서 getfee해서 받아온 fee 넣기 !
         
         axios
-            .post('http://localhost:3000/api/minuspoint', {postId:parseInt(this.temp_title_index), projectId:1, minusPoint: 300},{ headers: {'token': this.token}})
+            .post('http://localhost:3000/api/minuspoint', {postId:parseInt(this.temp_title_index), projectId:1, minusPoint: 100},{ headers: {'token': this.token}})
             .then(res=> {
                 console.log(res.data)
             })

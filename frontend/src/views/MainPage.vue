@@ -6,14 +6,18 @@
             height="400"
             hide-delimiter-background
             show-arrows-on-hover
+            :show-arrows="false"
             >
             <v-carousel-item
                 v-for="(slide, i) in slides"
                 :key="i"
             >
+            <v-sheet color="white">
                 <v-sheet
-                :color="white"
+                color="white"
                 height="100%"
+                width="80%"
+                class="mx-auto"
                 >
                 <v-img
                 max-width="100%"
@@ -29,10 +33,10 @@
                 </v-row>
                 </v-img>
                 </v-sheet>
+            </v-sheet>
             </v-carousel-item>
             </v-carousel>
-            
-            <v-btn to ="/1/collaboProjMain">공동프로젝트 메인페이지로</v-btn>
+                        <v-btn to ="/1/collaboProjMain">공동프로젝트 메인페이지로</v-btn>
             <v-container style="max-width:1050px;">
                 <v-layout align-center row wrap>
                     <v-flex>
@@ -77,6 +81,7 @@
 import RecruitmentWriter from '../components/recruitWriter.vue'
 import RecruitmentFund from '../components/recruitFund.vue'
 // import { Splide, SplideSlide } from '@splidejs/vue-splide';
+
 
 export default {
     components: {
