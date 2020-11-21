@@ -235,8 +235,6 @@ export default {
                 target_funding_money: this.target_funding_money,              
             }
             
-            console.log(data)
-            
             axios.post('/api/project/startup', data, { headers: {'token': this.token}})
                 .then(res => {
                     console.log(res)
