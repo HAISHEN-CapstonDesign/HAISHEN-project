@@ -105,6 +105,9 @@ import Advertising from './Advertising'
 import Subtitle from '../components/subtitleForReading';
 import axios from 'axios'
 import store from '../store'
+import {
+    mapActions
+} from "vuex"
 
 export default {
     components: {
@@ -145,13 +148,14 @@ export default {
         temp_title_index:3
   }),
   methods:{
+    ...mapActions(['paymentpoint']),
     selectIndex: function(title_idx){
         this.selected_idx= title_idx
         if(title_idx > 2){
             if( store.state.userInfo.point > 100 ){
-                alert('유료컨텐츠 입니다. 포인트 100을 차감하여 열람하겠습니다')
-                store.state.userInfo.point = store.state.userInfo.point - 100
-                this.request_minus_point()
+                alert('유료컨텐츠 입니다. 포인트를 차감하여 열람하겠습니다') //진짜 결제할건지 dialog창 띄우기
+                this.getFee_minuspoint(title_idx)
+                
                 //여기에 axios 요청 보내야함
             }
             else{
@@ -167,15 +171,24 @@ export default {
             alert(title_idx)
         }
     },
-    getFee(title_idx){
+    getFee_minuspoint(title_idx){
         console.log((title_idx))
         axios
             .post('http://localhost:3000/api/getfee',{ id: parseInt(title_idx), projectId: parseInt(1) })
             .then(res => {
                 // localStorage.setItem('point',this.chargePoint)
                 console.log(res.data)
-                alert(res.data)
-                
+                axios
+                  .post('http://localhost:3000/api/minuspoint', {postId:parseInt(this.temp_title_index), projectId:1, minusPoint: res.data},{ headers: {'token': this.token}})
+                  .then(request=> {
+                      console.log(request.data)
+                      localStorage.setItem('point',res.data) //local storage 에 바뀐 포인트 저장해야함 수정필요
+                      console.log(res.data)
+                      this.paymentpoint(res.data)
+                  })
+                  .catch((error) => {
+                      console.log(error)
+                  });
             })
             .catch((err) => {
                 console.log(err)
