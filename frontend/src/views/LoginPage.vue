@@ -67,6 +67,7 @@ export default {
                     window.Kakao.API.request({
                         url: '/v2/user/me',
                         success: function (response) {
+                            if(response.kakao_account)
                             console.log(response);
                             let userInfo = {
                                 id: response.kakao_account.id,
@@ -74,15 +75,19 @@ export default {
                                 // last_name: response.data.last_name,
                                 // avatar: response.data.avatar,
                                 nickname: response.kakao_account.nickname,
-                                gender: response.kakao_account.gender
+                                gender: response.kakao_account.gender,
                                 // point: res.data.userInfoDTO.point,
                                 // s3key: res.data.userInfoDTO.s3key,
                                 // name: res.data.userInfoDTO.name,
                                 // nickname: res.data.userInfoDTO.nickname,
                                 // gender: res.data.userInfoDTO.gender,
                                 // id: res.data.userInfoDTO.id
-                                
+                                email: response.kakao_account.email
                             }
+                            localStorage.setItem('name', userInfo.name)
+                            localStorage.setItem('point', userInfo.point)
+                            localStorage.setItem('nickname', userInfo.nickname)
+                            localStorage.setItem('gender', userInfo.gender)
                             console.log('userInfo :' + userInfo)
                             console.log('after userInfo :' + JSON.stringify(userInfo))
                             store.commit('loginSuccess', userInfo)
