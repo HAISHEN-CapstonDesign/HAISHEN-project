@@ -9,10 +9,6 @@
     <h4>{{content[selected_idx]}}</h4>
     <h3>{{little_titles[3].text}}</h3>
     {{selected_idx,}}
-    <h4>좋아요: {{ contents_like }}</h4>
-    <v-btn @click="increment" icon color="deep-orange">
-        <v-icon>mdi-thumb-up</v-icon>
-    </v-btn>
 </div>
 </template>
 

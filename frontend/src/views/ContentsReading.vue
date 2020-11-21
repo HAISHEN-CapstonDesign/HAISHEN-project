@@ -8,6 +8,10 @@
     </v-img>
     <v-container>
     <v-col align="end">
+        <v-btn @click="increment" icon color="deep-orange">
+            <v-icon>mdi-thumb-up</v-icon>
+        </v-btn>
+        {{ contents_like }}
         <v-btn class="l_btn" text>
           저자Info
         </v-btn>
@@ -115,6 +119,8 @@ export default {
     },
     data: () => ( 
         {
+        click_like: false,
+        contents_like: 0, //axios로 좋아요 수 가져와야함
         zIndex: 0,
         opacity: 0.9,
         dialog: false,
@@ -197,6 +203,18 @@ export default {
     dialogAd(){
       this.dialog = false
       this.overlay = !this.overlay
+    },
+    increment() {
+      let like_click_user_nickname = localStorage.getItem('nickname')
+      if(like_click_user_nickname != null && this.click_like == false){
+        this.contents_like++;
+        this.click_like = true
+      }
+      else if(like_click_user_nickname != null && this.click_like == true){
+        this.contents_like--;
+        this.click_like = false
+      }
+      
     }
 //나중에 페이지 나누고 코드 수정 후 활성화
     //  changeSubtitle(idx){

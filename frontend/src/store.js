@@ -61,6 +61,9 @@ export default new Vuex.Store({
             console.log('after isLoginError :' + state.isLoginError)
             console.log('after userInfo :' + JSON.stringify(state.userInfo))
         },
+        payment(state, chargepoint) {
+            state.userInfo.point = chargepoint
+        },
         logout(state) {
             if (!window.Kakao.Auth.getAccessToken()) {
                 console.log('Not kakao logged in.');
@@ -74,17 +77,29 @@ export default new Vuex.Store({
                 console.log('userInfo :' + JSON.stringify(state.userInfo))
                 return;
             }
-            window.Kakao.Auth.logout(function() {
-                console.log(window.Kakao.Auth.getAccessToken());
-                state.isLogin = false
-                state.isLoginError = true
-                state.userInfo = null
-                localStorage.clear()
-                console.log('logout')
-                console.log('isLogin :' + state.isLogin)
-                console.log('isLoginError :' + state.isLoginError)
-                console.log('userInfo :' + JSON.stringify(state.userInfo))
-            });
+
+            window.Kakao.API.request({
+                url: '/v1/user/unlink',
+                success: function(response) {
+                    console.log(response);
+                    window.Kakao.Auth.logout(function() {
+                        console.log(window.Kakao.Auth.getAccessToken());
+                        state.isLogin = false
+                        state.isLoginError = true
+                        state.userInfo = null
+                        localStorage.clear()
+                        console.log('logout')
+                        console.log('isLogin :' + state.isLogin)
+                        console.log('isLoginError :' + state.isLoginError)
+                        console.log('userInfo :' + JSON.stringify(state.userInfo))
+
+                    })
+                },
+                fail: function(error) {
+                    console.log(error);
+                },
+            })
+
         },
         changeSubId(state, payload) {
             state.subId = payload
@@ -143,6 +158,9 @@ export default new Vuex.Store({
         logout({ commit }) {
             commit('logout')
             router.push({ name: "MainPage" })
+        },
+        paymentpoint({ commit }, paymentpoint) {
+            commit('payment', paymentpoint)
         },
         getMemberInfo({ commit }) {
             // let token = localStorage.getItem('access_token')
