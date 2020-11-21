@@ -8,31 +8,55 @@
         <p style="position: absolute; top: 32%; left:45%; font-size:50px; color: white;">주제</p>
         </v-img>
         <v-container>
-            <v-card>
             <v-row cols="12" align="center" justify="center">
                 <v-col md="8">
-                    <v-text-field
-                    label="닉네임"
-                    placeholder= store.state.userInfo.nickname
-                    ></v-text-field>
-                    <p> id: {{$store.state.userInfo.nickname}}</p>
-                
+                    <v-card> 
+                        <v-container>
+                            <v-row cols="12" justify="center">
+                                <v-col md="3" align="center">
+                                    <v-avatar
+                                    size="110"
+                                    >
+                                    <v-img :src="'https://cdn.vuetifyjs.com/images/cards/halcyon.png'"></v-img>
+                                    </v-avatar>
+                                </v-col>
+                                <v-col md="9" align="center">
+                                <v-text-field
+                                label="닉네임"
+                                disabled
+                                outlined
+                                :placeholder= $store.state.userInfo.nickname
+                                ></v-text-field>
+                                <v-autocomplete
+                                disabled
+                                outlined
+                                dense
+                                chips
+                                small-chips
+                                label="관심분야"
+                                multiple
+                                ></v-autocomplete>
+                                </v-col>
+                            </v-row>
+                            <v-textarea
+                            label="지필 이력"
+                            outlined
+                            ></v-textarea>
+                        <v-textarea
+                        outlined
+                        name="comment"
+                        label="comment"
+                        v-model="comment"
+                        ></v-textarea>
+                        </v-container>
+                    </v-card>
                 </v-col>
             </v-row>
-            <v-row>
-                <v-col>
-                    <p> comment:</p>
+            <v-row cols="12" justify="center">
+                <v-col md="8" align="right">
+                <v-btn class="ma-2" @click="submit()">임시저장</v-btn>
+                <v-btn class="ma-2" @click="submit()">제출</v-btn>
                 </v-col>
-                <v-col>
-                    <v-text-field
-                    v-model="comment"
-                    ></v-text-field>
-                </v-col>
-            
-            </v-row>
-            </v-card>
-            <v-row>
-                <v-btn @click="submit()">submit</v-btn>
             </v-row>
         </v-container>   
     </v-app>
