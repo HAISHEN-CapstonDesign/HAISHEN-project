@@ -91,6 +91,7 @@
                         <v-radio
                         label="개인"
                         value="radio-1"
+                        @click="member_num=1"
                         ></v-radio>
                         <v-radio
                         label="팀"
@@ -122,6 +123,7 @@
                         <v-radio
                         label="펀딩 등록 안함"
                         value="radio-1"
+                        @click="target_funding_money=0"
                         ></v-radio>
                         <v-radio
                         label="펀딩 등록하기"
@@ -152,6 +154,7 @@
                         <v-radio
                         label="무기한"
                         value="radio-1"
+                        @click="date=null"
                         ></v-radio>
                         <v-radio
                         label="기한 있음"
@@ -220,17 +223,20 @@ export default {
         },
         
         createProject(){
-            /*
+            
             var data = {
                 title: this.title,
                 introduction: this.intro,
                 image: this.imageUrl,
                 //add tag or genre
                 mwn: this.member_num,
-               // target_d-day: this.date, //d-day -> d_day
+                target_d_day: this.date, //d-day -> d_day
                 target_funding_money: this.target_funding_money,              
             }
-            axios.put('/api/project/startup', data)
+            
+            console.log(data)
+            /*
+            axios.post('/api/project/startup', data)
                 .then(res => {
                     console.log(res)
                 })
