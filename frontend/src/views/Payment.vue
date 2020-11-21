@@ -1,14 +1,29 @@
 <template>
-<v-container fill-height style="max-width:900px;">
+<v-container fill-height style="max-width:600px;">
     <v-layout align-center row wrap class="mt-15">
+        <div style="text-align : center;">
+            <h2>현재 내가 보유 중인 크런치 포인트</h2>
+            <v-spacer class="pa-3"></v-spacer>
+            <v-card class="pa-3" width="600px">
+                <subtitle-2>{{ currentpoint }} 포인트</subtitle-2>
+            </v-card>
+        </div>
         <v-flex xs12>
-            <v-select :items="items" v-model="chargePoint" label="포인트 충전 금액" required></v-select>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">취소</v-btn>
-                <v-btn color="blue darken-1" text @click="pay()">결제</v-btn>
-                <v-btn color="blue darken-1" text @click="importpay()">아임포트결제</v-btn>
-            </v-card-actions>
+            <v-card>
+                <div class="pa-3" style="text-align : center;">
+                    <h2>크런치 포인트 충전하기</h2>
+                </div>
+                
+                <div class="pa-3" >
+                    <v-select :items="items" v-model="chargePoint" label="포인트 충전 금액" required></v-select>
+                </div>
+                <v-card-actions >
+                    <v-spacer class="pa-10"></v-spacer>
+                    <v-btn class="black white--text" text @click="dialog = false">취소</v-btn>
+                    <v-btn class="black white--text" text @click="pay()">결제</v-btn>
+                    <v-btn class="black white--text" text @click="importpay()">아임포트결제</v-btn>
+                </v-card-actions>
+            </v-card>
         </v-flex>
     </v-layout>
 </v-container>
@@ -25,7 +40,7 @@ export default {
         items: [5000, 10000, 20000],
         chargePoint: 0,
         token: localStorage.getItem('access_token'),
-        
+        currentpoint: localStorage.getItem('point')
     }),
     methods: {
         pay() {
@@ -56,8 +71,8 @@ export default {
                 pg: 'html5_inicis',                           // PG사
                 pay_method: 'card',                           // 결제수단
                 merchant_uid: `mid_${new Date().getTime()}`,  // 주문번호
-                amount: 1000,                                 // 결제금액
-                name: '아임포트 결제 데이터 분석',                  // 주문명
+                amount: this.chargePoint,                                 // 결제금액
+                name: '크런치 포인트 구매',                     // 주문명
                 buyer_name: '홍길동',                           // 구매자 이름
                 buyer_tel: '01012341234',                     // 구매자 전화번호
                 buyer_email: 'example@example',               // 구매자 이메일
