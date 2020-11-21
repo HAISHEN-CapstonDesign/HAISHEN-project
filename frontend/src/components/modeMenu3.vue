@@ -83,7 +83,7 @@ export default {
         this.$router.push(`/${this.idp}/basicCollaboTool/${this.ids}`);
       },
       clickWriter(){
-//페이지 이동
+        this.$router.push(`/${this.idp}/writerList`);
       },
     },
     

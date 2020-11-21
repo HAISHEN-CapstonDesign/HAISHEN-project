@@ -12,7 +12,7 @@
                 :key="i"
             >
                 <v-sheet
-                :color="indigo"
+                :color="white"
                 height="100%"
                 >
                 <v-img
@@ -32,7 +32,7 @@
             </v-carousel-item>
             </v-carousel>
             
-            <v-btn to ="/collaboProjMain">공동프로젝트 메인페이지로</v-btn>
+            <v-btn to ="/1/collaboProjMain">공동프로젝트 메인페이지로</v-btn>
             <v-container style="max-width:1050px;">
                 <v-layout align-center row wrap>
                     <v-flex>

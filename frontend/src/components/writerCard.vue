@@ -1,36 +1,28 @@
 <template>
     <v-app>
-          <v-card>
-            <div class="d-flex flex-no-wrap justify-space-between">
+          <v-card
+          outlined
+          tile
+          v-for="writer in items"
+          v-bind:key="writer.title">
+            <v-row cols="12">
+              <v-col md="3" align="center">
               <div>
-                <v-card-title
-                  class="headline"
-                >{{items.title}}</v-card-title>
-
-                <v-card-subtitle>{{items.artist}}</v-card-subtitle>
-
-                <v-card-actions>
-                  <v-btn
-                    class="ml-2 mt-3"
-                    fab
-                    icon
-                    height="40px"
-                    right
-                    width="40px"
-                  >
-                    <v-icon>mdi-play</v-icon>
-                  </v-btn>
-                </v-card-actions>
-              </div>
-
-              <v-avatar
+                <v-avatar
                 class="ma-3"
-                size="125"
-                tile
+                size="110"
               >
-                <v-img :src="items.src"></v-img>
+                <v-img :src="writer.src"></v-img>
               </v-avatar>
-            </div>
+                <v-card-title id="title" class="justify-center">{{writer.title}}</v-card-title>
+              </div>
+              </v-col>
+              <v-divider vertical></v-divider>
+              <v-col md="8">
+              <v-card-title>작가 소개</v-card-title>
+              <v-card-subtitle>작가소개작가소개작가소개</v-card-subtitle>
+              </v-col>
+            </v-row>
           </v-card>
     </v-app>
 </template>
@@ -39,14 +31,25 @@
 export default {
     data() {
         return{
-            items:{
+            items:[
+              {
                 color: '#952175',
                 src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
                 title: 'Halcyon Days',
-                artist: 'Ellie Goulding',
-            },
+              },
+              {
+                color: '#952175',
+                src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
+                title: 'Halcyon Days',
+              }
+            ],
         }
     },
         
 }
 </script>
+<style scoped>
+#title{
+  padding:0;
+}
+</style>
