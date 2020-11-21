@@ -21,6 +21,7 @@
                 max-width="100%"
                 max-height="100%"
                 v-bind:src="slide.img"
+                gradient="to top right, rgba(150,150,150,.33), rgba(52,52,52,.7)"
                 >
                 <v-row
                     class="fill-height"
