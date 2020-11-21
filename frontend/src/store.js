@@ -18,8 +18,7 @@ export default new Vuex.Store({
             },
             { id: 2, name: 'test', email: 'test@ajou.ac.kr', password: '123456' }
         ],
-        //eve.holt@reqres.in
-        //cityslicka
+        mainornot: false,
         isLogin: false,
         isLoginError: true,
         title: '기획자의 트렌드, 소통, 배움, 이타심',

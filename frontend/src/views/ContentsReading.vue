@@ -41,7 +41,13 @@
           <v-divider></v-divider>
           <div class="pt-10">
            <h3>{{subtitle_1}}</h3>
+           <v-spacer class = "pt-3"></v-spacer>
            <subtitle-2>{{contents_1}}</subtitle-2>
+          </div>
+          <div class="pt-10">
+           <h3>{{subtitle_2}}</h3>
+           <v-spacer class = "pt-3"></v-spacer>
+           <subtitle-2>{{contents_2}}</subtitle-2>
           </div>
            <br>
              <!-- <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
@@ -142,6 +148,8 @@ export default {
         title: '기획자의 트렌드, 소통, 배움, 이타심',
         subtitle_1: '트렌드와 소통, 끊임없는 배움',
         contents_1:'흔히 트렌드란 뭔가 재빠르게 세상을 따라가고, 핫플레이스를 좋아하는 패피들로 연상됩니다. 하지만 저는 트렌드를, 팀원과의 소통에 관한 관점으로 얘기해보려 합니다.',
+        subtitle_2:'',
+        contents_2:'',
         date: '2020.10.12 05:55',
         writer: ['김김김', '이이이', '박박박'],
         selected_idx: 0,
@@ -174,17 +182,17 @@ export default {
     getFee_minuspoint(title_idx){
         console.log('title_idx'+title_idx)
         axios
-            .post('http://localhost:3000/api/getfee',{ id: parseInt(title_idx), projectId: parseInt(1) })
+            .post('http://localhost:3000/api/getfee',{ id: parseInt(title_idx), projectId: parseInt(1) }, { headers: {'token': this.token}} )
             .then(res => {
                 // localStorage.setItem('point',this.chargePoint)
                 console.log(res.data)
                 axios
-                  .post('http://localhost:3000/api/minuspoint', {postId:parseInt(this.temp_title_index), projectId:1, minusPoint: res.data},{ headers: {'token': this.token}})
+                  .post('http://localhost:3000/api/minuspoint', {id:parseInt(this.temp_title_index), projectId:1, fee: res.data},{ headers: {'token': this.token}})
                   .then(request=> {
                       console.log(request.data)
-                      localStorage.setItem('point',res.data) //local storage 에 바뀐 포인트 저장해야함 수정필요
-                      console.log(res.data)
-                      this.paymentpoint(res.data)
+                      localStorage.setItem('point',request.data) //local storage 에 바뀐 포인트 저장해야함 수정필요
+                      console.log(request.data)
+                      this.paymentpoint(request.data)
                   })
                   .catch((error) => {
                       console.log(error)

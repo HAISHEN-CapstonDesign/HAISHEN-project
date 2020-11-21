@@ -9,10 +9,10 @@
         <v-card-text>
             모집 작가 수: 달성/목표
         </v-card-text>
-        <v-card-text @click="gotoWriterApply()">
+        <v-card-text v-if='!$store.state.mainornot' @click="gotoWriterApply()">
             작가로 참여하기
         </v-card-text>
-        <v-card-text>
+        <v-card-text v-if='$store.state.mainornot'>
             지원자 확인하기
         </v-card-text>
         <v-card-text>
