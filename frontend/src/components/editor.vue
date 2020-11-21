@@ -1,5 +1,6 @@
 <template>
   <div class="editor">
+    <Modal ref="ytmodal" @onConfirm="addCommand" />
     <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
       <div class="menubar">
         <v-row cols="12" justify="center">
@@ -116,6 +117,14 @@
         <v-col md="1">
         <button
           class="menubar__button"
+          @click="openModal(commands.image)"
+        >
+          <v-icon>mdi-image</v-icon>
+        </button>
+        </v-col>
+        <v-col md="1">
+        <button
+          class="menubar__button"
           :class="{ 'is-active': isActive.bullet_list() }"
           @click="commands.bullet_list"
         >
@@ -188,6 +197,7 @@
 import EventBus from '../EventBus.js';
 import { Editor, EditorMenuBar, EditorContent } from 'tiptap';
 import CustomStyle from "./CustomStyle";
+import Modal from "./Modal";
 //import EditorContent from "../components/editorContent.js";
 import {
   Blockquote,
@@ -207,12 +217,14 @@ import {
   Strike,
   Underline,
   History,
+  Image,
 } from 'tiptap-extensions'
 export default {
   name: 'editor',
   components: {
     EditorContent,
     EditorMenuBar,
+    Modal,
   },
   data() {
     return {
@@ -230,6 +242,7 @@ export default {
           new TodoList(),
           new Link(),
           new Bold(),
+          new Image(),
           new Code(),
           new Italic(),
           new Strike(),
@@ -263,7 +276,15 @@ export default {
   methods: {
     setContent() {
       this.editor.setContent(this.contE);
-    }
+    },
+    openModal(command) {
+      this.$refs.ytmodal.showModal(command);
+    },
+    addCommand(data) {
+      if (data.command !== null) {
+        data.command(data.data);
+      }
+    },
   },
 }
 </script>
