@@ -62,14 +62,29 @@ export default new Vuex.Store({
             console.log('after userInfo :' + JSON.stringify(state.userInfo))
         },
         logout(state) {
-            state.isLogin = false
-            state.isLoginError = true
-            state.userInfo = null
-            localStorage.clear()
-            console.log('logout')
-            console.log('isLogin :' + state.isLogin)
-            console.log('isLoginError :' + state.isLoginError)
-            console.log('userInfo :' + JSON.stringify(state.userInfo))
+            if (!window.Kakao.Auth.getAccessToken()) {
+                console.log('Not kakao logged in.');
+                state.isLogin = false
+                state.isLoginError = true
+                state.userInfo = null
+                localStorage.clear()
+                console.log('logout')
+                console.log('isLogin :' + state.isLogin)
+                console.log('isLoginError :' + state.isLoginError)
+                console.log('userInfo :' + JSON.stringify(state.userInfo))
+                return;
+            }
+            window.Kakao.Auth.logout(function() {
+                console.log(window.Kakao.Auth.getAccessToken());
+                state.isLogin = false
+                state.isLoginError = true
+                state.userInfo = null
+                localStorage.clear()
+                console.log('logout')
+                console.log('isLogin :' + state.isLogin)
+                console.log('isLoginError :' + state.isLoginError)
+                console.log('userInfo :' + JSON.stringify(state.userInfo))
+            });
         },
         changeSubId(state, payload) {
             state.subId = payload

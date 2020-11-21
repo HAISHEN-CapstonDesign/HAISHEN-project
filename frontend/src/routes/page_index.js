@@ -116,7 +116,7 @@ export default new VueRouter({
             component: postListPage,
         },
         {
-            path: '/collaboProjMain',
+            path: '/:idp/collaboProjMain',
             name: 'CollaboProjMain',
             component: collaboProjMain,
             // props: true
@@ -154,7 +154,7 @@ export default new VueRouter({
             component: community,
         },
         {
-            path: '/writerList',
+            path: '/:idp/writerList',
             name: 'writerList',
             component: writerList,
         },

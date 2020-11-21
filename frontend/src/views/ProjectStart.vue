@@ -236,8 +236,6 @@ export default {
                 target_funding_money: this.target_funding_money,              
             }
             
-            console.log(data)
-            
             axios.post('/api/project/startup', data, { headers: {'token': this.token}})
                 .then(res => {
                     console.log(res)
@@ -249,6 +247,8 @@ export default {
                 .catch((err) => {
                     console.log(err)
                 });
+                
+            this.$router.push('/1/CollaboProjMain'); //나중에 바꿀 것
                 
             // this.$router.push('/CollaboProjMain');
             // this.$router.push({path:'/CollaboProjMain', query: {name: 'cat'}})

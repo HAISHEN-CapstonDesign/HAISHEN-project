@@ -5,7 +5,7 @@
           dense
           rounded
         >
-        <v-list-item-group active-class="brown--text" v-model="clicked">
+        <v-list-item-group active-class="brown--text">
         <v-list-item
           @click="clickMain"
           link
@@ -17,10 +17,7 @@
             <v-list-item-subtitle class="text-center">MAIN PAGE</v-list-item-subtitle>
           </v-list-item-content>
           </v-list-item>
-          <v-list-item
-          @click="clickWriter"
-          link
-          >
+          <v-list-item @click="clickWriter" link>
             <v-list-item-content>
             <v-list-item-title class="text-center">
             <v-icon>mdi-account-edit</v-icon>
@@ -92,7 +89,7 @@ export default {
       },
       clickWriter(){
 //페이지 이동
-       // this.$router.push('/writerList');
+        this.$router.push(`/${this.idp}/writerList`);
       },
       clickRevert(){
 //되돌리기
