@@ -12,8 +12,11 @@ import community from '../views/Community'
 import historyPage from '../views/History'
 import historyDetail from '../views/HistoryDetail'
 import writerList from '../views/WriterList'
+import funding from '../views/Funding'
 
 import diff from '../views/diffTest'
+import WriterApply from '../views/WriterApply'
+// import { component } from 'vue/types/umd';
 
 // import store from '../store'
 
@@ -114,9 +117,10 @@ export default new VueRouter({
             component: postListPage,
         },
         {
-            path: '/collaboProjMain',
+            path: '/:idp/collaboProjMain',
             name: 'CollaboProjMain',
             component: collaboProjMain,
+            // props: true
         },
         {
             path: '/projectStart',
@@ -128,7 +132,7 @@ export default new VueRouter({
             component: profitCheck,
         },
         {
-            path: '/chooseWriter',
+            path: '/:idp/chooseWriter',
             component: chooseWriter,
         },
         {
@@ -151,14 +155,24 @@ export default new VueRouter({
             component: community,
         },
         {
-            path: '/writerList',
+            path: '/:idp/writerList',
             name: 'writerList',
             component: writerList,
+        },
+        {
+            path: '/:idp/funding',
+            name: 'fundingPage',
+            component: funding,
         },
         {
             path: '/test',
             component: diff,
         },
+        {
+            path: '/:idp/WriterApply',
+            name: WriterApply,
+            component: WriterApply
+        }
 
     ]
 })

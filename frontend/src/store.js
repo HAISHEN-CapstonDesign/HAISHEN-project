@@ -18,18 +18,17 @@ export default new Vuex.Store({
             },
             { id: 2, name: 'test', email: 'test@ajou.ac.kr', password: '123456' }
         ],
-        //eve.holt@reqres.in
-        //cityslicka
+        mainornot: false,
         isLogin: false,
         isLoginError: true,
-        title: '캡스톤 디자인 프로젝트',
+        title: '기획자의 트렌드, 소통, 배움, 이타심',
         subtitle: [
-            { idx: 1, text: '기획보고서란' },
-            { idx: 2, text: '유사 제품 서비스 동향' },
-            { idx: 3, text: '관련 기술 동향' },
-            { idx: 4, text: '유저 스토리' },
-            { idx: 5, text: 'UX/UI 설계' },
-            { idx: 6, text: '시스템 설계' },
+            { idx: 1, text: '트렌드와 소통, 끊임없는 배움' },
+            { idx: 2, text: '수용성과 타인을 돕는 것, 이타심' },
+            { idx: 3, text: '함께 만드는 것' },
+            { idx: 4, text: '그렇다면 어떻게 해야 할까' },
+            { idx: 5, text: '당부하고 싶은 말' },
+            { idx: 6, text: '글을 마무리하면서' },
         ],
         subId: 0,
         projectId: 1,
@@ -61,6 +60,9 @@ export default new Vuex.Store({
             console.log('after isLoginError :' + state.isLoginError)
             console.log('after userInfo :' + JSON.stringify(state.userInfo))
         },
+        payment(state, chargepoint) {
+            state.userInfo.point = chargepoint
+        },
         logout(state) {
             if (!window.Kakao.Auth.getAccessToken()) {
                 console.log('Not kakao logged in.');
@@ -74,17 +76,29 @@ export default new Vuex.Store({
                 console.log('userInfo :' + JSON.stringify(state.userInfo))
                 return;
             }
-            window.Kakao.Auth.logout(function() {
-                console.log(window.Kakao.Auth.getAccessToken());
-                state.isLogin = false
-                state.isLoginError = true
-                state.userInfo = null
-                localStorage.clear()
-                console.log('logout')
-                console.log('isLogin :' + state.isLogin)
-                console.log('isLoginError :' + state.isLoginError)
-                console.log('userInfo :' + JSON.stringify(state.userInfo))
-            });
+
+            window.Kakao.API.request({
+                url: '/v1/user/unlink',
+                success: function(response) {
+                    console.log(response);
+                    window.Kakao.Auth.logout(function() {
+                        console.log(window.Kakao.Auth.getAccessToken());
+                        state.isLogin = false
+                        state.isLoginError = true
+                        state.userInfo = null
+                        localStorage.clear()
+                        console.log('logout')
+                        console.log('isLogin :' + state.isLogin)
+                        console.log('isLoginError :' + state.isLoginError)
+                        console.log('userInfo :' + JSON.stringify(state.userInfo))
+
+                    })
+                },
+                fail: function(error) {
+                    console.log(error);
+                },
+            })
+
         },
         changeSubId(state, payload) {
             state.subId = payload
@@ -122,6 +136,8 @@ export default new Vuex.Store({
                     localStorage.setItem('point', userInfo.point)
                     localStorage.setItem('nickname', userInfo.nickname)
                     localStorage.setItem('gender', userInfo.gender)
+                    localStorage.setItem('s3key', userInfo.s3key)
+                    localStorage.setItem('id', userInfo.id)
                     console.log('user Info :' + JSON.stringify(userInfo))
                     console.log('user info point : ' + userInfo.point)
                     console.log('user info s3key : ' + userInfo.s3key)
@@ -143,6 +159,9 @@ export default new Vuex.Store({
         logout({ commit }) {
             commit('logout')
             router.push({ name: "MainPage" })
+        },
+        paymentpoint({ commit }, paymentpoint) {
+            commit('payment', paymentpoint)
         },
         getMemberInfo({ commit }) {
             // let token = localStorage.getItem('access_token')

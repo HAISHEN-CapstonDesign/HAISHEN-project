@@ -128,7 +128,7 @@ export default {
         download(filename, text);
       }, false);
     },
-    props:['isEditing', 'mainText', 'subId', 'title', 'subtitle'],
+    props:['isEditing', 'mainText', 'ids', 'title', 'subtitle'],
     data() {
         return {
             editing: false,
@@ -151,7 +151,7 @@ export default {
           this.editing = !this.editing
           this.$emit('changeEdit', this.editing);
         }
-        this.$router.push(`/${this.$store.state.projectId}/${this.subId}/historyPage`);
+        this.$router.push(`/${this.$store.state.projectId}/${this.ids}/historyPage`);
       },
       clickSubmit(){
         EventBus.$emit('submit');       

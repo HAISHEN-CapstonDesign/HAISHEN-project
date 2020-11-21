@@ -10,7 +10,7 @@
         </v-img>
         <v-container>
             <v-row cols="12">
-                <v-col md="8">
+                <v-col md="12">
                     <Card></Card>
                 </v-col>
             </v-row>

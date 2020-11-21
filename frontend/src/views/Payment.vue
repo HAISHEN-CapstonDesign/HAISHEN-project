@@ -31,6 +31,10 @@
 
 <script>
 import axios from "axios"
+import {
+    mapActions
+} from "vuex"
+import router from '../routes/page_index.js'
 
 export default {
     
@@ -43,6 +47,7 @@ export default {
         currentpoint: localStorage.getItem('point')
     }),
     methods: {
+        ...mapActions(['paymentpoint']),
         pay() {
             // console.log('payobj :'+payobj+'\ntoken : '+token+'\ntoken + payobj token :'+payobj.token)
             // console.log('payobj stringfy : '+ JSON.stringify(payobj))
@@ -52,16 +57,18 @@ export default {
             axios
                 .post('http://localhost:3000/api/chargePoint',{chargePoint: parseInt(this.chargePoint)}, { headers: {'token': this.token}})
                 .then(res => {
-                    localStorage.setItem('point',this.chargePoint)
-                    console.log(res)
+                    localStorage.setItem('point',res.data) //local storage 에 바뀐 포인트 저장해야함 수정필요
+                    console.log(res.data)
+                    this.paymentpoint(res.data)
+                    router.push({ name: "MainPage"})
                 })
                 .catch((err) => {
                     console.log(err)
                     alert("에러가 발생했습니다. 다시 시도해주세요")
-                    this.$router.push('/payment')
                 });
         },
         importpay(){
+            parseInt(this.chargePoint)
             /* 1. 가맹점 식별하기 */
             const { IMP } = window;
             IMP.init('imp55294309');
@@ -90,9 +97,29 @@ export default {
                 // merchant_uid,
                 error_msg,
             } = response;
-
             if (success) {
-                alert('결제 성공');
+                parseInt(this.chargePoint)
+                // let beforpoint = localStorage.getItem('point') //local storage 에 바뀐 포인트 저장해야함 수정필요
+                // parseInt(this.chargePoint)
+                axios
+                    .post('http://localhost:3000/api/chargePoint',{chargePoint: parseInt(this.chargePoint)}, { headers: {'token': this.token}})
+                    .then(res => {
+                        localStorage.setItem('point',res.data) //local storage 에 바뀐 포인트 저장해야함 수정필요
+                        console.log(res.data)
+                        this.paymentpoint(res.data)
+                        router.push({ name: "MainPage"})
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        alert("에러가 발생했습니다. 다시 시도해주세요")
+                    });
+                    // console.log('beforpoint : '+beforpoint)
+                    // let afterpoint = beforpoint + this.chargePoint
+                    // this.paymentpoint(afterpoint)
+                    // console.log('\nthis.chargepoint : '+this.chargePoint)
+                    // console.log('\nafterpoint : '+afterpoint)
+                    alert('결제 성공!');
+                    router.push({ name: "MainPage"})
             } else {
                 alert(`결제 실패: ${error_msg}`);
             }

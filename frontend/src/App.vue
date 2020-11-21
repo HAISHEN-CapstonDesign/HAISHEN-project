@@ -2,27 +2,26 @@
 <v-app>
     <div>
         <!-- color="~" 여기에 원하는 색깔 코드 넣으면 됨-->
-        <v-app-bar color="#14a0a0" dark absolute dense>
+        <v-app-bar color="white" absolute dense>
             <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
             <img src='./assets/crunch_logo2_1.png' height="60px" v-on:click="to_main"/>
             <v-row align="center" justify="end">
-
+            <v-row align="center" justify="center">
                 <v-combobox
                 v-model="select"
                 :items="items"
                 :menu-props="menuProps"
                 :search-input.sync="search"
                 dense
-                outlined
                 ></v-combobox>
-
                 <v-btn icon class="mr-2">
                     <v-icon>mdi-magnify</v-icon>
                 </v-btn>
-                <v-btn small class="mr-2" v-if="isLoginError" router :to="{name: 'LoginPage'}">login</v-btn>
-                <v-btn small class="mr-2" v-if="isLogin" @click="logout">logout</v-btn>
-                <v-btn small class="mr-2" v-if="isLoginError" router :to="{name: 'SignUpPage'}">sign up</v-btn>
-                <v-btn small class="mr-2" v-if="isLogin" router :to="{name:'MyPage'}">My</v-btn>
+            </v-row>
+                <v-btn dark small class="mr-2" v-if="isLoginError" router :to="{name: 'LoginPage'}">login</v-btn>
+                <v-btn dark small class="mr-2" v-if="isLogin" @click="logout">logout</v-btn>
+                <v-btn dark small class="mr-2" v-if="isLoginError" router :to="{name: 'SignUpPage'}">sign up</v-btn>
+                <v-btn dark small class="mr-2" v-if="isLogin" router :to="{name:'MyPage'}">My</v-btn>
                 <v-chip class="ma-2" color="orange" v-if="isLogin" text-color="white" router :to="{name:'PaymentPage'}">
                     <v-icon left>
                         mdi-currency-usd
@@ -218,4 +217,5 @@ export default {
     position: relative;
     top: 12px;
 }
+
 </style>

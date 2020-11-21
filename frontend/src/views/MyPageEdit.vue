@@ -92,7 +92,7 @@
           </v-col>
           <v-col>
           <v-row>
-            <input ref="avatarImageInput" type="file" hidden @change="onChangeAvatarImages">
+            <input id="change_image" ref="avatarImageInput" type="file" hidden @change="onChangeAvatarImages">
             <v-btn type="button" :disabled="!isUpdating" @click="onClickAvatarImageUpload">프로필 사진 업로드</v-btn>
 
             <input ref="imageInput" type="file" hidden @change="onChangeImages">
@@ -116,7 +116,7 @@
         <v-btn
         v-else
         color="#FFDFB0"
-        @click="clickSave"
+        @click="clickSave({ name, interests, career, change_image })"
         >
         <v-icon left>
           mdi-check-circle
@@ -141,6 +141,7 @@
 </template>
 
 <script>
+import axios from "axios"
 
 export default {
   name: 'myPageEdit',
@@ -158,7 +159,18 @@ export default {
           { name: '여행'},
           { name: '수학'},
           { name: '과학'},
+          { name: 'IT'},
           { name: '경제'},
+          { name: '요리'},
+          { name: '건강'},
+          { name: '역사'},
+          { name: '건축'},
+          { name: '문화, 예술'},
+          { name: '시사'},
+          { name: '직장'},
+          { name: '육아'},
+          { name: '게임'},
+          { name: '연애'},
         ],
         imageUrl: null,
       }
@@ -180,8 +192,17 @@ export default {
             const file = e.target.files[0];
             this.imageUrl = URL.createObjectURL(file);
         },
-      clickSave(){
+      clickSave(saveObj){
         this.isUpdating = false;
+        console.log('saveobj :'+ JSON.stringify(saveObj))
+          axios
+            .post('http://localhost:3000/api/user/edit', saveObj)
+            .then(res => {
+              console.log(res)
+            })
+            .catch((err) => {
+              console.log(err)
+            });
         // 변경 내용 저장 기능 추가 필요
       },
 

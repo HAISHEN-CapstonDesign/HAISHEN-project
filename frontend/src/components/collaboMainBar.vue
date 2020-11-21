@@ -1,20 +1,33 @@
 <template>
-    <v-card id="mode_menu" style="top:0px;" max-width="300">
+    <v-card id="mode_menu" style="top:0px;" max-width="250" align="center">
         <v-card-text>
-            펀딩금액: 달성/목표
+            <p>펀딩금액: 달성/목표</p>
+            <p>목표 작업 기한, d-day</p>
+            <p>모집 작가 수: 달성/목표</p>
         </v-card-text>
-        <v-card-text>
-            목표 작업 기한, d-day
-        </v-card-text>
-        <v-card-text>
-            모집 작가 수: 달성/목표
-        </v-card-text>
-        <v-card-text>
-            작가로 참여하기/지원자 확인하기
-        </v-card-text>
-        <v-card-text>
+        <v-divider></v-divider>
+        <v-card-action>
+            <v-btn
+            v-if='!$store.state.mainornot'
+            @click="gotoWriterApply"
+            class="bar_btn"
+            text>
+            작가로 참여하기
+            </v-btn>
+            <v-btn
+            @click="gotoChooseWriter"
+            v-if='$store.state.mainornot'
+            class="bar_btn"
+            text>
+            지원자 확인하기
+            </v-btn>
+            <v-btn
+            @click="gotoSupport"
+            class="bar_btn"
+            text>
             서포터로 후원하기
-        </v-card-text>
+            </v-btn>
+        </v-card-action>
     </v-card>
 </template>
 <script>
@@ -33,14 +46,28 @@ export default {
 	}).scroll();
     });
     },
+    props:['idp'],
     data() {
         return {
             editing: false,
         }
     },
     methods: {
-        
+        gotoWriterApply(){
+            this.$router.push(`/${this.idp}/WriterApply`);
+        },
+        gotoSupport(){
+            this.$router.push(`/${this.idp}/funding`);
+        },
+        gotoChooseWriter(){
+            this.$router.push(`/${this.idp}/chooseWriter`);
+        },
     },
     
 }
 </script>
+<style scoped>
+.bar_btn:hover{
+    color:brown;
+}
+</style>

@@ -6,19 +6,22 @@
             height="400"
             hide-delimiter-background
             show-arrows-on-hover
+            :show-arrows="false"
             >
             <v-carousel-item
                 v-for="(slide, i) in slides"
                 :key="i"
             >
                 <v-sheet
-                :color="indigo"
                 height="100%"
+                width="80%"
+                class="mx-auto"
                 >
                 <v-img
                 max-width="100%"
                 max-height="100%"
                 v-bind:src="slide.img"
+                gradient="to top right, rgba(150,150,150,.33), rgba(52,52,52,.7)"
                 >
                 <v-row
                     class="fill-height"
@@ -31,8 +34,7 @@
                 </v-sheet>
             </v-carousel-item>
             </v-carousel>
-            
-            <v-btn to ="/collaboProjMain">공동프로젝트 메인페이지로</v-btn>
+
             <v-container style="max-width:1050px;">
                 <v-layout align-center row wrap>
                     <v-flex>
@@ -77,14 +79,21 @@
 import RecruitmentWriter from '../components/recruitWriter.vue'
 import RecruitmentFund from '../components/recruitFund.vue'
 
+
 export default {
     components: {
         RecruitmentWriter,
         RecruitmentFund,
+
     },
 
     data: () => ({
     //
+    options: {
+          rewind : true,
+          width  : 800,
+          gap    : '1rem',
+        },
     slides: [
         {
             text: '아침 운동으로 인생이 바뀌진 않았지만',
