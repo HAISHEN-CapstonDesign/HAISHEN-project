@@ -9,8 +9,11 @@
         <v-card-text>
             모집 작가 수: 달성/목표
         </v-card-text>
+        <v-card-text @click="gotoWriterApply()">
+            작가로 참여하기
+        </v-card-text>
         <v-card-text>
-            작가로 참여하기/지원자 확인하기
+            지원자 확인하기
         </v-card-text>
         <v-card-text>
             서포터로 후원하기
@@ -39,7 +42,9 @@ export default {
         }
     },
     methods: {
-        
+        gotoWriterApply(){
+            this.$router.push('/WriterApply');
+        }
     },
     
 }

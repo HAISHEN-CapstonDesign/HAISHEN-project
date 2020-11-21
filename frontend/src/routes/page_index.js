@@ -14,6 +14,8 @@ import historyDetail from '../views/HistoryDetail'
 import writerList from '../views/WriterList'
 
 import diff from '../views/diffTest'
+import WriterApply from '../views/WriterApply'
+// import { component } from 'vue/types/umd';
 
 // import store from '../store'
 
@@ -160,6 +162,11 @@ export default new VueRouter({
             path: '/test',
             component: diff,
         },
+        {
+            path: '/WriterApply',
+            name: WriterApply,
+            component: WriterApply
+        }
 
     ]
 })
