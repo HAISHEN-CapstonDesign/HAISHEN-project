@@ -76,15 +76,22 @@
 <script>
 import RecruitmentWriter from '../components/recruitWriter.vue'
 import RecruitmentFund from '../components/recruitFund.vue'
+// import { Splide, SplideSlide } from '@splidejs/vue-splide';
 
 export default {
     components: {
         RecruitmentWriter,
         RecruitmentFund,
+
     },
 
     data: () => ({
     //
+    options: {
+          rewind : true,
+          width  : 800,
+          gap    : '1rem',
+        },
     slides: [
         {
             text: '아침 운동으로 인생이 바뀌진 않았지만',
