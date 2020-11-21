@@ -12,9 +12,7 @@
                 v-for="(slide, i) in slides"
                 :key="i"
             >
-            <v-sheet color="white">
                 <v-sheet
-                color="white"
                 height="100%"
                 width="80%"
                 class="mx-auto"
@@ -33,10 +31,9 @@
                 </v-row>
                 </v-img>
                 </v-sheet>
-            </v-sheet>
             </v-carousel-item>
             </v-carousel>
-                        <v-btn to ="/1/collaboProjMain">공동프로젝트 메인페이지로</v-btn>
+
             <v-container style="max-width:1050px;">
                 <v-layout align-center row wrap>
                     <v-flex>
