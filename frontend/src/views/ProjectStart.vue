@@ -204,7 +204,7 @@ export default {
             num_radios: 'radio-1',
             deadline_radios: 'radio-1',
             funding_radios: 'radio-1',
-            date: new Date().toISOString().substr(0, 10),
+            date: null,
             imageUrl: null,
             title: '',
             intro: '',
