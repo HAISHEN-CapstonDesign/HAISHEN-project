@@ -118,7 +118,7 @@ export default {
                     // this.paymentpoint(afterpoint)
                     // console.log('\nthis.chargepoint : '+this.chargePoint)
                     // console.log('\nafterpoint : '+afterpoint)
-                    alert('결제 성공');
+                    alert('결제 성공!');
                     router.push({ name: "MainPage"})
             } else {
                 alert(`결제 실패: ${error_msg}`);
