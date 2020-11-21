@@ -1,5 +1,4 @@
 <template>
-<v-app>
     <div>
     <v-img
         max-height="200"
@@ -7,53 +6,30 @@
         v-bind:src="imgUrl"
         >
     </v-img>
-    <v-row md = "6" sm="6">
-      <v-spacer></v-spacer>
-      <v-col
-      md="4" sm="3"
-      >
-        <v-btn
-        v-bind:style="infoBtnStyle"
-        @mouseover="hoverInfo"
-        @mouseout="endHoverInfo"
-        text
-        >
+    <v-container>
+    <v-col align="end">
+        <v-btn class="l_btn" text>
           저자Info
         </v-btn>
-        <v-btn
-        v-bind:style="supporterBtnStyle"
-        @mouseover="hoverSupporter"
-        @mouseout="endHoverSupporter"
-        text
-        >
+        <v-btn class="l_btn" text>
           서포터
         </v-btn>
-        <v-btn
-        v-bind:style="endProjectBtnStyle"
-        @mouseover="hoverEndProject"
-        @mouseout="endHoverEndProject"
-        text
-        >
+        <v-btn class="l_btn" text>
           프로젝트 종료
         </v-btn>
       </v-col>
-    </v-row>
-
-    <v-container>
     <v-row>
         <v-col
         cols="12"
         sm="4"
         md="3"
         >
-            <Subtitle v-bind:title="title" @changeSubtitle="changeSubtitle"></Subtitle>
+            <Subtitle v-bind:title="title" @selectIndex="selectIndex"></Subtitle>
         </v-col>
         <v-col
         sm="6"
         md="7"
         >
-        <div style="background-color: white">
-        <v-container>
           <div style="background-color: white">
           <v-container>
         <v-card
@@ -62,63 +38,19 @@
         >
           <h3>{{title}}</h3>
           <h1>{{subtitle}}</h1>
-          <p>{{$moment(project.time).format('YYYY-MM-DD h:mm:ss a')}}, {{project.writerName}}</p>               
 
           <v-divider></v-divider>
           <br>
-            <div v-html="nowMainText"></div>
+            <ProjContent></ProjContent>
+            <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
 
           </v-card>
           </v-container>
           </div>
-        </v-container>
-        </div>
         </v-col>
-        <!-- <v-col cols=3><ProjIndex></ProjIndex></v-col> -->
-        <!-- <v-col col-4> -->
-            <!-- <v-card width="300" height="600">
-                <v-navigation-drawer
-                    v-model="drawer"
-                    permanent
-                    floating
-                    width="400"         
-                >
-                    <v-list-item class="px-2">
-                        <v-list-item-avatar>
-                            <v-img src="../assets/grid.png"></v-img>
-                        </v-list-item-avatar>
-                        <v-list-item-title>{{title}}</v-list-item-title>
-
-                    </v-list-item>
-
-                    <v-divider></v-divider>
-
-                    <v-list dense>
-                        <v-list-item
-                            v-for="little_title in little_titles"
-                            :key="little_title"
-                            link
-                        >
-
-                        <v-list-item-content>
-                            <v-list-item-title @click="selectIndex(little_title.idx)">
-                                {{little_title.idx}}, {{ little_title.text }}
-                            </v-list-item-title>
-                        </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                </v-navigation-drawer>
-            </v-card> -->
-        <!-- </v-col> -->
-
-        <!-- <v-col cols=4 align="center">
-            <ProjContent></ProjContent>
-            <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
-             
-        </v-col> -->
-
-        <v-col cols=4></v-col>
-    </v-row>
+        
+      </v-row>
+    </v-container>
         <v-overlay
           :z-index="zIndex"
           :value="overlay"
@@ -127,50 +59,65 @@
         >
           <Advertising @endAd="endAd"></Advertising>
         </v-overlay>
-    </v-container>
+
+        <!-- dialog area -->
+        <v-dialog
+          v-model="dialog"
+          persistent
+          max-width="500"
+        >
+      <v-card>
+        <v-card-title class="headline">
+          유료 컨텐츠 입니다. 포인트를 충전하거나 광고를 시청해야 열람하실 수 있습니다.
+        </v-card-title>
+        <v-card-text>광고를 시청하고 무료로 열람하시겠습니까?</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="green darken-1"
+            text
+            @click="dialog = false"
+          >
+            아니요
+          </v-btn>
+          <v-btn
+            color="green darken-1"
+            text
+            @click="dialogAd()"
+          >
+            네
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- dialog area endline -->
     
 </div>
-</v-app>
+
 </template>
 
 <script>
 // import ProjIndex fro m '../components/projIndex.vue'
-// import ProjContent from '../components/projContent.vue'
-// import PostReply from '../components/reply.vue'
+import ProjContent from '../components/projContent.vue'
+import PostReply from '../components/reply.vue'
 import Advertising from './Advertising'
-import Subtitle from '../components/subtitleList';
+import Subtitle from '../components/subtitleForReading';
 import axios from 'axios'
 import store from '../store'
 
 export default {
     components: {
         // ProjIndex,
-        // PostReply,
-        // ProjContent,
+        PostReply,
+        ProjContent,
         Advertising,
         Subtitle
-    },
-    created(){
-        var id = this.$route.params.ids;
-      this.subId = id;
-      this.$store.commit('changeSubId', id)
-      this.subtitle=this.$store.state.subtitle[id-1].text
-      this.title=this.$store.state.title
-      axios.get(`http://localhost:3000/api/project/1/blob/basicTool/${id}`)
-        .then((res) => {
-          this.project = res.data;
-          this.nowMainText = this.project.post;
-          //this.imgUrl = this.project.s3key;
-          console.log(res);
-        })
-        .catch(function (error) {
-          console.log(error.response);
-        });
     },
     data: () => ( 
         {
         zIndex: 0,
         opacity: 0.9,
+        dialog: false,
         overlay: false,
         menu: [
                 {
@@ -185,28 +132,13 @@ export default {
                 },
             ],
         drawer: true,
-        items: [
-          { title: 'Home', icon: 'mdi-home-city' },
-          { title: 'My Account', icon: 'mdi-account' },
-          { title: 'Users', icon: 'mdi-account-group-outline' },
-        ],
         mini: true,
         imgUrl: require('../assets/banner2.jpg'),
         title: '캡디 기획 보고서 작성하기',
         date: '2020.10.12 05:55',
         writer: ['김김김', '이이이', '박박박'],
-        little_titles: [
-            { idx:1, text:'기획보고서란'},
-            { idx:2, text:'유사 제품 서비스 동향'},
-            { idx:3, text:'관련 기술 동향'},
-            { idx:4, text:'유저 스토리'},
-            { idx:5, text:'UX/UI 설계'},
-            { idx:6, text:'시스템 설계'},
-            { idx:7, text:'청춘예찬'},
-            { idx:8, text:'별헤는밤'},
-           
-        ],
-        selected_idx: 0
+        selected_idx: 0,
+        temp_title_index:3
   }),
   methods:{
     selectIndex: function(title_idx){
@@ -217,15 +149,42 @@ export default {
                 store.state.userInfo.point = store.state.userInfo.point - 100
                 //여기에 axios 요청 보내야함
             }
-            alert('유료컨텐츠 입니다.\n포인트가 없으므로 광고 시청후 열람하도록 하겠습니다.')
+            // alert('유료컨텐츠 입니다.\n포인트가 없으므로 광고 시청후 열람하도록 하겠습니다.')
             //this.$router.push({ name: 'AdvertisingPage' })
-            this.overlay = !this.overlay
+            // this.overlay = !this.overlay
+            this.dialog = true
         }
         else{
             alert('무료컨텐츠 입니다.')
             alert(title_idx)
         }
     },
+    getFee(title_idx){
+        console.log((title_idx))
+        axios
+            .post('http://localhost:3000/api/getfee',{ id: parseInt(title_idx), projectId: parseInt(1) })
+            .then(res => {
+                // localStorage.setItem('point',this.chargePoint)
+                console.log(res.data)
+                alert(res.data)
+                
+            })
+            .catch((err) => {
+                console.log(err)
+                alert("에러가 발생했습니다. 다시 시도해주세요")
+                this.$router.push('/payment')
+            });
+    },
+    request_minus_point(){
+        // fee: 300; // 위에서 getfee해서 받아온 fee 넣기 !
+        
+        axios
+            .post('http://localhost:3000/api/minuspoint', {postId:parseInt(this.temp_title_index), projectId:1, minusPoint: 300},{ headers: {'token': this.token}})
+            .then(res=> {
+                console.log(res.data)
+            })
+    },
+
     parent_replySubmit: function(){
         alert("hello")
     },
@@ -235,28 +194,20 @@ export default {
     endAd(over){
         this.overlay = over;
     },
-    hoverSupporter(){
-        this.supporterBtnStyle.color = 'brown'
-      },
-      hoverInfo(){
-        this.infoBtnStyle.color = 'brown'
-      },
-      hoverEndProject(){
-        this.endProjectBtnStyle.color = 'brown'
-      },
-      endHoverInfo(){
-        this.infoBtnStyle.color = 'black'
-      },
-      endHoverSupporter(){
-        this.supporterBtnStyle.color = 'black'
-      },
-      endHoverEndProject(){
-        this.endProjectBtnStyle.color = 'black'
-      },
-      changeSubtitle(idx){
+    dialogAd(){
+      this.dialog = false
+      this.overlay = !this.overlay
+    }
+//나중에 페이지 나누고 코드 수정 후 활성화
+    //  changeSubtitle(idx){
         //목차 클릭시 페이지 변경
-        this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
-      },
+        //this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
+     //},
   }
 }
 </script>
+<style scoped>
+.l_btn:hover{
+  color: brown;
+}
+</style>

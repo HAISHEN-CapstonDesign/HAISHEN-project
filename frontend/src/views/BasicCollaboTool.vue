@@ -7,42 +7,21 @@
         v-bind:src="imgUrl"
         >
     </v-img>
-    <v-row md = "6" sm="6">
-      <v-spacer></v-spacer>
-      <v-col
-      md="4" sm="3"
-      >
-        <v-btn
-        v-bind:style="infoBtnStyle"
-        @mouseover="hoverInfo"
-        @mouseout="endHoverInfo"
-        text
-        >
+      <v-col align="end">
+        <v-btn class="l_btn" text>
           저자Info
         </v-btn>
-        <v-btn
-        v-bind:style="supporterBtnStyle"
-        @mouseover="hoverSupporter"
-        @mouseout="endHoverSupporter"
-        text
-        >
+        <v-btn class="l_btn" text>
           서포터
         </v-btn>
-        <v-btn
-        v-bind:style="endProjectBtnStyle"
-        @mouseover="hoverEndProject"
-        @mouseout="endHoverEndProject"
-        text
-        >
+        <v-btn class="l_btn" text>
           프로젝트 종료
         </v-btn>
       </v-col>
-    </v-row>
     <!-- 개별 작성 페이지-->
     <v-container>
-    <v-row>
+    <v-row cols="12">
         <v-col
-        cols="12"
         sm="4"
         md="3"
         >
@@ -90,7 +69,7 @@
         >
           <h3>{{title}}</h3>
           <h1>{{subtitle}}</h1>
-          <p>{{$moment(project.time).format('YYYY-MM-DD h:mm:ss a')}}, {{project.writerName}}</p>               
+          <p>{{$moment(project.time).format('YYYY-MM-DD HH:mm:ss')}}, {{project.writerName}}</p>               
 
           <v-divider></v-divider>
           <br>
@@ -111,7 +90,11 @@
           <Menu
           v-model="isEditing"
           v-bind:subId="subId"
-          @changeEdit="editingChange"></Menu>
+          v-bind:mainText="nowMainText"
+          v-bind:title="title"
+          v-bind:subtitle="subtitle"
+          @changeEdit="editingChange"
+          @uploadFile="uploadFile"></Menu>
         </v-col>
     </v-row>
     </v-container>
@@ -161,18 +144,9 @@ export default {
             imgUrl: require('../assets/banner2.jpg'),
             comment:'',
             project: {},
-            infoBtnStyle: {
-              color: 'black'
-            },
-            supporterBtnStyle: {
-              color: 'black'
-            },
-            endProjectBtnStyle: {
-              color: 'black'
-            },
             subObj:{
               after:'',
-              time:new Date(),
+              time:'',
               commit_comment:'',
             },
         }
@@ -184,11 +158,12 @@ export default {
         //post data
         this.subObj.after = newText;
         this.subObj.commit_comment = this.comment;
+        this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
         console.log(this.subObj)
         axios.post(`http://localhost:3000/api/project/1/modify/basicTool/${this.subId}`, this.subObj,
           {
             headers: {
-              'token': localStorage.getItem('access_token')
+              token: localStorage.getItem('access_token')
             }
           })
         .then((res) => {
@@ -199,7 +174,6 @@ export default {
           console.log(error.response);
         });
         this.comment = ''
-        //this.little_titles[this.nowIdx].main = this.nowMainText;
       },
       editingChange(state){
         this.isEditing = state;
@@ -208,24 +182,15 @@ export default {
         //목차 클릭시 페이지 변경
         this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
       },
-      hoverSupporter(){
-        this.supporterBtnStyle.color = 'brown'
-      },
-      hoverInfo(){
-        this.infoBtnStyle.color = 'brown'
-      },
-      hoverEndProject(){
-        this.endProjectBtnStyle.color = 'brown'
-      },
-      endHoverInfo(){
-        this.infoBtnStyle.color = 'black'
-      },
-      endHoverSupporter(){
-        this.supporterBtnStyle.color = 'black'
-      },
-      endHoverEndProject(){
-        this.endProjectBtnStyle.color = 'black'
+      uploadFile(fileText){
+        this.nowMainText = fileText;
+        this.isEditing = true;
       },
     },
 }
 </script>
+<style scoped>
+.l_btn:hover{
+  color: brown;
+}
+</style>

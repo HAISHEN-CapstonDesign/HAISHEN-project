@@ -1,117 +1,3 @@
-
-<template>
-  <div class="editor">
-    <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
-      <div class="menubar">
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.bold() }"
-          @click="commands.bold"
-        >
-          Bold
-        </button>
-        <button
-          class="menubar__button"
-          :class="{
-            'is-active': isActive.customstyle({ level: 'body-black' }),
-          }"
-          @click="commands.customstyle({ level: 'body-black' })"
-        >
-          Body Green
-        </button>
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.customstyle({ level: 'body-blue' }) }"
-          @click="commands.customstyle({ level: 'body-blue' })"
-        >
-          Body Blue
-        </button>
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.customstyle({ level: 'body-red' }) }"
-          @click="commands.customstyle({ level: 'body-red' })"
-        >
-          Body Red
-        </button>
-      </div>
-    </editor-menu-bar>
-
-    <editor-content
-      class="editor__content"
-      style="background: rgba(100, 100, 0, 0.2)"
-      :editor="editor"
-    />
-    <pre>{{localHTML}}</pre>
-  </div>
-</template>
-
-<script>
-import { Editor, EditorContent, EditorMenuBar } from "tiptap";
-import { Bold } from "tiptap-extensions";
-import CustomStyle from "../components/CustomStyle";
-
-export default {
-  components: {
-    EditorContent,
-    EditorMenuBar,
-  },
-  data() {
-    return {
-      localJSON: "",
-      localHTML: "",
-      editor: new Editor({
-        extensions: [new Bold(), new CustomStyle()],
-        onUpdate: ({ getHTML, getJSON }) => {
-          this.localHTML = getHTML();
-          this.localJSON = getJSON();
-        },
-        content: `
-          <h2>
-            Hi there,
-          </h2>
-          <p>
-            this is a very <em>basic</em> example of tiptap.
-          </p>`,
-      }),
-    };
-  },
-  beforeDestroy() {
-    this.editor.destroy();
-  },
-};
-</script>
-
-<style>
-.menubar__button {
-  font-weight: 700;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  background: rgba(0, 0, 0, 0);
-  border: 0;
-  color: #000;
-  padding: 0.2rem 0.5rem;
-  margin-right: 0.2rem;
-  border-radius: 3px;
-  cursor: pointer;
-}
-.menubar__button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-.menubar__button.is-active {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-pre {
-  white-space: pre-wrap; /* Since CSS 2.1 */
-  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-  white-space: -pre-wrap; /* Opera 4-6 */
-  white-space: -o-pre-wrap; /* Opera 7 */
-  word-wrap: break-word; /* Internet Explorer 5.5+ */
-}
-</style>
-
-
-<!-- diff2html 예시 코드
 <template>
 <div>
   <span>기능설명, 추가기능: </span><a>https://github.com/rtfpessoa/diff2html#diff2htmlui-usage</a>
@@ -122,8 +8,18 @@ pre {
 <script>
 import * as Diff2Html from 'diff2html';
 import 'diff2html/bundles/css/diff2html.min.css';
-
+import axios from 'axios'
 export default {
+  created() {
+    axios.get(`http://localhost:3000/api/project/1/commit/basicTool/detail/27`)
+        .then((res) => {
+          this.diffs = res.data
+          console.log(res);
+        })
+        .catch(function (error) {
+          console.log(error.config);
+        });
+  },
   data() {
     return {
       diffs:
@@ -135,10 +31,9 @@ export default {
       return Diff2Html.html(this.diffs, {
         drawFileList: true,
         matching: 'lines',
-        outputFormat: 'side-by-side',
+        outputFormat: 'line-by-line',
       });
     },
   },
 };
 </script>
--->

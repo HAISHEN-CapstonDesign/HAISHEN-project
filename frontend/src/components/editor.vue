@@ -181,7 +181,6 @@
     <br>
     <editor-content class="editor__content" :editor="editor" v-model="content"/>
     
-    <pre>{{editor.content}}</pre>
   </div>
 </template>
 
@@ -245,10 +244,12 @@ export default {
         },
       }),
       contE:this.mainText,
+      test:'',
     }
   },
   beforeDestroy() {
     this.editor.destroy()
+    EventBus.$off('submit');
   },
   props:['mainText'],
   created() {

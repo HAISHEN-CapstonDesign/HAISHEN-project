@@ -28,7 +28,7 @@
             <v-list-item-subtitle class="text-center">WRITERS</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item @click="clickHistory" link>
+          <v-list-item :disabled="clicked==2" @click="clickHistory" link>
           <v-list-item-content>
             <v-list-item-title class="text-center">
             <v-icon>mdi-history</v-icon>
@@ -42,14 +42,6 @@
             <v-icon>mdi-forum</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">COMMUNITY</v-list-item-subtitle>
-          </v-list-item-content>
-          </v-list-item>
-          <v-list-item @click="clickRevert" link>
-          <v-list-item-content>
-            <v-list-item-title class="text-center">
-            <v-icon>mdi-replay</v-icon>
-            </v-list-item-title>
-            <v-list-item-subtitle class="text-center">REVERT</v-list-item-subtitle>
           </v-list-item-content>
           </v-list-item>
           </v-list-item-group>
@@ -73,7 +65,7 @@ export default {
 	}).scroll();
     });
     },
-    props:['ids', 'idp'],
+    props:['clicked','ids', 'idp'],
     data() {
         return {
             editing: false,
@@ -92,11 +84,6 @@ export default {
       },
       clickWriter(){
 //페이지 이동
-       // this.$router.push('/writerList');
-      },
-      clickRevert(){
-//되돌리기
-        this.$emit('revert');
       },
     },
     

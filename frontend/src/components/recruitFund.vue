@@ -27,7 +27,7 @@
                         >
                             <v-card width="400px">
                                 <v-img
-                                :src="`https://picsum.photos/200/300?image=${getImage()}`"
+                                :src="list.img"
                                 height="150px"
                                 ></v-img>
                                 <div style="height:100px;">
@@ -91,6 +91,7 @@ export default {
             nowFund:350,
             dDay:'2020-12-15',
             show: false,
+            img: require('../assets/banner.jpg'),
         },
         {
             genre:'수학',
@@ -101,6 +102,7 @@ export default {
             dDay:'2020-12-20',
             members: ['영희','재욱','인하','민수'],
             show: false,
+            img: require('../assets/banner.jpg'),
         },
         {
             genre:'역사',
@@ -111,16 +113,10 @@ export default {
             dDay:'2021-01-18',
             members: ['경수','미영','호영'],
             show: false,
+            img: require('../assets/banner.jpg'),
         },
     ],
   }),
-  methods: {
-      getImage () {
-        const min = 550
-        const max = 560
-        return Math.floor(Math.random() * (max - min + 1)) + min
-      },
-  },
 }
 </script>
 

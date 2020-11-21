@@ -1,11 +1,6 @@
 <template>
 <!-- <v-card height="1000" width="1000" align="left"> -->
 <div height="1000" width="300" align="left">
-    <h1>{{title}}</h1>
-
-    <h5>By. {{writer[0]}}</h5>
-    <h5>{{date}} 작성</h5>
-
     <h3>{{little_titles[0].text}}</h3>
     <h4>{{content[selected_idx]}}</h4>
     <h3>{{little_titles[1].text}}</h3>

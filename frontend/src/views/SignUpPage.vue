@@ -1,11 +1,12 @@
 <template>
   <v-container fill-height style="max-width:450px;">
     <v-layout align-center row wrap class="mt-15">
+      
       <v-flex xs12 >
         <v-card>
-          <v-toolbar flat>
-            <v-toolbar-title>회원가입</v-toolbar-title>
-          </v-toolbar>
+          <div style="text-align : center;">
+            <img src='../assets/sign_up_img.png' height="100px"/>
+          </div>
           <div class="pa-3">
             <v-text-field
               v-model="identity"
@@ -43,11 +44,11 @@
             ></v-autocomplete>
             <v-btn
               @click="signUp({ identity, password, name, nickname, gender })"
-              color="primary"
+              class="black white--text"
               depressed
               block
               large>
-              회원가입
+              Sign Up
             </v-btn>
             <!-- <v-btn @click="test">테스트</v-btn>
             <v-btn @click="postTest">포스트 테스트</v-btn> -->

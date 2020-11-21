@@ -5,7 +5,7 @@
                 <v-col md="10">
                     <div style="float:right; font-size:25px; color:#A06641;">HISTORY</div>
                     <div style="display: inline-block; font-size:25px; color:#A06641;">{{$store.state.title}}</div>
-                    <div style="display: inline-block; font-size:20px; color:#A06641;">_{{$store.state.subtitle[this.subId-1].text}}</div>
+                    <div style="display: inline-block; font-size:20px; color:#A06641;">_{{$store.state.subtitle[this.ids-1].text}}</div>
                     <v-card color="#FFEFD5">
                         <v-list color="#FFEFD5">
                             <v-list-item>
@@ -25,21 +25,21 @@
                             <v-divider></v-divider>
                             <div
                             v-for="tmp in histories"
-                            :key="tmp.time"
+                            :key="tmp.commitId"
                             >
                             <v-divider></v-divider>
                             <v-list-item>
                                 <v-list-item-content style="flex-basis: 25%;">
-                                    <v-list-item-title v-text="tmp.time"></v-list-item-title>
+                                    <v-list-item-title>{{$moment(tmp.time).format('YYYY-MM-DD HH:mm:ss')}}</v-list-item-title>
                                 </v-list-item-content>
                                 <v-list-item-content style="flex-basis: 30%;">
-                                    <v-list-item-title v-text="tmp.comment"></v-list-item-title>
+                                    <v-list-item-title v-text="tmp.commit_comment"></v-list-item-title>
                                 </v-list-item-content>
                                 <v-list-item-content style="flex-basis: 25%;">
-                                    <v-list-item-title v-text="tmp.name"></v-list-item-title>
+                                    <v-list-item-title v-text="tmp.writerName"></v-list-item-title>
                                 </v-list-item-content>
                                 <v-list-item-content class="text-center" style="flex-basis: 10%;">
-                                    <v-list-btn @click="showDetail(tmp.idx)">
+                                    <v-list-btn @click="showDetail(tmp.commitId)">
                                     <v-btn fab small depressed color="#D7AC87">
                                         <v-icon>
                                             mdi-magnify
@@ -55,6 +55,8 @@
                 <v-col md="2">
                     <Menu
                     v-bind:clicked="isHistory"
+                    v-bind:ids="ids"
+                    v-bind:idp="idp"
                     ></Menu>
                 </v-col>
             </v-row>
@@ -63,7 +65,7 @@
 </template>
 
 <script>
-import Menu from '../components/modeMenu2'
+import Menu from '../components/modeMenu3'
 import axios from 'axios'
 export default {
     name:'historyPage',
@@ -71,12 +73,13 @@ export default {
         Menu,
     },
     created() {
-        this.subId = this.$store.state.subId
-        //projectId, indexId
-        axios.get(`http://localhost:3000/api/project/1/commit/basicTool/${this.subId}`)
+        this.idp = this.$route.params.idp;
+        this.ids = this.$route.params.ids;
+        axios.get(`http://localhost:3000/api/project/${this.idp}/commit/basicTool/${this.ids}`)
         .then((res) => {
+          this.histories = res.data;
           
-          console.log(res.data);
+          console.log(res);
         })
         .catch(function (error) {
           console.log(error.config);
@@ -85,74 +88,15 @@ export default {
     data(){
         return{
             isHistory:2, //히스토리 페이지에서 클릭
-            subId: 0,
-            histories: [
-          {
-            idx: 1,
-            name: 'Frozen Yogurt',
-            comment: 'add sdfdf',
-            time:'2020-05-20 15:07:45',
-          },
-          {
-            idx: 2,
-            name: 'Ice cream sandwich',
-            comment: 'add rutghv',
-            time:'2020-05-28 19:34:35',
-          },
-          {
-              idx: 3,
-            name: 'Eclair',
-            comment: 'change augfgcc',
-            time:'2020-06-03 12:29:55',
-          },
-          {
-              idx: 4,
-            name: 'Cupcake',
-            comment: 'add rutghv',
-            time:'2020-06-28 19:34:35',
-          },
-          {
-              idx: 5,
-            name: 'Gingerbread',
-            comment: 'add rutghv',
-            time:'2020-07-10 19:34:35',
-          },
-          {
-              idx: 6,
-            name: 'Jelly bean',
-            comment: 'add rutghv',
-            time:'2020-07-28 19:34:35',
-          },
-          {
-              idx: 7,
-            name: 'Lollipop',
-            comment: 'add rutghv',
-            time:'2020-08-04 19:34:35',
-          },
-          {
-              idx: 8,
-            name: 'Honeycomb',
-            comment: 'add rutghv',
-            time:'2020-08-13 19:34:35',
-          },
-          {
-              idx: 9,
-            name: 'Donut',
-            comment: 'add rutghv',
-            time:'2020-08-28 19:34:35',
-          },
-          {
-              idx: 10,
-            name: 'KitKat',
-            comment: 'add rutghv',
-            time:'2020-09-28 19:34:35',
-          },
-        ],
+            idp:0,
+            ids:0,
+            idh:0,
+            histories: [],
         }
     },
     methods: {
         showDetail(idx){
-            this.$router.push(`/${this.$store.state.projectId}/${this.subId}/historyDetail/${idx}`);
+            this.$router.push(`/${this.idp}/${this.ids}/historyDetail/${idx}`);
         }
     },
 }

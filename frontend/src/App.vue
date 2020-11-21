@@ -6,8 +6,7 @@
             <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
             <img src='./assets/crunch_logo2_1.png' height="60px" v-on:click="to_main"/>
             <v-row align="center" justify="end">
-                <!--수정중(검색어 없을 때 items 안보이도록)-->
-                <div style="position: absolute; top: 8%; right:330px; width:30%;">
+
                 <v-combobox
                 v-model="select"
                 :items="items"
@@ -16,7 +15,7 @@
                 dense
                 outlined
                 ></v-combobox>
-                </div>
+
                 <v-btn icon class="mr-2">
                     <v-icon>mdi-magnify</v-icon>
                 </v-btn>
@@ -205,5 +204,18 @@ export default {
 }
 .body-black {
   color: black;
+}
+</style>
+<style scoped>
+.v-input {
+    align-items: flex-start;
+    display: flex;
+    flex: 1 1 auto;
+    font-size: 16px;
+    letter-spacing: normal;
+    max-width: 50%;
+    text-align: left;
+    position: relative;
+    top: 12px;
 }
 </style>

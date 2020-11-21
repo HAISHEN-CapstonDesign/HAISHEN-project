@@ -27,7 +27,7 @@
                         >
                             <v-card width="400px">
                                 <v-img
-                                :src="`https://picsum.photos/200/300?image=${getImage()}`"
+                                :src="list.img"
                                 height="150px"
                                 ></v-img>
                                 <div style="height:100px;">
@@ -90,6 +90,7 @@ export default {
             memberNum:1,
             members: ['철수'],
             show: false,
+            img: require('../assets/sample_img.jpg'),
         },
         {
             genre:'요리',
@@ -100,6 +101,7 @@ export default {
             memberNum:1,
             members: ['영희'],
             show: false,
+            img: require('../assets/sample_img.jpg'),
         },
         {
             genre:'역사',
@@ -110,16 +112,11 @@ export default {
             memberNum:2,
             members: ['경수','미영'],
             show: false,
+            img: require('../assets/sample_img.jpg'),
         },
     ],
   }),
-  methods: {
-      getImage () {
-        const min = 550
-        const max = 560
-        return Math.floor(Math.random() * (max - min + 1)) + min
-      },
-  },
+
 }
 </script>
 
