@@ -20,8 +20,8 @@
                 <v-card-actions >
                     <v-spacer class="pa-10"></v-spacer>
                     <v-btn class="black white--text" text @click="dialog = false">취소</v-btn>
-                    <v-btn class="black white--text" text @click="pay()">결제</v-btn>
-                    <v-btn class="black white--text" text @click="importpay()">아임포트결제</v-btn>
+                    <!-- <v-btn class="black white--text" text @click="pay()">결제</v-btn> -->
+                    <v-btn class="black white--text" text @click="importpay()">결제</v-btn>
                 </v-card-actions>
             </v-card>
         </v-flex>
@@ -48,25 +48,25 @@ export default {
     }),
     methods: {
         ...mapActions(['paymentpoint']),
-        pay() {
-            // console.log('payobj :'+payobj+'\ntoken : '+token+'\ntoken + payobj token :'+payobj.token)
-            // console.log('payobj stringfy : '+ JSON.stringify(payobj))
-            console.log(typeof(this.chargePoint))
-            console.log('pay obj : '+JSON.stringify())
-            parseInt(this.chargePoint)
-            axios
-                .post('http://localhost:3000/api/chargePoint',{chargePoint: parseInt(this.chargePoint)}, { headers: {'token': this.token}})
-                .then(res => {
-                    localStorage.setItem('point',res.data) //local storage 에 바뀐 포인트 저장해야함 수정필요
-                    console.log(res.data)
-                    this.paymentpoint(res.data)
-                    router.push({ name: "MainPage"})
-                })
-                .catch((err) => {
-                    console.log(err)
-                    alert("에러가 발생했습니다. 다시 시도해주세요")
-                });
-        },
+        // pay() {
+        //     // console.log('payobj :'+payobj+'\ntoken : '+token+'\ntoken + payobj token :'+payobj.token)
+        //     // console.log('payobj stringfy : '+ JSON.stringify(payobj))
+        //     console.log(typeof(this.chargePoint))
+        //     console.log('pay obj : '+JSON.stringify())
+        //     parseInt(this.chargePoint)
+        //     axios
+        //         .post('http://localhost:3000/api/chargePoint',{chargePoint: parseInt(this.chargePoint)}, { headers: {'token': this.token}})
+        //         .then(res => {
+        //             localStorage.setItem('point',res.data) //local storage 에 바뀐 포인트 저장해야함 수정필요
+        //             console.log(res.data)
+        //             this.paymentpoint(res.data)
+        //             router.push({ name: "MainPage"})
+        //         })
+        //         .catch((err) => {
+        //             console.log(err)
+        //             alert("에러가 발생했습니다. 다시 시도해주세요")
+        //         });
+        // },
         importpay(){
             parseInt(this.chargePoint)
             /* 1. 가맹점 식별하기 */

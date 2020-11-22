@@ -12,6 +12,7 @@ import community from '../views/Community'
 import historyPage from '../views/History'
 import historyDetail from '../views/HistoryDetail'
 import writerList from '../views/WriterList'
+import funding from '../views/Funding'
 
 import diff from '../views/diffTest'
 import WriterApply from '../views/WriterApply'
@@ -85,9 +86,10 @@ export default new VueRouter({
             component: AdvertisingPage
         },
         {
-            path: '/contents',
+            path: '/contents/:idc',
             name: 'ContentsReadingPage',
-            component: ContentsReadingPage
+            component: ContentsReadingPage,
+
         },
         {
             path: '/payment',
@@ -159,11 +161,16 @@ export default new VueRouter({
             component: writerList,
         },
         {
+            path: '/:idp/funding',
+            name: 'fundingPage',
+            component: funding,
+        },
+        {
             path: '/test',
             component: diff,
         },
         {
-            path: '/WriterApply',
+            path: '/:idp/WriterApply',
             name: WriterApply,
             component: WriterApply
         }

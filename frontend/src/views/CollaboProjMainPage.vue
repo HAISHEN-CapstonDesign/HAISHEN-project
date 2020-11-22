@@ -5,30 +5,33 @@
             class="white--text align-end"
             height="200px"
             src="../assets/banner2.jpg"
+            gradient="to top right, rgba(150,150,150,.33), rgba(52,52,52,.7)"
             >
-            <p style="position: absolute; top: 30%; left:45%; font-size:50px;">제목</p>
+            <p style="position: absolute; top: 30%; left:45%; font-size:50px;">{{title}}</p>
             </v-img>
 
         </v-row>
         <v-container>
             <v-row cols="12">
-                <v-col md="8">
+                <v-col md="9">
                     <v-card min-height="500px">
                         <v-col align="center">
-                            <v-btn text>소개</v-btn>
+                            <v-btn text @click="mainInfo">소개</v-btn>
                             <v-btn text @click="writerInfo">저자 info</v-btn>
-                            <v-btn text>목차</v-btn>
-                            <v-btn text>서포터</v-btn>
+                            <v-btn text @click="subtitleList">목차</v-btn>
+                            <v-btn text @click="supporter">서포터</v-btn>
                         </v-col>
                         <v-divider></v-divider>
                         <v-card>
                             <div v-show="nowList=='main'">대충 프로젝트 소개하는 내용</div>
                             <Writer v-show="nowList == 'writer'"></Writer>
+                            <div v-show="nowList=='subtitle'">프로젝트  목차 나열 나중에 편집기능도 넣어야 할듯</div>
+                            <div v-show="nowList=='supporter'">프로젝트 서포터 리스트 component 제작필요</div>
                         </v-card>
                     </v-card>          
                 </v-col>
-                <v-col md="4">
-                    <Toolbar></Toolbar>
+                <v-col md="3">
+                    <Toolbar :idp="idp"></Toolbar>
                 </v-col>
             </v-row>
         </v-container>
@@ -61,6 +64,7 @@ export default {
     },
     data(){
         return{
+            idp:0,
             nowList:'main',
             token: localStorage.getItem('access_token'),
             projectId : this.$route.query.projectId,
@@ -74,6 +78,7 @@ export default {
         }
     },
     created() {
+        this.idp = this.$route.params.idp;
         axios
             .post('http://localhost:3000/api/collaboProj',{id:this.$route.query.projectId}, { headers: {'token': this.token}})
             .then(res => {
@@ -107,8 +112,17 @@ export default {
     parent_replySubmit: function(){
         alert("hello")
     },
+    mainInfo(){
+        this.nowList = 'main'
+    },
     writerInfo(){
         this.nowList = 'writer'
+    },
+    subtitleList(){
+        this.nowList = 'subtitle'
+    },
+    supporter(){
+        this.nowList = 'supporter'
     },
     router_get(){
         alert(this.$route.query.projectId)
