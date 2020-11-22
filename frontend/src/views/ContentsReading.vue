@@ -8,10 +8,6 @@
     </v-img>
     <v-container>
     <v-col align="end">
-        <v-btn @click="increment" icon color="deep-orange">
-            <v-icon>mdi-thumb-up</v-icon>
-        </v-btn>
-        {{ contents_like }}
       </v-col>
     <v-row>
         <v-col
