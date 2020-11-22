@@ -7,16 +7,16 @@
         src="../assets/computer.jpeg"
         gradient="to top right, rgba(150,150,150,.80), rgba(52,52,52,.7)"
         >
-        <p style="position: absolute; top: 20%; left:48%; font-size:70px;">I T</p>
+        <p style="position: absolute; top: 20%; left:48%; font-size:50px;">I T</p>
         </v-img>
         <v-container>
-            <v-row>
-                <v-col cols="auto">
-                    <v-btn @click="showCompleteList">완결된 글</v-btn>
+            <v-row justify="center" no-gutters class="mb-3 pt-5">
+                <v-col md="auto" class="pl-4">
+                    <v-btn color="teal lighten-1" outlined rounded @click="showCompleteList">완결된 글</v-btn>
                 </v-col>
-                <v-col cols="auto">
-                    <v-btn @click="showRecruitList">작가 모집중</v-btn>
-                </v-col>
+                <v-col md="auto" class="pl-4">
+                    <v-btn color="teal lighten-1" outlined rounded @click="showRecruitList">작가 모집중</v-btn>
+                </v-col >
             </v-row>
             <CompleteList v-if="showComplete"></CompleteList>
             <RecruitList v-else></RecruitList>
