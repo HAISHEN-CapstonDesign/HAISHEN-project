@@ -35,8 +35,10 @@
     <v-card-subtitle>
       작가 목록
     </v-card-subtitle>
-    <v-card-text v-text="chat.writers"></v-card-text>
-    
+
+    <div class="text-center">
+      <v-chip class="mx-1" color="deep-purple" outlined v-for="member in chat.writers" :key="member" v-text="member"></v-chip>
+    </div>    
     <v-card-text v-text="chat.progress"></v-card-text>
 
   </v-card>
@@ -65,10 +67,10 @@
       list: [
         {
           idx: 1,
-          title:'제목1',
-          image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-          intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
-          writers: '김ㅇㅇ, 이ㅇㅇ, 박ㅇㅇ',
+          title:'기획자의 트렌드, 소통, 배움, 이타심',
+          image:require('../assets/partership.jpg'),
+          intro: '트렌드와 소통, 끊임없는 배움',
+          writers: ['Jennie', 'hello'],
           progress: '진행률'
         },
         {

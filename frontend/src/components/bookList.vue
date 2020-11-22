@@ -54,7 +54,7 @@ export default {
                     title:'기획자의 트렌드, 소통, 배움, 이타심',
                     info:'기획자의 트렌드, 소통, 배움, 이타심에 관한 글',
                     src: require('../assets/partership.jpg'),
-                    members: ['editor', '기획이조아'],
+                    members: ['Jennie', 'hello'],
                     show: false,
                     like: 3,
                     subscribe: 2,
