@@ -80,7 +80,7 @@ import axios from 'axios'
 export default {
     name: 'PostReply',
     data : () => ({
-        contents_like: 0, //axios로 좋아요 수 가져와야함
+        contents_like: 3, //axios로 좋아요 수 가져와야함
         message: '',
         click_like: false,
         value: '댓글을 입력하세요',
