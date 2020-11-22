@@ -11,7 +11,7 @@
                     md="3"
                     >
                     <!-- 임의로 ContentsReadingPage에 연결해둠 -->
-                        <v-card width="270px" router :to="{name:'ContentsReadingPage'}">
+                        <v-card width="270px" router :to="{name:'ContentsReadingPage',params:{idc:1}}">
                                 <v-img
                                 :src="`https://picsum.photos/200/300?image=${getImage()}`"
                                 height="100px"
@@ -46,9 +46,9 @@ export default {
             dataPerPage:8, //한 페이지에 나올 글의 수
             bookList: [
                 {
-                    title:'캡디 기획 보고서 작성하기',
-                    info:'캡스톤 디자인 기획 보고서 작성하는 방법에 대한 글',
-                    members: ['김김김', '이이이', '박박박'],
+                    title:'기획자의 트렌드, 소통, 배움, 이타심',
+                    info:'기획자의 트렌드, 소통, 배움, 이타심에 관한 글',
+                    members: ['기획자01', '기획이조아'],
                     show: false,
                     like: 4,
                     subscribe: 4,
