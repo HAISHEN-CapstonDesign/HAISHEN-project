@@ -30,8 +30,7 @@ export default new Vuex.Store({
             { idx: 5, text: '당부하고 싶은 말' },
             { idx: 6, text: '글을 마무리하면서' },
         ],
-        subId: 0,
-        projectId: 1,
+        modifying: false,
 
     },
     mutations: {
@@ -64,6 +63,7 @@ export default new Vuex.Store({
             state.userInfo.point = chargepoint
         },
         logout(state) {
+            localStorage.clear()
             if (!window.Kakao.Auth.getAccessToken()) {
                 console.log('Not kakao logged in.');
                 state.isLogin = false
@@ -100,12 +100,12 @@ export default new Vuex.Store({
             })
 
         },
-        changeSubId(state, payload) {
-            state.subId = payload
+        changeTitle(state, payload) {
+            state.title = payload
         },
-        changeProjectId(state, payload) {
-            state.projectId = payload
-        },
+        isModifying(state, payload) {
+            state.modifying = payload;
+        }
     },
     actions: {
         login({ commit }, loginObj) {

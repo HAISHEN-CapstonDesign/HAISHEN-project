@@ -86,9 +86,10 @@ export default new VueRouter({
             component: AdvertisingPage
         },
         {
-            path: '/contents',
+            path: '/contents/:idc',
             name: 'ContentsReadingPage',
-            component: ContentsReadingPage
+            component: ContentsReadingPage,
+
         },
         {
             path: '/payment',

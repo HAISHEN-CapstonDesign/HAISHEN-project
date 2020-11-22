@@ -42,7 +42,7 @@ export default {
         var newPosition_mode = scrollTop + floatPosition_mode + "px";
 	$("#mode_menu").stop().animate({
 	"top" :  newPosition_mode
-        }, 500);
+        }, 700);
 	}).scroll();
     });
     },

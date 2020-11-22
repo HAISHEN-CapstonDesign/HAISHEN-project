@@ -8,14 +8,17 @@
         <v-list-item-group active-class="brown--text">
           <v-list-item
           v-show="!editing"
+          :disabled="modifying"
           @click="clickEdit"
           link
           >
             <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-pencil</v-icon>
+            <v-icon small>mdi-pencil</v-icon>
             </v-list-item-title>
-            <v-list-item-subtitle class="text-center">EDIT</v-list-item-subtitle>
+            <v-list-item-subtitle
+            class="text-center"
+            >EDIT</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-list-item
@@ -25,7 +28,7 @@
           >
             <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-pencil-off</v-icon>
+            <v-icon small>mdi-pencil-off</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">CANCEL</v-list-item-subtitle>
             </v-list-item-content>
@@ -33,7 +36,7 @@
           <v-list-item @click="clickHistory" link>
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-history</v-icon>
+            <v-icon small>mdi-history</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">HISTORY</v-list-item-subtitle>
           </v-list-item-content>
@@ -41,7 +44,7 @@
           <v-list-item @click="clickCommunity" link>
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-forum</v-icon>
+            <v-icon small>mdi-forum</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">COMMUNITY</v-list-item-subtitle>
           </v-list-item-content>
@@ -53,7 +56,7 @@
           >
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-check-circle</v-icon>
+            <v-icon small>mdi-check-circle</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">SUBMIT</v-list-item-subtitle>
           </v-list-item-content>
@@ -64,19 +67,20 @@
           >
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-download</v-icon>
+            <v-icon small>mdi-download</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">DOWNLOAD</v-list-item-subtitle>
           </v-list-item-content>
           </v-list-item>
           <v-list-item
           @click="onClickFileUpload"
+          :disabled="modifying"
           link
           >
           <input ref="fileInput" type="file" hidden @change="importFile">
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-upload</v-icon>
+            <v-icon small>mdi-upload</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">UPLOAD</v-list-item-subtitle>
           </v-list-item-content>
@@ -88,9 +92,11 @@
         <div id="subtitle" v-show="false">{{subtitle}}</div>
             </v-card>
 </template>
+<!-- style="font-size:10px;" -->
 <script>
 import EventBus from '../EventBus.js';
 import $ from 'jquery';
+import axios from 'axios'
 
 export default {
     mounted(){
@@ -102,7 +108,7 @@ export default {
         var newPosition_mode = scrollTop + floatPosition_mode + "px";
 	$("#mode_menu").stop().animate({
 	"top" :  newPosition_mode
-        }, 500);
+        }, 1000);
 	}).scroll();
     });
     //download code
@@ -128,7 +134,7 @@ export default {
         download(filename, text);
       }, false);
     },
-    props:['isEditing', 'mainText', 'ids', 'title', 'subtitle'],
+    props:['isEditing', 'mainText', 'ids', 'title', 'subtitle', 'modifying','idp'],
     data() {
         return {
             editing: false,
@@ -151,7 +157,7 @@ export default {
           this.editing = !this.editing
           this.$emit('changeEdit', this.editing);
         }
-        this.$router.push(`/${this.$store.state.projectId}/${this.ids}/historyPage`);
+        this.$router.push(`/${this.idp}/${this.ids}/historyPage`);
       },
       clickSubmit(){
         EventBus.$emit('submit');       
@@ -159,12 +165,39 @@ export default {
         this.$emit('changeEdit', this.editing);
       },
       clickEdit(){
-        if(!this.editing){
-          this.editing = !this.editing
-          this.$emit('changeEdit', this.editing);
-        }
+          axios.post(`http://localhost:3000/api/project/${this.idp}/pressModifyButton/${this.ids}`, {tmp:''},
+          {
+            headers: {
+              'token': localStorage.getItem('access_token')
+            }
+          })
+          .then((res) => {
+            if(res.data =='failed'){
+              alert('다른 사람이 수정중인 글입니다.')
+            }
+            else{
+              this.editing = !this.editing
+              this.$emit('changeEdit', this.editing);
+            }
+            console.log(res);
+          })
+          .catch(function (error) {
+            console.log(error.response);
+          });
       },
       cancelEdit(){
+          axios.post(`http://localhost:3000/api/project/${this.idp}/pressModifyCancelButton/${this.ids}`, {tmp:''},
+          {
+            headers: {
+              'token': localStorage.getItem('access_token')
+            }
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch(function (error) {
+            console.log(error.response);
+          });
         this.editing = !this.editing
         this.$emit('changeEdit', this.editing);
       },

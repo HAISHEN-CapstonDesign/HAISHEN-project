@@ -20,8 +20,8 @@
                 <v-card-actions >
                     <v-spacer class="pa-10"></v-spacer>
                     <v-btn class="black white--text" text @click="dialog = false">취소</v-btn>
-                    <v-btn class="black white--text" text @click="pay()">결제</v-btn>
-                    <v-btn class="black white--text" text @click="importpay()">아임포트결제</v-btn>
+                     <v-btn class="black white--text" text @click="pay()">결제</v-btn>
+                    <v-btn class="black white--text" text @click="importpay()">결제</v-btn>
                 </v-card-actions>
             </v-card>
         </v-flex>
@@ -41,7 +41,7 @@ export default {
     name: 'Payment',
     data: () => ({
         dialog: false,
-        items: [5000, 10000, 20000],
+        items: [1000, 5000, 10000, 20000],
         chargePoint: 0,
         token: localStorage.getItem('access_token'),
         currentpoint: localStorage.getItem('point')

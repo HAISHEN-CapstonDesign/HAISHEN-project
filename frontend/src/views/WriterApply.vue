@@ -66,9 +66,13 @@ import axios from 'axios'
 
 export default {
     name: 'WriterApply',
+    created() {
+        this.idp = this.$route.params.idp;
+    },
 
     data() {
         return{
+            idp:0,
             comment: '',
             token: localStorage.getItem('access_token'),
         }
@@ -76,7 +80,7 @@ export default {
     methods:{
         submit(){
 
-            axios.post('/api/writerapply', {comment: this.comment },{ headers: {'token': this.token}})
+            axios.post('/api/writerapply', {projectId: this.idp, comment: this.comment },{ headers: {'token': this.token}})
             .then(res => {
                 console.log(res)
                 
