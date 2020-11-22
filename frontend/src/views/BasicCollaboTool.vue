@@ -15,12 +15,12 @@
                 </v-card-text>
                   </v-col>
                   <v-col md="12">
-                  <p>저장하시겠습니까?</p>
-                <v-text-field
-                v-model="comment"
-                label="Commemt"
-                outlined
-                ></v-text-field>
+                    <v-text-field
+                    v-model="comment"
+                    label="Commemt"
+                    outlined
+                    ></v-text-field>
+                    <p>저장하시겠습니까?</p>
                   </v-col>
                 </v-row>
                 </v-container>
@@ -45,11 +45,27 @@
         </v-dialog>
     <div>
       <v-img
+        class="white--text"
         max-height="200"
         max-width="100%"
         v-bind:src="imgUrl"
+        gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
         >
-    </v-img>
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
+        >
+        <v-col
+          align="center"
+          justify="center"
+        >
+          <div class="display-1">기획자의 트렌드, 소통, 배움, 이타심</div>
+          <v-spacer class="pt-5"></v-spacer>
+          <div class="subtitle-1 font-italic">By. Jennie。hello</div>
+        </v-col>
+        </v-row>
+      </v-img>
       <v-col align="end">
         <v-btn
         class="l_btn"
@@ -122,7 +138,8 @@
                 class="ma-1"
                 size="50"
               >
-                <v-img :src="hisS3key"></v-img>
+              <!-- <v-img :src="hisS3key"></v-img> -->
+                <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"></v-img>
               </v-avatar>
               <p>{{hisNickname}}</p>
           </v-col>
@@ -206,7 +223,7 @@ export default {
             nowMainText: '',
             editText:'',
             editFiles:[],
-            imgUrl: require('../assets/banner2.jpg'),
+            imgUrl: require('../assets/partership.jpg'),
             dialog:false,
             comment:'',
             project: {},

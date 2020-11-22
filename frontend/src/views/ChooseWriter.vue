@@ -1,17 +1,32 @@
 <template>
   <v-app>
     <v-img
-      max-height="200"
-      max-width="100%"
-      src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-    >
-    <div style="position: absolute; top: 50%; left: 50%;">
+        class="white--text"
+        max-height="200"
+        max-width="100%"
+        v-bind:src="imgUrl"
+        gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
+        >
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
+        >
+        <v-col
+          align="center"
+          justify="center"
+        >
+          <div class="display-1">{{title}}</div>
+        </v-col>
+        </v-row>
+      </v-img>
+    <!--<div style="position: absolute; top: 50%; left: 50%;">
     <p class="text-center white--text headline">
       {{title}}
     </p>
     </div>
-    </v-img>
-    <p>{{selected}}</p>
+    </v-img>-->
+    <!-- <p>{{selected}}</p> -->
     <v-container>
         <v-row cols="12" justify="center">
             <v-col md="10">
@@ -79,18 +94,42 @@
                     <v-btn @click="start" large class="ma-2">
                         메인으로 돌아가기
                     </v-btn>
-                    <v-btn @click="start" large class="ma-2">
+                    <!-- <v-btn @click="start" large class="ma-2">
                         펀딩 시작하기
+                        
+                    </v-btn> -->
+                    <v-btn @click="submit_start_funding()" large class="ma-2">
+                        채택하기
                         <v-icon right>
                             mdi-check-circle-outline
                         </v-icon>
                     </v-btn>
-                    <v-btn @click="submit_start_funding()">
-                        submit
-                    </v-btn>
                 </div>
             </v-col>
         </v-row>
+         <v-dialog
+          v-model="adopt"
+          persistent
+          max-width="500"
+        >
+        <v-card>
+          <v-card-title class="headline">
+            채택이 완료되었습니다
+          </v-card-title>
+          <v-card-text>공동 작업 페이지로 이동합니다</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="green darken-1"
+              text
+              @click="goto_mainproj()"
+            >
+                확인
+            </v-btn>
+     
+          </v-card-actions>
+      </v-card>
+    </v-dialog>
     </v-container>
   </v-app>   
 </template>
@@ -102,6 +141,8 @@ export default {
     name:'ChooseWriter',
     data() {
         return{
+            imgUrl: require('../assets/partership.jpg'),
+            adopt:false,
             expanded: [],
             singleExpand: false,
             headers: [
@@ -143,10 +184,17 @@ export default {
             // this.submit_selected.push()
             console.log(this.submit_selected)
             axios
-                .post('http://localhost:3000/api/${this.idp}/submitStartFunding',{selectedWriters:this.submit_selected},{ headers: {'token': localStorage.getItem('access_token')}})
+                .post('http://localhost:3000/api/${this.idp}/submitStartFunding',this.submit_selected,{ headers: {'token': localStorage.getItem('access_token')}})
                 .then(res=>{
                     console.log(res.data)
+                    this.adopt=true
+                    
                 })
+        },
+        goto_mainproj(){
+            this.adopt=false
+            this.$router.push(`/1/basicCollaboTool/1`)
+            // this.$router.push(`/${this.idp}/basicCollaboTool/1`)
         }
         
     },

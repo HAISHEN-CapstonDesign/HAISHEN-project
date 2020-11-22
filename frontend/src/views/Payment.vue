@@ -20,7 +20,7 @@
                 <v-card-actions >
                     <v-spacer class="pa-10"></v-spacer>
                     <v-btn class="black white--text" text @click="dialog = false">취소</v-btn>
-                     <v-btn class="black white--text" text @click="pay()">결제</v-btn>
+                    <!--  <v-btn class="black white--text" text @click="pay()">결제</v-btn> -->
                     <v-btn class="black white--text" text @click="importpay()">결제</v-btn>
                 </v-card-actions>
             </v-card>
