@@ -1,9 +1,11 @@
 <template>
     <v-card id="mode_menu" style="top:0px;" max-width="250" align="center">
         <v-card-text>
-            <p>펀딩금액: 달성/목표</p>
-            <p>목표 작업 기한, d-day</p>
-            <p>모집 작가 수: 달성/목표</p>
+            <p v-show="target_funding_money">펀딩금액: 달성/{{target_funding_money}}</p>
+            <p v-show="!target_funding_money">펀딩 받지 않음</p>
+            <p v-show="target_d_day">목표 작업 기한: {{target_d_day}}</p>
+            <p v-show="!target_d_day">목표 작업 기한: 무기한</p>
+            <p>모집 작가 수: {{mwn}}</p>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-action>
@@ -46,7 +48,7 @@ export default {
 	}).scroll();
     });
     },
-    props:['idp'],
+    props:['idp', 'target_funding_money', 'target_d_day','mwn'],
     data() {
         return {
             editing: false,

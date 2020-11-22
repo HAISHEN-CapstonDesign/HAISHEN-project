@@ -10,14 +10,18 @@
                     sm="4"
                     md="3"
                     >
-                        <v-card width="270px">
-                                <v-img
+                        <v-card width="270px" router :to="{name:'CollaboProjMain',params:{idp:67}}">
+                                <!--<v-img
                                 :src="`https://picsum.photos/200/300?image=${getImage()}`"
                                 height="100px"
+                                ></v-img>-->
+                                <v-img
+                                    :src="list.src"
+                                    height="100px"
                                 ></v-img>
                                 <v-card-title v-text="list.title" class="justify-center" style="font-size:15px"></v-card-title>
                                     <div class="text-center">
-                                        <v-chip v-for="member in list.members" :key="member" v-text="member"></v-chip>
+                                        <v-chip class="mx-1" color="deep-purple" outlined v-for="member in list.members" :key="member" v-text="member"></v-chip>
                                     </div>
                                     <v-card-title class="justify-center" style="font-size:15px">모집인원</v-card-title>
                                 <v-card-subtitle>
@@ -67,83 +71,93 @@ export default {
             dataPerPage:8, //한 페이지에 나올 글의 수
             bookList: [
                 {
-                    title:'여행이란 무엇인가',
-                    info:'여행이란 무엇인가, 여행에 대한 고찰',
-                    members: ['철수'],
+                    title:'기획자의 트렌드, 소통, 배움, 이타심',
+                    info:'기획자의 트렌드, 소통, 배움, 이타심에 관한 글',
+                    src: require('../assets/partership.jpg'),
+                    members: ['Jennie', 'hello'],
                     show: false,
                     targetNum:6,
                     memberNum:2,
                 },
                 {
-                    title:'라면 끓이는법',
-                    info:'라면 끓이는법에 대한 글',
-                    members: ['영희'],
+                    title:'앤드류 응의 머신러닝(13-1):비지도학습 클러스터링',
+                    info:'앤드류 응의 머신러닝(13-1):비지도학습 클러스터링',
+                    src: require('../assets/mclearning.png'),
+                    members: ['라인하트','andrew'],
+                    show: false,
+                    targetNum:4,
+                    memberNum:2,
+                },
+                {
+                    title:'치매, 그리고 AI',
+                    info:'치매, 그리고 AI',
+                    members: ['글쓰는 몽글c'],
+                    src: require('../assets/chimae.jpg'),
+                    show: false,
+                    targetNum:5,
+                    memberNum:1,
+                },
+                {
+                    title:'드디어! - 애플 아이폰 12 프로 맥스 실버 언박싱!',
+                    info:'드디어! - 애플 아이폰 12 프로 맥스 실버 언박싱!',
+                    members: ['비범한츈','나도개봉'],
+                    src: require('../assets/appleunboxing.jpg'),
                     show: false,
                     targetNum:6,
                     memberNum:2,
                 },
                 {
-                    title:'한 눈에 보는 한국사',
-                    info:'한국사의 모든 것을 목표로 하는 프로젝트',
-                    members: ['경수','미영'],
+                    title:'아이폰 12 화면 결함 소프트웨어 업데이트로 해결 예정',
+                    info:'아이폰 12 화면 결함 소프트웨어 업데이트로 해결 예정',
+                    members: ['시류아','잉여공학도'],
+                    src: require('../assets/iphoneupdate.png'),
+                    show: false,
+                    targetNum:4,
+                    memberNum:2,
+                },
+                {
+                    title:'데이터프로젝트의 단단한 초석 쌓기',
+                    info:'데이터프로젝트의 단단한 초석 쌓기',
+                    src: require('../assets/bigdataproject.jpg'),
+                    members: ['Suki','스시조아','너랑나랑은'],
+                    show: false,
+                    targetNum:6,
+                    memberNum:3,
+                },
+                {
+                    title:'아이폰 `미리알림` 어디까지 써봤니?',
+                    info:'아이폰 `미리알림` 어디까지 써봤니?',
+                    src: require('../assets/iphone_002.jpg'),
+                    members: ['Dave','Davit'],
+                    show: false,
+                    targetNum:4,
+                    memberNum:2,
+                },
+                {
+                    title:'내 폰에게 칭찬을',
+                    info:'내 폰에게 칭찬을',
+                    src: require('../assets/myphone_01.jpg'),
+                    members: ['점제이','l_luv'],
                     show: false,
                     targetNum:6,
                     memberNum:2,
                 },
                 {
-                    title:'한 눈에 보는 한국사',
-                    info:'한국사의 모든 것을 목표로 하는 프로젝트',
-                    members: ['경수','미영'],
+                    title:'드디어! - 애플 아이폰 12 프로 맥스 실버 언박싱!',
+                    info:'드디어! - 애플 아이폰 12 프로 맥스 실버 언박싱!',
+                    members: ['비범한츈','나도개봉'],
+                    src: require('../assets/appleunboxing.jpg'),
                     show: false,
                     targetNum:6,
                     memberNum:2,
                 },
                 {
-                    title:'한 눈에 보는 한국사',
-                    info:'한국사의 모든 것을 목표로 하는 프로젝트',
-                    members: ['경수','미영'],
+                    title:'앤드류 응의 머신러닝(13-1):비지도학습 클러스터링',
+                    info:'앤드류 응의 머신러닝(13-1):비지도학습 클러스터링',
+                    src: require('../assets/mclearning.png'),
+                    members: ['라인하트','andrew'],
                     show: false,
-                    targetNum:6,
-                    memberNum:2,
-                },
-                {
-                    title:'한 눈에 보는 한국사',
-                    info:'한국사의 모든 것을 목표로 하는 프로젝트',
-                    members: ['경수','미영'],
-                    show: false,
-                    targetNum:6,
-                    memberNum:2,
-                },
-                {
-                    title:'한 눈에 보는 한국사',
-                    info:'한국사의 모든 것을 목표로 하는 프로젝트',
-                    members: ['경수','미영'],
-                    show: false,
-                    targetNum:6,
-                    memberNum:2,
-                },
-                {
-                    title:'한 눈에 보는 한국사',
-                    info:'한국사의 모든 것을 목표로 하는 프로젝트',
-                    members: ['경수','미영'],
-                    show: false,
-                    targetNum:6,
-                    memberNum:2,
-                },
-                {
-                    title:'한 눈에 보는 한국사',
-                    info:'한국사의 모든 것을 목표로 하는 프로젝트',
-                    members: ['경수','미영'],
-                    show: false,
-                    targetNum:6,
-                    memberNum:2,
-                },
-                {
-                    title:'한 눈에 보는 한국사',
-                    info:'한국사의 모든 것을 목표로 하는 프로젝트',
-                    members: ['경수','미영'],
-                    show: false,
-                    targetNum:6,
+                    targetNum:4,
                     memberNum:2,
                 },
             ],
