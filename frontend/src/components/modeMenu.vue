@@ -85,6 +85,16 @@
             <v-list-item-subtitle class="text-center">UPLOAD</v-list-item-subtitle>
           </v-list-item-content>
           </v-list-item>
+          <v-list-item
+          link
+          >
+          <v-list-item-content>
+            <v-list-item-title class="text-center">
+            <v-icon small>mdi-bookmark-plus</v-icon>
+            </v-list-item-title>
+            <v-list-item-subtitle class="text-center">INDEX</v-list-item-subtitle>
+          </v-list-item-content>
+          </v-list-item>
           </v-list-item-group>
         </v-list>
         <div id="text-val" v-html="mainText" v-show="false"></div>
