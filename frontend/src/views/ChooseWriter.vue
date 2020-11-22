@@ -68,10 +68,13 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name:'ChooseWriter',
     data() {
         return{
+            idp: 0,
             chooseList:[],
             applicants:[
                 {
@@ -113,8 +116,21 @@ export default {
     methods: {
         start(){
             console.log(this.chooseList)
-        }
+        },
+        
     },
+    created(){
+        this.idp = this.$route.params.idp;
+        axios
+            .post(`http://localhost:3000/api/${this.idp}/choosewriter`,{id:this.idp},{ headers: {'token': localStorage.getItem('access_token')}})
+            .then(res => {
+                //1이면 main, 0이면 sub
+                console.log(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    }
 }
 </script>
 <!--

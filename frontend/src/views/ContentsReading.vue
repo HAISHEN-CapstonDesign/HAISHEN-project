@@ -8,10 +8,6 @@
     </v-img>
     <v-container>
     <v-col align="end">
-        <v-btn @click="increment" icon color="deep-orange">
-            <v-icon>mdi-thumb-up</v-icon>
-        </v-btn>
-        {{ contents_like }}
       </v-col>
     <v-row>
         <v-col
@@ -79,6 +75,10 @@
           <div class="pt-10">
            <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
           </div>
+           
+             <!-- <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
+-->
+<!-- 나중에 하나로 합쳐지면 div에 class="content_div" 추가 -->
           </v-card>
           </v-container>
           </div>
