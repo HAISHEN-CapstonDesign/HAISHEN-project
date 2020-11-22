@@ -80,7 +80,7 @@ export default {
     created() {
         this.idp = this.$route.params.idp;
         axios
-            .post('http://localhost:3000/api/collaboProj',{id:this.$route.query.projectId}, { headers: {'token': this.token}})
+            .post('http://localhost:3000/api/collaboProj',{id:this.idp}, { headers: {'token': this.token}})
             .then(res => {
                 this.title = res.data.title
                 this.introduction = res.data.introduction
