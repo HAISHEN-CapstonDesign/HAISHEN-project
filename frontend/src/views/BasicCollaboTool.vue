@@ -15,12 +15,12 @@
                 </v-card-text>
                   </v-col>
                   <v-col md="12">
-                  <p>저장하시겠습니까?</p>
-                <v-text-field
-                v-model="comment"
-                label="Commemt"
-                outlined
-                ></v-text-field>
+                    <v-text-field
+                    v-model="comment"
+                    label="Commemt"
+                    outlined
+                    ></v-text-field>
+                    <p>저장하시겠습니까?</p>
                   </v-col>
                 </v-row>
                 </v-container>
@@ -138,7 +138,8 @@
                 class="ma-1"
                 size="50"
               >
-                <v-img :src="hisS3key"></v-img>
+              <!-- <v-img :src="hisS3key"></v-img> -->
+                <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"></v-img>
               </v-avatar>
               <p>{{hisNickname}}</p>
           </v-col>
