@@ -215,7 +215,7 @@ export default {
       },
       imageFileAdd(imgfile){
         this.subObj.files=imgfile
-        console.log(imgfile)
+        console.log(this.subObj.files)
       }
     },
 }

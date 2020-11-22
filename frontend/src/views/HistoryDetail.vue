@@ -26,22 +26,15 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
-        <br/>
+        <br><br>
         <v-container>
             <v-row>
                 <v-col md="10" sm="10">
                     <div style="float:right; font-size:25px; color:#A06641;">HISTORY DETAIL</div>
-                    <div style="font-size:20px; color:#A06641;">{{$store.state.subtitle[ids-1].text}}</div>
+                    <div style="font-size:25px; color:#A06641;">{{$store.state.subtitle[ids-1].text}}</div>
                     <v-card>
-                        <div style="margin:0" v-html="prettyHtml"/>
+                        <div v-html="prettyHtml" />
                     </v-card>
-                    <v-btn
-                    color="green darken-1"
-                    text
-                    @click="dialog = true"
-                    >
-                        Disagree
-                    </v-btn>
                 </v-col>
                 <v-col md="2" sm="2">
                     <Menu
@@ -86,7 +79,6 @@ export default {
             idh:0,
             diffs:'',
             comment:'',
-            dialog: false,
             reObj:{
                 commit_comment:'',
                 time: ''
