@@ -3,9 +3,21 @@
         <v-img
         max-height="200"
         max-width="100%"
-        src="../assets/banner.jpg"
+        src='../assets/partership.jpg'
+        gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
         >
-        <p style="position: absolute; top: 32%; left:45%; font-size:50px; color: white;">주제</p>
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
+        >
+        <v-col
+          align="center"
+          justify="center"
+        >
+        <p style="font-size:50px; color: white;">기획자의 트렌드, 소통, 배움, 이타심</p>
+        </v-col>
+        </v-row>
         </v-img>
         <v-container>
             <v-row cols="12" align="center" justify="center">
@@ -28,7 +40,9 @@
                                 :placeholder= $store.state.userInfo.nickname
                                 ></v-text-field>
                                 <v-autocomplete
-                                disabled
+                                v-model="intre"
+                                :items="items"
+                                :disabled="profile_radios == 'radio-1'"
                                 outlined
                                 dense
                                 chips
@@ -40,6 +54,7 @@
                             </v-row>
                             <v-textarea
                             label="지필 이력"
+                            v-model="carrer"
                             outlined
                             ></v-textarea>
                         <v-textarea
@@ -56,7 +71,7 @@
             
             <v-row cols="12" justify="center">
                 <v-col md="8" align="right">
-                <v-btn class="ma-2" @click="submit()">임시저장</v-btn>
+                <v-btn v-show="false" class="ma-2" @click="submit()">임시저장</v-btn>
                 <v-btn class="ma-2" @click="submit()">제출</v-btn>
                 </v-col>
             </v-row>
@@ -101,6 +116,10 @@ export default {
             dialog0: false,
             comment: '',
             token: localStorage.getItem('access_token'),
+            intre:['IT'],
+            items:['여행', '수학', '과학', 'IT', '요리','건강','역사','건축','문화,예술'],
+            carrer:`1. 아이폰 12 생태계,
+2. 일상을 담는 모빌리티 - 총 12회차`,
         }
     },
     methods:{
