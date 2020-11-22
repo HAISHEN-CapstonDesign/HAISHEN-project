@@ -34,7 +34,7 @@
                         <v-divider></v-divider>
                         <div v-show="nowList=='main'">
                                 <v-textarea
-                                disabled
+                                readonly
                                 v-model="introduction"
                                 solo
                                 flat="flase"
