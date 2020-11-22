@@ -310,6 +310,7 @@ export default {
     },
     endAd(over){
         this.overlay = over;
+        this.$router.push({ name: 'ContentsReadingPage',params: {idc: this.new_selected_idx} })
     },
     dialogAd(){
       this.dialog1 = false
