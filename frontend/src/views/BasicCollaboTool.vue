@@ -225,29 +225,38 @@ export default {
         this.nowMainText = newText;
         //post data
         let form = new FormData()
+        let form2 = new FormData()
         form.append('after', newText)
         form.append('commit_comment', this.comment)
         form.append('time', this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss'))
-        form.append('files', this.subObj.files)
+        form2.append('files', this.subObj.files)
 
-        this.subObj.after = newText;
-        this.subObj.commit_comment = this.comment;
-        this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-        console.log(this.subObj)
-        axios.post(`http://localhost:3000/api/project/${this.idp}/modify/basicTool/${this.ids}`, form,
+       // this.subObj.after = newText;
+      //  this.subObj.commit_comment = this.comment;
+      //  this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+       // console.log(this.subObj)
+        axios.post(`http://localhost:3000/api/project/file`, form2)
+        .then((res) => {
+          axios.post(`http://localhost:3000/api/project/${this.idp}/modify/basicTool/${this.ids}`, form,
           {
             headers: {
               'token': localStorage.getItem('access_token')
               //'Content-Type':'multipart/form-data'
             }
           })
-        .then((res) => {
-          this.project = res.data;
+            .then((res) => {
+            this.project = res.data;
+            console.log(res);
+          })
+          .catch(function (error) {
+            console.log(error.response);
+          });
           console.log(res);
         })
         .catch(function (error) {
           console.log(error.response);
         });
+        
         this.comment = ''
         this.files = null;
       },
