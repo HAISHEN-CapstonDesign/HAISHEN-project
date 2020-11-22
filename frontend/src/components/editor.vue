@@ -189,7 +189,6 @@
     <v-divider></v-divider>
     <br>
     <editor-content class="editor__content" :editor="editor" v-model="content"/>
-    
   </div>
 </template>
 
@@ -258,6 +257,7 @@ export default {
       }),
       contE:this.mainText,
       test:'',
+      imgFile: null,
     }
   },
   beforeDestroy() {
@@ -268,6 +268,7 @@ export default {
   created() {
     EventBus.$on('submit',()=>{
       this.$emit('event-data', this.contE);
+      this.$emit('imageFile', this.imgFile);
     })
   },
   mounted() {
@@ -279,10 +280,12 @@ export default {
     },
     openModal(command) {
       this.$refs.ytmodal.showModal(command);
+     // this.$emit('imageFile',imgfile)
     },
     addCommand(data) {
       if (data.command !== null) {
         data.command(data.data);
+        this.imgFile = data.data.file
       }
     },
   },

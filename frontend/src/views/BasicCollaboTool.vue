@@ -51,7 +51,7 @@
           <h1>{{subtitle}}</h1>
 
           <v-divider></v-divider>
-          <Editor v-bind:mainText="nowMainText" @event-data="updateText"></Editor>
+          <Editor v-bind:mainText="nowMainText" @imageFile="imageFileAdd" @event-data="updateText"></Editor>
           <v-text-field
             v-model="comment"
             label="Commemt"
@@ -71,10 +71,24 @@
         flat
         tile
         >
+        <v-row cols="12">
+          <v-col md="10">
+        <div>
           <h3>{{title}}</h3>
           <h1>{{subtitle}}</h1>
           <p>{{$moment(project.time).format('YYYY-MM-DD HH:mm:ss')}}, {{project.writerName}}</p>               
-
+        </div>
+          </v-col>
+          <v-col md="2" align="center" v-show="modifying">
+            <v-avatar
+                class="ma-1"
+                size="50"
+              >
+                <v-img :src="hisS3key"></v-img>
+              </v-avatar>
+              <p>{{hisNickname}}</p>
+          </v-col>
+        </v-row>
           <v-divider></v-divider>
           <br>
             <div v-html="nowMainText"></div>
@@ -93,9 +107,11 @@
           <Menu
           v-model="isEditing"
           v-bind:ids="ids"
+          v-bind:idp="idp"
           v-bind:mainText="nowMainText"
           v-bind:title="title"
           v-bind:subtitle="subtitle"
+          v-bind:modifying="modifying"
           @changeEdit="editingChange"
           @uploadFile="uploadFile"></Menu>
         </v-col>
@@ -120,7 +136,6 @@ export default {
     created() {
       this.idp = this.$route.params.idp;
       this.ids = this.$route.params.ids;
-      this.$store.commit('changeids', this.ids)
       this.subtitle=this.$store.state.subtitle[this.ids-1].text
       this.title=this.$store.state.title
       axios.get(`http://localhost:3000/api/project/1/blob/basicTool/${this.ids}`)
@@ -128,6 +143,10 @@ export default {
           this.project = res.data;
           this.nowMainText = this.project.post;
           //this.imgUrl = this.project.s3key;
+          this.modifying = this.project.modifying;
+          this.$store.commit('isModifying', this.modifying)
+          this.hisNickname = this.project.hisNickname;
+          this.hisS3key = this.project.hisS3key;
           console.log(res);
         })
         .catch(function (error) {
@@ -136,6 +155,9 @@ export default {
     },
     data() {
         return{
+            modifying: false,
+            hisNickname:'',
+            hisS3key:'',
             idp:0,
             ids:0,
             token: localStorage.getItem('access_token'),
@@ -150,6 +172,8 @@ export default {
               after:'',
               time:'',
               commit_comment:'',
+              files:[],
+              test:null,
             },
         }
     },
@@ -162,10 +186,10 @@ export default {
         this.subObj.commit_comment = this.comment;
         this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
         console.log(this.subObj)
-        axios.post(`http://localhost:3000/api/project/1/modify/basicTool/${this.ids}`, this.subObj,
+        axios.post(`http://localhost:3000/api/project/${this.idp}/modify/basicTool/${this.ids}`, this.subObj,
           {
             headers: {
-              token: localStorage.getItem('access_token')
+              'token': localStorage.getItem('access_token')
             }
           })
         .then((res) => {
@@ -176,18 +200,23 @@ export default {
           console.log(error.response);
         });
         this.comment = ''
+        this.files = null;
       },
       editingChange(state){
         this.isEditing = state;
       },
       changeSubtitle(idx){
         //목차 클릭시 페이지 변경
-        this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
+        this.$router.push(`/${this.idp}/basicCollaboTool/${idx}`);
       },
       uploadFile(fileText){
         this.nowMainText = fileText;
         this.isEditing = true;
       },
+      imageFileAdd(imgfile){
+        this.subObj.files.push(imgfile);
+        console.log(imgfile)
+      }
     },
 }
 </script>

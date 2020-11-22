@@ -41,7 +41,7 @@ export default {
     name: 'Payment',
     data: () => ({
         dialog: false,
-        items: [5000, 10000, 20000],
+        items: [1000, 5000, 10000, 20000],
         chargePoint: 0,
         token: localStorage.getItem('access_token'),
         currentpoint: localStorage.getItem('point')
