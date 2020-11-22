@@ -57,7 +57,7 @@
           <div class="subtitle-1 font-italic">By. editor。기획이조아</div>
         </v-col>
         </v-row>
-    </v-img>
+      </v-img>
       <v-col align="end">
         <v-btn
         class="l_btn"

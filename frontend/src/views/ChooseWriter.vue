@@ -1,16 +1,31 @@
 <template>
   <v-app>
     <v-img
-      max-height="200"
-      max-width="100%"
-      src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-    >
-    <div style="position: absolute; top: 50%; left: 50%;">
+        class="white--text"
+        max-height="200"
+        max-width="100%"
+        v-bind:src="imgUrl"
+        gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
+        >
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
+        >
+        <v-col
+          align="center"
+          justify="center"
+        >
+          <div class="display-1">{{title}}</div>
+        </v-col>
+        </v-row>
+      </v-img>
+    <!--<div style="position: absolute; top: 50%; left: 50%;">
     <p class="text-center white--text headline">
       {{title}}
     </p>
     </div>
-    </v-img>
+    </v-img>-->
     <!-- <p>{{selected}}</p> -->
     <v-container>
         <v-row cols="12" justify="center">
@@ -126,6 +141,7 @@ export default {
     name:'ChooseWriter',
     data() {
         return{
+            imgUrl: require('../assets/partership.jpg'),
             adopt:false,
             expanded: [],
             singleExpand: false,
