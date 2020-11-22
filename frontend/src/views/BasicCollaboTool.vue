@@ -1,5 +1,40 @@
 <template>
   <v-app>
+    <v-dialog
+        v-model="dialog"
+        persistent
+        max-width="500"
+        >
+            <v-card>
+                <v-card-title class="headline">
+                    저장하시겠습니까?
+                </v-card-title>
+                <v-container>
+                <v-text-field
+                v-model="comment"
+                label="Commemt"
+                outlined
+                ></v-text-field>
+                </v-container>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                    color="green darken-1"
+                    text
+                    @click="revertYes"
+                    >
+                        확인
+                    </v-btn>
+                    <v-btn
+                    color="red darken-1"
+                    text
+                    @click="revertNo"
+                    >
+                        취소
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     <div>
       <v-img
         max-height="200"
@@ -21,6 +56,13 @@
         <v-btn class="l_btn" text>
           프로젝트 종료
         </v-btn>
+        <v-btn
+                    color="green darken-1"
+                    text
+                    @click="dialog=true"
+                    >
+                        dialog test
+                    </v-btn>
       </v-col>
     <!-- 개별 작성 페이지-->
     <v-container>
@@ -166,6 +208,7 @@ export default {
             subtitle:'',
             nowMainText: '',
             imgUrl: require('../assets/banner2.jpg'),
+            dialog:false,
             comment:'',
             project: {},
             subObj:{
@@ -181,11 +224,17 @@ export default {
         //본문 변경 내용 저장
         this.nowMainText = newText;
         //post data
+        let form = new FormData()
+        form.append('after', newText)
+        form.append('commit_comment', this.comment)
+        form.append('time', this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss'))
+        form.append('files', this.subObj.files)
+
         this.subObj.after = newText;
         this.subObj.commit_comment = this.comment;
         this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
         console.log(this.subObj)
-        axios.post(`http://localhost:3000/api/project/${this.idp}/modify/basicTool/${this.ids}`, this.subObj,
+        axios.post(`http://localhost:3000/api/project/${this.idp}/modify/basicTool/${this.ids}`, form,
           {
             headers: {
               'token': localStorage.getItem('access_token')
@@ -215,7 +264,13 @@ export default {
       },
       imageFileAdd(imgfile){
         this.subObj.files=imgfile
-      }
+      },
+      revertYes(){
+        this.dialog=false;
+      },
+      revertNo(){
+        this.dialog=false;
+      },
     },
 }
 </script>

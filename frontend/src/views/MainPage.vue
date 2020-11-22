@@ -78,6 +78,7 @@
 <script>
 import RecruitmentWriter from '../components/recruitWriter.vue'
 import RecruitmentFund from '../components/recruitFund.vue'
+// import { Splide, SplideSlide } from '@splidejs/vue-splide';
 
 
 export default {
