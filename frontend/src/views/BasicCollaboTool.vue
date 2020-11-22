@@ -220,24 +220,25 @@ export default {
         }
     },
     methods: {
-      updateText(newText){
+      updateText(newText, imgfile){
         //본문 변경 내용 저장
         this.nowMainText = newText;
+        this.subObj.files=imgfile
         //post data
         let form = new FormData()
         let form2 = new FormData()
         form.append('after', newText)
         form.append('commit_comment', this.comment)
         form.append('time', this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss'))
-        form2.append('files', this.subObj.files)
+        form2.append('files',this.subObj.files)
 
-       // this.subObj.after = newText;
-      //  this.subObj.commit_comment = this.comment;
-      //  this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+        this.subObj.after = newText;
+        this.subObj.commit_comment = this.comment;
+        this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
        // console.log(this.subObj)
         axios.post(`http://localhost:3000/api/project/file`, form2)
         .then((res) => {
-          axios.post(`http://localhost:3000/api/project/${this.idp}/modify/basicTool/${this.ids}`, form,
+          axios.post(`http://localhost:3000/api/project/${this.idp}/modify/basicTool/${this.ids}`, this.subObj,
           {
             headers: {
               'token': localStorage.getItem('access_token')
@@ -273,6 +274,7 @@ export default {
       },
       imageFileAdd(imgfile){
         this.subObj.files=imgfile
+      //  console.log(this.subObj.files);
       },
       revertYes(){
         this.dialog=false;
