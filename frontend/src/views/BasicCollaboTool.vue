@@ -51,7 +51,7 @@
           <h1>{{subtitle}}</h1>
 
           <v-divider></v-divider>
-          <Editor v-bind:mainText="nowMainText" @event-data="updateText"></Editor>
+          <Editor v-bind:mainText="nowMainText" @imageFile="imageFileAdd" @event-data="updateText"></Editor>
           <v-text-field
             v-model="comment"
             label="Commemt"
@@ -172,6 +172,8 @@ export default {
               after:'',
               time:'',
               commit_comment:'',
+              files:[],
+              test:null,
             },
         }
     },
@@ -198,6 +200,7 @@ export default {
           console.log(error.response);
         });
         this.comment = ''
+        this.files = null;
       },
       editingChange(state){
         this.isEditing = state;
@@ -210,6 +213,9 @@ export default {
         this.nowMainText = fileText;
         this.isEditing = true;
       },
+      imageFileAdd(imgfile){
+        this.subObj.files.push(imgfile);
+      }
     },
 }
 </script>

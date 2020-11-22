@@ -16,7 +16,9 @@
             <v-list-item-title class="text-center">
             <v-icon small>mdi-pencil</v-icon>
             </v-list-item-title>
-            <v-list-item-subtitle class="text-center">EDIT</v-list-item-subtitle>
+            <v-list-item-subtitle
+            class="text-center"
+            >EDIT</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-list-item
@@ -90,6 +92,7 @@
         <div id="subtitle" v-show="false">{{subtitle}}</div>
             </v-card>
 </template>
+<!-- style="font-size:10px;" -->
 <script>
 import EventBus from '../EventBus.js';
 import $ from 'jquery';
