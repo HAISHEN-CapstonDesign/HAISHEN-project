@@ -6,15 +6,23 @@
         max-width="500"
         >
             <v-card>
-                <v-card-title class="headline">
-                    저장하시겠습니까?
-                </v-card-title>
-                <v-container>
+              <v-container>
+                <v-row cols="12" justify="center">
+                  <v-col md="12" align="center">
+                <v-card-text>
+                    <p style="font-size:20px;">{{title}}</p>
+                    <p>{{ids}}. {{subtitle}}</p>
+                </v-card-text>
+                  </v-col>
+                  <v-col md="12">
+                  <p>저장하시겠습니까?</p>
                 <v-text-field
                 v-model="comment"
                 label="Commemt"
                 outlined
                 ></v-text-field>
+                  </v-col>
+                </v-row>
                 </v-container>
                 <v-card-actions>
                     <v-spacer></v-spacer>
