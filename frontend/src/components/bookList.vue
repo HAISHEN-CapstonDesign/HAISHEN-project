@@ -12,22 +12,22 @@
                     >
                     <!-- 임의로 ContentsReadingPage에 연결해둠 -->
                         <v-card width="270px" router :to="{name:'ContentsReadingPage',params:{idc:1}}">
-                                <!--
-                                <v-img
-                                :src="`https://picsum.photos/200/300?image=${getImage()}`"
-                                height="100px"
-                                ></v-img>-->
-                                <v-img
-                                :src="list.src"
-                                height="100px"
-                                ></v-img>
-                                <v-card-title v-text="list.title" class="justify-center" style="font-size:15px"></v-card-title>
-                                <div class="text-center">
-                                    <v-chip v-for="member in list.members" :key="member" v-text="member"></v-chip>
-                                </div>
-                                <v-card-text class="text-right">
-                                    <v-icon>mdi-heart</v-icon>{{list.like}}
-                                    <v-icon>mdi-bookmark</v-icon>{{list.subscribe}}
+                            <!--
+                            <v-img
+                            :src="`https://picsum.photos/200/300?image=${getImage()}`"
+                            height="100px"
+                            ></v-img>-->
+                            <v-img
+                            :src="list.src"
+                            height="100px"
+                            ></v-img>
+                            <v-card-title v-text="list.title" class="justify-center" style="font-size:15px"></v-card-title>
+                            <div class="text-center">
+                                <v-chip class="mx-1" color="deep-purple" outlined v-for="member in list.members" :key="member" v-text="member"></v-chip>
+                            </div>
+                            <v-card-text class="text-right">
+                                <v-icon>mdi-heart</v-icon>{{list.like}}
+                                <v-icon>mdi-bookmark</v-icon>{{list.subscribe}}
                                 </v-card-text>       
                             </v-card>
                         </v-col>

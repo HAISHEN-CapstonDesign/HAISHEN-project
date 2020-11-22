@@ -37,10 +37,26 @@
         </v-dialog>
     <div>
       <v-img
+        class="white--text"
         max-height="200"
         max-width="100%"
         v-bind:src="imgUrl"
+        gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
         >
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
+        >
+        <v-col
+          align="center"
+          justify="center"
+        >
+          <div class="display-1">기획자의 트렌드, 소통, 배움, 이타심</div>
+          <v-spacer class="pt-5"></v-spacer>
+          <div class="subtitle-1 font-italic">By. editor。기획이조아</div>
+        </v-col>
+        </v-row>
     </v-img>
       <v-col align="end">
         <v-btn
@@ -207,7 +223,7 @@ export default {
             title: '',
             subtitle:'',
             nowMainText: '',
-            imgUrl: require('../assets/banner2.jpg'),
+            imgUrl:require('../assets/partership.jpg'),
             dialog:false,
             comment:'',
             project: {},
