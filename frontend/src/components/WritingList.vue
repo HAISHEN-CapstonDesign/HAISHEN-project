@@ -4,7 +4,7 @@
       <v-sheet
     class="mx-auto"
     elevation="8"
-    max-width="800"
+    max-width="820"
   >
     <v-slide-group
       v-model="model"
@@ -60,6 +60,8 @@
       }
     },
     data: () => ({
+      project_src1:require('@/assets/student_1.jpg'),
+      project_src2:require('@/assets/student_2.jpg'),
       list: [
         {
           idx: 1,
@@ -71,16 +73,16 @@
         },
         {
           idx: 2,
-          title:'제목2',
-          image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-          intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
-          writers: '김ㅁㅁ, 최ㅁㅁ, 강ㅁㅁ',
+          title: '기계는 소비를 못한다',
+          image: require('@/assets/student_2.jpg'),
+          intro: '인공지능의 발달이 우리에게 부를 가져다줄까? 다시 생각해보자',
+          writers: 'Jennie, Lisa, Rose, ',
           progress: '진행률'
         },
         {
           idx: 3,
           title:'제목3',
-          image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+          image: require('@/assets/student_1.jpg'),
           intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
           writers: '한ㅇㅇ, 이ㅇㅇ, 김ㅇㅇ, 박ㅇㅇ',
           progress: '진행률'

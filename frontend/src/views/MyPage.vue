@@ -64,18 +64,28 @@
      <v-card-subtitle class="ml-1">
        관심분야
      </v-card-subtitle>
-     <v-chip class="ml-4">정치</v-chip>
-     <v-chip class="ma-1">경제</v-chip>
+     <v-chip class="ml-4">IT</v-chip>
+     <v-chip class="ma-1">컴퓨터</v-chip>
      <v-card-subtitle>
-       집필 수 등등 나머지 세부사항
+       <v-text>
+         기획과 IT, 음악을 좋아하는 제니입니다
+         <br>
+        글로 생각을 나누는 것으 즐거워요
+        <br>
+        함께 글을 쓰고 싶습니다
+       </v-text>
+       
      </v-card-subtitle>
-     <v-btn
-      text
+     <div align="right">
+       <v-btn
+       text
       color="primary"
       to ="/mypageEdit"
-    >
-      수정하기
-    </v-btn>
+    >수정하기</v-btn>
+     </div>
+     
+      
+    
       </v-card>
       </v-col>
     <!--집필중 글 목록-->
@@ -150,7 +160,8 @@ export default {
   data() {
     return {
       banner_src:require('@/assets/watch.jpg'),
-      avatar_src:require('@/assets/jenny2.jpg')
+      avatar_src:require('@/assets/jenny2.jpg'),
+      
     
     }
   },
