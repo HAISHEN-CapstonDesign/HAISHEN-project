@@ -131,7 +131,7 @@ export default {
         download(filename, text);
       }, false);
     },
-    props:['isEditing', 'mainText', 'ids', 'title', 'subtitle', 'modifying'],
+    props:['isEditing', 'mainText', 'ids', 'title', 'subtitle', 'modifying','idp'],
     data() {
         return {
             editing: false,
@@ -167,7 +167,7 @@ export default {
           axios.post(`http://localhost:3000/api/project/${this.idp}/pressModifyButton/${this.ids}`, {tmp:''},
           {
             headers: {
-              token: localStorage.getItem('access_token')
+              'token': localStorage.getItem('access_token')
             }
           })
           .then((res) => {

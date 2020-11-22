@@ -107,6 +107,7 @@
           <Menu
           v-model="isEditing"
           v-bind:ids="ids"
+          v-bind:idp="idp"
           v-bind:mainText="nowMainText"
           v-bind:title="title"
           v-bind:subtitle="subtitle"
@@ -187,7 +188,7 @@ export default {
         axios.post(`http://localhost:3000/api/project/${this.idp}/modify/basicTool/${this.ids}`, this.subObj,
           {
             headers: {
-              token: localStorage.getItem('access_token')
+              'token': localStorage.getItem('access_token')
             }
           })
         .then((res) => {

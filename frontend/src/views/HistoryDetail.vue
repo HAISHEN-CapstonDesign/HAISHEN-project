@@ -82,7 +82,7 @@ export default {
             axios.post(`http://localhost:3000/api/project/${this.idp}/commit/basicTool/detail/revert/${this.idh}`, this.reObj,
             {
                 headers: {
-                    token: localStorage.getItem('access_token')
+                    'token': localStorage.getItem('access_token')
                 }
             })
             .then((res) => {
