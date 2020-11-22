@@ -40,7 +40,7 @@ export default {
             var newPosition = scrollTop + floatPosition + "px";
 	$("#contents").stop().animate({
 	"top" : newPosition
-            }, 500);
+            }, 1000);
 	}).scroll();
     });
     },

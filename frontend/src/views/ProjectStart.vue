@@ -132,7 +132,7 @@
                     </v-radio-group>
                     <v-text-field
                     label="목표 펀딩 금액"
-                    suffix="원"
+                    suffix="point"
                     v-show="funding_radios == 'radio-2'"
                     v-model="target_funding_money"
                     type="number"
