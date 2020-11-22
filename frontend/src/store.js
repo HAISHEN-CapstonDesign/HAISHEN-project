@@ -30,8 +30,6 @@ export default new Vuex.Store({
             { idx: 5, text: '당부하고 싶은 말' },
             { idx: 6, text: '글을 마무리하면서' },
         ],
-        subId: 0,
-        projectId: 1,
         modifying: false,
 
     },
@@ -101,11 +99,8 @@ export default new Vuex.Store({
             })
 
         },
-        changeSubId(state, payload) {
-            state.subId = payload
-        },
-        changeProjectId(state, payload) {
-            state.projectId = payload
+        changeTitle(state, payload) {
+            state.title = payload
         },
         isModifying(state, payload) {
             state.modifying = payload;

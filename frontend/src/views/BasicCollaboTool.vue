@@ -136,7 +136,6 @@ export default {
     created() {
       this.idp = this.$route.params.idp;
       this.ids = this.$route.params.ids;
-      this.$store.commit('changeids', this.ids)
       this.subtitle=this.$store.state.subtitle[this.ids-1].text
       this.title=this.$store.state.title
       axios.get(`http://localhost:3000/api/project/1/blob/basicTool/${this.ids}`)
@@ -205,7 +204,7 @@ export default {
       },
       changeSubtitle(idx){
         //목차 클릭시 페이지 변경
-        this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
+        this.$router.push(`/${this.idp}/basicCollaboTool/${idx}`);
       },
       uploadFile(fileText){
         this.nowMainText = fileText;

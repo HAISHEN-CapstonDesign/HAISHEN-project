@@ -154,7 +154,7 @@ export default {
           this.editing = !this.editing
           this.$emit('changeEdit', this.editing);
         }
-        this.$router.push(`/${this.$store.state.projectId}/${this.ids}/historyPage`);
+        this.$router.push(`/${this.idp}/${this.ids}/historyPage`);
       },
       clickSubmit(){
         EventBus.$emit('submit');       
@@ -162,8 +162,6 @@ export default {
         this.$emit('changeEdit', this.editing);
       },
       clickEdit(){
-        if(!this.editing){
-          this.editing = !this.editing
           axios.post(`http://localhost:3000/api/project/${this.idp}/pressModifyButton/${this.ids}`, {tmp:''},
           {
             headers: {
@@ -171,13 +169,18 @@ export default {
             }
           })
           .then((res) => {
+            if(res.data =='failed'){
+              alert('다른 사람이 수정중인 글입니다.')
+            }
+            else{
+              this.editing = !this.editing
+              this.$emit('changeEdit', this.editing);
+            }
             console.log(res);
           })
           .catch(function (error) {
             console.log(error.response);
           });
-          this.$emit('changeEdit', this.editing);
-        }
       },
       cancelEdit(){
         this.editing = !this.editing
