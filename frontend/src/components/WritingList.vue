@@ -39,7 +39,7 @@
     <div class="text-center">
       <v-chip class="mx-1" color="deep-purple" outlined v-for="member in chat.writers" :key="member" v-text="member"></v-chip>
     </div>    
-    <v-card-text v-text="chat.progress"></v-card-text>
+    <!--<v-card-text v-text="chat.progress"></v-card-text>-->
 
   </v-card>
 
@@ -78,7 +78,7 @@
           title: '기계는 소비를 못한다',
           image: require('@/assets/student_2.jpg'),
           intro: '인공지능의 발달이 우리에게 부를 가져다줄까? 다시 생각해보자',
-          writers: 'Jennie, Lisa, Rose, ',
+          writers: ['Jennie', 'Lisa', 'Rose'],
           progress: '진행률'
         },
         {

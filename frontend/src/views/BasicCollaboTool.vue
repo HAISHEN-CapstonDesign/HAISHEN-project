@@ -222,7 +222,7 @@ export default {
             nowMainText: '',
             editText:'',
             editFiles:[],
-            imgUrl: require('../assets/banner2.jpg'),
+            imgUrl: require('../assets/partership.jpg'),
             dialog:false,
             comment:'',
             project: {},
