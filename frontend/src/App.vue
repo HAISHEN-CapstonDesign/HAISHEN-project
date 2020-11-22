@@ -49,7 +49,7 @@
             <v-divider></v-divider>
 
             <v-list>
-                <v-list-group value="true">
+                <v-list-group >
                     <template v-slot:activator>
                         <v-list-item-icon>
                             <v-icon>mdi-account-circle</v-icon>
@@ -75,7 +75,7 @@
 
                 </v-list-group>
 
-                <v-list-group value="true">
+                <v-list-group >
                     <template v-slot:activator>
                         <v-list-item-icon>
                             <v-icon>mdi-book-open-variant</v-icon>
@@ -93,7 +93,7 @@
 
                 </v-list-group>
 
-                <v-list-group value="true">
+                <v-list-group >
                     <template v-slot:activator>
                         <v-list-item-icon>
                             <v-icon>mdi-lead-pencil</v-icon>
