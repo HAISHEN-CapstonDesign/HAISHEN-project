@@ -156,6 +156,7 @@ import Editor from '../components/editor';
 import Menu from '../components/modeMenu';
 import Subtitle from '../components/subtitleList';
 import axios from 'axios'
+import EventBus from '../EventBus.js';
 
 export default {
     components: {
@@ -253,6 +254,8 @@ export default {
         this.comment = '';
         this.subObj.files = null;
         this.dialog = false;
+     //   this.isEditing = false;
+        EventBus.$emit('submitOk'); 
       },
       editingChange(state){
         this.isEditing = state;
