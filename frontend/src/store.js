@@ -64,6 +64,7 @@ export default new Vuex.Store({
             state.userInfo.point = chargepoint
         },
         logout(state) {
+            localStorage.clear()
             if (!window.Kakao.Auth.getAccessToken()) {
                 console.log('Not kakao logged in.');
                 state.isLogin = false

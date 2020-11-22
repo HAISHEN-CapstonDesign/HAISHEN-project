@@ -12,12 +12,6 @@
             <v-icon>mdi-thumb-up</v-icon>
         </v-btn>
         {{ contents_like }}
-        <v-btn class="l_btn" text>
-          저자Info
-        </v-btn>
-        <v-btn class="l_btn" text>
-          서포터
-        </v-btn>
       </v-col>
     <v-row>
         <v-col
@@ -50,8 +44,8 @@
            <subtitle-2>{{contents_1_1}}</subtitle-2>
           </div>
 
-          <div v-if="idc==1" style="text-align : center;" class="pt-5">
-            <img src="../assets/partership.jpg" />
+          <div v-if="idc==1" style="text-align : center; width: 100%;" class="pt-5">
+            <img src="../assets/partership.jpg" style="width: 100%; max-width: 760px;" >
           </div>
           <div v-if="idc==1" class="pt-10">
            <subtitle-2>{{contents_1_2}}</subtitle-2>
@@ -102,35 +96,68 @@
           <Advertising @endAd="endAd"></Advertising>
         </v-overlay>
 
-        <!-- dialog area -->
-        <v-dialog
-          v-model="dialog"
+        <!-- dialog area point have-->
+      <v-dialog
+          v-model="dialog0"
           persistent
           max-width="500"
         >
-      <v-card>
-        <v-card-title class="headline">
-          유료 컨텐츠 입니다. 포인트를 충전하거나 광고를 시청해야 열람하실 수 있습니다.
-        </v-card-title>
-        <v-card-text>광고를 시청하고 무료로 열람하시겠습니까?</v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="green darken-1"
-            text
-            @click="dialog = false"
-          >
-            아니요
-          </v-btn>
-          <v-btn
-            color="green darken-1"
-            text
-            @click="dialogAd()"
-          >
-            네
-          </v-btn>
-        </v-card-actions>
+        <v-card>
+          <v-card-title class="headline">
+            선택한 컨텐츠는 유료 컨텐츠 입니다.
+          </v-card-title>
+          <v-card-text>포인트를 차감하고 열람하시겠습니까?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="green darken-1"
+              text
+              @click="dialog0 = false"
+            >
+              아니요
+            </v-btn>
+            <v-btn
+              color="green darken-1"
+              text
+              @click="getFee_minuspoint(new_selected_idx)"
+              >
+              네
+            </v-btn>
+          </v-card-actions>
       </v-card>
+    </v-dialog> -->
+    <!-- dialog area endline-->
+
+    <!-- dialog area point dont have-->
+
+        <v-dialog
+          v-model="dialog1"
+          persistent
+          max-width="500"
+        >
+          <v-card>
+            <v-card-title class="headline">
+              유료 컨텐츠 입니다. 포인트를 충전하거나 광고를 시청해야 열람하실 수 있습니다.
+            </v-card-title>
+            <v-card-text>광고를 시청하고 무료로 열람하시겠습니까?</v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="green darken-1"
+                text
+                @click="dialog1 = false"
+              >
+                아니요
+              </v-btn>
+              <v-btn
+                color="green darken-1"
+                text
+                @click="dialogAd()"
+              >
+                네
+              </v-btn>
+            </v-card-actions>
+          </v-card>
     </v-dialog>
     <!-- dialog area endline -->
     
@@ -160,8 +187,10 @@ export default {
         click_like: false,
         contents_like: 0, //axios로 좋아요 수 가져와야함
         zIndex: 0,
-        opacity: 0.9,
         dialog: false,
+        dialog0: false,
+        dialog1: false,
+        opacity: 0.9,
         overlay: false,
         menu: [
                 {
@@ -177,6 +206,7 @@ export default {
             ],
         drawer: true,
         mini: true,
+        
         imgUrl: require('../assets/banner2.jpg'),
         title: '기획자의 트렌드, 소통, 배움, 이타심',
         subtitle_1: '트렌드와 소통, 끊임없는 배움',
@@ -194,32 +224,44 @@ export default {
         date: '2020.10.12 05:55',
         writer: ['김김김', '이이이', '박박박'],
         selected_idx: 0,
-        
-        temp_title_index:3
+        // router :to="{ 
+        //       name: 'ContentsReadingPage',
+        //       params: {idc: this.selected_idx}}"
+        //       >
+        temp_title_index:3,
+        new_selected_idx: 0
   }),
   methods:{
     ...mapActions(['paymentpoint']),
-    selectIndex: function(title_idx){
-        this.selected_idx= title_idx
+    selectIndex(title_idx){
+      console.log("title_idx : "+title_idx)
+        this.selected_idx = title_idx
+        console.log("selected_idx :"+this.selected_idx)
+        this.new_selected_idx = title_idx
+        console.log("new_selected_idx :"+this.new_selected_idx)
+
         if(title_idx > 2){
             if( store.state.userInfo.point > 100 ){
-                alert('유료컨텐츠 입니다. 포인트를 차감하여 열람하겠습니다') //진짜 결제할건지 dialog창 띄우기
-                this.getFee_minuspoint(title_idx)
-                
+                // alert('유료컨텐츠 입니다. 포인트를 차감하여 열람하겠습니다') //진짜 결제할건지 dialog창 띄우기
+                // console.log('before click :' + this.ifpointhave )
+                // this.ifpointhave = 1
+                // console.log('after click :' + this.ifpointhave )
+                this.dialog0 = true
+                // this.getFee_minuspoint(title_idx)
                 //여기에 axios 요청 보내야함
             }
             else{
-              this.dialog = true
+              console.log("dialog")
+              this.dialog1 = true
             }
             // alert('유료컨텐츠 입니다.\n포인트가 없으므로 광고 시청후 열람하도록 하겠습니다.')
-            this.$router.push({ name: 'ContentsReadingPage',params: {idc: title_idx} })
+            //this.$router.push({ name: 'ContentsReadingPage',params: {idc: title_idx} })
             // this.overlay = !this.overlay
-            
         }
         else{
-            alert('무료컨텐츠 입니다.')
-            // alert(title_idx)
-            this.$router.push({ name: 'ContentsReadingPage',params: {idc: title_idx} })
+          // alert('무료컨텐츠 입니다.')
+          // alert(title_idx)
+          this.$router.push({ name: 'ContentsReadingPage',params: {idc: title_idx} })
         }
     },
     getFee_minuspoint(title_idx){
@@ -236,10 +278,12 @@ export default {
                       localStorage.setItem('point',request.data) //local storage 에 바뀐 포인트 저장해야함 수정필요
                       console.log(request.data)
                       this.paymentpoint(request.data)
+                      this.$router.push({ name: 'ContentsReadingPage',params: {idc: title_idx} })
                   })
                   .catch((error) => {
                       console.log(error)
                   });
+                  this.dialog0=false
             })
             .catch((err) => {
                 console.log(err)
@@ -264,7 +308,7 @@ export default {
         this.overlay = over;
     },
     dialogAd(){
-      this.dialog = false
+      this.dialog1 = false
       this.overlay = !this.overlay
     },
     increment() {
