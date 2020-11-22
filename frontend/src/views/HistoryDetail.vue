@@ -3,25 +3,34 @@
         <v-dialog
         v-model="dialog"
         persistent
-        max-width="290"
+        max-width="500"
         >
             <v-card>
                 <v-card-title class="headline">
-                    Use Google's location service?
+                    이 버전으로 되돌리시겠습니까?
                 </v-card-title>
+                <v-container>
                 <v-text-field
                 v-model="comment"
                 label="Commemt"
                 outlined
                 ></v-text-field>
+                </v-container>
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn
                     color="green darken-1"
                     text
-                    @click="dialog = false"
+                    @click="revertYes"
                     >
-                        Disagree
+                        확인
+                    </v-btn>
+                    <v-btn
+                    color="red darken-1"
+                    text
+                    @click="revertNo"
+                    >
+                        취소
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -79,6 +88,7 @@ export default {
             idh:0,
             diffs:'',
             comment:'',
+            dialog:false,
             reObj:{
                 commit_comment:'',
                 time: ''
@@ -96,6 +106,10 @@ export default {
     },
     methods: {
         revert(){
+            this.dialog = true;
+        },
+        revertYes(){
+            this.dialog = false;
             this.reObj.commit_comment = this.comment;
             this.reObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
             console.log(this.reObj);
@@ -113,7 +127,11 @@ export default {
             });
             this.comment = ''
             this.$router.push(`/${this.idp}/basicCollaboTool/${this.ids}`);
-        }
+        },
+        revertNo(){
+            this.dialog = false;
+            this.comment = ''
+        },
     },
 }
 </script>
