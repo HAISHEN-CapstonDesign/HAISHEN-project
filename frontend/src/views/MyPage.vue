@@ -4,16 +4,18 @@
       lazy-src="https://picsum.photos/id/11/10/6"
       max-height="250px"
       max-width="100%"
-      src="https://picsum.photos/id/11/500/300"
+      :src="banner_src"
+      gradient="to top right, rgba(150,150,150,.30), rgba(52,52,52,.9)"
     >
-    <div style="position: absolute; top: 12%; left: 10%;">
+    <!-- <div style="position: absolute; top: 12%; left: 10%;"> -->
+    <!-- <div style="position: absolute;  top: 12%; left: 10%;">
       <v-avatar
-        color="blue"
-        size="200"
+        size="180"
       >
+        <v-img :src="avatar_src"></v-img>
         <span class="white--text headline">Avatar</span>
       </v-avatar>
-    </div>
+    </div> -->
     </v-img>
 
   <v-container fluid grid-list-sm>
@@ -49,15 +51,21 @@
         md="4"
       >
       <v-card class="mx-auto" max-width="344" outlined>
-      <v-card-title>
+
+            <v-img :src="avatar_src" max-height="400" max-width="344">
+              </v-img>
+  
+        
+       
+      <v-card-title class="ml-1 text-h4 mb-3">
        {{ $store.state.userInfo.nickname }}
       </v-card-title>
 
-     <v-card-subtitle>
+     <v-card-subtitle class="ml-1">
        관심분야
      </v-card-subtitle>
-     <v-chip>정치</v-chip>
-     <v-chip>경제</v-chip>
+     <v-chip class="ml-4">정치</v-chip>
+     <v-chip class="ma-1">경제</v-chip>
      <v-card-subtitle>
        집필 수 등등 나머지 세부사항
      </v-card-subtitle>
@@ -141,6 +149,8 @@ export default {
   },
   data() {
     return {
+      banner_src:require('@/assets/watch.jpg'),
+      avatar_src:require('@/assets/jenny2.jpg')
     
     }
   },

@@ -1,6 +1,6 @@
 <template>
     <v-app>
-      <p>진행중인 집필 목록</p>
+      <div class="text-h5 mb-5">진행중인 집필 목록</div>
       <v-sheet
     class="mx-auto"
     elevation="8"
@@ -26,10 +26,10 @@
           @click="goDetailPage(chat.idx)"
         >
          
-    <v-img
-    :src="chat.image"
-    height="200px"
-    ></v-img>
+      <v-img
+      :src="chat.image"
+      height="200px"
+      ></v-img>
     <v-card-title v-text="chat.title"></v-card-title>
     <v-card-text v-text="chat.intro"></v-card-text>
     <v-card-subtitle>
