@@ -36,7 +36,7 @@
             <template>
                 <v-list-item two-line>
                     <v-list-item-avatar size="50">
-                        <img src="https://randomuser.me/api/portraits/women/81.jpg">
+                        <img src="./assets/jenny2.jpg">
                     </v-list-item-avatar>
 
                     <v-list-item-content>

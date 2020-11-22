@@ -62,7 +62,7 @@
         >
           <div class="display-1">기획자의 트렌드, 소통, 배움, 이타심</div>
           <v-spacer class="pt-5"></v-spacer>
-          <div class="subtitle-1 font-italic">By. editor。기획이조아</div>
+          <div class="subtitle-1 font-italic">By. Jennie。hello</div>
         </v-col>
         </v-row>
       </v-img>
@@ -223,7 +223,7 @@ export default {
             nowMainText: '',
             editText:'',
             editFiles:[],
-            imgUrl: require('../assets/banner2.jpg'),
+            imgUrl: require('../assets/partership.jpg'),
             dialog:false,
             comment:'',
             project: {},
