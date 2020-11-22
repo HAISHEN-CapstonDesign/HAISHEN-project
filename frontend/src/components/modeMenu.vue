@@ -183,6 +183,18 @@ export default {
           });
       },
       cancelEdit(){
+          axios.post(`http://localhost:3000/api/project/${this.idp}/pressModifyCancelButton/${this.ids}`, {tmp:''},
+          {
+            headers: {
+              'token': localStorage.getItem('access_token')
+            }
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch(function (error) {
+            console.log(error.response);
+          });
         this.editing = !this.editing
         this.$emit('changeEdit', this.editing);
       },
