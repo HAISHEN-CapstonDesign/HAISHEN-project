@@ -54,6 +54,7 @@ export default {
       //this.imgfile = formData;
       axios.post(uploadUrl).then(data => { // eslint-disable-line no-unused-vars
         this.imageSrc = URL.createObjectURL(file);
+        console.log(this.imageSrc);
       });
     },
     insertImage() {
