@@ -189,7 +189,7 @@ export default {
           {
             headers: {
               'token': localStorage.getItem('access_token'),
-              //'Content-Type':'multipart/form-data'
+              'Content-Type':'multipart/form-data'
             }
           })
         .then((res) => {
@@ -215,7 +215,6 @@ export default {
       },
       imageFileAdd(imgfile){
         this.subObj.files=imgfile
-        console.log(this.subObj.files)
       }
     },
 }
