@@ -45,7 +45,13 @@
             <v-container style="max-width:1050px;">
                 <v-layout align-center row wrap>
                     <v-flex>
-                        <h2 class="pl-5 pb-2">Genre</h2>
+                    <div align="center" class="pb-5 pt-10">
+                        <v-img
+                            max-width="300"
+                            max-height="100%"
+                            v-bind:src="crunch_img"
+                        ></v-img>
+                    </div>
                         <v-row no-gutters>
                             <v-col
                             v-for="(genre, id) in genres"
@@ -100,7 +106,9 @@ export default {
 
     data: () => ({
     //
+    crunch_img: require('../assets/Crunch_keyword.png'),
     options: {
+        
           rewind : true,
           width  : 700,
           gap    : '1rem',
