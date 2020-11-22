@@ -47,13 +47,14 @@ export default {
     },
     fileChange(e) { // eslint-disable-line no-unused-vars
       const file = this.$refs.file.files[0]; 
-      //this.imgfile = file;
+      this.imgfile = file;
       const uploadUrl = `https://httpbin.org/post`;
       let formData = new FormData();
       formData.append("file", this.file);
-      this.imgfile = formData;
+      //this.imgfile = formData;
       axios.post(uploadUrl).then(data => { // eslint-disable-line no-unused-vars
         this.imageSrc = URL.createObjectURL(file);
+        console.log(this.imageSrc);
       });
     },
     insertImage() {
@@ -64,7 +65,6 @@ export default {
           file: this.imgfile
         }
       };
-
       this.$emit("onConfirm", data);
       this.closeModal();
     },

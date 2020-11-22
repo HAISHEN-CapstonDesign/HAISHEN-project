@@ -173,7 +173,6 @@ export default {
               time:'',
               commit_comment:'',
               files:[],
-              test:null,
             },
         }
     },
@@ -189,7 +188,8 @@ export default {
         axios.post(`http://localhost:3000/api/project/${this.idp}/modify/basicTool/${this.ids}`, this.subObj,
           {
             headers: {
-              'token': localStorage.getItem('access_token')
+              'token': localStorage.getItem('access_token'),
+              //'Content-Type':'multipart/form-data'
             }
           })
         .then((res) => {
@@ -214,8 +214,8 @@ export default {
         this.isEditing = true;
       },
       imageFileAdd(imgfile){
-        this.subObj.files.push(imgfile);
-        console.log(imgfile)
+        this.subObj.files=imgfile
+        console.log(this.subObj.files)
       }
     },
 }
