@@ -93,6 +93,7 @@
 <script>
 import EventBus from '../EventBus.js';
 import $ from 'jquery';
+import axios from 'axios'
 
 export default {
     mounted(){
@@ -163,6 +164,18 @@ export default {
       clickEdit(){
         if(!this.editing){
           this.editing = !this.editing
+          axios.post(`http://localhost:3000/api/project/${this.idp}/pressModifyButton/${this.ids}`, 
+          {
+            headers: {
+              token: localStorage.getItem('access_token')
+            }
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch(function (error) {
+            console.log(error.response);
+          });
           this.$emit('changeEdit', this.editing);
         }
       },

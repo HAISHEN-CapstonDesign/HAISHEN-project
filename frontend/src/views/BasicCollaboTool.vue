@@ -184,7 +184,7 @@ export default {
         this.subObj.commit_comment = this.comment;
         this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
         console.log(this.subObj)
-        axios.post(`http://localhost:3000/api/project/1/modify/basicTool/${this.ids}`, this.subObj,
+        axios.post(`http://localhost:3000/api/project/${this.idp}/modify/basicTool/${this.ids}`, this.subObj,
           {
             headers: {
               token: localStorage.getItem('access_token')
