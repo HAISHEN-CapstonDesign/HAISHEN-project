@@ -11,9 +11,13 @@
                     md="3"
                     >
                         <v-card width="270px">
-                                <v-img
+                                <!--<v-img
                                 :src="`https://picsum.photos/200/300?image=${getImage()}`"
                                 height="100px"
+                                ></v-img>-->
+                                <v-img
+                                    :src="list.src"
+                                    height="100px"
                                 ></v-img>
                                 <v-card-title v-text="list.title" class="justify-center" style="font-size:15px"></v-card-title>
                                     <div class="text-center">
@@ -67,33 +71,37 @@ export default {
             dataPerPage:8, //한 페이지에 나올 글의 수
             bookList: [
                 {
-                    title:'여행이란 무엇인가',
-                    info:'여행이란 무엇인가, 여행에 대한 고찰',
-                    members: ['철수'],
+                    title:'부부 사이를 위한 스마트폰 사용 줄이기',
+                    info:'부부 사이를 위한 스마트폰 사용 줄이기',
+                    src: require('../assets/luv_parents.jpg'),
+                    members: ['리리안','jety'],
                     show: false,
                     targetNum:6,
                     memberNum:2,
                 },
                 {
-                    title:'라면 끓이는법',
-                    info:'라면 끓이는법에 대한 글',
-                    members: ['영희'],
+                    title:'앤드류 응의 머신러닝(13-1):비지도학습 클러스터링',
+                    info:'앤드류 응의 머신러닝(13-1):비지도학습 클러스터링',
+                    src: require('../assets/mclearning.png'),
+                    members: ['라인하트','andrew'],
                     show: false,
-                    targetNum:6,
+                    targetNum:4,
                     memberNum:2,
                 },
                 {
-                    title:'한 눈에 보는 한국사',
-                    info:'한국사의 모든 것을 목표로 하는 프로젝트',
-                    members: ['경수','미영'],
+                    title:'치매, 그리고 AI',
+                    info:'치매, 그리고 AI',
+                    members: ['글쓰는 몽글c'],
+                    src: require('../assets/chimae.jpg'),
                     show: false,
-                    targetNum:6,
-                    memberNum:2,
+                    targetNum:5,
+                    memberNum:1,
                 },
                 {
-                    title:'한 눈에 보는 한국사',
-                    info:'한국사의 모든 것을 목표로 하는 프로젝트',
-                    members: ['경수','미영'],
+                    title:'드디어! - 애플 아이폰 12 프로 맥스 실버 언박싱!',
+                    info:'드디어! - 애플 아이폰 12 프로 맥스 실버 언박싱!',
+                    members: ['비범한츈','나도개봉'],
+                    src: require('../assets/appleunboxing.jpg'),
                     show: false,
                     targetNum:6,
                     memberNum:2,
