@@ -4,7 +4,7 @@
         <!-- color="~" 여기에 원하는 색깔 코드 넣으면 됨-->
         <v-app-bar color="white" absolute dense>
             <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-            <img src='./assets/crunch_logo2_1.png' height="60px" v-on:click="to_main"/>
+            <img src='./assets/crunch_logo2_1.png' height="45px" v-on:click="to_main"/>
             <v-row align="center" justify="end">
             <v-row align="center" justify="center">
                 <v-combobox
@@ -48,7 +48,7 @@
 
             <v-divider></v-divider>
 
-            <v-list>
+            <v-list dense>
                 <v-list-group >
                     <template v-slot:activator>
                         <v-list-item-icon>
@@ -110,14 +110,14 @@
                     <v-list-item-icon>
                         <v-icon>mdi-book-plus-multiple</v-icon>
                     </v-list-item-icon>
-                    <v-list-item-title>project</v-list-item-title>
+                    <v-list-item-title>Project</v-list-item-title>
                 </v-list-item>
                 <v-list-item>
                     <v-list-item-icon>
                         <v-icon>mdi-bell</v-icon>
                     </v-list-item-icon>
 
-                    <v-list-item-title>alarm</v-list-item-title>
+                    <v-list-item-title>Alarm</v-list-item-title>
                 </v-list-item>
                 <v-list-item router :to="{name: 'PaymentPage'}">
                     <v-list-item-icon>

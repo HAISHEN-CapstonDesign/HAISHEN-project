@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="pt-5">
         <v-app>
             <v-carousel
             cycle
-            height="400"
+            height="280"
             hide-delimiter-background
             show-arrows-on-hover
             :show-arrows="false"
@@ -14,21 +14,28 @@
             >
                 <v-sheet
                 height="100%"
-                width="80%"
+                width="69%"
                 class="mx-auto"
                 >
                 <v-img
                 max-width="100%"
                 max-height="100%"
                 v-bind:src="slide.img"
-                gradient="to top right, rgba(150,150,150,.33), rgba(52,52,52,.7)"
+                gradient="to top right, rgba(150,150,150,.20), rgba(52,52,52,.9)"
                 >
                 <v-row
                     class="fill-height"
                     align="center"
                     justify="center"
                 >
-                    <div class="display-3">{{ slide.text }}</div>
+                <v-col
+                    align="center"
+                    justify="center"
+                >
+                    <div class="display-1">{{ slide.text }}</div>
+                    <v-spacer class="pt-5"></v-spacer>
+                    <div class="subtitle-1 font-italic">{{ slide.writer}}</div>
+                </v-col>
                 </v-row>
                 </v-img>
                 </v-sheet>
@@ -38,7 +45,7 @@
             <v-container style="max-width:1050px;">
                 <v-layout align-center row wrap>
                     <v-flex>
-                        <h1>Genre</h1>
+                        <h2 class="pl-5 pb-2">Genre</h2>
                         <v-row no-gutters>
                             <v-col
                             v-for="(genre, id) in genres"
@@ -61,15 +68,18 @@
                     </v-flex>
                 </v-layout>
                 <br>
-                    <v-row
+                <v-row
                     class="justify-center"
                     no-gutters
                     dense
                     >
+                    
                     <RecruitmentWriter></RecruitmentWriter>
+                    
                     <br>
                     <RecruitmentFund></RecruitmentFund>
                 </v-row>
+                
             </v-container>
         </v-app>
   </div>
@@ -92,29 +102,34 @@ export default {
     //
     options: {
           rewind : true,
-          width  : 800,
+          width  : 700,
           gap    : '1rem',
         },
     slides: [
         {
             text: '아침 운동으로 인생이 바뀌진 않았지만',
             img: require('../assets/morning_training.jpg'),
+            writer: 'By. 해정。븟츠。acafela'
         },
         {
             text: '미국과 대한민국, UX 디자이너 인재상의 차이',
-            img: require('../assets/banner2.jpg'),
+            img: require('../assets/goldbridge.jpeg'),
+            writer: 'By. 안토。civilia'
         },
         {
             text: '국내 IT회사의 업무방식 & 기술창업',
-            img: require('../assets/sample_img.jpg'),
+            img: require('../assets/company.png'),
+            writer: 'By. Space Odyssey。steamer'
         },
         {
             text: '세상에 같은 고양이는 없어',
-            img: require('../assets/banner.jpg'),
+            img: require('../assets/cutecat.jpg'),
+            writer: 'By. 선아키。luv_cat'
         },
         {
             text: '차곡차곡 추억을 담은 집',
-            img: require('../assets/banner2.jpg'),
+            img: require('../assets/house.jpg'),
+            writer: 'By. 말그미。제이트리'
         },
     ],
     genres:[
