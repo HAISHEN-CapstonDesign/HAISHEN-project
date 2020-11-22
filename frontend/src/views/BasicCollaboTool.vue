@@ -225,12 +225,14 @@ export default {
         this.nowMainText = newText;
         this.subObj.files=imgfile
         //post data
-        let form = new FormData()
+   //     let form = new FormData()
         let form2 = new FormData()
-        form.append('after', newText)
-        form.append('commit_comment', this.comment)
-        form.append('time', this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss'))
-        form2.append('files',this.subObj.files)
+    //    form.append('after', newText)
+   //     form.append('commit_comment', this.comment)
+    //    form.append('time', this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss'))
+        for(var i=0; i<this.subObj.files.length; i++){
+          form2.append('files',this.subObj.files[i]);
+        }
 
         this.subObj.after = newText;
         this.subObj.commit_comment = this.comment;
