@@ -7,7 +7,7 @@
             <h3> {{ items.length}} </h3>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
-        <div class="pb-1">
+        <div class="pb-1 pr-3">
             <v-btn @click="increment" icon color="deep-orange">
                 <v-icon>mdi-thumb-up</v-icon>
             </v-btn>
