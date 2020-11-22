@@ -8,6 +8,7 @@
         <v-list-item-group active-class="brown--text">
           <v-list-item
           v-show="!editing"
+          :disabled="modifying"
           @click="clickEdit"
           link
           >
@@ -71,6 +72,7 @@
           </v-list-item>
           <v-list-item
           @click="onClickFileUpload"
+          :disabled="modifying"
           link
           >
           <input ref="fileInput" type="file" hidden @change="importFile">
@@ -128,7 +130,7 @@ export default {
         download(filename, text);
       }, false);
     },
-    props:['isEditing', 'mainText', 'ids', 'title', 'subtitle'],
+    props:['isEditing', 'mainText', 'ids', 'title', 'subtitle', 'modifying'],
     data() {
         return {
             editing: false,

@@ -32,6 +32,7 @@ export default new Vuex.Store({
         ],
         subId: 0,
         projectId: 1,
+        modifying: false,
 
     },
     mutations: {
@@ -106,6 +107,9 @@ export default new Vuex.Store({
         changeProjectId(state, payload) {
             state.projectId = payload
         },
+        isModifying(state, payload) {
+            state.modifying = payload;
+        }
     },
     actions: {
         login({ commit }, loginObj) {

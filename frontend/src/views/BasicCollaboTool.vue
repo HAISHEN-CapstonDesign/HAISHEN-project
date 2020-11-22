@@ -71,10 +71,24 @@
         flat
         tile
         >
+        <v-row cols="12">
+          <v-col md="10">
+        <div>
           <h3>{{title}}</h3>
           <h1>{{subtitle}}</h1>
           <p>{{$moment(project.time).format('YYYY-MM-DD HH:mm:ss')}}, {{project.writerName}}</p>               
-
+        </div>
+          </v-col>
+          <v-col md="2" align="center" v-show="modifying">
+            <v-avatar
+                class="ma-1"
+                size="50"
+              >
+                <v-img :src="hisS3key"></v-img>
+              </v-avatar>
+              <p>{{hisNickname}}</p>
+          </v-col>
+        </v-row>
           <v-divider></v-divider>
           <br>
             <div v-html="nowMainText"></div>
@@ -96,6 +110,7 @@
           v-bind:mainText="nowMainText"
           v-bind:title="title"
           v-bind:subtitle="subtitle"
+          v-bind:modifying="modifying"
           @changeEdit="editingChange"
           @uploadFile="uploadFile"></Menu>
         </v-col>
@@ -128,6 +143,10 @@ export default {
           this.project = res.data;
           this.nowMainText = this.project.post;
           //this.imgUrl = this.project.s3key;
+          this.modifying = this.project.modifying;
+          this.$store.commit('isModifying', this.modifying)
+          this.hisNickname = this.project.hisNickname;
+          this.hisS3key = this.project.hisS3key;
           console.log(res);
         })
         .catch(function (error) {
@@ -136,6 +155,9 @@ export default {
     },
     data() {
         return{
+            modifying: false,
+            hisNickname:'',
+            hisS3key:'',
             idp:0,
             ids:0,
             token: localStorage.getItem('access_token'),

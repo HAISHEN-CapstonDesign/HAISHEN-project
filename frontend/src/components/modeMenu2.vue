@@ -41,7 +41,7 @@
             <v-list-item-subtitle class="text-center">COMMUNITY</v-list-item-subtitle>
           </v-list-item-content>
           </v-list-item>
-          <v-list-item @click="clickRevert" link>
+          <v-list-item @click="clickRevert" link :disabled="modifying">
           <v-list-item-content>
             <v-list-item-title class="text-center">
             <v-icon>mdi-replay</v-icon>
@@ -71,9 +71,13 @@ export default {
     });
     },
     props:['ids', 'idp'],
+    created() {
+      this.modifying=this.$store.state.modifying
+    },
     data() {
         return {
             editing: false,
+            modifying: false,
         }
     },
     methods: {
