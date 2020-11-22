@@ -15,9 +15,9 @@
                                 <v-list-item-content style="flex-basis: 30%;">
                                     <v-list-item-title>코멘트</v-list-item-title>
                                 </v-list-item-content>
-                                <v-list-item-content style="flex-basis: 25%;">
+                                <!-- <v-list-item-content style="flex-basis: 25%;">
                                     <v-list-item-title>작성자</v-list-item-title>
-                                </v-list-item-content>
+                                </v-list-item-content> -->
                                 <v-list-item-content class="text-center" style="flex-basis: 10%;">
                                     <v-list-item-title>상세보기</v-list-item-title>
                                 </v-list-item-content>
@@ -35,9 +35,9 @@
                                 <v-list-item-content style="flex-basis: 30%;">
                                     <v-list-item-title v-text="tmp.commit_comment"></v-list-item-title>
                                 </v-list-item-content>
-                                <v-list-item-content style="flex-basis: 25%;">
+                                <!-- <v-list-item-content style="flex-basis: 25%;">
                                     <v-list-item-title v-text="tmp.writerName"></v-list-item-title>
-                                </v-list-item-content>
+                                </v-list-item-content> -->
                                 <v-list-item-content class="text-center" style="flex-basis: 10%;">
                                     <v-list-btn @click="showDetail(tmp.commitId)">
                                     <v-btn fab small depressed color="#D7AC87">
