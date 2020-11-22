@@ -224,11 +224,17 @@ export default {
         //본문 변경 내용 저장
         this.nowMainText = newText;
         //post data
+        let form = new FormData()
+        form.append('after', newText)
+        form.append('commit_comment', this.comment)
+        form.append('time', this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss'))
+        form.append('files', this.subObj.files)
+
         this.subObj.after = newText;
         this.subObj.commit_comment = this.comment;
         this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
         console.log(this.subObj)
-        axios.post(`http://localhost:3000/api/project/${this.idp}/modify/basicTool/${this.ids}`, this.subObj,
+        axios.post(`http://localhost:3000/api/project/${this.idp}/modify/basicTool/${this.ids}`, form,
           {
             headers: {
               'token': localStorage.getItem('access_token')
