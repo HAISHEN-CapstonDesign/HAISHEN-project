@@ -50,14 +50,39 @@
                         ></v-textarea>
                         </v-container>
                     </v-card>
+
                 </v-col>
             </v-row>
+            
             <v-row cols="12" justify="center">
                 <v-col md="8" align="right">
                 <v-btn class="ma-2" @click="submit()">임시저장</v-btn>
                 <v-btn class="ma-2" @click="submit()">제출</v-btn>
                 </v-col>
             </v-row>
+                <v-dialog
+                    v-model="dialog0"
+                    persistent
+                    max-width="500"
+                    >
+                    <v-card>
+                    <v-card-title class="headline">
+                        지원이 완료되었습니다
+                    </v-card-title>
+                    
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                        color="green darken-1"
+                        text
+                        @click="goto_main()"
+                        >
+                        확인
+                        </v-btn>
+                       
+                    </v-card-actions>
+                </v-card>
+                </v-dialog>
         </v-container>   
     </v-app>
 </template>
@@ -73,6 +98,7 @@ export default {
     data() {
         return{
             idp:0,
+            dialog0: false,
             comment: '',
             token: localStorage.getItem('access_token'),
         }
@@ -83,11 +109,16 @@ export default {
             axios.post('/api/writerapply', {projectId: this.idp, comment: this.comment },{ headers: {'token': this.token}})
             .then(res => {
                 console.log(res)
+                this.dialog0=true
                 
             })
             .catch((err) => {
                 console.log(err)
             });
+        },
+        goto_main(){
+            this.$router.push('/')
+
         }
     }
         
