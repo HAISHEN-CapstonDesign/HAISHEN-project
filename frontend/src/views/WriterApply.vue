@@ -3,9 +3,21 @@
         <v-img
         max-height="200"
         max-width="100%"
-        src="../assets/banner.jpg"
+        src='../assets/partership.jpg'
+        gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
         >
-        <p style="position: absolute; top: 32%; left:45%; font-size:50px; color: white;">주제</p>
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
+        >
+        <v-col
+          align="center"
+          justify="center"
+        >
+        <p style="font-size:50px; color: white;">기획자의 트렌드, 소통, 배움, 이타심</p>
+        </v-col>
+        </v-row>
         </v-img>
         <v-container>
             <v-row cols="12" align="center" justify="center">
