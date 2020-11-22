@@ -21,14 +21,14 @@
                     <v-btn
                     color="green darken-1"
                     text
-                    @click="revertYes"
+                    @click="updateText"
                     >
                         확인
                     </v-btn>
                     <v-btn
                     color="red darken-1"
                     text
-                    @click="revertNo"
+                    @click="submitNo"
                     >
                         취소
                     </v-btn>
@@ -56,13 +56,6 @@
         <v-btn class="l_btn" text>
           프로젝트 종료
         </v-btn>
-        <v-btn
-                    color="green darken-1"
-                    text
-                    @click="dialog=true"
-                    >
-                        dialog test
-                    </v-btn>
       </v-col>
     <!-- 개별 작성 페이지-->
     <v-container>
@@ -93,12 +86,7 @@
           <h1>{{subtitle}}</h1>
 
           <v-divider></v-divider>
-          <Editor v-bind:mainText="nowMainText" @imageFile="imageFileAdd" @event-data="updateText"></Editor>
-          <v-text-field
-            v-model="comment"
-            label="Commemt"
-            outlined
-          ></v-text-field>
+          <Editor v-bind:mainText="nowMainText" @imageFile="imageFileAdd" @event-data="clickSubmit"></Editor>
           </v-card>
           </v-container>
           </div>
@@ -207,6 +195,8 @@ export default {
             title: '',
             subtitle:'',
             nowMainText: '',
+            editText:'',
+            editFiles:[],
             imgUrl: require('../assets/banner2.jpg'),
             dialog:false,
             comment:'',
@@ -220,10 +210,10 @@ export default {
         }
     },
     methods: {
-      updateText(newText, imgfile){
+      updateText(){
         //본문 변경 내용 저장
-        this.nowMainText = newText;
-        this.subObj.files=imgfile
+        this.nowMainText = this.editText;
+        this.subObj.files=this.editFiles
         //post data
    //     let form = new FormData()
         let form2 = new FormData()
@@ -234,7 +224,7 @@ export default {
           form2.append('files',this.subObj.files[i]);
         }
 
-        this.subObj.after = newText;
+        this.subObj.after = this.editText;
         this.subObj.commit_comment = this.comment;
         this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
        // console.log(this.subObj)
@@ -260,8 +250,9 @@ export default {
           console.log(error.response);
         });
         
-        this.comment = ''
-        this.files = null;
+        this.comment = '';
+        this.subObj.files = null;
+        this.dialog = false;
       },
       editingChange(state){
         this.isEditing = state;
@@ -274,15 +265,14 @@ export default {
         this.nowMainText = fileText;
         this.isEditing = true;
       },
-      imageFileAdd(imgfile){
-        this.subObj.files=imgfile
-      //  console.log(this.subObj.files);
+      clickSubmit(newText, imgfile){
+        this.dialog=true;
+        this.editText = newText;
+        this.editFiles=imgfile
       },
-      revertYes(){
+      submitNo(){
         this.dialog=false;
-      },
-      revertNo(){
-        this.dialog=false;
+        this.comment = '';
       },
     },
 }
