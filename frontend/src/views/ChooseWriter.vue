@@ -7,27 +7,47 @@
     >
     <div style="position: absolute; top: 50%; left: 50%;">
     <p class="text-center white--text headline">
-      주제
+      {{title}}
     </p>
     </div>
     </v-img>
+    <p>{{selected}}</p>
     <v-container>
         <v-row cols="12" justify="center">
             <v-col md="10">
-                <v-card
+                <v-data-table
+                    v-model="selected"
+                    :headers="headers"
+                    :items="applicants"
+                    :single-select="singleSelect"
+                    hide-default-footer
+                    item-key="nickname"
+                    show-select
+                    class="elevation-1"
+                >
+                    <!-- <template v-slot:top>
+                    <v-switch
+                        v-model="singleSelect"
+                        label="Single select"
+                        class="pa-3"
+                    ></v-switch>
+                    </template> -->
+                </v-data-table>
+               
+                <!-- <v-card
                 v-for="applicant in applicants"
-                v-bind:key="applicant.name"
+                v-bind:key="applicant.userId"
                 >
                 <v-card-title>
                 <v-card-avatar>
                 <v-avatar
                 class="ma-1"
-                size="70"
+                size="10"
                 >
                     <v-img :src="applicant.profile"></v-img>
                 </v-avatar>
                 </v-card-avatar>
-                <v-text>{{applicant.name}}</v-text>
+                <v-text>{{applicant.nickname}}</v-text>
                 <v-spacer></v-spacer>
                 <v-text>{{applicant.comment}}</v-text>
                 <v-spacer></v-spacer>
@@ -40,6 +60,11 @@
                 <v-btn icon @click="chooseList.push(applicant)">
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
+                <v-checkbox
+                    v-model="selected"
+                    value: applicant.userId
+                >
+                </v-checkbox>
                 </v-card-title>
                 <v-expand-transition>
                     <div v-show="applicant.show">
@@ -48,7 +73,7 @@
                     <v-card-text v-text="applicant.detail"></v-card-text>
                     </div>
                 </v-expand-transition>
-                </v-card>
+                </v-card> -->
                 <br/>
                 <div class="text-center">
                     <v-btn @click="start" large class="ma-2">
@@ -59,6 +84,9 @@
                         <v-icon right>
                             mdi-check-circle-outline
                         </v-icon>
+                    </v-btn>
+                    <v-btn @click="submit_start_funding()">
+                        submit
                     </v-btn>
                 </div>
             </v-col>
@@ -74,63 +102,91 @@ export default {
     name:'ChooseWriter',
     data() {
         return{
+            expanded: [],
+            singleExpand: false,
+            headers: [
+            {
+                text: '닉네임',
+                align: 'start',
+                sortable: false,
+                value: 'nickname',
+            },
+            { text: '한 줄 소개', value: 'comment' },
+            ],
+            selected:[],
             idp: 0,
             chooseList:[],
             applicants:[
-                {
-                    profile:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-                    name:'김ㅇㅇ',
-                    comment:'잘 부탁드립니다!',
-                    show: false,
-                    detail:'세부사항들',
-                    id:1,
-                },
-                {
-                    profile:'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-                    name:'이ㅇㅇ',
-                    comment:'잘 부탁드립니다!',
-                    show: false,
-                    detail:'세부사항들',
-                    id:2,
-                },
-                {
-                    profile:'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-                    name:'박ㅇㅇ',
-                    comment:'잘 부탁드립니다!',
-                    show: false,
-                    detail:'세부사항들',
-                    id:3,
-                },
-                {
-                    profile:'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-                    name:'최ㅇㅇ',
-                    comment:'잘 부탁드립니다!',
-                    show: false,
-                    detail:'세부사항들',
-                    id:4,
-                },
+                // {
+                //     profile:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+                //     name:'김ㅇㅇ',
+                //     comment:'잘 부탁드립니다!',
+                //     show: false,
+                //     detail:'세부사항들',
+                //     id:1,
+                // },
+                
                 
             ],
+            title: '',
+            submit_selected:[]
         }
     },
     methods: {
         start(){
             console.log(this.chooseList)
         },
+        submit_start_funding(){
+            this.selected.forEach(element => {
+                this.submit_selected.push(element.userId)
+            });
+            // this.submit_selected.push()
+            console.log(this.submit_selected)
+            axios
+                .post('http://localhost:3000/api/${this.idp}/submitStartFunding',{selectedWriters:this.submit_selected},{ headers: {'token': localStorage.getItem('access_token')}})
+                .then(res=>{
+                    console.log(res.data)
+                })
+        }
         
     },
     created(){
         this.idp = this.$route.params.idp;
-        axios
+        axios //title 불러오기
+            .get(`http://localhost:3000/api/${this.idp}/choosewritertitle`)
+            .then(res=>{
+                console.log(res.data)
+                this.title = res.data
+
+            })
+        axios //지원자들 정보 불러오기
             .post(`http://localhost:3000/api/${this.idp}/choosewriter`,{id:this.idp},{ headers: {'token': localStorage.getItem('access_token')}})
             .then(res => {
                 //1이면 main, 0이면 sub
-                console.log(res.data)
+                console.log(res.data);
+                var app_list = res.data;
+                
+                for(var i in app_list){
+                    var app = {
+                        nickname: app_list[i].nickname,
+                        comment: app_list[i].comment,
+                        userId: app_list[i].userId,
+                        projectId: app_list[i].projectId,
+                        selected: false
+
+                    }
+                    this.applicants.push(app);
+                    console.log("hello")
+                }
+                
             })
             .catch((err) => {
                 console.log(err)
             });
     }
+
+    ,
+    
 }
 </script>
 <!--

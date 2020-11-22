@@ -15,6 +15,8 @@ Vue.use(VueMoment);
 Vue.use(VueSplide);
 Vue.use(VueRouter);
 Vue.use(VModal, { dynamic: true, dialog: true })
+Vue.use( VueSplide );
+
 
 new Vue({
     vuetify,
