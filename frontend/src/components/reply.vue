@@ -72,17 +72,17 @@ export default {
         items: [
             { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', 
                 title: `기획자의 트렌드에 대해서 알 수 있었습니다 감사합니다.`, 
-                subtitle: 'hyejinJeon',
+                subtitle: '기획자할래',
                 date: '2020.10.25'
             },
             { avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg', 
-                subtitle: 'asdad', 
+                subtitle: 'crunch_good', 
                 title: '좋은글 감사합니다!', 
                 date: '2020.10.25'
             },
             { avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg', 
-                subtitle: 'Oui oui', 
-                title: '',
+                subtitle: 'finn', 
+                title: '추천 누르고 갑니다!',
                 date: '2020.10.25'
             },
         ]
