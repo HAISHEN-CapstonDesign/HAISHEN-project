@@ -14,7 +14,7 @@
           >
             <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-pencil</v-icon>
+            <v-icon small>mdi-pencil</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">EDIT</v-list-item-subtitle>
             </v-list-item-content>
@@ -26,7 +26,7 @@
           >
             <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-pencil-off</v-icon>
+            <v-icon small>mdi-pencil-off</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">CANCEL</v-list-item-subtitle>
             </v-list-item-content>
@@ -34,7 +34,7 @@
           <v-list-item @click="clickHistory" link>
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-history</v-icon>
+            <v-icon small>mdi-history</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">HISTORY</v-list-item-subtitle>
           </v-list-item-content>
@@ -42,7 +42,7 @@
           <v-list-item @click="clickCommunity" link>
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-forum</v-icon>
+            <v-icon small>mdi-forum</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">COMMUNITY</v-list-item-subtitle>
           </v-list-item-content>
@@ -54,7 +54,7 @@
           >
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-check-circle</v-icon>
+            <v-icon small>mdi-check-circle</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">SUBMIT</v-list-item-subtitle>
           </v-list-item-content>
@@ -65,7 +65,7 @@
           >
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-download</v-icon>
+            <v-icon small>mdi-download</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">DOWNLOAD</v-list-item-subtitle>
           </v-list-item-content>
@@ -78,7 +78,7 @@
           <input ref="fileInput" type="file" hidden @change="importFile">
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-upload</v-icon>
+            <v-icon small>mdi-upload</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">UPLOAD</v-list-item-subtitle>
           </v-list-item-content>

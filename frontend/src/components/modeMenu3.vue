@@ -12,7 +12,7 @@
           >
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-book-open-variant</v-icon>
+            <v-icon small>mdi-book-open-variant</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">MAIN PAGE</v-list-item-subtitle>
           </v-list-item-content>
@@ -23,7 +23,7 @@
           >
             <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-account-edit</v-icon>
+            <v-icon small>mdi-account-edit</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">WRITERS</v-list-item-subtitle>
             </v-list-item-content>
@@ -31,7 +31,7 @@
           <v-list-item :disabled="clicked==2" @click="clickHistory" link>
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-history</v-icon>
+            <v-icon small>mdi-history</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">HISTORY</v-list-item-subtitle>
           </v-list-item-content>
@@ -39,7 +39,7 @@
           <v-list-item @click="clickCommunity" link>
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-forum</v-icon>
+            <v-icon small>mdi-forum</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">COMMUNITY</v-list-item-subtitle>
           </v-list-item-content>
