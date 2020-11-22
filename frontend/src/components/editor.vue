@@ -258,6 +258,7 @@ export default {
       contE:this.mainText,
       test:'',
       imgFile: null,
+      files:[],
     }
   },
   beforeDestroy() {
@@ -268,7 +269,7 @@ export default {
   created() {
     EventBus.$on('submit',()=>{
       this.$emit('event-data', this.contE);
-      this.$emit('imageFile', this.imgFile);
+      this.$emit('imageFile', this.files);
     })
   },
   mounted() {
@@ -285,7 +286,8 @@ export default {
     addCommand(data) {
       if (data.command !== null) {
         data.command(data.data);
-        this.imgFile = data.data.file
+        this.imgFile = data.data.file;
+        this.files.push(this.imgFile);
       }
     },
   },

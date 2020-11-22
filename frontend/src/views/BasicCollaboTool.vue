@@ -214,7 +214,7 @@ export default {
         this.isEditing = true;
       },
       imageFileAdd(imgfile){
-        this.subObj.files.push(imgfile);
+        this.subObj.files=imgfile
         console.log(imgfile)
       }
     },

@@ -1,14 +1,39 @@
 <template>
     <v-app>
-        
+        <v-dialog
+        v-model="dialog"
+        persistent
+        max-width="290"
+        >
+            <v-card>
+                <v-card-title class="headline">
+                    Use Google's location service?
+                </v-card-title>
+                <v-text-field
+                v-model="comment"
+                label="Commemt"
+                outlined
+                ></v-text-field>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                    color="green darken-1"
+                    text
+                    @click="dialog = false"
+                    >
+                        Disagree
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
         <br/>
         <v-container>
             <v-row>
                 <v-col md="10" sm="10">
                     <div style="float:right; font-size:25px; color:#A06641;">HISTORY DETAIL</div>
-                    <div style="display: inline-block; font-size:20px; color:#A06641;">{{$store.state.subtitle[ids-1].text}}</div>
+                    <div style="font-size:20px; color:#A06641;">{{$store.state.subtitle[ids-1].text}}</div>
                     <v-card>
-                        <div v-html="prettyHtml" />
+                        <div style="margin:0" v-html="prettyHtml"/>
                     </v-card>
                     <v-btn
                     color="green darken-1"

@@ -64,7 +64,6 @@ export default {
           file: this.imgfile
         }
       };
-
       this.$emit("onConfirm", data);
       this.closeModal();
     },
