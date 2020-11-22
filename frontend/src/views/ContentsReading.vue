@@ -33,7 +33,6 @@
         >
           <h2>{{title}}</h2>
           <v-divider></v-divider>
-
           <div v-if="idc==1" class="pt-10">
            <h3>{{subtitle_1}}</h3>
            <v-spacer class = "pt-3"></v-spacer>
@@ -74,12 +73,12 @@
            <v-spacer class = "pt-3"></v-spacer>
            <subtitle-2>{{contents_3}}</subtitle-2>
           </div>
-          <div v-if="idc==3" style="text-align : center;" class="pt-5">
-            <img src="../assets/trend.jpg" />
+          <div v-if="idc==3" style="text-align : center; width: 100%;" class="pt-5">
+            <img src="../assets/trend.jpg" style="width: 100%; max-width: 760px;" />
           </div>
-           
-             <!-- <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
--->
+          <div class="pt-10">
+           <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
+          </div>
           </v-card>
           </v-container>
           </div>
@@ -87,6 +86,8 @@
         
       </v-row>
     </v-container>
+
+    <!-- overlay area -->
         <v-overlay
           :z-index="zIndex"
           :value="overlay"
@@ -166,7 +167,7 @@
 
 <script>
 // import ProjIndex fro m '../components/projIndex.vue'
-// import PostReply from '../components/reply.vue'
+import PostReply from '../components/reply.vue'
 import Advertising from './Advertising'
 import Subtitle from '../components/subtitleForReading';
 import axios from 'axios'
@@ -178,10 +179,11 @@ import {
 export default {
     components: {
         // ProjIndex,
-        // PostReply,
+        PostReply,
         Advertising,
         Subtitle
     },
+    
     data: () => ( 
         {
         click_like: false,
@@ -206,7 +208,7 @@ export default {
             ],
         drawer: true,
         mini: true,
-        
+        project_id: 1,
         imgUrl: require('../assets/banner2.jpg'),
         title: '기획자의 트렌드, 소통, 배움, 이타심',
         subtitle_1: '트렌드와 소통, 끊임없는 배움',
@@ -229,7 +231,9 @@ export default {
         //       params: {idc: this.selected_idx}}"
         //       >
         temp_title_index:3,
-        new_selected_idx: 0
+        new_selected_idx: 1,
+        comment_selected_idx: 3,
+        token: localStorage.getItem('access_token')
   }),
   methods:{
     ...mapActions(['paymentpoint']),
@@ -322,7 +326,23 @@ export default {
         this.click_like = false
       }
       
-    }
+    },
+      addcomment(){
+          axios
+          .post('http://localhost:3000/api/addcomment',
+          { postindexId: this.comment_selected_idx, projectId: this.project_id, text:"포스트 잘봤어요! 자주 소통하고 지내요 ~ 제 블로그에도 놀러오세요!"}, 
+          { headers: {'token': this.token}}
+          )
+          .then(res => {
+                  // localStorage.setItem('point',this.chargePoint)
+                  console.log(res.data)
+                
+              })
+              .catch((err) => {
+                  console.log(err)
+                  alert("에러가 발생했습니다. 다시 시도해주세요")
+              });
+      }
 //나중에 페이지 나누고 코드 수정 후 활성화
     //  changeSubtitle(idx){
         //목차 클릭시 페이지 변경

@@ -40,62 +40,35 @@
                 <v-divider></v-divider>
             </v-col>
      
-            <p>메시지: {{ message }}</p>
-            <v-card flat width="1000">
-            <v-textarea
-            :rules="rules"
-            :value="value"
-            v-model="message"
-            onfocus="textClear()"
-            ></v-textarea>
-            
-            </v-card>
-            <v-col align="end">
-                <!-- <v-btn v-model="message" @click="replySubmit(message)" outlined>제출</v-btn>           -->
-                <v-btn @click="pushSubmit">댓글등록</v-btn>
-            </v-col>
-
-            
-
+            <div class="pt-10">
+                <div class="pt-10">
+                    <v-card flat width="595">
+                        <v-textarea height= "0.5px"
+                            :value="value"
+                            v-model="message"
+                            onfocus="textClear()"
+                        ></v-textarea>
+                    </v-card>
+                </div>
+                <div style="float: right">
+                <v-btn dark @click="pushSubmit">댓글등록</v-btn>
+                </div>
+            </div>
             <!-- <v-btn @click="alert('sdafasdf')">asfasfasf</v-btn> -->
 
         </v-row>
-        
-        
-
-
-
-
-    
-
     </v-card>
-
-
-    
-
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'PostReply',
     data : () => ({
         message: '',
         value: '댓글을 입력하세요',
         // replyNum: ,
-        items3: [
-        {
-          color: '#1F7087',
-          src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
-          title: 'Supermodel',
-          artist: 'Foster the People',
-        },
-        {
-          color: '#952175',
-          src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
-          title: 'Halcyon Days',
-          artist: 'Ellie Goulding',
-        },
-      ],
         items: [
             { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', 
                 title: `뭇 대중을 구할 피다. 아니한 그들의 거선의 사랑의 가슴에 봄바람이다. 용감하고 생생하며, 이상 속잎나고, 못할 이것이다. 할지니, 가지에 커다란 것은 청춘 뜨거운지라, 없는 낙원을 피가 있다. 싸인 속에 오아이스도 시들어 대고, 곳이 이것이다. 이상은 그들은 설레는 대고, 오직 따뜻한 대한 우리 그들은 운다. 인간은 평화스러운 하는 청춘은 사라지지 그들은 싶이 피부가 봄바람이다. 동산에는 사랑의 무엇을 사는가 곳으로 있으랴? 커다란 우리 하는 아니다. 것은 거선의 소담스러운 무엇을 방황하였으며, 있는 풀이 따뜻한 되는 피다. 크고 인간이 끝까지 속잎나고, 위하여서.`, 
@@ -112,41 +85,11 @@ export default {
                 title: 'ㅠㅠㅠ 참 신기해요 아직도 그런 신분제도가 있다는게!! ㅠㅠㅠ',
                 date: '2020.10.25'
             },
-        ],
-        items2: [
-        { header: 'Today' },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-          title: 'hyejinjeon',
-          subtitle: `ㄴ이ㅏㅓㄻ지ㅏㄷ허지ㅏ더힞ㅁ다ㅏㅓ힘ㅈ다ㅓ히ㅓㅁㄴ라ㅓ미나러ㅣㅏㅁ너리나ㅁ너라ㅣㅏ머니라asfasfasf asfasfasfasfasfafafasfasf I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-        },
-        { divider: true, inset: true },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-          title: 'Alex',
-          subtitle: `<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
-        },
-        { divider: true, inset: true },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-          title: 'Oui oui',
-          subtitle: '<span class="text--primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
-        },
-        { divider: true, inset: true },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-          title: 'Birthday gift',
-          subtitle: '<span class="text--primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
-        },
-        { divider: true, inset: true },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-          title: 'Recipe',
-          subtitle: '<span class="text--primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
-        },
-      ],
+        ]
     }),
-
+    created() {
+      this.getcomment()
+    },
     methods:{
         replySubmit: function(message){
             // this.$emit('child_replySubmit')
@@ -180,7 +123,24 @@ export default {
         },
         textClear(){
             this.message='';
-        }
+        },
+        getcomment(){
+        console.log("hy22")
+        axios
+            .post('http://localhost:3000/api/getcomment',
+            { projectId: 1 , postIndex: 3}, 
+            { headers: {'token': this.token}}
+            )
+            .then(res => {
+                    // localStorage.setItem('point',this.chargePoint)
+                    console.log((res.data))
+                
+                })
+                .catch((err) => {
+                    console.log(err)
+                    alert("에러가 발생했습니다. 다시 시도해주세요")
+                });
+        },
     }
 }
 </script>
