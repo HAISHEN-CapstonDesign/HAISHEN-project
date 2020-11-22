@@ -35,14 +35,13 @@
                                 <v-col md="9" align="center">
                                 <v-text-field
                                 label="닉네임"
-                                disabled
+                                readonly
                                 outlined
                                 :placeholder= $store.state.userInfo.nickname
                                 ></v-text-field>
                                 <v-autocomplete
                                 v-model="intre"
                                 :items="items"
-                                :disabled="profile_radios == 'radio-1'"
                                 outlined
                                 dense
                                 chips

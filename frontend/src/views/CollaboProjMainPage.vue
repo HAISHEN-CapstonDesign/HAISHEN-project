@@ -33,9 +33,8 @@
                         </v-col>
                         <v-divider></v-divider>
                         <div v-show="nowList=='main'">
-                            {{this.introduction}}
-                                <!-- <v-textarea
-                                disabled
+                                <v-textarea
+                                readonly
                                 v-model="introduction"
                                 solo
                                 flat="flase"
