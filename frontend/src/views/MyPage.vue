@@ -124,6 +124,7 @@ import Writing from '../components/WritingList'
 import Complete from '../components/WritingCompleteList'
 import Liked from '../components/Liked'
 import Sub from '../components/SubscribedWriter'
+import axios from 'axios'
 
 import {
     mapState
@@ -148,7 +149,17 @@ export default {
   },
   methods: {
   
-  }
+  },
+  created(){
+    axios
+      .post('http://localhost:3000/api/user/mypage',{ headers: {'token': localStorage.getItem('access_token')}})
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch((err) => {
+          console.log(err)
+      });
 
+  }
 };
 </script>

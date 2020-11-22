@@ -1,11 +1,20 @@
 <template>
     <v-card width="1000" class="pa-6">
         <v-row class="ml-3">
-        <div class="pb-3">
+        <div class="pb-3 pr-1">
             <h3> 댓글 </h3>
         </div>
-            <h3> {{items.length}} </h3>
-            
+            <h3> {{ items.length}} </h3>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
+        <div class="pb-1 pr-3">
+            <v-btn @click="increment" icon color="deep-orange">
+                <v-icon>mdi-thumb-up</v-icon>
+            </v-btn>
+            {{ contents_like }}
+        </div>
+        
+        
 
         </v-row>
         <v-divider></v-divider>
@@ -71,7 +80,9 @@ import axios from 'axios'
 export default {
     name: 'PostReply',
     data : () => ({
+        contents_like: 0, //axios로 좋아요 수 가져와야함
         message: '',
+        click_like: false,
         value: '댓글을 입력하세요',
         // replyNum: ,
         items: [
@@ -106,7 +117,7 @@ export default {
         pushSubmit(){
             let today = new Date();   
             this.items.push({
-                avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', //여기서 본인 사진넣기
+                avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg', //여기서 본인 사진넣기
                 title: this.message,
                 subtitle: localStorage.getItem('nickname'),
                 date: today.toLocaleString()
@@ -134,6 +145,17 @@ export default {
                     alert("에러가 발생했습니다. 다시 시도해주세요")
                 });
         },
+        increment() {
+            let like_click_user_nickname = localStorage.getItem('nickname')
+            if(like_click_user_nickname != null && this.click_like == false){
+                this.contents_like++;
+                this.click_like = true
+            }
+            else if(like_click_user_nickname != null && this.click_like == true){
+                this.contents_like--;
+                this.click_like = false
+            } 
+        }
     }
 }
 </script>

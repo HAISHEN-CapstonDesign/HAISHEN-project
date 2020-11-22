@@ -97,7 +97,7 @@ export default {
     slides: [
         {
             text: '아침 운동으로 인생이 바뀌진 않았지만',
-            img: require('../assets/banner.jpg'),
+            img: require('../assets/morning_training.jpg'),
         },
         {
             text: '미국과 대한민국, UX 디자이너 인재상의 차이',

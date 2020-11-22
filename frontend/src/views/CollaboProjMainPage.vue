@@ -88,13 +88,23 @@ export default {
                 this.image = res.data.image
                 this.target_d_day = res.data.target_d_day
                 this.target_funding_money = res.data.target_funding_money
-                if(res.data.mainornot == 1){
-                    store.state.mainornot = true
-                }else if(res.data.mainornot == 0){
-                    store.state.mainornot = false
-                }
+                
                 console.log(res)
                 
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+        axios
+            .post('http://localhost:3000/api/mainorapply',{id:this.idp}, { headers: {'token': this.token}})
+            .then(res => {
+                //1이면 main, 0이면 sub
+                console.log(res.data)
+                if(res.data == 1){
+                    store.state.mainornot = true
+                }else if(res.data == 0){
+                    store.state.mainornot = false
+                }
             })
             .catch((err) => {
                 console.log(err)
