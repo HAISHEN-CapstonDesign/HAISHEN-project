@@ -4,9 +4,10 @@
         class="white--text align-end"
         max-height="150px"
         max-width="100%"
-        src="../assets/banner2.jpg"
+        src="../assets/computer.jpeg"
+        gradient="to top right, rgba(150,150,150,.80), rgba(52,52,52,.7)"
         >
-        <p style="position: absolute; top: 20%; left:45%; font-size:70px;">장르</p>
+        <p style="position: absolute; top: 20%; left:48%; font-size:70px;">I T</p>
         </v-img>
         <v-container>
             <v-row>
