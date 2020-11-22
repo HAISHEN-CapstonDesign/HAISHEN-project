@@ -215,6 +215,7 @@ export default {
       },
       imageFileAdd(imgfile){
         this.subObj.files.push(imgfile);
+        console.log(imgfile)
       }
     },
 }

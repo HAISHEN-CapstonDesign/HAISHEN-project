@@ -1,5 +1,5 @@
 <template>
-    <v-card id="mode_menu" style="top:100px; position: absolute;" max-width="127">
+    <v-card id="mode_menu" style="top:100px;" max-width="127">
 
         <v-list
           dense
