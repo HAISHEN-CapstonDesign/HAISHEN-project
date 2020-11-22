@@ -86,6 +86,7 @@
            
              <!-- <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
 -->
+<!-- 나중에 하나로 합쳐지면 div에 class="content_div" 추가 -->
           </v-card>
           </v-container>
           </div>

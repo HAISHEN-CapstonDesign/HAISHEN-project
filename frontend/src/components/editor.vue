@@ -291,3 +291,11 @@ export default {
   },
 }
 </script>
+<style>
+.editor__content img {
+  width: 100%;
+}
+.content_div img{
+  width: 100%;
+}
+</style>
