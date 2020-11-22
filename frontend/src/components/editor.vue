@@ -268,8 +268,8 @@ export default {
   props:['mainText'],
   created() {
     EventBus.$on('submit',()=>{
-      this.$emit('event-data', this.contE);
-      this.$emit('imageFile', this.files);
+      this.$emit('event-data', this.contE, this.files);
+    //  this.$emit('imageFile', this.files);
     })
   },
   mounted() {
