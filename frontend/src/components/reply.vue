@@ -71,18 +71,18 @@ export default {
         // replyNum: ,
         items: [
             { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', 
-                title: `뭇 대중을 구할 피다. 아니한 그들의 거선의 사랑의 가슴에 봄바람이다. 용감하고 생생하며, 이상 속잎나고, 못할 이것이다. 할지니, 가지에 커다란 것은 청춘 뜨거운지라, 없는 낙원을 피가 있다. 싸인 속에 오아이스도 시들어 대고, 곳이 이것이다. 이상은 그들은 설레는 대고, 오직 따뜻한 대한 우리 그들은 운다. 인간은 평화스러운 하는 청춘은 사라지지 그들은 싶이 피부가 봄바람이다. 동산에는 사랑의 무엇을 사는가 곳으로 있으랴? 커다란 우리 하는 아니다. 것은 거선의 소담스러운 무엇을 방황하였으며, 있는 풀이 따뜻한 되는 피다. 크고 인간이 끝까지 속잎나고, 위하여서.`, 
+                title: `기획자의 트렌드에 대해서 알 수 있었습니다 감사합니다.`, 
                 subtitle: 'hyejinJeon',
                 date: '2020.10.25'
             },
             { avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg', 
                 subtitle: 'asdad', 
-                title: '본인나라에는 신분제도가 있다하더라도 외국인에게까지 그것을 강요하는것은 문제가 있는 태도라고 생각합니다. ㅡ ㅡ 고생많으셨어요', 
+                title: '좋은글 감사합니다!', 
                 date: '2020.10.25'
             },
             { avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg', 
                 subtitle: 'Oui oui', 
-                title: 'ㅠㅠㅠ 참 신기해요 아직도 그런 신분제도가 있다는게!! ㅠㅠㅠ',
+                title: '',
                 date: '2020.10.25'
             },
         ]
