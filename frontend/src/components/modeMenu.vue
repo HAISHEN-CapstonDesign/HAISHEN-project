@@ -164,7 +164,7 @@ export default {
       clickEdit(){
         if(!this.editing){
           this.editing = !this.editing
-          axios.post(`http://localhost:3000/api/project/${this.idp}/pressModifyButton/${this.ids}`, null,
+          axios.post(`http://localhost:3000/api/project/${this.idp}/pressModifyButton/${this.ids}`, {},
           {
             headers: {
               token: localStorage.getItem('access_token')
