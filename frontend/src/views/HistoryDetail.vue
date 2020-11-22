@@ -3,7 +3,7 @@
         <br><br>
         <v-container>
             <v-row>
-                <v-col md="10">
+                <v-col md="10" sm="10">
                     <div style="float:right; font-size:25px; color:#A06641;">HISTORY DETAIL</div>
                     <div style="display: inline-block; font-size:25px; color:#A06641;">{{$store.state.title}}</div>
                     <div style="display: inline-block; font-size:20px; color:#A06641;">_{{$store.state.subtitle[ids-1].text}}</div>
@@ -16,7 +16,7 @@
                     ></v-text-field>
                     </v-card>
                 </v-col>
-                <v-col md="2">
+                <v-col md="2" sm="2">
                     <Menu
                     v-bind:ids="ids"
                     v-bind:idp="idp"
@@ -82,7 +82,7 @@ export default {
             axios.post(`http://localhost:3000/api/project/${this.idp}/commit/basicTool/detail/revert/${this.idh}`, this.reObj,
             {
                 headers: {
-                    token: localStorage.getItem('access_token')
+                    'token': localStorage.getItem('access_token')
                 }
             })
             .then((res) => {
@@ -104,5 +104,14 @@ export default {
     padding: 5px 10px;
     border-bottom: 1px solid #d8d8d8;
     background-color: #f7f7f7;
+}
+.d2h-file-diff .d2h-del.d2h-change {
+    background-color: #fdd0d0;
+}
+.d2h-file-diff {
+    overflow-y: auto;
+}
+.d2h-code-line, .d2h-code-line-ctn {
+      white-space: normal;
 }
 </style>

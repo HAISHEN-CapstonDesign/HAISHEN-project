@@ -37,6 +37,7 @@ export default {
       imageSrc: "",
       command: null,
       show: false,
+      imgfile:null,
     };
   },
   methods: {
@@ -46,6 +47,7 @@ export default {
     },
     fileChange(e) { // eslint-disable-line no-unused-vars
       const file = this.$refs.file.files[0]; 
+      this.imgfile = file;
       const uploadUrl = `https://httpbin.org/post`;
       let formData = new FormData();
       formData.append("file", this.file);
@@ -57,7 +59,8 @@ export default {
       const data = {
         command: this.command,
         data: {
-          src: this.imageSrc
+          src: this.imageSrc,
+          file: this.imgfile
         }
       };
 

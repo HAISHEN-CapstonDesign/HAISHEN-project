@@ -56,7 +56,7 @@
     methods: {
       goDetailPage(idx){
         //projectId 받아와서 변경하기 추가 필요
-        this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
+        this.$router.push(`/1/basicCollaboTool/${idx}`);
       }
     },
     data: () => ({

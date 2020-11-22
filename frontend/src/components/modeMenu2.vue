@@ -1,5 +1,5 @@
 <template>
-    <v-card id="mode_menu" style="top:100px; position: absolute;" max-width="127">
+    <v-card id="mode_menu" style="top:100px;" max-width="127">
 
         <v-list
           dense
@@ -12,7 +12,7 @@
           >
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-book-open-variant</v-icon>
+            <v-icon small>mdi-book-open-variant</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">MAIN PAGE</v-list-item-subtitle>
           </v-list-item-content>
@@ -20,7 +20,7 @@
           <v-list-item @click="clickWriter" link>
             <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-account-edit</v-icon>
+            <v-icon small>mdi-account-edit</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">WRITERS</v-list-item-subtitle>
             </v-list-item-content>
@@ -28,7 +28,7 @@
           <v-list-item @click="clickHistory" link>
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-history</v-icon>
+            <v-icon small>mdi-history</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">HISTORY</v-list-item-subtitle>
           </v-list-item-content>
@@ -36,15 +36,15 @@
           <v-list-item @click="clickCommunity" link>
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-forum</v-icon>
+            <v-icon small>mdi-forum</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">COMMUNITY</v-list-item-subtitle>
           </v-list-item-content>
           </v-list-item>
-          <v-list-item @click="clickRevert" link>
+          <v-list-item @click="clickRevert" link :disabled="modifying">
           <v-list-item-content>
             <v-list-item-title class="text-center">
-            <v-icon>mdi-replay</v-icon>
+            <v-icon small>mdi-replay</v-icon>
             </v-list-item-title>
             <v-list-item-subtitle class="text-center">REVERT</v-list-item-subtitle>
           </v-list-item-content>
@@ -71,9 +71,13 @@ export default {
     });
     },
     props:['ids', 'idp'],
+    created() {
+      this.modifying=this.$store.state.modifying
+    },
     data() {
         return {
             editing: false,
+            modifying: false,
         }
     },
     methods: {
