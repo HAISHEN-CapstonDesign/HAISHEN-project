@@ -142,6 +142,12 @@ export default {
             data:'',
         }
     },
+    created() {
+      EventBus.$on('submitOk',()=>{
+        this.editing = !this.editing;
+        this.$emit('changeEdit', this.editing);
+      })
+    },
     methods: {
         clickCommunity(){
         if(this.editing == true){
@@ -161,8 +167,8 @@ export default {
       },
       clickSubmit(){
         EventBus.$emit('submit');       
-        this.editing = !this.editing
-        this.$emit('changeEdit', this.editing);
+      //  this.editing = !this.editing
+      //  this.$emit('changeEdit', this.editing);
       },
       clickEdit(){
           axios.post(`http://localhost:3000/api/project/${this.idp}/pressModifyButton/${this.ids}`, {tmp:''},
