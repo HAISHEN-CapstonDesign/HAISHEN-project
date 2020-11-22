@@ -50,22 +50,20 @@
         cols="6"
         md="4"
       >
-      <v-card class="mx-auto" max-width="344" outlined>
-
-            <v-img :src="avatar_src" max-height="400" max-width="344">
-              </v-img>
-  
-        
-       
-      <v-card-title class="ml-1 text-h4 mb-3">
-       {{ $store.state.userInfo.nickname }}
-      </v-card-title>
-
-     <v-card-subtitle class="ml-1">
-       관심분야
-     </v-card-subtitle>
-     <v-chip class="ml-4">정치</v-chip>
-     <v-chip class="ma-1">경제</v-chip>
+      <v-card class="mx-auto" max-width="250" outlined>
+        <v-img 
+          :src="avatar_src"
+          max-height="400"
+          max-width="344">
+        </v-img>
+        <v-card-title class="ml-1 text-h4 mb-3">
+          {{ $store.state.userInfo.nickname }}
+        </v-card-title>
+        <v-card-subtitle class="ml-1">
+          관심분야
+        </v-card-subtitle>
+        <v-chip class="ml-4">정치</v-chip>
+        <v-chip class="ma-1">경제</v-chip>
      <v-card-subtitle>
        집필 수 등등 나머지 세부사항
      </v-card-subtitle>
