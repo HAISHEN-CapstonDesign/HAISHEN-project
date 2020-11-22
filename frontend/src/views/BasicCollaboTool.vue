@@ -91,7 +91,7 @@
         </v-row>
           <v-divider></v-divider>
           <br>
-            <div v-html="nowMainText"></div>
+            <div class="content_div" v-html="nowMainText"></div>
 
           </v-card>
           </v-container>
