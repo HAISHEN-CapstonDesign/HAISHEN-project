@@ -6,6 +6,9 @@
             color="blue-grey darken-4"
             class="pb-5"
             >
+            <div style="text-align : center;"> 
+                <img src='../assets/myaccount_img_white.png' height="100px"/>
+            </div>
                 <div class="ml-15">
                    
                     <v-col
