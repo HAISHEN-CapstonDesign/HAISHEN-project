@@ -1,5 +1,5 @@
 <template>
-    <v-card id="mode_menu" style="top:10px;" max-width="127">
+    <v-card id="mode_menu" style="top:0px;" max-width="127">
 
         <v-list
           dense
@@ -122,9 +122,12 @@ export default {
 	}).scroll();
     });
     //download code
-    function download(filename, text) {
+    function download(filename) {
         var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(text));
+        var header = "<html>" + "<head><meta charset='utf-8'></head><body>";
+	var footer = "</body></html>";
+	var text = header+document.getElementById("text-val").innerHTML+footer;
+        element.setAttribute('href', 'data:' + 'application/vnd.ms-word' + ';charset=utf-8,' + encodeURIComponent(text));
         element.setAttribute('download', filename);
 
         element.style.display = 'none';
@@ -135,13 +138,13 @@ export default {
         document.body.removeChild(element);
       }
       document.getElementById("dwn-btn").addEventListener("click", function(){
-        var text = document.getElementById("text-val").innerHTML;
+      //  var text = document.getElementById("text-val").innerHTML;
         var date = new Date().toLocaleString();
         var title = document.getElementById("title").innerText;
         var subtitle = document.getElementById("subtitle").innerText;
-        var filename = `${title}_${subtitle}_${date}.html`;
+        var filename = `${title}_${subtitle}_${date}.doc`;
     
-        download(filename, text);
+        download(filename);
       }, false);
     },
     props:['isEditing', 'mainText', 'ids', 'title', 'subtitle', 'modifying','idp'],
