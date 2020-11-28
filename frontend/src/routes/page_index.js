@@ -14,6 +14,7 @@ import historyDetail from '../views/HistoryDetail'
 import writerList from '../views/WriterList'
 import funding from '../views/Funding'
 
+
 import diff from '../views/diffTest'
 import WriterApply from '../views/WriterApply'
 // import { component } from 'vue/types/umd';
@@ -42,6 +43,10 @@ Vue.use(VueRouter);
 
 const MainPage = () => {
     return import ( /* webpackChunkName: "mainpage" */ '../views/MainPage.vue')
+}
+
+const AccountLinkPage = () => {
+    return import ( /* webpackChunkName: "accountlinkpage" */ '../views/AccountLink.vue')
 }
 
 const LoginPage = () => {
@@ -79,6 +84,12 @@ export default new VueRouter({
             component: LoginPage
         },
         //광고 페이지는 component로 바꿔서 routing 안해도 됩니다!
+        {
+            path: '/accountlink',
+            name: 'AccountLinkPage',
+            // beforeEnter: rejectAuthUser,
+            component: AccountLinkPage
+        },
         {
             path: '/ad',
             name: 'AdvertisingPage',

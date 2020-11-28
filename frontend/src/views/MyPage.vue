@@ -20,6 +20,20 @@
 
   <v-container fluid grid-list-sm>
       <div style="float:right;">
+
+      <v-btn
+            class="mx-2"
+            fab
+            dark
+            small
+            color="yellow darken-1"
+            to='/accountlink'
+          >
+            <v-icon dark>
+             mdi-cash-usd-outline
+            </v-icon>
+          </v-btn>
+
     <v-btn
       class="mx-2"
       fab
@@ -32,6 +46,8 @@
         mdi-currency-usd
       </v-icon>
     </v-btn>
+
+
     <v-btn
       class="mx-2"
       fab
@@ -43,6 +59,8 @@
         mdi-bell
       </v-icon>
     </v-btn>
+
+
         </div>
         <br><br>
     <v-row no-gutters>
