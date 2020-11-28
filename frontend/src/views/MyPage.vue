@@ -27,7 +27,7 @@
             dark
             small
             color="yellow darken-1"
-            to='/accountlink'
+            to='/myaccount'
           >
             <v-icon dark>
              mdi-cash-usd-outline
