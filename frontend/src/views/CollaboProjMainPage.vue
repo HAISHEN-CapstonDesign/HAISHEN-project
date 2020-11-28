@@ -38,7 +38,7 @@
                                 v-model="introduction"
                                 solo
                                 flat="flase"
-                                ></v-textarea>
+                                ></v-textarea> -->
                             </div>
                             <Writer v-show="nowList == 'writer'"></Writer>
                             <div v-show="nowList=='subtitle'">프로젝트  목차 나열 나중에 편집기능도 넣어야 할듯</div>
