@@ -43,6 +43,36 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+        <!-- 취소버튼 dialog 만드는중 
+        <v-dialog
+        v-model="cancelDialog"
+        persistent
+        max-width="500"
+        >
+            <v-card>
+                <v-card-title class="headline">
+                    이 버전으로 되돌리시겠습니까?
+                </v-card-title>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                    color="green darken-1"
+                    text
+                    @click="cancelYes"
+                    >
+                        확인
+                    </v-btn>
+                    <v-btn
+                    color="red darken-1"
+                    text
+                    @click="cancelDialog = false"
+                    >
+                        취소
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+        -->
     <div>
       <v-img
         class="white--text"
@@ -225,6 +255,7 @@ export default {
             editFiles:[],
             imgUrl: require('../assets/partership.jpg'),
             dialog:false,
+            cancelDialog: false,
             comment:'',
             project: {},
             subObj:{
@@ -301,6 +332,9 @@ export default {
       submitNo(){
         this.dialog=false;
         this.comment = '';
+      },
+      cancelYes(){
+
       },
     },
 }
