@@ -31,10 +31,11 @@
                         <v-card
                         color="blue-grey darken-3"
                         width="450"
-                        height="70"
+                        height="80"
                         outlined="false"
                         hover="true"
                         class="text-center ml-2"
+                        to='/accountlink'
                         >
                             <div style="position: absolute; top: 40%; width:100%">
                             <v-icon>
