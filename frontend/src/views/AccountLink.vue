@@ -1,11 +1,95 @@
 <template>
-    <v-container fill-height style="max-width:500px;">
-    <v-layout align-center row wrap class="mt-15"> 
+    <v-container fill-height style="max-width:700px;">
+    <v-layout align-center row wrap class="mt-15">
+    <v-card>
+        <div style="text-align : center;"> 
+            <img src='../assets/Account3_font_img.png' height="100px"/>
+        </div>
+    <v-stepper v-model="e1">
+    <v-stepper-header>
+      <v-stepper-step
+        :complete="e1 > 1"
+        step="1"
+      >
+        Please enter<br>the account holder name
+      </v-stepper-step>
+      <v-stepper-step
+        :complete="e1 > 2"
+        step="2"
+      >
+        Please select a bank
+      </v-stepper-step>
+      <v-stepper-step step="3">
+        Please enter<br> account number
+      </v-stepper-step>
+    </v-stepper-header>
+
+    <v-stepper-items>
+      <v-stepper-content step="1">
+        <v-card
+          class="mb-12"
+          height="200px"
+        >
+            <v-text-field v-model="accountholder" label="예금주명을 입력하세요">
+            </v-text-field>
+        </v-card>
+
+        <v-btn
+          color="primary"
+          @click="e1 = 2"
+        >
+          Continue
+        </v-btn>
+
+        <v-btn text>
+          Cancel
+        </v-btn>
+      </v-stepper-content>
+
+      <v-stepper-content step="2">
+        <v-card
+          class="mb-12"
+          color="grey lighten-1"
+          height="200px"
+        >
+            <v-select :items="items" v-model="bankname" label="은행 선택" required></v-select>
+        </v-card>
+        <v-btn
+          color="primary"
+          @click="e1 = 3"
+        >
+          Continue
+        </v-btn>
+
+        <v-btn text>
+          Cancel
+        </v-btn>
+      </v-stepper-content>
+
+      <v-stepper-content step="3">
+        <v-card
+          class="mb-12"
+          color="grey lighten-1"
+          height="200px"
+        ></v-card>
+
+        <v-btn
+          color="primary"
+          @click="e1 = 1"
+        >
+          Continue
+        </v-btn>
+
+        <v-btn text>
+          Cancel
+        </v-btn>
+      </v-stepper-content>
+    </v-stepper-items>
+  </v-stepper>
+    </v-card>
         <v-flex xs12>      
             <v-card>
-            <div style="text-align : center;"> 
-                <img src='../assets/Account_font_img.png' height="100px"/>
-            </div>
+            
                 <div class="pa-3">
                     <v-text-field v-model="accountholder" label="예금주명을 입력하세요">
                     </v-text-field>
