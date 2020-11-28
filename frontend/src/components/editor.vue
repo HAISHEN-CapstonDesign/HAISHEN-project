@@ -269,4 +269,7 @@ export default {
 .content_div img{
   width: 100%;
 }
+.ProseMirror:focus {
+    outline: none;
+}
 </style>
