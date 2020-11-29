@@ -14,6 +14,7 @@ import historyDetail from '../views/HistoryDetail'
 import writerList from '../views/WriterList'
 import funding from '../views/Funding'
 
+
 import diff from '../views/diffTest'
 import WriterApply from '../views/WriterApply'
 // import { component } from 'vue/types/umd';
@@ -44,6 +45,10 @@ const MainPage = () => {
     return import ( /* webpackChunkName: "mainpage" */ '../views/MainPage.vue')
 }
 
+const AccountLinkPage = () => {
+    return import ( /* webpackChunkName: "accountlinkpage" */ '../views/AccountLink.vue')
+}
+
 const LoginPage = () => {
     return import ( /* webpackChunkName: "loginpage" */ '../views/LoginPage.vue')
 }
@@ -64,6 +69,10 @@ const PaymentPage = () => {
     return import ( /* webpackChunkName: "paymentpage" */ '../views/Payment.vue')
 }
 
+const MyAccountPage = () => {
+    return import ( /* webpackChunkName: "myaccountpage" */ '../views/MyAccount.vue')
+}
+
 export default new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
@@ -80,6 +89,12 @@ export default new VueRouter({
         },
         //광고 페이지는 component로 바꿔서 routing 안해도 됩니다!
         {
+            path: '/accountlink',
+            name: 'AccountLinkPage',
+            // beforeEnter: rejectAuthUser,
+            component: AccountLinkPage
+        },
+        {
             path: '/ad',
             name: 'AdvertisingPage',
             // beforeEnter: rejectAuthUser,
@@ -90,6 +105,11 @@ export default new VueRouter({
             name: 'ContentsReadingPage',
             component: ContentsReadingPage,
 
+        },
+        {
+            path: '/myaccount',
+            name: 'MyAccountPage',
+            component: MyAccountPage,
         },
         {
             path: '/payment',

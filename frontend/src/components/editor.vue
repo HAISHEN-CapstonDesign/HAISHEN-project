@@ -86,35 +86,6 @@
         </button>
         </v-col>
         <v-col md="1">
-          <button
-          class="menubar__button"
-          :class="{
-            'is-active': isActive.customstyle({ level: 'body-black' }),
-          }"
-          @click="commands.customstyle({ level: 'body-black' })"
-        >
-          <v-icon color="black">mdi-format-color-text</v-icon>
-        </button>
-        </v-col>
-        <v-col md="1">
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.customstyle({ level: 'body-blue' }) }"
-          @click="commands.customstyle({ level: 'body-blue' })"
-        >
-          <v-icon color="blue">mdi-format-color-text</v-icon>
-        </button>
-        </v-col>
-        <v-col md="1">
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.customstyle({ level: 'body-red' }) }"
-          @click="commands.customstyle({ level: 'body-red' })"
-        >
-          <v-icon color="red">mdi-format-color-text</v-icon>
-        </button>
-        </v-col>
-        <v-col md="1">
         <button
           class="menubar__button"
           @click="openModal(commands.image)"
@@ -195,7 +166,6 @@
 <script>
 import EventBus from '../EventBus.js';
 import { Editor, EditorMenuBar, EditorContent } from 'tiptap';
-import CustomStyle from "./CustomStyle";
 import Modal from "./Modal";
 //import EditorContent from "../components/editorContent.js";
 import {
@@ -247,7 +217,6 @@ export default {
           new Strike(),
           new Underline(),
           new History(),
-          new CustomStyle()
         ],
         content: '',
         onUpdate: ({ getHTML }) => {
@@ -299,5 +268,8 @@ export default {
 }
 .content_div img{
   width: 100%;
+}
+.ProseMirror:focus {
+    outline: none;
 }
 </style>

@@ -60,7 +60,7 @@ export default {
             window.Kakao.Auth.login({
                 scope: 'account_email,gender',
                 success: function (authObj) {
-                    alert(JSON.stringify(authObj))
+                    // alert(JSON.stringify(authObj))
                     console.log(authObj.access_token) // 발급받은 토큰 확인
                     localStorage.setItem("kakao_token", authObj.access_token); // 로컬 저장소에 저장
                     window.Kakao.Auth.setAccessToken(authObj.access_token); // 발급받은 토큰 할당
@@ -101,7 +101,7 @@ export default {
                     });
                 },
                 fail: function (err) {
-                    alert(JSON.stringify(err))
+                     alert(JSON.stringify(err))
                 },
             })
         }
