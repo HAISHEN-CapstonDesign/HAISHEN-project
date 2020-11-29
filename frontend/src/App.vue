@@ -193,16 +193,21 @@ export default {
     },
 };
 </script>
-<!-- 글자 색 변경을 위한 style -->
+<!-- 스크롤 style -->
 <style>
-.body-blue {
-  color: blue;
+::-webkit-scrollbar {
+  width: 6px;
 }
-.body-red {
-  color: red;
+::-webkit-scrollbar-track {
+  background-color: transparent;
 }
-.body-black {
-  color: black;
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: gray;
+}
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
 }
 </style>
 <style scoped>

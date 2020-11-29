@@ -18,7 +18,7 @@
         <v-col md="4">
         <v-card min-height="650px">
             <div id="container"
-            style="overflow-y:auto; overflow-x:hidden; height:430px;">
+            style="overflow-y:auto; overflow-x:hidden; min-height:430px; max-height:430px;">
                 <v-card
                 v-for="(item) in items"
                 v-bind:key="item.subtitle"
@@ -136,18 +136,19 @@ export default {
         replyNum(){
             alert(this.items.length)
         },
-        pushSubmit(){
+        async pushSubmit(){
             let today = this.$moment(new Date()).format('YYYY-MM-DD HH:mm');   
-            this.items.push({
+            await this.items.push({
                 avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg', //여기서 본인 사진넣기
                 title: this.message,
                 subtitle: localStorage.getItem('nickname'),
                 date: today.toLocaleString()
             })
             this.message='';
+            this.scrollToEnd();
 
         },
-        scrollToEnd: function() {    	
+        scrollToEnd() {    	
             var container = this.$el.querySelector("#container");
             container.scrollTop = container.scrollHeight;
         },
@@ -184,5 +185,19 @@ export default {
     max-width: 100%;
     min-height: 14px;
     overflow: hidden;
+}
+.container::-webkit-scrollbar {
+  width: 6px;
+}
+.container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.container::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: gray;
+}
+.container::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
 }
 </style>
