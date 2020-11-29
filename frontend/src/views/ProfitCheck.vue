@@ -1,5 +1,9 @@
 <template>
-    <div>
-        <h1> 수익 확인 페이지 </h1>
-    </div>
+    <h1>g</h1>
 </template>
+
+<script>
+export default {
+    
+}
+</script>

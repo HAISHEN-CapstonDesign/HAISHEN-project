@@ -23,7 +23,6 @@
                         outlined="false"
                         hover="true"
                         class="text-center"
-                        @click="$router.push('/postlist')"
                         >
                             <div style="position: absolute; top: 40%; width:100%">
                             <h3>등록된 계좌가 없습니다</h3>
