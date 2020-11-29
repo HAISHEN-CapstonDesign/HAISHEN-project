@@ -8,7 +8,7 @@
         </v-row>
     <v-row cols="12">
         <v-col md="2">
-            <Subtitle></Subtitle>
+            <Subtitle :title="title"></Subtitle>
         </v-col>
         <v-col md="6">
             <v-card height="668px">
@@ -34,7 +34,9 @@
                         </v-col>
                         <v-col md="10">
                             <v-card flat style="background-color: #ECDACE" width="70%">
-                                <v-card-text>{{item.title}}</v-card-text>
+                                <v-card-text>
+                                    {{item.title}}
+                                </v-card-text>
                             </v-card>
                             <p>{{item.date}}</p>
                         </v-col>
@@ -42,23 +44,35 @@
                     <v-row v-else justify="right">
                         <v-col align="right">
                             <v-card flat style="background-color: #D5F3E9" width="60%">
-                                <v-card-text align="left">{{item.title}}</v-card-text>
+                                <v-card-text align="left">
+                                    <v-chip
+                                    small
+                                    text
+                                    class="ma-1"
+                                    color="blue"
+                                    outlined
+                                    v-for="tags in item.tagList"
+                                    :key="tags.name"
+                                    >{{tags.name}}</v-chip>
+                                    {{item.title}}
+                                    </v-card-text>
                             </v-card>
                             <p>{{item.date}}</p>
                         </v-col>
                     </v-row>
                 </v-card>
             </div>
-            <br>
             <v-divider></v-divider>
         <v-card-actions class="pt-0">
             <v-row>
                 <v-col>
                     <v-btn
                     text
+                    class="writerTagBtn"
                     v-for="writer in writers"
-                    :key="writer.nicname"
+                    :key="writer.nickname"
                     @click="tag(writer.nickname)"
+                    :id="writer.nickname"
                     >@{{writer.nickname}}</v-btn>
                     <v-textarea
                     label="내용을 입력하세요."
@@ -87,6 +101,7 @@ export default {
         Subtitle,
     },
     data : () => ({
+        title:'',
         me: localStorage.getItem('nickname') ,
         nowMainText:`<p>글 내용</p>`,
         message: '',
@@ -111,23 +126,28 @@ export default {
             { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', 
                 title: `기획자의 트렌드에 대해서 알 수 있었습니다 감사합니다.`, 
                 subtitle: '기획자할래',
-                date: '2020.10.25'
+                date: '2020.10.25',
+                tagList:[],
             },
             { avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg', 
                 subtitle: 'crunch_good', 
                 title: '좋은글 감사합니다!', 
-                date: '2020.10.25'
+                date: '2020.10.25',
+                tagList:[],
             },
             { avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg', 
                 subtitle: 'finn', 
                 title: '추천 누르고 갑니다!',
-                date: '2020.10.25'
+                date: '2020.10.25',
+                tagList:[],
             },
         ],
+        tagLists:[],
     }),
     created() {
       this.getcomment()
       console.log('items url :'+this.items[0].avatar)
+      this.title=this.$store.state.title
     },
     methods:{
         clickmethod: function(){
@@ -137,14 +157,22 @@ export default {
             alert(this.items.length)
         },
         async pushSubmit(){
+            var clearTag = document.getElementsByClassName("writerTagBtn");
             let today = this.$moment(new Date()).format('YYYY-MM-DD HH:mm');   
             await this.items.push({
                 avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg', //여기서 본인 사진넣기
                 title: this.message,
                 subtitle: localStorage.getItem('nickname'),
-                date: today.toLocaleString()
+                date: today.toLocaleString(),
+                tagList:this.tagLists,
             })
+            this.tagLists=[];
             this.message='';
+            //버튼 색 초기화
+            for(var j=0; j<clearTag.length; j++){
+                clearTag[j].style.color = "black";
+            }
+            
             this.scrollToEnd();
 
         },
@@ -154,7 +182,25 @@ export default {
         },
         //나중에 전송으로 이동
         tag(writer){
-            alert(writer+'에게 알람')
+            var bodyTag = document.getElementById(writer);
+            var plusTag= "@" + writer
+            var check=false;
+            for(var i=0; i<this.tagLists.length; i++){
+                if(this.tagLists[i].name==plusTag){
+                    check=true;
+                    bodyTag.style.color = "black";
+                    this.tagLists.splice(i,1);
+                    break;
+                }
+            }
+            if(check == false){
+                bodyTag.style.color = "blue";
+                this.tagLists.push({
+                    name:plusTag
+                })
+            }
+
+           // alert(writer+'에게 알람')
         },
         /*
         getcomment(){

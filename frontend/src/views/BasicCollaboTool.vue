@@ -112,25 +112,22 @@
         </v-btn>
       </v-col>
     <!-- 개별 작성 페이지-->
-    <v-container>
+    <v-container fluid grid-list-sm pa-5>
     <v-row cols="12">
         <v-col
         sm="4"
-        md="3"
+        md="2"
         >
             <Subtitle v-bind:title="title" @changeSubtitle="changeSubtitle"></Subtitle>
         </v-col>
         <v-col
         sm="6"
-        md="7"
+        md="8"
         >
         <!-- isEditing -->
         <div v-if="isEditing" style="background-color: #FFD0A1">
         <v-container>
           <div style="background-color: white">
-            <div v-show="isEditing" style="width: 70px; background-color: #FFD0A1; position: relative; left: 36vw; text-align: center; color: white;">
-            수정중
-            </div>
           <v-container>
         <v-card
         flat

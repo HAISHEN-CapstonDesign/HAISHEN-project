@@ -10,6 +10,7 @@
     "dependencies": {
         "@splidejs/vue-splide": "^0.3.5",
         "core-js": "^3.6.5",
+        "diff": "^5.0.0",
         "plugin": "^0.3.3",
         "tiptap": "^1.26.4",
         "tiptap-extensions": "^1.33.2",
