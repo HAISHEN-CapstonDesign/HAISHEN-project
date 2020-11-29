@@ -74,9 +74,35 @@
         color="#282828"
     >
     <v-card
-        color="white"
+        color="grey lighten-1"
+        width="1050"
+        height="100%"
     >
         <bar_chart></bar_chart>
+
+        <v-row
+        :align="align"
+        no-gutters
+        style="height: 150px;"
+      >
+        <v-col
+          v-for="n in 3"
+          :key="n"
+        >
+          <v-card
+            color="deep-orange accent-1"
+            width="350"
+            height="100%"
+        >
+            <v-avatar>
+            <img
+                src="https://cdn.vuetifyjs.com/images/john.jpg"
+                alt="John"
+            >
+            </v-avatar>
+        </v-card>
+        </v-col>
+      </v-row>
         <v-btn @click="overlay = false">끄기</v-btn>
     </v-card>
     </v-overlay>
@@ -89,9 +115,11 @@
 import bar_chart from '../components/BarChart'
 
 
+
 export default {
     components:{
         bar_chart
+        
         
     },
     data:() => (
@@ -102,14 +130,14 @@ export default {
         project:['project 1', 'project 2', 'project 3', 'project 4', 'project 5'],
         headers: [
           {
-            text: 'Dessert (100g serving)',
+            text: '목차',
             align: 'start',
             sortable: false,
             value: 'name',
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
+          { text: '몇명이 샀는지', value: 'calories' },
+          { text: '총 수익 내역', value: 'fat' },
+          { text: '내 수익 내역', value: 'carbs' },
           { text: 'Protein (g)', value: 'protein' },
           { text: 'Iron (%)', value: 'iron' },
         ],
