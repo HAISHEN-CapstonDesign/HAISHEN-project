@@ -233,7 +233,8 @@ export default {
           this.$store.commit('isModifying', this.modifying)
           this.hisNickname = this.project.hisNickname;
           this.hisS3key = this.project.hisS3key;
-          console.log(res);
+          this.postDetail = this.project.postDetailList;
+          console.log(this.postDetail);
         })
         .catch(function (error) {
           console.log(error.response);
@@ -241,6 +242,7 @@ export default {
     },
     data() {
         return{
+            postDetail:[],
             modifying: false,
             hisNickname:'',
             hisS3key:'',

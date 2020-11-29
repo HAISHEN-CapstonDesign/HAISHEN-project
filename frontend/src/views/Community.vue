@@ -6,7 +6,7 @@
                 <h3>title, subtutle 나중에 정리</h3>
             </v-col>
         </v-row>
-    <v-row justify="center" cols="12">
+    <v-row cols="12">
         <v-col md="2">
             <Subtitle></Subtitle>
         </v-col>
@@ -17,7 +17,8 @@
         </v-col>
         <v-col md="4">
         <v-card min-height="650px">
-            <div id="mes" ref="mes" tile style="overflow-y: auto; overflow-x:hidden; height:430px;">
+            <div id="container"
+            style="overflow-y:auto; overflow-x:hidden; height:430px;">
                 <v-card
                 v-for="(item) in items"
                 v-bind:key="item.subtitle"
@@ -33,7 +34,7 @@
                         </v-col>
                         <v-col md="10">
                             <v-card flat style="background-color: #ECDACE" width="70%">
-                                <v-card-text>test</v-card-text>
+                                <v-card-text>{{item.title}}</v-card-text>
                             </v-card>
                             <p>{{item.date}}</p>
                         </v-col>
@@ -41,7 +42,7 @@
                     <v-row v-else justify="right">
                         <v-col align="right">
                             <v-card flat style="background-color: #D5F3E9" width="60%">
-                                <v-card-text align="left">test</v-card-text>
+                                <v-card-text align="left">{{item.title}}</v-card-text>
                             </v-card>
                             <p>{{item.date}}</p>
                         </v-col>
@@ -122,7 +123,7 @@ export default {
                 title: '추천 누르고 갑니다!',
                 date: '2020.10.25'
             },
-        ]
+        ],
     }),
     created() {
       this.getcomment()
@@ -143,11 +144,12 @@ export default {
                 subtitle: localStorage.getItem('nickname'),
                 date: today.toLocaleString()
             })
-            this.textClear()
+            this.message='';
 
         },
-        textClear(){
-            this.message='';
+        scrollToEnd: function() {    	
+            var container = this.$el.querySelector("#container");
+            container.scrollTop = container.scrollHeight;
         },
         //나중에 전송으로 이동
         tag(writer){
