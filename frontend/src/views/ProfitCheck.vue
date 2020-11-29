@@ -86,7 +86,7 @@
         style="height: 150px;"
       >
         <v-col
-          v-for="n in 3"
+          v-for="(item,n) in writers"
           :key="n"
         >
           <v-card
@@ -100,6 +100,8 @@
                 alt="John"
             >
             </v-avatar>
+            <h3>{{item.writer}}</h3>
+            <h3>월 수익 ${{item.write_profit}}</h3>
         </v-card>
         </v-col>
       </v-row>
@@ -116,11 +118,10 @@ import bar_chart from '../components/BarChart'
 
 
 
+
 export default {
     components:{
         bar_chart
-        
-        
     },
     data:() => (
     {
@@ -128,6 +129,23 @@ export default {
         overlay: false,
         project_num: 5,
         project:['project 1', 'project 2', 'project 3', 'project 4', 'project 5'],
+        writers:[
+            {
+                writer: '메인 작가', //main = 1, sub = 0
+                profile: '프사',
+                write_profit: 50000
+            },
+            {
+                writer: '서브 작가', //main = 1, sub = 0
+                profile: '프사',
+                write_profit: 8000
+            },
+            {
+                writer: '서브 작가', //main = 1, sub = 0
+                profile: '프사',
+                write_profit: 7000
+            },
+            ],
         headers: [
           {
             text: '목차',

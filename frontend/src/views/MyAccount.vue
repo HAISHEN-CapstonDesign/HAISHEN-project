@@ -58,7 +58,20 @@ export default {
       account: ['start'],
     }),
     methods: {
-        
+        // test(){
+        //     console.log("hi")
+        //     axios
+        //         .post('http://localhost:3000/api/getaccounts',{tmp:3}, { headers: {'token': localStorage.getItem('access_token')}})
+        //         .then(res => {
+                    
+        //             console.log(res.data)
+                    
+        //         })
+        //         .catch((err) => {
+        //             console.log(err)
+        //             alert("에러가 발생했습니다. 다시 시도해주세요")
+        //         });
+        // }
     }
 }
 </script>
