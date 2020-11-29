@@ -27,10 +27,10 @@
             height="100%"
             class="mt-5 pt-10 px-3"
         >
-        <v-expansion-panels
+        <v-expansion-panels accordion
             width="1050"
         >
-            <v-expansion-panel
+            <v-expansion-panel 
             v-for="(item,i) in 5"
             :key="i"
             >
