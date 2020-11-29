@@ -3,12 +3,12 @@
     <v-container fluid grid-list-sm pa-5>
         <v-row justify="center">
             <v-col>
-                <h3>title, subtutle 나중에 정리</h3>
+                <h3>{{title}}(title), {{subtitle}}(subtutle) 나중에 정리</h3>
             </v-col>
         </v-row>
     <v-row cols="12">
         <v-col md="2">
-            <Subtitle :title="title"></Subtitle>
+            <Subtitle v-bind:title="title" @changeSubtitle="changeSubtitle"></Subtitle>
         </v-col>
         <v-col md="6">
             <v-card height="668px">
@@ -34,7 +34,7 @@
                         </v-col>
                         <v-col md="10">
                             <v-card flat style="background-color: #ECDACE" width="70%">
-                                <v-card-text>
+                                <v-card-text class="ma-0 pa-2">
                                     {{item.title}}
                                 </v-card-text>
                             </v-card>
@@ -44,11 +44,11 @@
                     <v-row v-else justify="right">
                         <v-col align="right">
                             <v-card flat style="background-color: #D5F3E9" width="60%">
-                                <v-card-text align="left">
+                                <v-card-text align="left" class="ma-0 pa-2">
                                     <v-chip
                                     small
                                     text
-                                    class="ma-1"
+                                    class="ma-1 pa-2"
                                     color="blue"
                                     outlined
                                     v-for="tags in item.tagList"
@@ -102,6 +102,9 @@ export default {
     },
     data : () => ({
         title:'',
+        subtitle:'',
+        idp:0,
+        ids:0,
         me: localStorage.getItem('nickname') ,
         nowMainText:`<p>글 내용</p>`,
         message: '',
@@ -145,9 +148,12 @@ export default {
         tagLists:[],
     }),
     created() {
-      this.getcomment()
-      console.log('items url :'+this.items[0].avatar)
-      this.title=this.$store.state.title
+        this.title=this.$store.state.title;
+        this.idp = this.$route.params.idp;
+        this.ids = this.$route.params.ids;
+        this.subtitle=this.$store.state.subtitle[this.ids-1].text
+        this.getcomment()
+        console.log('items url :'+this.items[0].avatar)
     },
     methods:{
         clickmethod: function(){
@@ -201,6 +207,9 @@ export default {
             }
 
            // alert(writer+'에게 알람')
+        },
+        changeSubtitle(idx){
+            this.$router.push(`/${this.idp}/${idx}/community`);
         },
         /*
         getcomment(){

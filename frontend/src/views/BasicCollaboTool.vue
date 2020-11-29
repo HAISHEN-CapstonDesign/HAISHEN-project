@@ -230,8 +230,13 @@ export default {
           this.$store.commit('isModifying', this.modifying)
           this.hisNickname = this.project.hisNickname;
           this.hisS3key = this.project.hisS3key;
-          this.postDetail = this.project.postDetailList;
-          console.log(this.postDetail);
+          for(var i=0; i<this.project.postDetailList.length; i++){
+            this.postDetail[i].writerName = this.project.postDetailList[i].writerName;
+            this.postDetail[i].s3key = this.project.postDetailList[i].s3key;
+            this.postDetail[i].text = this.project.postDetailList[i].text;
+            this.readText = this.readText + this.postDetail[i].text
+          }
+          //console.log(this.postDetail[0].text);
         })
         .catch(function (error) {
           console.log(error.response);
@@ -239,7 +244,14 @@ export default {
     },
     data() {
         return{
-            postDetail:[],
+            postDetail:[
+              {
+                writerName:'',
+                s3key:'',
+                text:'',
+                color:'#F7CBCB',
+            }
+            ],
             modifying: false,
             hisNickname:'',
             hisS3key:'',
@@ -250,6 +262,7 @@ export default {
             title: '',
             subtitle:'',
             nowMainText: '',
+            readText:'',
             editText:'',
             editFiles:[],
             imgUrl: require('../assets/partership.jpg'),
@@ -341,5 +354,23 @@ export default {
 <style scoped>
 .l_btn:hover{
   color: brown;
+}
+.color_0{
+  background-color: #F7CBCB;
+}
+.color_1{
+  background-color: #FFDBAF;
+}
+.color_2{
+  background-color: #F1F0C3;
+}
+.color_3{
+  background-color: #D4F8D1;
+}
+.color_4{
+  background-color: #D1DCF8;
+}
+.color_5{
+  background-color: #E1C3F3;
 }
 </style>

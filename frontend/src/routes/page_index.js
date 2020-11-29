@@ -13,6 +13,7 @@ import historyPage from '../views/History'
 import historyDetail from '../views/HistoryDetail'
 import writerList from '../views/WriterList'
 import funding from '../views/Funding'
+import alarm from '../views/Alarm'
 
 import diff from '../views/diffTest'
 import WriterApply from '../views/WriterApply'
@@ -151,7 +152,7 @@ export default new VueRouter({
             component: historyDetail,
         },
         {
-            path: '/community',
+            path: '/:idp/:ids/community',
             name: 'community',
             component: community,
         },
@@ -173,6 +174,11 @@ export default new VueRouter({
             path: '/:idp/WriterApply',
             name: WriterApply,
             component: WriterApply
+        },
+        {
+            path: '/alarm',
+            name: 'alarm',
+            component: alarm,
         }
 
     ]

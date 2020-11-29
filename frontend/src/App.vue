@@ -1,7 +1,6 @@
 <template>
 <v-app>
     <div>
-        <!-- color="~" 여기에 원하는 색깔 코드 넣으면 됨-->
         <v-app-bar color="white" absolute dense>
             <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
             <img src='./assets/crunch_logo2_1.png' height="45px" v-on:click="to_main"/>
@@ -21,7 +20,15 @@
                 <v-btn dark small class="mr-2" v-if="isLoginError" router :to="{name: 'LoginPage'}">login</v-btn>
                 <v-btn dark small class="mr-2" v-if="isLogin" @click="logout">logout</v-btn>
                 <v-btn dark small class="mr-2" v-if="isLoginError" router :to="{name: 'SignUpPage'}">sign up</v-btn>
-                <v-btn dark small class="mr-2" v-if="isLogin" router :to="{name:'MyPage'}">My</v-btn>
+                <v-badge
+                color="red"
+                :content="messages"
+                :value="messages"
+                overlap
+                >
+                
+                    <v-btn dark small class="mr-2" v-if="isLogin" router :to="{name:'MyPage'}">My</v-btn>
+                </v-badge>
                 <v-chip class="ma-2" color="orange" v-if="isLogin" text-color="white" router :to="{name:'PaymentPage'}">
                     <v-icon left>
                         mdi-currency-usd
@@ -112,7 +119,7 @@
                     </v-list-item-icon>
                     <v-list-item-title>Project</v-list-item-title>
                 </v-list-item>
-                <v-list-item>
+                <v-list-item to="/alarm">
                     <v-list-item-icon>
                         <v-icon>mdi-bell</v-icon>
                     </v-list-item-icon>
@@ -165,13 +172,21 @@ export default {
             'pink darken-2',
             'red lighten-1',
             'deep-purple accent-4',
-        ]
+        ],
+        messages: 0,
     }),
     computed: {
         menuProps(){
             return !this.search ? {value: false} : {}
         },
         ...mapState(['isLogin', 'isLoginError','userInfo'])
+    },
+    mounted(){
+        var link = document.location.href.split("/");
+        console.log(link[3])
+        if(link == 'alarm'){
+            this.messages =0;
+        }
     },
     watch: {
         search (val) {

@@ -38,6 +38,7 @@
       dark
       small
       color="warning"
+      to="/alarm"
     >
       <v-icon dark>
         mdi-bell

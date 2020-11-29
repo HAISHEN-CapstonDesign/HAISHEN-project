@@ -168,7 +168,7 @@ export default {
           this.editing = !this.editing
           this.$emit('changeEdit', this.editing);
         }
-        this.$router.push('/community');
+        this.$router.push(`/${this.idp}/${this.ids}/community`);
       },
       clickHistory(){
         if(this.editing){
