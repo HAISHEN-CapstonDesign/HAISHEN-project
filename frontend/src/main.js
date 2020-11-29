@@ -8,6 +8,7 @@ import VueMoment from 'vue-moment'
 import VModal from 'vue-js-modal'
 import VueSplide from '@splidejs/vue-splide';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
 // import VueJsModal from 'plugin'
 
 Vue.config.productionTip = false

@@ -26,6 +26,7 @@
             width="1200"
             height="100%"
             class="mt-5 pt-10 px-3"
+            color="blue lighten-5"
         >
         <v-expansion-panels accordion
             width="1050"
@@ -35,19 +36,43 @@
             :key="i"
             >
             <v-expansion-panel-header>
-                Item
+               item
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-            <v-card>
-                <bar_chart></bar_chart>         
-            </v-card>    
+                <v-container>
+                <v-card
+                width="100"
+                height="100"
+                color="cyan"
+                >
+                <v-btn
+                    @click="overlay = !overlay"
+                >btn
+                </v-btn>
+                </v-card>
+                    
+                </v-container>
             </v-expansion-panel-content>
             </v-expansion-panel>
         </v-expansion-panels>
-         
         </v-card>
    </v-container>
    
+    <!-- overlay area -->
+    <v-overlay
+        :z-index="zIndex"
+        :value="overlay"
+        :opacity="opacity"
+        color="#282828"
+    >
+    <v-card
+        color="white"
+    >
+        <bar_chart></bar_chart>
+        <v-btn @click="overlay = false">끄기</v-btn>
+    </v-card>
+    </v-overlay>
+
    </v-app>
    
 </template>
@@ -55,13 +80,20 @@
 <script>
 import bar_chart from '../components/BarChart'
 
+
 export default {
     components:{
-        bar_chart,
+        bar_chart
+        
     },
-    data() {
-        return {
-            banner_src:require('@/assets/watch.jpg')
+    data:() => (
+    {
+        banner_src:require('@/assets/watch.jpg'),
+        overlay: false,
+    }),
+    methods:{
+        endOver(over){
+            this.overlay = over;
         }
     }
 }
