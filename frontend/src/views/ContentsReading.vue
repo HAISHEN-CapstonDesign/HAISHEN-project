@@ -285,6 +285,21 @@ export default {
           this.$router.push({ name: 'ContentsReadingPage',params: {idc: title_idx} })
         }
     },
+    addbuyer(){
+          axios
+                .post('http://localhost:3000/api/addbuyercrew',
+                  {postindexId: 3,projectId:1,  purchaseDate:'2020-11-30'}, 
+                  { headers: {'token': localStorage.getItem('access_token')}}
+                )
+                .then(res => {
+                    console.log(res.data)
+                    
+                })
+                .catch((err) => {
+                    console.log(err)
+                    alert("에러가 발생했습니다. 다시 시도해주세요")
+                });
+        },
     getFee_minuspoint(title_idx){
         console.log('title_idx'+title_idx)
         axios
@@ -292,6 +307,7 @@ export default {
             .then(res => {
                 // localStorage.setItem('point',this.chargePoint)
                 console.log(res.data)
+                
                 axios
                   .post('http://localhost:3000/api/minuspoint', {id:parseInt(this.temp_title_index), projectId:1, fee: res.data},{ headers: {'token': this.token}})
                   .then(request=> {
