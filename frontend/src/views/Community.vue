@@ -20,13 +20,13 @@
             <div id="container"
             style="overflow-y:auto; overflow-x:hidden; min-height:430px; max-height:430px;">
                 <v-card
-                v-for="(item) in items"
-                v-bind:key="item.subtitle"
+                v-for="(item) in recvList"
+                v-bind:key="item.date"
                 cols="12"
                 class="ma-1 pa-0"
                 flat 
                 >
-                    <v-row v-if="item.subtitle!=me" cols="12" justify="left">
+                    <v-row v-if="item.userName!=me" cols="12" justify="left">
                         <v-col md="2" align="center">
                             <v-avatar size="50px">
                                 <img :src="item.avatar">
@@ -35,7 +35,7 @@
                         <v-col md="10">
                             <v-card flat style="background-color: #ECDACE" width="70%">
                                 <v-card-text class="ma-0 pa-2">
-                                    {{item.title}}
+                                    {{item.content}}
                                 </v-card-text>
                             </v-card>
                             <p>{{item.date}}</p>
@@ -54,7 +54,7 @@
                                     v-for="tags in item.tagList"
                                     :key="tags.name"
                                     >{{tags.name}}</v-chip>
-                                    {{item.title}}
+                                    {{item.content}}
                                     </v-card-text>
                             </v-card>
                             <p>{{item.date}}</p>
@@ -80,9 +80,8 @@
                     solo
                     outlined
                     height="100px"
-                    onfocus="textClear()"
                     ></v-textarea>
-                    <v-btn style="float: right" dark @click="pushSubmit">작성</v-btn>
+                    <v-btn style="float: right" dark @click="sendMessage">작성</v-btn>
                 </v-col>
             </v-row>
         </v-card-actions>
@@ -96,8 +95,8 @@
 <script>
 //import axios from 'axios'
 import Subtitle from '../components/subtitleList'
-//import Stomp from 'webstomp-client'
-//import SockJS from 'sockjs-client'
+import Stomp from 'webstomp-client'
+import SockJS from 'sockjs-client'
 export default {
     components:{
         Subtitle,
@@ -127,34 +126,19 @@ export default {
                 tag: false,
             },
         ],
-        items: [
-            { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', 
-                title: `기획자의 트렌드에 대해서 알 수 있었습니다 감사합니다.`, 
-                subtitle: '기획자할래',
-                date: '2020.10.25',
-                tagList:[],
-            },
-            { avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg', 
-                subtitle: 'crunch_good', 
-                title: '좋은글 감사합니다!', 
-                date: '2020.10.25',
-                tagList:[],
-            },
-            { avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg', 
-                subtitle: 'finn', 
-                title: '추천 누르고 갑니다!',
-                date: '2020.10.25',
-                tagList:[],
-            },
-        ],
+        
         tagLists:[],
+       // userName: "",
+       // message: "",
+        recvList: [],
     }),
     created() {
         this.title=this.$store.state.title;
         this.idp = this.$route.params.idp;
         this.ids = this.$route.params.ids;
         this.subtitle=this.$store.state.subtitle[this.ids-1].text
-        this.getcomment()
+       // this.getcomment()
+        this.connect()
       //  this.connect()
        // console.log('items url :'+this.items[0].avatar)
     },
@@ -169,10 +153,10 @@ export default {
             var clearTag = document.getElementsByClassName("writerTagBtn");
             let today = this.$moment(new Date()).format('YYYY-MM-DD HH:mm');   
             await this.items.push({
-                avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg', //여기서 본인 사진넣기
+             //   avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg', //여기서 본인 사진넣기
                 title: this.message,
                 subtitle: localStorage.getItem('nickname'),
-                date: today.toLocaleString(),
+                date: today,
                 tagList:this.tagLists,
             })
             this.tagLists=[];
@@ -214,6 +198,59 @@ export default {
         changeSubtitle(idx){
             this.$router.push(`/${this.idp}/${idx}/community`);
         },
+        sendMessage () {
+        if( this.userName !== '' && this.message !== ''){
+            var clearTag = document.getElementsByClassName("writerTagBtn");
+            this.send()
+            this.message = '';
+            this.tagLists=[];
+            for(var j=0; j<clearTag.length; j++){
+                clearTag[j].style.color = "black";
+            }
+            
+            this.scrollToEnd();
+
+      }
+    },    
+    send() {
+      console.log("Send message:" + this.message);
+      if (this.stompClient && this.stompClient.connected) {
+        const msg = { 
+          userName: localStorage.getItem('nickname'),
+          content: this.message,
+          time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm'),
+          tagName:this.tagLists,
+        };
+        this.stompClient.send("/receive", JSON.stringify(msg), {});
+      }
+    },    
+    connect() {
+      const serverURL = "http://localhost:3000"
+      let socket = new SockJS(serverURL);
+      this.stompClient = Stomp.over(socket);
+      console.log(`소켓 연결을 시도합니다. 서버 주소: ${serverURL}`)
+      this.stompClient.connect(
+        {},
+        frame => {
+          // 소켓 연결 성공
+          this.connected = true;
+          console.log('소켓 연결 성공', frame);
+          // 서버의 메시지 전송 endpoint를 구독합니다.
+          // 이런형태를 pub sub 구조라고 합니다.
+          this.stompClient.subscribe("/send", res => {
+            console.log('구독으로 받은 메시지 입니다.', res.body);
+
+            // 받은 데이터를 json으로 파싱하고 리스트에 넣어줍니다.
+            this.recvList.push(JSON.parse(res.body))
+          });
+        },
+        error => {
+          // 소켓 연결 실패
+          console.log('소켓 연결 실패', error);
+          this.connected = false;
+        }
+      );        
+    }
         /*
         getcomment(){
         console.log("hy22")

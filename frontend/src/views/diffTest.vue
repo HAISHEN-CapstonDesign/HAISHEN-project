@@ -15,8 +15,9 @@
       :key="idx"
     >
       <h3>유저이름: {{ item.userName }}</h3>
-      <h3>내용: {{ item.content }}</h3>
+      <h3>내용: {{ item.content }}</h3><h3>시간: {{ item.time }}</h3>
     </div>
+    <p>{{recvList}}</p>
   </div>
 </template>
 
@@ -49,7 +50,8 @@ export default {
       if (this.stompClient && this.stompClient.connected) {
         const msg = { 
           userName: this.userName,
-          content: this.message 
+          content: this.message,
+          time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm') 
         };
         this.stompClient.send("/receive", JSON.stringify(msg), {});
       }
