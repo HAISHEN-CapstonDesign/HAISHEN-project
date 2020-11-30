@@ -57,10 +57,6 @@ const SignUpPage = () => {
     return import ( /* webpackChunkName: "signuppage" */ '../views/SignUpPage.vue')
 }
 
-const AdvertisingPage = () => {
-    return import ( /* webpackChunkName: "advertisingpage" */ '../views/Advertising.vue')
-}
-
 const ContentsReadingPage = () => {
     return import ( /* webpackChunkName: "contentsreadingpage" */ '../views/ContentsReading.vue')
 }
@@ -73,6 +69,10 @@ const MyAccountPage = () => {
     return import ( /* webpackChunkName: "myaccountpage" */ '../views/MyAccount.vue')
 }
 
+const ProjectendPage = () => {
+    return import ( /* webpackChunkName: "projectendpage" */ '../views/Projectend.vue')
+}
+
 export default new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
@@ -82,23 +82,22 @@ export default new VueRouter({
             component: MainPage
         },
         {
+            path: '/projectend',
+            name: 'ProjectendPage',
+            // beforeEnter: rejectAuthUser,
+            component: ProjectendPage
+        },
+        {
             path: '/login',
             name: 'LoginPage',
             // beforeEnter: rejectAuthUser,
             component: LoginPage
         },
-        //광고 페이지는 component로 바꿔서 routing 안해도 됩니다!
         {
             path: '/accountlink',
             name: 'AccountLinkPage',
             // beforeEnter: rejectAuthUser,
             component: AccountLinkPage
-        },
-        {
-            path: '/ad',
-            name: 'AdvertisingPage',
-            // beforeEnter: rejectAuthUser,
-            component: AdvertisingPage
         },
         {
             path: '/contents/:idc',
