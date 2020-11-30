@@ -5,24 +5,27 @@
         <v-row
             :align="center"
             no-gutters
-            style="height: 150px;"
+            style="height: 800px;"
         >
             <v-card
                 color="#F4511E"
-                width="300"
+                width="400"
                 height="100%"
+                class="mr-5"
             >
             </v-card>
             <v-card
                 color="#6D4C41"
-                width="300"
+                width="100"
                 height="100%"
+                class="mr-5"
             >
             </v-card>
             <v-card
                 color="#546E7A"
-                width="300"
+                width="400"
                 height="100%"
+                class="mr-5"
             >
             </v-card>
         </v-row>
