@@ -74,12 +74,22 @@
         color="#282828"
     >
     <v-card
-        color="grey lighten-1"
+        color="white"
         width="1050"
         height="100%"
     >
         <bar_chart></bar_chart>
-
+        <v-card
+          color="#73413D"
+          width="1050"
+          height="100%"
+        >
+        <div align="center">
+          <v-img
+          :src="profic_src"
+          max-width="600"
+          ></v-img>
+        </div>
         <v-row
         :align="align"
         no-gutters
@@ -90,9 +100,10 @@
           :key="n"
         >
           <v-card
-            color="deep-orange accent-1"
-            width="350"
+            color="#BF5E3B"
+            width="150"
             height="100%"
+            class="mx-1"
         >
             <v-avatar>
             <img
@@ -101,11 +112,14 @@
             >
             </v-avatar>
             <h3>{{item.writer}}</h3>
-            <h3>월 수익 ${{item.write_profit}}</h3>
+            <overline>월 수익 ${{item.write_profit}}</overline>
         </v-card>
         </v-col>
       </v-row>
-        <v-btn @click="overlay = false">끄기</v-btn>
+      <div style="text-align : center;">
+        <v-btn color="#F2CF63" class="mt-5" @click="overlay = false">끄기</v-btn>
+      </div>
+      </v-card>
     </v-card>
     </v-overlay>
 
@@ -126,6 +140,7 @@ export default {
     data:() => (
     {
         banner_src:require('@/assets/watch.jpg'),
+        profic_src:require('@/assets/writer_porfit_icon.png'),
         overlay: false,
         project_num: 5,
         project:['project 1', 'project 2', 'project 3', 'project 4', 'project 5'],

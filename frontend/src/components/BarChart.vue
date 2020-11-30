@@ -11,13 +11,13 @@
           labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
           datasets: [
             {
-              label: 'Data One',
-              backgroundColor: '#f87979',
+              label: 'Monthly revenue',
+              backgroundColor: '#FF8F00',
               pointBackgroundColor: 'white',
               borderWidth: 1,
               pointBorderColor: '#249EBF',
               //Data to be represented on y-axis
-              data: [40, 20, 30, 50, 90, 10, 20, 40, 50, 70, 90, 100]
+              data: [900000, 750000, 600000, 650000, 900000, 100000, 200000, 400000, 500000, 700000, 900000, 1000000]
             }
           ]
         },
