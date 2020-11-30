@@ -188,6 +188,11 @@ export default {
                 .then(res=>{
                     console.log(res.data)
                     this.adopt=true
+                    axios
+                        .post('http://localhost:3000/api/endFunding', {d: this.idp}, { headers: {'token': localStorage.getItem('access_token')}})
+                        .then(res=>{
+                            console.log(res.data)
+                        })
                     
                 })
         },
