@@ -20,21 +20,33 @@
                 <v-btn dark small class="mr-2" v-if="isLoginError" router :to="{name: 'LoginPage'}">login</v-btn>
                 <v-btn dark small class="mr-2" v-if="isLogin" @click="logout">logout</v-btn>
                 <v-btn dark small class="mr-2" v-if="isLoginError" router :to="{name: 'SignUpPage'}">sign up</v-btn>
+                <v-btn dark small class="mr-2" v-if="isLogin" router :to="{name:'MyPage'}">My</v-btn>
+                
                 <v-badge
                 color="red"
+                v-if="isLogin"
                 :content="messages"
                 :value="messages"
                 overlap
                 >
-                
-                    <v-btn dark small class="mr-2" v-if="isLogin" router :to="{name:'MyPage'}">My</v-btn>
+                    <v-btn
+                    fab
+                    dark
+                    x-small
+                    color="warning"
+                    @click="alarmPage"
+                    >
+                        <v-icon dark>
+                            mdi-bell
+                        </v-icon>
+                    </v-btn>
                 </v-badge>
-                <v-chip class="ma-2" color="orange" v-if="isLogin" text-color="white" router :to="{name:'PaymentPage'}">
+                <v-btn rounded small class="ma-2" color="success" v-if="isLogin" text-color="white" router :to="{name:'PaymentPage'}">
                     <v-icon left>
                         mdi-currency-usd
                     </v-icon>
                     Point : {{ $store.state.userInfo.point }} 
-                </v-chip>
+                </v-btn>
             </v-row>
         </v-app-bar>
         
@@ -119,13 +131,20 @@
                     </v-list-item-icon>
                     <v-list-item-title>Project</v-list-item-title>
                 </v-list-item>
-                <v-list-item to="/alarm">
+                <v-badge
+                color="red"
+                inline
+                :content="messages"
+                :value="messages"
+                >
+                <v-list-item style="padding-right:105px" @click="alarmPage">
                     <v-list-item-icon>
                         <v-icon>mdi-bell</v-icon>
                     </v-list-item-icon>
 
                     <v-list-item-title>Alarm</v-list-item-title>
                 </v-list-item>
+                </v-badge>
                 <v-list-item router :to="{name: 'PaymentPage'}">
                     <v-list-item-icon>
                         <v-icon>mdi-currency-usd-circle-outline</v-icon>
@@ -173,20 +192,13 @@ export default {
             'red lighten-1',
             'deep-purple accent-4',
         ],
-        messages: 0,
+        messages: 5,
     }),
     computed: {
         menuProps(){
             return !this.search ? {value: false} : {}
         },
         ...mapState(['isLogin', 'isLoginError','userInfo'])
-    },
-    mounted(){
-        var link = document.location.href.split("/");
-        console.log(link[3])
-        if(link == 'alarm'){
-            this.messages =0;
-        }
     },
     watch: {
         search (val) {
@@ -200,6 +212,10 @@ export default {
     methods: {
         to_main() {
             this.$router.push('/');
+        },
+        alarmPage(){
+            this.messages =0;
+            this.$router.push("/alarm");
         },
         ask_charge_point() {
 

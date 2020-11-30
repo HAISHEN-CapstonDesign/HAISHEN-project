@@ -96,6 +96,8 @@
 <script>
 //import axios from 'axios'
 import Subtitle from '../components/subtitleList'
+//import Stomp from 'webstomp-client'
+//import SockJS from 'sockjs-client'
 export default {
     components:{
         Subtitle,
@@ -153,7 +155,8 @@ export default {
         this.ids = this.$route.params.ids;
         this.subtitle=this.$store.state.subtitle[this.ids-1].text
         this.getcomment()
-        console.log('items url :'+this.items[0].avatar)
+      //  this.connect()
+       // console.log('items url :'+this.items[0].avatar)
     },
     methods:{
         clickmethod: function(){

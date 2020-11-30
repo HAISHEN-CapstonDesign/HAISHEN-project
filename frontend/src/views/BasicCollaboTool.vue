@@ -173,8 +173,7 @@
         </v-row>
           <v-divider></v-divider>
           <br>
-            <div class="content_div" v-html="nowMainText"></div>
-
+            <div class="content_div" v-html="readText"></div>
           </v-card>
           </v-container>
           </div>
@@ -217,6 +216,7 @@ export default {
       Subtitle,
     },
     created() {
+      var color=['#FF8787','#FFBB67','#68BE66','#689CDD','#9668DD','#E778E0']
       this.idp = this.$route.params.idp;
       this.ids = this.$route.params.ids;
       this.subtitle=this.$store.state.subtitle[this.ids-1].text
@@ -230,28 +230,20 @@ export default {
           this.$store.commit('isModifying', this.modifying)
           this.hisNickname = this.project.hisNickname;
           this.hisS3key = this.project.hisS3key;
-          for(var i=0; i<this.project.postDetailList.length; i++){
-            this.postDetail[i].writerName = this.project.postDetailList[i].writerName;
-            this.postDetail[i].s3key = this.project.postDetailList[i].s3key;
-            this.postDetail[i].text = this.project.postDetailList[i].text;
-            this.readText = this.readText + this.postDetail[i].text
-          }
-          //console.log(this.postDetail[0].text);
+            this.postDetail = this.project.postDetailList;
+            for(var i=0; i<this.postDetail.length; i++){
+              let colorText = this.postDetail[i].text.replace("<p>", `<p style="color:${color[0]};">`);
+              this.readText = this.readText + colorText;
+            }
+          console.log(this.postDetail);
         })
         .catch(function (error) {
-          console.log(error.response);
+          console.log(error);
         });
     },
     data() {
         return{
-            postDetail:[
-              {
-                writerName:'',
-                s3key:'',
-                text:'',
-                color:'#F7CBCB',
-            }
-            ],
+            postDetail:[],
             modifying: false,
             hisNickname:'',
             hisS3key:'',
@@ -283,12 +275,9 @@ export default {
         //본문 변경 내용 저장
         this.nowMainText = this.editText;
         this.subObj.files=this.editFiles
-        //post data
-   //     let form = new FormData()
+
         let form2 = new FormData()
-    //    form.append('after', newText)
-   //     form.append('commit_comment', this.comment)
-    //    form.append('time', this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss'))
+
         for(var i=0; i<this.subObj.files.length; i++){
           form2.append('files',this.subObj.files[i]);
         }
@@ -308,6 +297,7 @@ export default {
           })
             .then((res) => {
             this.project = res.data;
+            location.reload();
             console.log(res);
           })
           .catch(function (error) {
@@ -355,22 +345,9 @@ export default {
 .l_btn:hover{
   color: brown;
 }
-.color_0{
-  background-color: #F7CBCB;
-}
-.color_1{
-  background-color: #FFDBAF;
-}
-.color_2{
-  background-color: #F1F0C3;
-}
-.color_3{
-  background-color: #D4F8D1;
-}
-.color_4{
-  background-color: #D1DCF8;
-}
-.color_5{
-  background-color: #E1C3F3;
+</style>
+<style>
+.v-application p {
+    margin-bottom: 0px;
 }
 </style>

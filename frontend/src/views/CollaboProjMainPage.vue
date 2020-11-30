@@ -42,7 +42,7 @@
                             </div>
                             <Writer v-show="nowList == 'writer'"></Writer>
                             <div v-show="nowList=='subtitle'">프로젝트  목차 나열 나중에 편집기능도 넣어야 할듯</div>
-                            <div v-show="nowList=='supporter'">프로젝트 서포터 리스트 component 제작필요</div>
+                            <Supporter v-show="nowList=='supporter'"></Supporter>
                     </v-card>          
                 </v-col>
                 <v-col md="3">
@@ -63,6 +63,7 @@
 // import ProjContent from '../components/projContent.vue'
 import Writer from '../components/writerCard'
 import Toolbar from '../components/collaboMainBar'
+import Supporter from '../components/supporterList'
 import axios from "axios"
 import {
     mapState
@@ -75,6 +76,7 @@ export default {
         // PostReply,
         Writer,
         Toolbar,
+        Supporter,
     },
     props:{
         // projectId : {

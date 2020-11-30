@@ -32,18 +32,7 @@
         mdi-currency-usd
       </v-icon>
     </v-btn>
-    <v-btn
-      class="mx-2"
-      fab
-      dark
-      small
-      color="warning"
-      to="/alarm"
-    >
-      <v-icon dark>
-        mdi-bell
-      </v-icon>
-    </v-btn>
+    
         </div>
         <br><br>
     <v-row no-gutters>
