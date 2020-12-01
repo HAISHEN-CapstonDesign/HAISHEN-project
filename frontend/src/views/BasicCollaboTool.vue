@@ -233,12 +233,12 @@ export default {
           this.postDetail = this.project.postDetailList;
           axios.get(`http://localhost:3000/api/project/1/writercrew`)
             .then((res2) => {
-              this.writerCrew = res2.data.writerName;
-          /*    for(var i=0; i<this.postDetail.length; i++){
+              this.writerCrew = res2.data;
+              for(var i=0; i<this.postDetail.length; i++){
                 let colorText = null;
                 let colorIndex = 0;
                 for(var j=0; j<this.writerCrew.length; j++){
-                  if(this.postDetail[i].writerName == this.writerCrew[j]){
+                  if(this.postDetail[i].writerName == this.writerCrew[j].writerName){
                     colorIndex = j;
                   }
                 }
@@ -246,7 +246,7 @@ export default {
                 else colorText = this.postDetail[i].text.replace("<p>", `<p style="color:${color[colorIndex]};">`);
 
                 this.readText = this.readText + colorText;
-              }*/
+              }
               console.log(res2.data);
             })
             .catch(function (error) {
