@@ -236,7 +236,12 @@ export default {
               this.writerCrew = res2.data.writerName;
               for(var i=0; i<this.postDetail.length; i++){
                 let colorText = null;
-                let colorIndex = this.writerCrew.indexOf(`postDetail[i].writerName`);
+                let colorIndex = 0;
+                for(var j=0; j<this.writerCrew.length; j++){
+                  if(this.postDetail[i].writerName == this.writerCrew[j]){
+                    colorIndex = j;
+                  }
+                }
                 if(this.postDetail[i].text == " <p></p>") colorText = "<br>"
                 else colorText = this.postDetail[i].text.replace("<p>", `<p style="color:${color[colorIndex]};">`);
 
