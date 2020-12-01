@@ -1,5 +1,5 @@
 <template>
-    <v-container fill-height style="max-width:1200px;">
+    <v-container fill-height style="max-width:1300px;">
     <v-layout align="center" row wrap class="mt-15">
     <div>
         <v-row
@@ -50,12 +50,12 @@
                 width="230"
                 ></v-img>
             </div>
-            <div class="ml-15">
+            <div class="ml-15">      
                 <v-row
                 v-for="(item, n) in fee"
                 :key="n"
                 class="mb-16 ml-5"
-                >   
+                >  
                     <v-btn @click="which_fee(item)">{{item}}</v-btn>
                 </v-row>
             </div>
@@ -105,7 +105,18 @@
                     </div>
                 </v-row>
             </v-card>
+            <div>
+                <v-btn>
+                    test
+                </v-btn>
+            </div>
+                
+            
+               
+            
         </v-row>
+
+
     </div>
     </v-layout>
     </v-container>
@@ -116,7 +127,7 @@ export default {
     data:()=>({
         fee:['유료','무료'],
         real_fee: false,
-        real_fee2: false,
+        real_fee2: true,
         items: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         indexlist:[
             {
