@@ -216,7 +216,7 @@ export default {
       Subtitle,
     },
     created() {
-      var color=['#FF8787','#FFBB67','#68BE66','#689CDD','#9668DD','#E778E0']
+    //  var color=['#FF8787','#FFBB67','#68BE66','#689CDD','#9668DD','#E778E0']
       this.idp = this.$route.params.idp;
       this.ids = this.$route.params.ids;
       this.subtitle=this.$store.state.subtitle[this.ids-1].text
@@ -234,10 +234,10 @@ export default {
           axios.get(`http://localhost:3000/api/project/1/writercrew`)
             .then((res2) => {
               this.writerCrew = res2.data.writerName;
-              for(var i=0; i<this.postDetail.length; i++){
+          /*    for(var i=0; i<this.postDetail.length; i++){
                 let colorText = null;
                 let colorIndex = 0;
-                for(var j=0; j<this.writerCrew.size(); j++){
+                for(var j=0; j<this.writerCrew.length; j++){
                   if(this.postDetail[i].writerName == this.writerCrew[j]){
                     colorIndex = j;
                   }
@@ -246,8 +246,8 @@ export default {
                 else colorText = this.postDetail[i].text.replace("<p>", `<p style="color:${color[colorIndex]};">`);
 
                 this.readText = this.readText + colorText;
-              }
-              console.log(this.writerCrew);
+              }*/
+              console.log(res2.data);
             })
             .catch(function (error) {
               console.log(error);
