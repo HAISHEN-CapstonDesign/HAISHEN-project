@@ -13,6 +13,9 @@ import historyPage from '../views/History'
 import historyDetail from '../views/HistoryDetail'
 import writerList from '../views/WriterList'
 import funding from '../views/Funding'
+import alarm from '../views/Alarm'
+import supporter from '../views/Supporter'
+import subtitleEdit from '../views/SubtitleEdit'
 
 
 import diff from '../views/diffTest'
@@ -170,7 +173,7 @@ export default new VueRouter({
             component: historyDetail,
         },
         {
-            path: '/community',
+            path: '/:idp/:ids/community',
             name: 'community',
             component: community,
         },
@@ -192,7 +195,22 @@ export default new VueRouter({
             path: '/:idp/WriterApply',
             name: WriterApply,
             component: WriterApply
-        }
+        },
+        {
+            path: '/alarm',
+            name: 'alarm',
+            component: alarm,
+        },
+        {
+            path: '/:idp/supporter',
+            name: 'supporter',
+            component: supporter,
+        },
+        {
+            path: '/:idp/subtitleEdit',
+            name: 'subtitleEdit',
+            component: subtitleEdit,
+        },
 
     ]
 })

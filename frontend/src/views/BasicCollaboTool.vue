@@ -104,7 +104,7 @@
         >
           저자Info
         </v-btn>
-        <v-btn class="l_btn" text>
+        <v-btn class="l_btn" text @click="$router.push(`/${idp}/supporter`)">
           서포터
         </v-btn>
         <v-btn to='/projectend' class="l_btn" text>
@@ -112,25 +112,22 @@
         </v-btn>
       </v-col>
     <!-- 개별 작성 페이지-->
-    <v-container>
+    <v-container fluid grid-list-sm pa-5>
     <v-row cols="12">
         <v-col
         sm="4"
-        md="3"
+        md="2"
         >
             <Subtitle v-bind:title="title" @changeSubtitle="changeSubtitle"></Subtitle>
         </v-col>
         <v-col
         sm="6"
-        md="7"
+        md="8"
         >
         <!-- isEditing -->
         <div v-if="isEditing" style="background-color: #FFD0A1">
         <v-container>
           <div style="background-color: white">
-            <div v-show="isEditing" style="width: 70px; background-color: #FFD0A1; position: relative; left: 36vw; text-align: center; color: white;">
-            수정중
-            </div>
           <v-container>
         <v-card
         flat
@@ -176,8 +173,7 @@
         </v-row>
           <v-divider></v-divider>
           <br>
-            <div class="content_div" v-html="nowMainText"></div>
-
+            <div class="content_div" v-html="readText"></div>
           </v-card>
           </v-container>
           </div>
@@ -220,10 +216,11 @@ export default {
       Subtitle,
     },
     created() {
+      var color=['#FF8787','#FFBB67','#68BE66','#689CDD','#9668DD','#E778E0']
       this.idp = this.$route.params.idp;
       this.ids = this.$route.params.ids;
       this.subtitle=this.$store.state.subtitle[this.ids-1].text
-      this.title=this.$store.state.title
+      this.title=this.$store.state.title;
       axios.get(`http://localhost:3000/api/project/1/blob/basicTool/${this.ids}`)
         .then((res) => {
           this.project = res.data;
@@ -233,14 +230,31 @@ export default {
           this.$store.commit('isModifying', this.modifying)
           this.hisNickname = this.project.hisNickname;
           this.hisS3key = this.project.hisS3key;
-          console.log(res);
-        })
-        .catch(function (error) {
-          console.log(error.response);
-        });
+          this.postDetail = this.project.postDetailList;
+          axios.get(`http://localhost:3000/api/project/1/writercrew`)
+            .then((res2) => {
+              this.writerCrew = res2.data.writerName;
+              for(var i=0; i<this.postDetail.length; i++){
+                let colorText = null;
+                let colorIndex = this.writerCrew.indexOf(`postDetail[i].writerName`);
+                if(this.postDetail[i].text == " <p></p>") colorText = "<br>"
+                else colorText = this.postDetail[i].text.replace("<p>", `<p style="color:${color[colorIndex]};">`);
+
+                this.readText = this.readText + colorText;
+              }
+              console.log(this.writerCrew);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     },
     data() {
         return{
+            postDetail:[],
             modifying: false,
             hisNickname:'',
             hisS3key:'',
@@ -251,8 +265,10 @@ export default {
             title: '',
             subtitle:'',
             nowMainText: '',
+            readText:'',
             editText:'',
             editFiles:[],
+            writerCrew:[],
             imgUrl: require('../assets/partership.jpg'),
             dialog:false,
             cancelDialog: false,
@@ -271,12 +287,9 @@ export default {
         //본문 변경 내용 저장
         this.nowMainText = this.editText;
         this.subObj.files=this.editFiles
-        //post data
-   //     let form = new FormData()
+
         let form2 = new FormData()
-    //    form.append('after', newText)
-   //     form.append('commit_comment', this.comment)
-    //    form.append('time', this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss'))
+
         for(var i=0; i<this.subObj.files.length; i++){
           form2.append('files',this.subObj.files[i]);
         }
@@ -284,7 +297,7 @@ export default {
         this.subObj.after = this.editText;
         this.subObj.commit_comment = this.comment;
         this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-       // console.log(this.subObj)
+        console.log(this.subObj)
         axios.post(`http://localhost:3000/api/project/file`, form2)
         .then((res) => {
           axios.post(`http://localhost:3000/api/project/${this.idp}/modify/basicTool/${this.ids}`, this.subObj,
@@ -296,6 +309,7 @@ export default {
           })
             .then((res) => {
             this.project = res.data;
+          //  location.reload();
             console.log(res);
           })
           .catch(function (error) {
@@ -342,5 +356,10 @@ export default {
 <style scoped>
 .l_btn:hover{
   color: brown;
+}
+</style>
+<style>
+.v-application p {
+    margin-bottom: 0px;
 }
 </style>
