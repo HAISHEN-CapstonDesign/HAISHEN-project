@@ -44,11 +44,35 @@
                 height="100%"
                 class="mr-5"   
             >
+            <div class="ml-2 mb-5">
                 <v-img
                 src="../assets/fee_icon.png"
                 width="230"
                 ></v-img>
-                <v-btn></v-btn>
+            </div>
+            <div class="ml-15">
+                <v-row
+                v-for="(item, n) in fee"
+                :key="n"
+                class="mb-16 ml-5"
+                >
+                    <v-btn @click="which_fee(item)">{{item}}</v-btn>
+                </v-row>
+            </div>
+            <div class="mt-10 ml-3">
+                <v-img
+                v-if="real_fee"
+                src="../assets/real_fee_icon.png"
+                width="200"
+                ></v-img>
+
+                <v-img
+                v-if="real_fee2"
+                src="../assets/real_fee2_icon.png"
+                width="200"
+                ></v-img>   
+            </div>
+            
             </v-card>
             <v-card
                 color="white"
@@ -56,6 +80,12 @@
                 height="100%"
                 class="mr-5"
             >
+                <div class="mb-5" align="center">
+                    <v-img
+                    src="../assets/index_icon.png"
+                    width="160"
+                    ></v-img>
+                </div>
             </v-card>
         </v-row>
     </div>
@@ -66,7 +96,16 @@
 <script>
 export default {
     data:()=>({
+        fee:['유료','무료'],
+        real_fee: false,
+        real_fee2: false,
         items: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        indexlist:[
+            {
+                indexname:''
+            },
+
+        ],
         writerlist:[
             {
                 writer: '메인 작가 A', //main = 1, sub = 0
@@ -84,7 +123,19 @@ export default {
                 write_profit: 7000
             },
         ]
-    })
+    }),
+    methods: {
+        which_fee(item){
+            console.log("item : "+item)
+            if(item=='무료'){
+                this.real_fee = true
+                this.real_fee2 = false
+            }else{
+                this.real_fee = false
+                this.real_fee2 = true
+            }
+        }
+    }
     
 }
 </script>
