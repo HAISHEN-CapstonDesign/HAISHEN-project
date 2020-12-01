@@ -14,6 +14,8 @@ import historyDetail from '../views/HistoryDetail'
 import writerList from '../views/WriterList'
 import funding from '../views/Funding'
 import alarm from '../views/Alarm'
+import supporter from '../views/Supporter'
+import subtitleEdit from '../views/SubtitleEdit'
 
 import diff from '../views/diffTest'
 import WriterApply from '../views/WriterApply'
@@ -179,7 +181,17 @@ export default new VueRouter({
             path: '/alarm',
             name: 'alarm',
             component: alarm,
-        }
+        },
+        {
+            path: '/:idp/supporter',
+            name: 'supporter',
+            component: supporter,
+        },
+        {
+            path: '/:idp/subtitleEdit',
+            name: 'subtitleEdit',
+            component: subtitleEdit,
+        },
 
     ]
 })

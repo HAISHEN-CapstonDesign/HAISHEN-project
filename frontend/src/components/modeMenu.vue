@@ -86,6 +86,7 @@
           </v-list-item-content>
           </v-list-item>
           <v-list-item
+          @click="clickIndex"
           link
           >
           <v-list-item-content>
@@ -177,6 +178,14 @@ export default {
           this.$emit('changeEdit', this.editing);
         }
         this.$router.push(`/${this.idp}/${this.ids}/historyPage`);
+      },
+      clickIndex(){
+        if(this.editing){
+          alert('수정한 내용이 저장되지 않습니다.');
+          this.editing = !this.editing
+          this.$emit('changeEdit', this.editing);
+        }
+        this.$router.push(`/${this.idp}/subtitleEdit`);
       },
       clickSubmit(){
         EventBus.$emit('submit');       

@@ -149,7 +149,7 @@ export default {
         replyNum(){
             alert(this.items.length)
         },
-        async pushSubmit(){
+    /*    async pushSubmit(){
             var clearTag = document.getElementsByClassName("writerTagBtn");
             let today = this.$moment(new Date()).format('YYYY-MM-DD HH:mm');   
             await this.items.push({
@@ -168,12 +168,11 @@ export default {
             
             this.scrollToEnd();
 
-        },
+        },*/
         scrollToEnd() {    	
             var container = this.$el.querySelector("#container");
             container.scrollTop = container.scrollHeight;
         },
-        //나중에 전송으로 이동
         tag(writer){
             var bodyTag = document.getElementById(writer);
             var plusTag= "@" + writer
@@ -199,7 +198,7 @@ export default {
             this.$router.push(`/${this.idp}/${idx}/community`);
         },
         sendMessage () {
-        if( this.userName !== '' && this.message !== ''){
+        if(this.message !== ''){
             var clearTag = document.getElementsByClassName("writerTagBtn");
             this.send()
             this.message = '';

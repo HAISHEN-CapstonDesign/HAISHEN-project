@@ -104,7 +104,7 @@
         >
           저자Info
         </v-btn>
-        <v-btn class="l_btn" text>
+        <v-btn class="l_btn" text @click="$router.push(`/${idp}/supporter`)">
           서포터
         </v-btn>
         <v-btn class="l_btn" text>
@@ -220,7 +220,7 @@ export default {
       this.idp = this.$route.params.idp;
       this.ids = this.$route.params.ids;
       this.subtitle=this.$store.state.subtitle[this.ids-1].text
-      this.title=this.$store.state.title
+      this.title=this.$store.state.title;
       axios.get(`http://localhost:3000/api/project/1/blob/basicTool/${this.ids}`)
         .then((res) => {
           this.project = res.data;
@@ -230,16 +230,27 @@ export default {
           this.$store.commit('isModifying', this.modifying)
           this.hisNickname = this.project.hisNickname;
           this.hisS3key = this.project.hisS3key;
-            this.postDetail = this.project.postDetailList;
-            for(var i=0; i<this.postDetail.length; i++){
-              let colorText = this.postDetail[i].text.replace("<p>", `<p style="color:${color[0]};">`);
-              this.readText = this.readText + colorText;
-            }
-          console.log(this.postDetail);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+          this.postDetail = this.project.postDetailList;
+          axios.get(`http://localhost:3000/api/project/1/writercrew`)
+            .then((res2) => {
+              this.writerCrew = res2.data.writerCrew;
+              for(var i=0; i<this.postDetail.length; i++){
+                let colorText = null;
+                let colorIndex = this.writerCrew.indexOf(`postDetail[i].writerName`);
+                if(this.postDetail[i].text == " <p></p>") colorText = "<br>"
+                else colorText = this.postDetail[i].text.replace("<p>", `<p style="color:${color[colorIndex]};">`);
+
+                this.readText = this.readText + colorText;
+              }
+              console.log(this.postDetail);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     },
     data() {
         return{
@@ -257,6 +268,7 @@ export default {
             readText:'',
             editText:'',
             editFiles:[],
+            writerCrew:[],
             imgUrl: require('../assets/partership.jpg'),
             dialog:false,
             cancelDialog: false,
@@ -285,7 +297,7 @@ export default {
         this.subObj.after = this.editText;
         this.subObj.commit_comment = this.comment;
         this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-       // console.log(this.subObj)
+        console.log(this.subObj)
         axios.post(`http://localhost:3000/api/project/file`, form2)
         .then((res) => {
           axios.post(`http://localhost:3000/api/project/${this.idp}/modify/basicTool/${this.ids}`, this.subObj,
@@ -297,7 +309,7 @@ export default {
           })
             .then((res) => {
             this.project = res.data;
-            location.reload();
+          //  location.reload();
             console.log(res);
           })
           .catch(function (error) {

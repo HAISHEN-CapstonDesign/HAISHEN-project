@@ -132,6 +132,7 @@
                     <v-list-item-title>Project</v-list-item-title>
                 </v-list-item>
                 <v-badge
+                v-show="isLogin"
                 color="red"
                 inline
                 :content="messages"
@@ -192,7 +193,7 @@ export default {
             'red lighten-1',
             'deep-purple accent-4',
         ],
-        messages: 5,
+        messages: 0,
     }),
     computed: {
         menuProps(){

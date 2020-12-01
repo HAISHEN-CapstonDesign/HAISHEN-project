@@ -1,15 +1,19 @@
 <template>
     <v-app>
-        <v-row cols="12">
+      <v-container>
+        <v-row col="12">
             <v-col
-            md="4"
             v-for="writer in items"
-            v-bind:key="writer.title">
+            v-bind:key="writer.title"
+            md="3">
             <v-card
+            width="250px"
+            height="200px"
             outlined
-            tile>
-            <v-row cols="12">
-              <v-col md="3" align="center">
+            tile
+            >
+            <v-row>
+              <v-col align="center">
               <div>
                 <v-avatar
                 class="ma-3"
@@ -24,6 +28,7 @@
           </v-card>
             </v-col>
         </v-row>
+      </v-container>
     </v-app>
 </template>
 <script>
@@ -41,7 +46,32 @@ export default {
                 color: '#952175',
                 src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
                 title: 'Halcyon Days',
-              }
+              },
+              {
+                color: '#952175',
+                src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
+                title: 'Halcyon Days',
+              },
+              {
+                color: '#952175',
+                src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
+                title: 'Halcyon Days',
+              },
+              {
+                color: '#952175',
+                src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
+                title: 'Halcyon Days',
+              },
+              {
+                color: '#952175',
+                src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
+                title: 'Halcyon Days',
+              },
+              {
+                color: '#952175',
+                src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
+                title: 'Halcyon Days',
+              },
             ],
         }
     },
