@@ -237,7 +237,7 @@ export default {
               for(var i=0; i<this.postDetail.length; i++){
                 let colorText = null;
                 let colorIndex = 0;
-                for(var j=0; j<this.writerCrew.length; j++){
+                for(var j=0; j<this.writerCrew.size(); j++){
                   if(this.postDetail[i].writerName == this.writerCrew[j]){
                     colorIndex = j;
                   }
