@@ -55,7 +55,7 @@
                 v-for="(item, n) in fee"
                 :key="n"
                 class="mb-16 ml-5"
-                >
+                >   
                     <v-btn @click="which_fee(item)">{{item}}</v-btn>
                 </v-row>
             </div>
