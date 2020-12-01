@@ -76,9 +76,9 @@
             </v-card>
             <v-card
                 color="white"
-                width="400"
+                width="500"
                 height="100%"
-                class="mr-5"
+                class="mr-5 pl-5"
             >
                 <div class="mb-5" align="center">
                     <v-img
@@ -86,6 +86,23 @@
                     width="160"
                     ></v-img>
                 </div>
+
+                 <v-row
+                v-for="(item, n) in indexlist"
+                :key="n"
+                class="mb-5"
+                no-gutters
+                >
+                    <div class="pt-3">
+                    <h3>{{item.index_name}}</h3>
+                    </div>
+                    <div align="center" style="max-width:100px;">
+                    <v-text-field
+                        label="단위 : 원"
+                        v-model="item.selectprofit"
+                    ></v-text-field>
+                    </div>
+                </v-row>
             </v-card>
         </v-row>
     </div>
@@ -102,7 +119,25 @@ export default {
         items: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         indexlist:[
             {
-                indexname:''
+                index_name:'트렌드와 소통'
+            },
+            {
+                index_name:'끊임없는 배움'
+            },
+            {
+                index_name:'수용성과 타인을 돕는 것'
+            },
+            {
+                index_name:'함께 만드는 것'
+            },
+            {
+                index_name:'그렇다면 어떻게 해야 할까'
+            },
+            {
+                index_name:'당부하고 싶은 말'
+            },
+            {
+                index_name:'글을 마무리 하면서'
             },
 
         ],
