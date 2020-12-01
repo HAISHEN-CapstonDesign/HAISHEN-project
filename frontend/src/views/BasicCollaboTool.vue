@@ -216,7 +216,7 @@ export default {
       Subtitle,
     },
     created() {
-    //  var color=['#FF8787','#FFBB67','#68BE66','#689CDD','#9668DD','#E778E0']
+      var color=['#FF8787','#FFBB67','#68BE66','#689CDD','#9668DD','#E778E0']
       this.idp = this.$route.params.idp;
       this.ids = this.$route.params.ids;
       this.subtitle=this.$store.state.subtitle[this.ids-1].text
