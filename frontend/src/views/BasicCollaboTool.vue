@@ -233,7 +233,7 @@ export default {
           this.postDetail = this.project.postDetailList;
           axios.get(`http://localhost:3000/api/project/1/writercrew`)
             .then((res2) => {
-              this.writerCrew = res2.data.writerCrew;
+              this.writerCrew = res2.data.writerName;
               for(var i=0; i<this.postDetail.length; i++){
                 let colorText = null;
                 let colorIndex = this.writerCrew.indexOf(`postDetail[i].writerName`);
@@ -242,7 +242,7 @@ export default {
 
                 this.readText = this.readText + colorText;
               }
-              console.log(this.postDetail);
+              console.log(this.writerCrew);
             })
             .catch(function (error) {
               console.log(error);
