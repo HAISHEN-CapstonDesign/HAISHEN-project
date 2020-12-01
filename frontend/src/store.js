@@ -30,6 +30,7 @@ export default new Vuex.Store({
             { idx: 5, text: '당부하고 싶은 말' },
             { idx: 6, text: '글을 마무리하면서' },
         ],
+        writerCrew: [],
         modifying: false,
 
     },
