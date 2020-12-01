@@ -82,8 +82,8 @@
             >
                 <div class="mb-5" align="center">
                     <v-img
-                    src="../assets/index_icon.png"
-                    width="160"
+                    src="../assets/index_edit_icon.png"
+                    width="400"
                     ></v-img>
                 </div>
 
@@ -96,7 +96,8 @@
                     <div class="pt-3">
                     <h3>{{item.index_name}}</h3>
                     </div>
-                    <div align="center" style="max-width:100px;">
+                    <v-spacer></v-spacer>
+                    <div class="mr-10" style="max-width:100px;">
                     <v-text-field
                         label="단위 : 원"
                         v-model="item.selectprofit"
