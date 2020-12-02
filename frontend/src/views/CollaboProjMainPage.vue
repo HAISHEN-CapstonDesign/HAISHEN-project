@@ -17,22 +17,20 @@
                 align="center"
                 justify="center"
                 >
-                <div class="display-1">{{this.title}}</div>
+                <div>{{this.title}}</div>
                 </v-col>
                 </v-row>
             </v-img>
 
         </v-row>
-        <v-container>
-            <v-row cols="12">
-                <v-col md="9">
-                    <v-card min-height="500px">
+        <v-container fluid grid-list-sm pa-5>
+            <v-row cols="12" justify="end">
+                <v-col md="8">
+                    <v-card max-height="500px">
                         <v-col align="center">
-                            <v-btn text @click="mainInfo">소개</v-btn>
-                            <v-btn text @click="supporter">서포터</v-btn>
+                            <v-btn text @click="mainInfo">Introduction</v-btn>
                         </v-col>
-                        <v-divider></v-divider>
-                        <div v-show="nowList=='main'">
+                        <div>
                                 <v-textarea
                                 readonly
                                 v-model="introduction"
@@ -40,12 +38,18 @@
                                 flat="flase"
                                 ></v-textarea>
                             </div>
-                            <Writer v-show="nowList == 'writer'"></Writer>
-                            <div v-show="nowList=='subtitle'">프로젝트  목차 나열 나중에 편집기능도 넣어야 할듯</div>
-                            <Supporter v-show="nowList=='supporter'"></Supporter>
+                    </v-card>
+                    <br>
+                    <v-card min-height="500px" elevation="0">
+                        <v-col align="center">
+                            <v-btn text @click="supporter">Supporters</v-btn>
+                        </v-col>
+                            <Supporter></Supporter>
                     </v-card>          
+     
                 </v-col>
-                <v-col md="3">
+                
+                <v-col md="2">
                     <Toolbar
                     :idp="idp"
                     :target_funding_money="target_funding_money"
@@ -61,7 +65,7 @@
 <script>
 // import ProjIndex fro m '../components/projIndex.vue'
 // import ProjContent from '../components/projContent.vue'
-import Writer from '../components/writerCard'
+//import Writer from '../components/writerCard'
 import Toolbar from '../components/collaboMainBar'
 import Supporter from '../components/supporterList'
 import axios from "axios"
@@ -74,7 +78,7 @@ export default {
     components: {
         // ProjIndex,
         // PostReply,
-        Writer,
+        //Writer,
         Toolbar,
         Supporter,
     },

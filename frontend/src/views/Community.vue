@@ -3,7 +3,7 @@
     <v-container fluid grid-list-sm pa-5>
         <v-row justify="center">
             <v-col>
-                <h3>{{title}}(title), {{subtitle}}(subtutle) 나중에 정리</h3>
+                <h3>{{title}} _ {{subtitle}}</h3>
             </v-col>
         </v-row>
     <v-row cols="12">
@@ -12,7 +12,9 @@
         </v-col>
         <v-col md="6">
             <v-card height="668px">
-                <div class="content_div" v-html="nowMainText"></div>
+                <div class="content_div">
+                    흔히 트렌드란 뭔가 재빠르게 세상을 따라가고, 핫플레이스를 좋아하는 패피들로 연상됩니다. 하지만 저는 트렌드를, 팀원과의 소통에 관한 관점으로 얘기해보려 합니다. 트렌드는 어떠한 방향으로 쏠리는 사회적 추세, 경향을 뜻합니다. 소통은 사회성, 사람들과의 커뮤니케이션 활동입니다. 트렌드와 소통을 같은 선상에 놓고 비교하면, 트렌드는 앞서 나가는 멋진 사람에 대한 좁은 정의 뿐만 아니라, 사람(팀원)들이 자주 사용하는 언어와 행동, 도구를 파악하는 넓은 의미로도 비춰질 수 있습니다. 사람들과 더 잘 대화하고 함께 가기 위해 그들의 행동과 방향성을 읽고 공감하며, 그들의 언어로 대화를 나누는 것도 트렌드를 읽는 것입니다.
+                </div>
             </v-card>
         </v-col>
         <v-col md="4">

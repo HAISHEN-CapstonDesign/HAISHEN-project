@@ -1,13 +1,26 @@
 <template>
     <v-app>
         <v-img
-        class="white--text align-end"
+        class="white--text"
         max-height="200"
-        src="../assets/banner2.jpg"
-        gradient="to top right, rgba(150,150,150,.33), rgba(52,52,52,.7)"
+        max-width="100%"
+        v-bind:src="imgUrl"
+        gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
         >
-            <p style="position: absolute; top: 32%; left:45%; font-size:50px;">제목</p>
-        </v-img>
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
+        >
+        <v-col
+          align="center"
+          justify="center"
+        >
+          <p style="font-size:40px">제목</p>
+
+        </v-col>
+        </v-row>
+      </v-img>
         <v-container>
             <v-row justify="center">
                 <v-col cols="12" sm="6" md="8" align="center">

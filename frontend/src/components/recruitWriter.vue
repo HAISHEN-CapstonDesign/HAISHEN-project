@@ -1,15 +1,17 @@
 <template>
-    <div>
+    <div style="background-color: #FDFAF9">
         <v-app>
             <v-card
             flat
             tile
+            color="#FDFAF9"
+            width="1050px"
             >
                 <v-container
                 fluid
                 >
                 <v-row>
-                    <v-header><h2>작가 모집중인 프로젝트</h2></v-header>
+                    <v-header><p style="font-size:40px">작가 모집중인 프로젝트</p></v-header>
                     <v-spacer></v-spacer>
                     <v-btn
                     color="deep-purple lighten-2"

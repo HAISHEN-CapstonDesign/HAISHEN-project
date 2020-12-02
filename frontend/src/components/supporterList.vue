@@ -1,30 +1,25 @@
 <template>
     <v-app>
       <v-container>
-        <v-row col="12">
+        <v-row>
             <v-col
             v-for="writer in items"
-            v-bind:key="writer.title"
-            md="3">
+            v-bind:key="writer.title">
             <v-card
-            width="250px"
-            height="200px"
-            outlined
+            elevation="0"
+            width="100px"
+            height="150px"
+            align="center"
             tile
             >
-            <v-row>
-              <v-col align="center">
+
               <div>
-                <v-avatar
-                class="ma-3"
-                size="110"
-              >
-                <v-img :src="writer.src"></v-img>
-              </v-avatar>
-                <v-card-title id="title" class="justify-center">{{writer.title}}</v-card-title>
+                <v-avatar size="80">
+                <v-img :src="writer.src" height="130px"></v-img>
+                </v-avatar>
+                <v-card-title id="title" class="justify-center" style="font-size:12px">{{writer.title}}</v-card-title>
               </div>
-              </v-col>
-            </v-row>
+
           </v-card>
             </v-col>
         </v-row>

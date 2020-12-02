@@ -32,9 +32,9 @@
                     align="center"
                     justify="center"
                 >
-                    <div class="display-1">{{ slide.text }}</div>
+                    <p style="font-size:40px">{{ slide.text }}</p>
                     <v-spacer class="pt-5"></v-spacer>
-                    <div class="subtitle-1 font-italic">{{ slide.writer}}</div>
+                    <p>{{ slide.writer}}</p>
                 </v-col>
                 </v-row>
                 </v-img>
@@ -73,7 +73,10 @@
                         </v-row>
                     </v-flex>
                 </v-layout>
-                <br>
+            </v-container>
+            <v-container style="max-width:100%; background-color: #FDFAF9">
+                
+                <v-spacer class="mt-15"></v-spacer>
                 <v-row
                     class="justify-center"
                     no-gutters
@@ -82,7 +85,7 @@
                     
                     <RecruitmentWriter></RecruitmentWriter>
                     
-                    <br>
+                    
                     <RecruitmentFund></RecruitmentFund>
                 </v-row>
                 
@@ -156,5 +159,16 @@ export default {
   },
 }
 </script>
-
+<style>
+.v-application--wrap {
+    flex: 1 1 auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    max-width: 100%;
+    position: relative;
+}
+</style>
 
