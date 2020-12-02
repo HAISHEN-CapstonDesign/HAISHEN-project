@@ -45,6 +45,13 @@
         tile
         >
           <h2>{{title}}</h2>
+          <v-rating
+            v-model="rating"
+            background-color="grey"
+            color="yellow"
+            size="40"
+            large
+          ></v-rating>
           <v-divider></v-divider>
           <div v-if="idc==1" class="pt-10">
            <h3>{{subtitle_1}}</h3>
@@ -297,7 +304,7 @@ export default {
                 })
                 .catch((err) => {
                     console.log(err)
-                    alert("에러가 발생했습니다. 다시 시도해주세요")
+                    //alert("에러가 발생했습니다. 다시 시도해주세요")
                 });
         },
     getFee_minuspoint(title_idx){
@@ -324,7 +331,7 @@ export default {
             })
             .catch((err) => {
                 console.log(err)
-                alert("에러가 발생했습니다. 다시 시도해주세요")
+                //alert("에러가 발생했습니다. 다시 시도해주세요")
             });
     },
     request_minus_point(){
@@ -374,7 +381,7 @@ export default {
               })
               .catch((err) => {
                   console.log(err)
-                  alert("에러가 발생했습니다. 다시 시도해주세요")
+                  //alert("에러가 발생했습니다. 다시 시도해주세요")
               });
       }
 //나중에 페이지 나누고 코드 수정 후 활성화

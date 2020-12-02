@@ -142,7 +142,7 @@ export default {
                 })
                 .catch((err) => {
                     console.log(err)
-                    alert("에러가 발생했습니다. 다시 시도해주세요")
+                    //alert("에러가 발생했습니다. 다시 시도해주세요")
                 });
         },
         increment() {
