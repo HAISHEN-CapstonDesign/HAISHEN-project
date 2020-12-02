@@ -5,6 +5,7 @@
             flat
             tile
             color="#FDFAF9"
+            width="1050px"
             >
                 <v-container
                 fluid
