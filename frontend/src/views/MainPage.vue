@@ -32,9 +32,9 @@
                     align="center"
                     justify="center"
                 >
-                    <div class="display-1">{{ slide.text }}</div>
+                    <h2>{{ slide.text }}</h2>
                     <v-spacer class="pt-5"></v-spacer>
-                    <div class="subtitle-1 font-italic">{{ slide.writer}}</div>
+                    <p>{{ slide.writer}}</p>
                 </v-col>
                 </v-row>
                 </v-img>
@@ -156,5 +156,4 @@ export default {
   },
 }
 </script>
-
 
