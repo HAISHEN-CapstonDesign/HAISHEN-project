@@ -16,7 +16,7 @@
           align="center"
           justify="center"
         >
-          <h2>기획자의 트렌드, 소통, 배움, 이타심</h2>
+          <p style="font-size:40px">기획자의 트렌드, 소통, 배움, 이타심</p>
           <v-spacer class="pt-5"></v-spacer>
           <div>By. Jennie。hello</div>
           <div>2020 년 11 월 22 일</div>
@@ -44,7 +44,7 @@
         flat
         tile
         >
-          <h2>{{title}}</h2>
+          <p style="font-size:40px">{{ title }}</p>
           <v-divider></v-divider>
           <div v-if="idc==1" class="pt-10">
            <h3>{{subtitle_1}}</h3>

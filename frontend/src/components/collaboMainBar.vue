@@ -29,6 +29,12 @@
             text>
             서포터로 후원하기
             </v-btn>
+            <v-btn
+            @click="projectStart"
+            class="bar_btn"
+            text>
+            프로젝트 시작
+            </v-btn>
         </v-card-action>
     </v-card>
 </template>
@@ -63,6 +69,9 @@ export default {
         },
         gotoChooseWriter(){
             this.$router.push(`/${this.idp}/chooseWriter`);
+        },
+        projectStart(){
+            this.$router.push(`/${this.idp}/basicCollaboTool/1`);
         },
     },
     

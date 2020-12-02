@@ -2,7 +2,7 @@
 <v-container fill-height style="max-width:600px;">
     <v-layout align-center row wrap class="mt-15">
         <div style="text-align : center;">
-            <h2>현재 내가 보유 중인 크런치 포인트</h2>
+            <p style="font-size:40px">현재 내가 보유 중인 크런치 포인트</p>
             <v-spacer class="pa-3"></v-spacer>
             <v-card class="pa-3" width="600px">
                 <subtitle-2>{{ currentpoint }} 포인트</subtitle-2>
@@ -11,7 +11,7 @@
         <v-flex xs12>
             <v-card>
                 <div class="pa-3" style="text-align : center;">
-                    <h2>크런치 포인트 충전하기</h2>
+                    <p style="font-size:40px">크런치 포인트 충전하기</p>
                 </div>
                 
                 <div class="pa-3" >

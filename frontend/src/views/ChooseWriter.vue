@@ -16,7 +16,7 @@
           align="center"
           justify="center"
         >
-          <h2>{{title}}</h2>
+          <p style="font-size:40px">{{ title }}</p>
         </v-col>
         </v-row>
       </v-img>
