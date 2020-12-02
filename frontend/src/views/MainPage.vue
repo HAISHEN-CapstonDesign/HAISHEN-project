@@ -42,8 +42,8 @@
             </v-carousel-item>
             </v-carousel>
 
-            <v-container style="max-width:1050px;">
-                <v-layout align-center row wrap>
+            <v-container class="mb-15" style="max-width:1050px;">
+                <v-layout class="mb-15" align-center row wrap>
                     <v-flex>
                     <div align="center" class="pb-5 pt-10">
                         <v-img
