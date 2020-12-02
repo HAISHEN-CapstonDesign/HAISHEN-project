@@ -1,6 +1,6 @@
 <template>
     <v-app>
-      <div class="text-h5 mb-5">진행중인 집필 목록</div>
+      <div>진행중인 집필 목록</div>
       <v-sheet
     class="mx-auto"
     elevation="8"

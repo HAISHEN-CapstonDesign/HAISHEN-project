@@ -227,6 +227,13 @@ export default {
 </script>
 <!-- 스크롤 style -->
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+html, body {
+  font-family: 'Nanum Gothic', sans-serif;
+}
+#app {
+  font-family: 'Nanum Gothic', sans-serif;
+}
 ::-webkit-scrollbar {
   width: 6px;
 }

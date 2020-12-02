@@ -16,10 +16,10 @@
           align="center"
           justify="center"
         >
-          <div class="display-1">기획자의 트렌드, 소통, 배움, 이타심</div>
+          <h2>기획자의 트렌드, 소통, 배움, 이타심</h2>
           <v-spacer class="pt-5"></v-spacer>
-          <div class="subtitle-1 font-italic">By. Jennie。hello</div>
-          <div class="caption">2020 년 11 월 22 일</div>
+          <div>By. Jennie。hello</div>
+          <div>2020 년 11 월 22 일</div>
         </v-col>
         </v-row>
     </v-img>

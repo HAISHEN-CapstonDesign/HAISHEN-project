@@ -1,14 +1,26 @@
 <template>
     <v-app>
         <v-img
-        class="white--text align-end"
-        max-height="150px"
+        class="white--text"
+        max-height="200"
         max-width="100%"
         src="../assets/computer.jpeg"
-        gradient="to top right, rgba(150,150,150,.80), rgba(52,52,52,.7)"
+        gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
         >
-        <p style="position: absolute; top: 20%; left:48%; font-size:50px;">I T</p>
-        </v-img>
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
+        >
+        <v-col
+          align="center"
+          justify="center"
+        >
+          <h2>I T</h2>
+
+        </v-col>
+        </v-row>
+      </v-img>
         <v-container>
             <v-row justify="center" no-gutters class="mb-3 pt-5">
                 <v-col md="auto" class="pl-4">

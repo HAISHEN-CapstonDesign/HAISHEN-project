@@ -90,9 +90,9 @@
           align="center"
           justify="center"
         >
-          <div class="display-1">기획자의 트렌드, 소통, 배움, 이타심</div>
+          <h2>기획자의 트렌드, 소통, 배움, 이타심</h2>
           <v-spacer class="pt-5"></v-spacer>
-          <div class="subtitle-1 font-italic">By. Jennie。hello</div>
+          <div>By. Jennie。hello</div>
         </v-col>
         </v-row>
       </v-img>
@@ -233,16 +233,21 @@ export default {
           this.postDetail = this.project.postDetailList;
           axios.get(`http://localhost:3000/api/project/1/writercrew`)
             .then((res2) => {
-              this.writerCrew = res2.data.writerName;
+              this.writerCrew = res2.data;
               for(var i=0; i<this.postDetail.length; i++){
                 let colorText = null;
-                let colorIndex = this.writerCrew.indexOf(`postDetail[i].writerName`);
-                if(this.postDetail[i].text == " <p></p>") colorText = "<br>"
+                let colorIndex = 0;
+                for(var j=0; j<this.writerCrew.length; j++){
+                  if(this.postDetail[i].writerName == this.writerCrew[j].writerName){
+                    colorIndex = j;
+                  }
+                }
+                if(this.postDetail[i].text.includes("<p></p>")) colorText = "<br>"
                 else colorText = this.postDetail[i].text.replace("<p>", `<p style="color:${color[colorIndex]};">`);
 
                 this.readText = this.readText + colorText;
               }
-              console.log(this.writerCrew);
+              console.log(res2.data);
             })
             .catch(function (error) {
               console.log(error);
@@ -309,7 +314,7 @@ export default {
           })
             .then((res) => {
             this.project = res.data;
-          //  location.reload();
+            location.reload();
             console.log(res);
           })
           .catch(function (error) {
