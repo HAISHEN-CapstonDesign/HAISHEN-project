@@ -14,7 +14,7 @@
                     <v-header><p style="font-size:40px">펀딩 진행중인 프로젝트</p></v-header>
                     <v-spacer></v-spacer>
                     <v-btn
-                    color="deep-purple lighten-2"
+                    color="grey"
                     text
                     >더 보기</v-btn>
                 </v-row>
@@ -49,7 +49,7 @@
                                 </v-col>
                                 <v-card-actions>
                                     <v-btn
-                                    color="orange lighten-2"
+                                    color="grey"
                                     text
                                     @click="list.show = !list.show"
                                     >
