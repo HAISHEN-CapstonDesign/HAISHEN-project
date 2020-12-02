@@ -9,7 +9,7 @@
     >
     </v-img>
     <div style="text-align : center;" class="mt-5">
-        <h1> name님의 수익 통계</h1>
+        <h1> Jennie 님의 수익 통계</h1>
     </div>
     <v-container fill-height style="max-width:1200px;">
         <v-col class="text-right mr-10">
@@ -36,14 +36,14 @@
             :key="i"
             >
             <v-expansion-panel-header>
-               {{item}} 총 수익 금액 10000 원 최종 정산일 : 2020.12.12 이번달 정산 : 5000 원
+               Project Name : {{item}}
             </v-expansion-panel-header>
             <v-expansion-panel-content>
                 <v-container>
                 <v-card
                 width="1050"
                 height="100%"
-                color="cyan"
+                color="blue lighten-4"
                 >
                 <v-data-table
                     :headers="headers"
@@ -53,10 +53,12 @@
                     multi-sort
                     class="elevation-1"
                 ></v-data-table>
-                <v-btn
-                    @click="overlay = !overlay"
-                >btn
-                </v-btn>
+                <div class="mt-3 pb-3" align="center">
+                  <v-btn
+                      @click="overlay = !overlay"
+                  >작가들 수익 보기
+                  </v-btn>
+                </div>
                 </v-card>
                     
                 </v-container>
@@ -103,15 +105,10 @@
             color="#BF5E3B"
             width="150"
             height="100%"
-            class="mx-1"
+            class="mx-16 pa-5"
         >
-            <v-avatar>
-            <img
-                src="https://cdn.vuetifyjs.com/images/john.jpg"
-                alt="John"
-            >
-            </v-avatar>
             <h3>{{item.writer}}</h3>
+            <br>
             <overline>월 수익 ${{item.write_profit}}</overline>
         </v-card>
         </v-col>
@@ -143,20 +140,20 @@ export default {
         profic_src:require('@/assets/writer_porfit_icon.png'),
         overlay: false,
         project_num: 5,
-        project:['project 1', 'project 2', 'project 3', 'project 4', 'project 5'],
+        project:['아침 운동으론 인생이 바뀌지 않았지만', '차곡차곡 추억을 담은 집', '국내 IT 회사의 업무방식 & 기술 창업', '세상에 같은 고양이는 없어', '미국과 대한민국 UX 인재상의 차이'],
         writers:[
             {
-                writer: '메인 작가', //main = 1, sub = 0
+                writer: 'Jennie', //main = 1, sub = 0
                 profile: '프사',
                 write_profit: 50000
             },
             {
-                writer: '서브 작가', //main = 1, sub = 0
+                writer: 'Rose', //main = 1, sub = 0
                 profile: '프사',
                 write_profit: 8000
             },
             {
-                writer: '서브 작가', //main = 1, sub = 0
+                writer: 'Kai', //main = 1, sub = 0
                 profile: '프사',
                 write_profit: 7000
             },
@@ -168,91 +165,90 @@ export default {
             sortable: false,
             value: 'name',
           },
-          { text: '몇명이 샀는지', value: 'calories' },
-          { text: '총 수익 내역', value: 'fat' },
-          { text: '내 수익 내역', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
+          { text: '구매한 독자 수', value: 'calories' },
+          { text: '총 수익 내역(백원)', value: 'fat' },
+          { text: '내 수익 내역(백원)', value: 'carbs' },
+          { text: '평점', value: 'protein' },
         ],
         desserts: [
           {
-            name: 'Frozen Yogurt',
-            calories: 200,
-            fat: 6.0,
-            carbs: 24,
+            name: '아침운동을 시작한 계기',
+            calories: 234,
+            fat: 234*3,
+            carbs: 234*3/4,
             protein: 4.0,
             iron: '1%',
           },
           {
-            name: 'Ice cream sandwich',
-            calories: 200,
-            fat: 9.0,
-            carbs: 37,
+            name: '아침운동으로 얻은 것',
+            calories: 451,
+            fat: 451*3,
+            carbs: 451*3/4,
             protein: 4.3,
             iron: '1%',
           },
           {
-            name: 'Eclair',
-            calories: 300,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
+            name: '아침운동으로 잃은 것',
+            calories: 365,
+            fat: 365*3,
+            carbs: 365*3/4,
+            protein: 4.0,
             iron: '7%',
           },
           {
-            name: 'Cupcake',
-            calories: 300,
-            fat: 3.7,
-            carbs: 67,
+            name: '아침운동의 장단점',
+            calories: 214,
+            fat: 214*3,
+            carbs: 214*3/4,
             protein: 4.3,
             iron: '8%',
           },
           {
-            name: 'Gingerbread',
-            calories: 400,
-            fat: 16.0,
-            carbs: 49,
+            name: '아침운동을 해야하는 이유',
+            calories: 162,
+            fat: 162*3,
+            carbs: 162*3/4,
             protein: 3.9,
             iron: '16%',
           },
           {
-            name: 'Jelly bean',
-            calories: 400,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
+            name: '당신이 아침운동을 하기 싫은 이유',
+            calories: 548,
+            fat: 548*3,
+            carbs: 548*3/4,
+            protein: 4.7,
             iron: '0%',
           },
           {
-            name: 'Lollipop',
-            calories: 400,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
+            name: '아침 운동 계획을 놓치지 않는 법',
+            calories: 475,
+            fat: 475*3,
+            carbs: 475*3/4,
+            protein: 4.1,
             iron: '2%',
           },
           {
-            name: 'Honeycomb',
-            calories: 400,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
+            name: '아침 운동의 재미',
+            calories: 394,
+            fat: 394*3,
+            carbs: 394*3/4,
+            protein: 4.5,
             iron: '45%',
           },
           {
-            name: 'Donut',
-            calories: 500,
-            fat: 25.0,
-            carbs: 51,
+            name: '아침 운동 계획을 효율적으로 짜는 법',
+            calories: 741,
+            fat: 741*3,
+            carbs: 741*3/4,
             protein: 4.9,
             iron: '22%',
           },
           {
-            name: 'KitKat',
-            calories: 500,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
+            name: '아침 운동을 하자',
+            calories: 266,
+            fat: 266*3,
+            carbs: 266*3/4,
+            protein: 4.7,
             iron: '6%',
           },
         ],
