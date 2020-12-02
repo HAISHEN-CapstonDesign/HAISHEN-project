@@ -30,6 +30,7 @@
             서포터로 후원하기
             </v-btn>
             <v-btn
+            v-if='$store.state.mainornot'
             @click="projectStart"
             class="bar_btn"
             text>

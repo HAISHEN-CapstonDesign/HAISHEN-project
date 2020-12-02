@@ -90,7 +90,7 @@
             <img src="../assets/trend.jpg" style="width: 100%; max-width: 760px;" />
           </div>
           <div class="pt-10">
-           <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
+           <PostReply :idp="idp" :idc="idc" @child_replySubmit="parent_replySubmit"></PostReply>
           </div>
            
              <!-- <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
@@ -240,6 +240,7 @@ export default {
         subtitle_3:'함께 만드는 것',
         contents_3:'글을 쓰다보니 내용이 적절하지 않은 듯도 하고, 엉켜서 의미가 분명하게 전달되지 않는 문장들도 참 많은거 같습니다. 이렇듯 미숙한 글을 통해 전달하고 싶은건, 미숙한 사람들이 함께 모여 함께 멋진 제품을 만드는 것. 협동하여 서로의 부족을 채워주는 것. 그러기 위해 끊임없이 배우는 것과 이타심의 가치입니다.',
         idc: 1,
+        idp:0,
         date: '2020.10.12 05:55',
         writer: ['김김김', '이이이', '박박박'],
         selected_idx: 0,
@@ -383,7 +384,10 @@ export default {
         //this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
      //},
   },
-  mounted(){ this.idc = this.$route.params.idc }
+ created(){ 
+    this.idc = this.$route.params.idc;
+    this.idp = this.$route.params.idp;
+     }
 
 
 

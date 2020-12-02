@@ -11,7 +11,7 @@
                     md="3"
                     >
                     <!-- 임의로 ContentsReadingPage에 연결해둠 -->
-                        <v-card width="270px" router :to="{name:'ContentsReadingPage',params:{idc:1}}">
+                        <v-card width="270px" @click="$router.push('/1/contents/1')">
                             <!--
                             <v-img
                             :src="`https://picsum.photos/200/300?image=${getImage()}`"
