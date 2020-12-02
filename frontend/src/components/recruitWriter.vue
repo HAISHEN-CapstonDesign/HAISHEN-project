@@ -11,7 +11,7 @@
                 fluid
                 >
                 <v-row>
-                    <v-header><p style="font-size:40px">작가 모집중인 프로젝트</p></v-header>
+                    <v-header class="ml-3"><p style="font-size:25px">작가 모집중인 프로젝트</p></v-header>
                     <v-spacer></v-spacer>
                     <v-btn
                     color="grey"
@@ -32,9 +32,9 @@
                                 :src="list.img"
                                 height="150px"
                                 ></v-img>
-                                <div style="height:100px;">
+                                <div style="height:70px;">
                                 <v-card-title v-text="list.genre" class="justify-center"></v-card-title>
-                                <v-card-subtitle v-text="list.title" class="text-center"></v-card-subtitle>
+                                
                                 </div>
                                 <v-divider ></v-divider>
                                 <v-card-title class="justify-center">모집인원</v-card-title>

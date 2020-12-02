@@ -1,5 +1,5 @@
 <template>
-    <div style="background-color: #FDFAF9">
+    <div class="mt-15" style="background-color: #FDFAF9">
         <v-app >
             <v-card
             flat
@@ -12,7 +12,7 @@
                 style="background-color: #FDFAF9"
                 >
                 <v-row>
-                    <v-header><p style="font-size:40px">펀딩 진행중인 프로젝트</p></v-header>
+                    <v-header class="ml-3"><p style="font-size:25px">펀딩 진행중인 프로젝트</p></v-header>
                     <v-spacer></v-spacer>
                     <v-btn
                     color="grey"
@@ -33,9 +33,9 @@
                                 :src="list.img"
                                 height="150px"
                                 ></v-img>
-                                <div  style="height:100px; ">
+                                <div style="height:70px; ">
                                 <v-card-title v-text="list.genre" class="justify-center"></v-card-title>
-                                <v-card-subtitle v-text="list.title" class="text-center"></v-card-subtitle>
+                                
                                 </div>
                                 <v-divider ></v-divider>
                                 <v-card-title class="justify-center">펀딩 진행률</v-card-title>
