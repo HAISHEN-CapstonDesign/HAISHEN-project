@@ -73,7 +73,10 @@
                         </v-row>
                     </v-flex>
                 </v-layout>
-                <br>
+            </v-container>
+            <v-container style="max-width:100%; background-color: #FDFAF9">
+                
+                <v-spacer class="mt-15"></v-spacer>
                 <v-row
                     class="justify-center"
                     no-gutters
@@ -82,7 +85,7 @@
                     
                     <RecruitmentWriter></RecruitmentWriter>
                     
-                    <br>
+                    
                     <RecruitmentFund></RecruitmentFund>
                 </v-row>
                 

@@ -1,9 +1,11 @@
 <template>
-    <div>
+    <div style="background-color: #FDFAF9">
         <v-app>
             <v-card
             flat
             tile
+            color="#FDFAF9"
+            width="1050px"
             >
                 <v-container
                 fluid
