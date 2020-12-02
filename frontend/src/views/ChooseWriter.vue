@@ -16,7 +16,7 @@
           align="center"
           justify="center"
         >
-          <h2>{{title}}</h2>
+          <p style="font-size:40px">{{ title }}</p>
         </v-col>
         </v-row>
       </v-img>
@@ -107,6 +107,7 @@
                 </div>
             </v-col>
         </v-row>
+        <!--
          <v-dialog
           v-model="adopt"
           persistent
@@ -130,6 +131,7 @@
           </v-card-actions>
       </v-card>
     </v-dialog>
+    -->
     </v-container>
   </v-app>   
 </template>
@@ -142,7 +144,6 @@ export default {
     data() {
         return{
             imgUrl: require('../assets/partership.jpg'),
-            adopt:false,
             expanded: [],
             singleExpand: false,
             headers: [
@@ -157,25 +158,15 @@ export default {
             selected:[],
             idp: 0,
             chooseList:[],
-            applicants:[
-                // {
-                //     profile:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-                //     name:'김ㅇㅇ',
-                //     comment:'잘 부탁드립니다!',
-                //     show: false,
-                //     detail:'세부사항들',
-                //     id:1,
-                // },
-                
-                
-            ],
+            applicants:[],
             title: '',
             submit_selected:[]
         }
     },
     methods: {
         start(){
-            console.log(this.chooseList)
+            this.submit_selected=[];
+            this.$router.push(`/${this.idp}/collaboProjMain`);
         },
         submit_start_funding(){
             this.selected.forEach(element => {
@@ -187,21 +178,23 @@ export default {
                 .post('http://localhost:3000/api/${this.idp}/submitStartFunding',this.submit_selected,{ headers: {'token': localStorage.getItem('access_token')}})
                 .then(res=>{
                     console.log(res.data)
-                    this.adopt=true
+                //    this.adopt=true
                     axios
                         .post('http://localhost:3000/api/endFunding', {d: this.idp}, { headers: {'token': localStorage.getItem('access_token')}})
                         .then(res=>{
+                            this.$router.push(`/${this.idp}/collaboProjMain`)
                             console.log(res.data)
                         })
                     
                 })
         },
+        /*
         goto_mainproj(){
             this.adopt=false
             this.$router.push(`/1/basicCollaboTool/1`)
             // this.$router.push(`/${this.idp}/basicCollaboTool/1`)
         }
-        
+        */
     },
     created(){
         this.idp = this.$route.params.idp;
@@ -226,7 +219,6 @@ export default {
                         userId: app_list[i].userId,
                         projectId: app_list[i].projectId,
                         selected: false
-
                     }
                     this.applicants.push(app);
                     console.log("hello")

@@ -103,7 +103,7 @@ export default new VueRouter({
             component: AccountLinkPage
         },
         {
-            path: '/contents/:idc',
+            path: '/:idp/contents/:idc',
             name: 'ContentsReadingPage',
             component: ContentsReadingPage,
 

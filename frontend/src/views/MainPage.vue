@@ -32,7 +32,7 @@
                     align="center"
                     justify="center"
                 >
-                    <h2>{{ slide.text }}</h2>
+                    <p style="font-size:40px">{{ slide.text }}</p>
                     <v-spacer class="pt-5"></v-spacer>
                     <p>{{ slide.writer}}</p>
                 </v-col>
@@ -159,4 +159,16 @@ export default {
   },
 }
 </script>
+<style>
+.v-application--wrap {
+    flex: 1 1 auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    max-width: 100%;
+    position: relative;
+}
+</style>
 

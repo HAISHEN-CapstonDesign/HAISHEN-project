@@ -11,7 +11,7 @@
                 fluid
                 >
                 <v-row>
-                    <v-header><h2>작가 모집중인 프로젝트</h2></v-header>
+                    <v-header><p style="font-size:40px">작가 모집중인 프로젝트</p></v-header>
                     <v-spacer></v-spacer>
                     <v-btn
                     color="deep-purple lighten-2"

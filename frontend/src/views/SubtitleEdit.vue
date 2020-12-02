@@ -11,12 +11,17 @@
                     :key="little_title"
                     @click="cardClick(little_title.idx, little_title.text)"
                     >
-                        <v-row>
+                        <v-row class="fill-height">
                             <v-col align="center" md="2">
                                 {{little_title.idx}}. 
                             </v-col>
-                            <v-col align="left" md="10">
+                            <v-col align="left" md="9">
                                 {{ little_title.text }}
+                            </v-col>
+                            <v-col md="1">
+                                <v-btn class="mx-2" icon @click="cancelPlus">
+                                <v-icon>mdi-close</v-icon>
+                            </v-btn>
                             </v-col>
                         </v-row>
                     </v-card>
@@ -58,14 +63,7 @@
             </v-row>
             <v-row>
                 <v-col>
-                    <v-btn icon>
-                        <v-icon>mdi-arrow-up-drop-circle</v-icon>
-                    </v-btn>
-                    <v-btn icon>
-                        <v-icon>mdi-arrow-down-drop-circle</v-icon>
-                    </v-btn>
                     <v-btn @click="changeSave">저장</v-btn>
-                    {{clickedCard}}
                 </v-col>
             </v-row>
         </v-container>
