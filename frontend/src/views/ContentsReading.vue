@@ -44,14 +44,26 @@
         flat
         tile
         >
-          <h2>{{title}}</h2>
-          <v-rating
-            v-model="rating"
-            background-color="grey"
-            color="yellow"
-            size="40"
-            large
-          ></v-rating>
+
+
+          <h2 style="display:inline">{{title}}</h2>
+            <v-row>
+            <v-spacer></v-spacer>
+              <v-rating
+                v-model="rating"
+                background-color="grey"
+                color="yellow"
+                half-increments
+                size="20"
+                :value="rating_score"
+                length="5"
+                dense
+                class="mr-3"
+            ></v-rating>
+            {{rating_score}}
+            </v-row>
+          
+          
           <v-divider></v-divider>
           <div v-if="idc==1" class="pt-10">
            <h3>{{subtitle_1}}</h3>
@@ -210,6 +222,8 @@ export default {
     
     data: () => ( 
         {
+        rating_size: 20,
+        rating_score: 4,
         click_like: false,
         contents_like: 0, //axios로 좋아요 수 가져와야함
         zIndex: 0,
