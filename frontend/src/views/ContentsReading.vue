@@ -47,6 +47,7 @@
 
 
           <h2 style="display:inline">{{title}}</h2>
+          <v-btn id="dwn_btn">다운로드</v-btn>
             <v-row>
             <v-spacer></v-spacer>
               <v-rating
@@ -405,13 +406,38 @@ export default {
         //this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
      //},
   },
- created(){ 
+  created(){ 
     this.idc = this.$route.params.idc;
     this.idp = this.$route.params.idp;
-     }
+  },
+  mounted(){
+    /* 다운로드 코드(아직 수정 안함)
+    function download(filename) {
+        var element = document.createElement('a');
+        var header = "<html>" + "<head><meta charset='utf-8'></head><body>";
+	var footer = "</body></html>";
+	var text = header+document.getElementById("text-val").innerHTML+footer;
+        element.setAttribute('href', 'data:' + 'application/vnd.ms-word' + ';charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
 
+        element.style.display = 'none';
+        document.body.appendChild(element);
 
+        element.click();
 
+        document.body.removeChild(element);
+      }
+      document.getElementById("dwn-btn").addEventListener("click", function(){
+      //  var text = document.getElementById("text-val").innerHTML;
+        var date = new Date().toLocaleString();
+        var title = document.getElementById("title").innerText;
+        var subtitle = document.getElementById("subtitle").innerText;
+        var filename = `${title}_${subtitle}_${date}.doc`;
+    
+        download(filename);
+      }, false);
+      */
+  },
 
 }
 </script>

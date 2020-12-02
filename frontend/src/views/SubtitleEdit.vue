@@ -19,7 +19,7 @@
                                 {{ little_title.text }}
                             </v-col>
                             <v-col md="1">
-                                <v-btn class="mx-2" icon @click="cancelPlus">
+                                <v-btn class="mx-2" icon>
                                 <v-icon>mdi-close</v-icon>
                             </v-btn>
                             </v-col>
