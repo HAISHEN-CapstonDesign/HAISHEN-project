@@ -159,4 +159,16 @@ export default {
   },
 }
 </script>
+<style>
+.v-application--wrap {
+    flex: 1 1 auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    max-width: 100%;
+    position: relative;
+}
+</style>
 
