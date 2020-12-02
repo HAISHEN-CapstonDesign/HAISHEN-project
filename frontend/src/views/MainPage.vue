@@ -32,7 +32,7 @@
                     align="center"
                     justify="center"
                 >
-                    <h2>{{ slide.text }}</h2>
+                    <p style="font-size:40px">{{ slide.text }}</p>
                     <v-spacer class="pt-5"></v-spacer>
                     <p>{{ slide.writer}}</p>
                 </v-col>

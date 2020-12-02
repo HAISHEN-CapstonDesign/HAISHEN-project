@@ -9,7 +9,7 @@
                 fluid
                 >
                 <v-row>
-                    <v-header><h2>펀딩 진행중인 프로젝트</h2></v-header>
+                    <v-header><p style="font-size:40px">펀딩 진행중인 프로젝트</p></v-header>
                     <v-spacer></v-spacer>
                     <v-btn
                     color="deep-purple lighten-2"

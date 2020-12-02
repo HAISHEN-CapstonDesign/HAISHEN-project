@@ -6,14 +6,17 @@
             v-for="writer in items"
             v-bind:key="writer.title">
             <v-card
+            elevation="0"
             width="100px"
-            height="200px"
+            height="150px"
+            align="center"
             tile
             >
 
               <div>
-
+                <v-avatar size="80">
                 <v-img :src="writer.src" height="130px"></v-img>
+                </v-avatar>
                 <v-card-title id="title" class="justify-center" style="font-size:12px">{{writer.title}}</v-card-title>
               </div>
 

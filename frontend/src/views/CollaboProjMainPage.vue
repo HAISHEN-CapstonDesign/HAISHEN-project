@@ -25,12 +25,11 @@
         </v-row>
         <v-container fluid grid-list-sm pa-5>
             <v-row cols="12" justify="end">
-                <v-col md="4">
-                    <v-card min-height="500px">
+                <v-col md="8">
+                    <v-card max-height="500px">
                         <v-col align="center">
                             <v-btn text @click="mainInfo">Introduction</v-btn>
                         </v-col>
-                        <v-divider></v-divider>
                         <div>
                                 <v-textarea
                                 readonly
@@ -39,17 +38,17 @@
                                 flat="flase"
                                 ></v-textarea>
                             </div>
-                    </v-card>          
-                </v-col>
-                <v-col md="4" align="center">
-                    <v-card min-height="500px">
+                    </v-card>
+                    <br>
+                    <v-card min-height="500px" elevation="0">
                         <v-col align="center">
                             <v-btn text @click="supporter">Supporters</v-btn>
                         </v-col>
-                        <v-divider></v-divider>
                             <Supporter></Supporter>
                     </v-card>          
+     
                 </v-col>
+                
                 <v-col md="2">
                     <Toolbar
                     :idp="idp"

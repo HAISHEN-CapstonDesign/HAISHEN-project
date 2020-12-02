@@ -16,7 +16,7 @@
           align="center"
           justify="center"
         >
-          <h2>제목</h2>
+          <p style="font-size:40px">제목</p>
 
         </v-col>
         </v-row>

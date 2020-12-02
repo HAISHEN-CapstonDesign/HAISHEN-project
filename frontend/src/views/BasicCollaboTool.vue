@@ -90,7 +90,7 @@
           align="center"
           justify="center"
         >
-          <h2>기획자의 트렌드, 소통, 배움, 이타심</h2>
+          <p style="font-size:40px">기획자의 트렌드, 소통, 배움, 이타심</p>
           <v-spacer class="pt-5"></v-spacer>
           <div>By. Jennie。hello</div>
         </v-col>

@@ -16,7 +16,7 @@
           align="center"
           justify="center"
         >
-          <h2>I T</h2>
+          <p style="font-size:40px">I T</p>
 
         </v-col>
         </v-row>
