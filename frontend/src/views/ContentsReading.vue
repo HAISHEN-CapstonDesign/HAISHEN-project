@@ -51,12 +51,11 @@
             <v-row>
             <v-spacer></v-spacer>
               <v-rating
-                v-model="rating"
                 background-color="grey"
                 color="yellow"
                 half-increments
                 size="20"
-                :value="rating_score"
+                :value=rating_score
                 length="5"
                 dense
                 class="mr-3"

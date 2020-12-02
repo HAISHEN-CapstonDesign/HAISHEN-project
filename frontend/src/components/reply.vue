@@ -6,7 +6,15 @@
         </div>
             <h3> {{ items.length}} </h3>
         <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
+        <v-rating
+                background-color="grey"
+                color="yellow"
+                half-increments
+                size="25"
+                length="5"
+                dense
+                class="mr-3"
+            ></v-rating>
         <div class="pb-1 pr-3">
             <v-btn @click="increment" icon color="deep-orange">
                 <v-icon>mdi-thumb-up</v-icon>
