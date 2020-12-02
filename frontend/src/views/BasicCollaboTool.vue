@@ -242,7 +242,7 @@ export default {
                     colorIndex = j;
                   }
                 }
-                if(this.postDetail[i].text == " <p></p>") colorText = "<br>"
+                if(this.postDetail[i].text.includes("<p></p>")) colorText = "<br>"
                 else colorText = this.postDetail[i].text.replace("<p>", `<p style="color:${color[colorIndex]};">`);
 
                 this.readText = this.readText + colorText;
@@ -314,7 +314,7 @@ export default {
           })
             .then((res) => {
             this.project = res.data;
-          //  location.reload();
+            location.reload();
             console.log(res);
           })
           .catch(function (error) {
