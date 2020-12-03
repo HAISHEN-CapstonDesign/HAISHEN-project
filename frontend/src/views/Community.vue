@@ -141,8 +141,8 @@ export default {
         this.idp = this.$route.params.idp;
         this.ids = this.$route.params.ids;
         this.subtitle=this.$store.state.subtitle[this.ids-1].text
-        axios ///{projectId}/index/{indexId}/roomId
-            .get(`api/project/${this.idp}/index/${this.ids}/CommunityBlob`)
+        axios
+            .get(`http://localhost:3000/api/project/${this.idp}/index/${this.ids}/CommunityBlob`)
                 .then(res => {
                     this.roomId = res.data.roomId;
                     this.chat = res.data.chat;
@@ -257,7 +257,7 @@ connect(event) {
     onMessageReceived(payload) {
   var message = JSON.parse(payload.body);
 console.log(message)
-  //var messageElement = document.createElement('li');
+  //var messageElement = document.createElement('li'); 
 
   
   //  messageElement.classList.add('chat-message');
