@@ -256,6 +256,15 @@ export default {
           .catch(function (error) {
             console.log(error);
           });
+          axios.get(`http://localhost:3000/api/project/${this.idp}/index/0/makeChatRoom`)
+            .then((res) => {
+              
+              console.log(res.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          
     },
     data() {
         return{

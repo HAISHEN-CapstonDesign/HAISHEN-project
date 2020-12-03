@@ -32,13 +32,13 @@
                     >
                     <v-row>
                         <v-col align="center" md="2">
-                            {{newIndex}}. 
+                            {{lastindex}}. 
                         </v-col>
                         <v-col md="8">
                             <v-text-field
                             dense
                             solo
-                            v-model="newSubtitle"
+                            v-model="lastindexTitle"
                             ></v-text-field>
                         </v-col>
                         <v-col md="2">
@@ -63,7 +63,7 @@
             </v-row>
             <v-row>
                 <v-col>
-                    <v-btn @click="changeSave">저장</v-btn>
+                    <v-btn @click="addLastIndexPost">저장</v-btn>
                 </v-col>
             </v-row>
         </v-container>
@@ -71,42 +71,38 @@
 </template>
 <script>
 import axios from 'axios'
-
 export default {
     data(){
         return{
             little_titles: [],
             plusClick:false,
-            newSubtitle:'',
-            newIndex:0,
+        //    newSubtitle:'',
+        //    newIndex:0,
 
-            projectId: 1, //여기에 프로젝트 아이디 추가해주세요!
-            lastindex: 7, //여기에 새로 추가하는 index 넣어주세요!
-            lastindexTitle: '여기에 새로 추가하는 index title 연결해주세요!'
+            projectId: 0,
+            lastindex: 0,
+            lastindexTitle: ''
         }
     },
     created() {
       this.little_titles=this.$store.state.subtitle;
-      this.newIndex = this.little_titles.length+1;
+      this.lastindex = this.little_titles.length+1;
+      this.projectId = this.$route.params.idp;
     },
     methods:{
         async plusSubtitle(){
-            await this.little_titles.push({idx: this.newIndex, text: this.newSubtitle});
-            this.newIndex++;
-            this.newSubtitle = '';
+            await this.little_titles.push({idx: this.lastindex, text: this.lastindexTitle});
+            this.lastindex++;
+            this.lastindexTitle = '';
             this.plusClick = false;
         },
-        changeSave(){
-            alert("저장")
-        },
         cancelPlus(){
-            this.newSubtitle = '';
+            this.lastindexTitle = '';
             this.plusClick = false;
         },
         cardClick(idx, text){
             alert(idx, text);
         },
-
         addLastIndexPost(){
             axios
                 .post('http://localhost:3000/api//project/indexedit',{indexId: this.lastindex ,projectId: this.projectId ,title: this.lastindexTitle}, { headers: {'token': this.token}})

@@ -42,10 +42,10 @@
             </v-carousel-item>
             </v-carousel>
 
-            <v-container class="mb-15" style="max-width:1050px;">
+            <v-container class="mb-15" style="max-width:875px;">
                 <v-layout class="mb-15" align-center row wrap>
                     <v-flex>
-                    <div align="center" class="pb-5 pt-10">
+                    <div align="center" class="pb-5 pt-10 mb-10">
                         <v-img
                             max-width="300"
                             max-height="100%"
@@ -58,15 +58,15 @@
                             :key="id"
                             >
                                 <v-card
-                                width="150"
-                                height="150"
+                                width="125"
+                                height="125"
                                 outlined="false"
                                 hover="true"
                                 class="text-center"
                                 @click="$router.push('/postlist')"
                                 >
                                    <div style="position: absolute; top: 40%; width:100%">
-                                    <h3>{{genre}}</h3>
+                                    <h3 style="font-size:14px; color:grey">{{genre}}</h3>
                                    </div>
                                 </v-card>
                             </v-col>

@@ -11,6 +11,16 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 // import VueJsModal from 'plugin'
 
+
+const DEFAULT_TITLE = 'Crunch';
+router.afterEach((to) => {
+    // Use next tick to handle router history correctly
+    // see: https://github.com/vuejs/vue-router/issues/914#issuecomment-384477609
+    Vue.nextTick(() => {
+        document.title = to.meta.title || DEFAULT_TITLE;
+    });
+});
+
 Vue.config.productionTip = false
 
 Vue.use(VueMoment);
