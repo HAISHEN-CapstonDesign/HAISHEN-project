@@ -51,9 +51,10 @@
             <v-row>
             <div class="ml-4">
             <v-chip
-            class="mb-"
+            class="mb-2"
             outlined
             small
+
             >
               <p style="color:grey">I T</p>
             </v-chip>
