@@ -50,11 +50,16 @@
                 </v-col>
                 
                 <v-col md="2">
+
+                    
+
                     <Toolbar
                     :idp="idp"
                     :target_funding_money="target_funding_money"
                     :target_d_day="target_d_day"
                     :mwn="mwn"
+                    
+                    
                     ></Toolbar>
                 </v-col>
             </v-row>
