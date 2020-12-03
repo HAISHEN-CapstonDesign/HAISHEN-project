@@ -45,9 +45,14 @@
         tile
         >
 
-
+          <v-row cols="12">
+            <v-col md="9">
           <h2 style="display:inline" id="title">{{title}}</h2>
-          <v-btn id="dwn-btn">다운로드</v-btn>
+            </v-col>
+          <v-col md="3">
+          <v-btn dark id="dwn-btn">download PDF</v-btn>
+          </v-col>
+          </v-row>
             <v-row>
             <v-spacer></v-spacer>
               <v-rating
@@ -65,10 +70,10 @@
           
           
           <v-divider></v-divider>
-          <div v-if="idc==1" class="pt-10">
+          <div v-if="idc==1" class="pt-10" id="pdf_wrap">
            <h3>{{subtitle_1}}</h3>
            <v-spacer class = "pt-3"></v-spacer>
-           <subtitle-2 id="pdf_wrap">{{contents_1}}</subtitle-2>
+           <subtitle-2>{{contents_1}}</subtitle-2>
           </div>
 
           <div v-if="idc==1" class="pt-10">
