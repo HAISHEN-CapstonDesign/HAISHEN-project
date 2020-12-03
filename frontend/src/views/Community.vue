@@ -218,7 +218,7 @@ export default {
         this.stompClient.send("/receive", JSON.stringify(msg), {});
       }
     },*/
-    sendMessage(event) {
+    sendMessage() {
   var messageContent =  this.message;
   if (messageContent.startsWith('/join ')) {
    // var this.roomId = messageContent.substring('/join '.length);
@@ -238,9 +238,9 @@ export default {
   }
   this.message = '';
   this.tagLists=[];
-  event.preventDefault();
+  //event.preventDefault();
 },
-connect(event) {
+connect() {
   var username = localStorage.getItem('nickname');
   //Cookies.set('name', username);
   if (username) {
@@ -252,7 +252,7 @@ connect(event) {
 
     this.stompClient.connect({}, this.onConnected, this.onError);
   }
-  event.preventDefault();
+ //event.preventDefault();
 },
     onMessageReceived(payload) {
   var message = JSON.parse(payload.body);
