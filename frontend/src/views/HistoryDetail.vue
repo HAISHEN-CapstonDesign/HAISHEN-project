@@ -111,7 +111,7 @@ export default {
         revertYes(){
             this.dialog = false;
             this.reObj.commit_comment = this.comment;
-            this.reObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+            this.reObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm')
             console.log(this.reObj);
             axios.post(`http://localhost:3000/api/project/${this.idp}/commit/basicTool/detail/revert/${this.idh}`, this.reObj,
             {

@@ -17,6 +17,7 @@
           <v-list-item
           v-for="little_title in little_titles"
           :key="little_title"
+          :id="little_title.idx"
           @click="clickSub(little_title.idx)"
           link
           >
@@ -47,10 +48,12 @@ export default {
             }, 1000);
 	}).scroll();
     });
+
     },
     props: ['title'],
     created() {
       this.idp = this.$route.params.idp;
+      this.ids = this.$route.params.ids;
       // this.little_titles=this.$store.state.subtitle
       axios
         .post('http://localhost:3000/api/getindex',
@@ -83,10 +86,13 @@ export default {
             little_titles: [],
             // project_id: 1,
             idp:0,
+            ids:0,
         }
     },
     methods: {
       clickSub(idx){
+        var nowIndex = document.getElementById(idx)
+        nowIndex.style.backgroundColor = "#36B8B2"
         this.$emit('changeSubtitle', idx)
       },
       // test(){
