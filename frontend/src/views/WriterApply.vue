@@ -107,14 +107,16 @@ export default {
     name: 'WriterApply',
     created() {
         this.idp = this.$route.params.idp;
+        console.log(this.idp)
     },
 
     data() {
         return{
+            title:'',
             idp:0,
             dialog0: false,
             comment: '',
-            token: localStorage.getItem('access_token'),
+            // token: localStorage.getItem('access_token'),
             intre:['IT'],
             items:['여행', '수학', '과학', 'IT', '요리','건강','역사','건축','문화,예술'],
             carrer:`1. 아이폰 12 생태계,
@@ -124,7 +126,7 @@ export default {
     methods:{
         submit(){
 
-            axios.post('/api/writerapply', {projectId: this.idp, comment: this.comment },{ headers: {'token': this.token}})
+            axios.post('/api/writerapply', {projectId: this.idp, comment: this.comment },{ headers: {'token': localStorage.getItem('access_token')}})
             .then(res => {
                 console.log(res)
                 this.dialog0=true
