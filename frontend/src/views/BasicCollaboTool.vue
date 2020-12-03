@@ -157,7 +157,7 @@
         <div>
           <h3>{{title}}</h3>
           <h1>{{subtitle}}</h1>
-          <p>{{$moment(project.time).format('YYYY-MM-DD HH:mm:ss')}}, {{project.writerName}}</p>               
+          <p>{{$moment(project.time).format('YYYY-MM-DD HH:mm')}}, 작성자 {{project.writerName}}</p>               
         </div>
           </v-col>
           <v-col md="2" align="center" v-show="modifying">
@@ -338,7 +338,7 @@ export default {
 
         this.subObj.after = this.editText;
         this.subObj.commit_comment = this.comment;
-        this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+        this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm')
         console.log(this.subObj)
         axios.post(`http://localhost:3000/api/project/file`, form2)
         .then((res) => {
