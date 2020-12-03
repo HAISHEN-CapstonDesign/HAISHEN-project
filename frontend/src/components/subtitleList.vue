@@ -25,12 +25,16 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
+        <v-btn @click="test()">test</v-btn>
       </v-navigation-drawer>
-            </v-card>
+      
+    </v-card>
 </template>
 <script>
 import $ from 'jquery';
+import axios from 'axios';
 export default {
+
     mounted(){
     //list가 스크롤을 따라오게 하는 코드
     $(document).ready(function() {
@@ -46,17 +50,40 @@ export default {
     },
     props: ['title'],
     created() {
-      this.little_titles=this.$store.state.subtitle
+      // this.little_titles=this.$store.state.subtitle
+
+
     },
     data() {
         return {
             //sample
             little_titles: [],
+            // project_id: 1,
         }
     },
     methods: {
       clickSub(idx){
         this.$emit('changeSubtitle', idx)
+      },
+      test(){
+        
+      axios
+        .post('http://localhost:3000/api/getindex',
+            { id: 1 }, 
+            { headers: {'token':localStorage.getItem('access_token') }})
+        .then(res => {
+            console.log("bi")
+            console.log(res.data);
+            // this.res.data.forEach(element => {
+            //     this.little_titles.push({idx:element.id, text:element.title})
+            // });
+          
+          
+        })
+        .catch((err) => {
+            console.log(err)
+            alert("에러가 발생했습니다. 다시 시도해주세요")
+        });
       }
     },
 }
