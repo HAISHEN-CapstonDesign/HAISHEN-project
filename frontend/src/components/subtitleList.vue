@@ -49,8 +49,6 @@ export default {
 	}).scroll();
     });
 
-    var nowIndex = document.getElementById(this.ids)
-    nowIndex.style.backgroundColor = "#36B8B2"
     },
     props: ['title'],
     created() {
@@ -93,6 +91,8 @@ export default {
     },
     methods: {
       clickSub(idx){
+        var nowIndex = document.getElementById(idx)
+        nowIndex.style.backgroundColor = "#36B8B2"
         this.$emit('changeSubtitle', idx)
       },
       // test(){
