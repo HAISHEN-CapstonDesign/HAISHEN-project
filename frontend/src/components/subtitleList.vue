@@ -90,12 +90,15 @@ export default {
         }
     },
     methods: {
-      clickSub(idx){
-        var nowIndex = document.getElementById(idx);
-        console.log(nowIndex.text)
-        nowIndex.style.backgroundColor = "#36B8B2"
+      async clickSub(idx){
+        await this.colorChange(idx)
         this.$emit('changeSubtitle', idx)
       },
+      colorChange(idx){
+        var nowIndex = document.getElementById(idx);
+        console.log(nowIndex)
+        nowIndex.style.backgroundColor = "#36B8B2"
+      }
       // test(){
         
       // axios
