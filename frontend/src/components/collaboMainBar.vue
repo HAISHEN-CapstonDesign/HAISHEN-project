@@ -6,10 +6,13 @@
             
             <h3 style="font-size:15px" v-show="!target_funding_money">펀딩 받지 않음</h3>
         </div>
-            <v-progress-linear color="#36B8B2" class="my-2" height="10" value="70"></v-progress-linear>
+            <v-progress-linear color="#36B8B2" class="my-2" height="8" value="70"></v-progress-linear>
         <div align="left">
-            <h3 style="font-size:15px" v-show="target_d_day">목표 작업 기한: {{target_d_day}}</h3>
-            <h3 style="font-size:15px" v-show="!target_d_day">목표 작업 기한: 무기한</h3>
+            <v-row>
+            <h3 class="ml-3" style="display:inline-block; font-size:15px" v-show="target_d_day">목표 작업 기한 {{target_d_day}}</h3>
+            <h3 class="ml-3" style="display:inline-block; font-size:15px" v-show="!target_d_day">목표 작업 기한</h3> 
+            <h3 class="ml-2" style="color:red; font-size:15px" v-show="!target_d_day">무기한</h3>
+            </v-row>
             <h3 style="font-size:15px" >모집 작가 수: {{mwn}}</h3>
         </div>
         </v-card-text>
