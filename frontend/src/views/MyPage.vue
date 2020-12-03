@@ -19,32 +19,27 @@
     </v-img>
 
   <v-container class="pl-16 ml-10" fluid grid-list-sm>
-      <div style="float:right" class="pr-16 mr-16">
+      <div style="float:right" class="mr-16">
       <v-row class="pr-16">
       <v-btn
-            fab
+            
             dark
             normal
             text
             color="black"
             to='/myaccount'
-            
           >
-            <v-icon dark>
-             mdi-cash-usd-outline
-            </v-icon>
+            계좌 등록하기
           </v-btn>
           <v-btn
-            fab
+            
             text
             dark
             normal
             color="black"
             to='/profitCheck'
           >
-            <v-icon dark>
-              mdi-currency-usd
-            </v-icon>
+            수익 확인하기
           </v-btn>
       </v-row>
         </div>
