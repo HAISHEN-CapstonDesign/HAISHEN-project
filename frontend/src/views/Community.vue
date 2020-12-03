@@ -140,9 +140,8 @@ export default {
         this.title=this.$store.state.title;
         this.idp = this.$route.params.idp;
         this.ids = this.$route.params.ids;
-        this.subtitle=this.$store.state.subtitle[this.ids-1].text
-        axios
-            .get(`http://localhost:3000/api/project/${this.idp}/index/${this.ids}/CommunityBlob`)
+    //    this.subtitle=this.$store.state.subtitle[this.ids-1].text
+        axios.get(`http://localhost:3000/api/project/${this.idp}/index/${this.ids}/CommunityBlob`)
                 .then(res => {
                     this.roomId = res.data.roomId;
                     this.chat = res.data.chat;
@@ -234,8 +233,8 @@ export default {
         time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm'),
         tagName:this.tagLists,
     };
-    console.log('보낸 message 정보'+chatMessage)
-    this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`, {}, JSON.stringify(chatMessage));
+   // console.log('보낸 message 정보'+chatMessage)
+    this.stompClient.send(`http://localhost:3000/app/chat/${this.roomId}/sendMessage`, JSON.stringify(chatMessage));
   }
   this.message = '';
   this.tagLists=[];
@@ -263,7 +262,7 @@ console.log(message)
 
   
   //  messageElement.classList.add('chat-message');
-
+/*
     var avatarElement = document.createElement('i');
     var avatarText = document.createTextNode(message.sender[0]);
     avatarElement.appendChild(avatarText);
@@ -284,17 +283,18 @@ console.log(message)
  // messageElement.appendChild(textElement);
 
  // messageArea.appendChild(messageElement);
+ */
 },
 
 enterRoom(roomId) {
   //Cookies.set('roomId', roomId);
   //roomIdDisplay.textContent = roomId;
-  var topic = `/app/chat/${roomId}`;
+  var topic = `http://localhost:3000/app/chat/${roomId}`;
 
-  var currentSubscription = this.stompClient.subscribe(`/channel/${roomId}`, this.onMessageReceived); // eslint-disable-line no-unused-vars
+  var currentSubscription = this.stompClient.subscribe(`http://localhost:3000/channel/${roomId}`, this.onMessageReceived); // eslint-disable-line no-unused-vars
 
   this.stompClient.send(`${topic}/addUser`,
-    {},
+    
     JSON.stringify({sender: localStorage.getItem('nickname')})
   );
 },
@@ -307,7 +307,7 @@ onError(error) {
 },
 /*
     connect() {
-      const serverURL = "http://localhost:3000/ws"
+      const serverURL = "http://localhost:3000"
       let socket = new SockJS(serverURL);
       this.stompClient = Stomp.over(socket);
       console.log(`소켓 연결을 시도합니다. 서버 주소: ${serverURL}`)
