@@ -76,7 +76,9 @@ const ProjectendPage = () => {
     return import ( /* webpackChunkName: "projectendpage" */ '../views/Projectend.vue')
 }
 
-export default new VueRouter({
+
+
+const vueRouter = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [{
@@ -214,3 +216,5 @@ export default new VueRouter({
 
     ]
 })
+
+export default vueRouter;

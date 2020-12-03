@@ -17,10 +17,10 @@
                     <v-icon>mdi-magnify</v-icon>
                 </v-btn>
             </v-row>
-                <v-btn dark small class="mr-2" v-if="isLoginError" router :to="{name: 'LoginPage'}">login</v-btn>
-                <v-btn dark small class="mr-2" v-if="isLogin" @click="logout">logout</v-btn>
-                <v-btn dark small class="mr-2" v-if="isLoginError" router :to="{name: 'SignUpPage'}">sign up</v-btn>
-                <v-btn dark small class="mr-2" v-if="isLogin" router :to="{name:'MyPage'}">My</v-btn>
+                <v-btn text small class="mr-1" v-if="isLoginError" router :to="{name: 'LoginPage'}">login</v-btn>
+                <v-btn text small class="mr-1" v-if="isLogin" @click="logout">logout</v-btn>
+                <v-btn text small class="mr-1" v-if="isLoginError" router :to="{name: 'SignUpPage'}">sign up</v-btn>
+                <v-btn text small class="mr-1" v-if="isLogin" router :to="{name:'MyPage'}">My</v-btn>
                 
                 <v-badge
                 color="red"
@@ -30,10 +30,11 @@
                 overlap
                 >
                     <v-btn
+                    text
                     fab
                     dark
                     x-small
-                    color="warning"
+                    color="black"
                     @click="alarmPage"
                     >
                         <v-icon dark>
@@ -41,11 +42,9 @@
                         </v-icon>
                     </v-btn>
                 </v-badge>
-                <v-btn rounded small class="ma-2" color="success" v-if="isLogin" text-color="white" router :to="{name:'PaymentPage'}">
-                    <v-icon left>
-                        mdi-currency-usd
-                    </v-icon>
-                    Point : {{ $store.state.userInfo.point }} 
+                <v-btn text rounded small class="ma-2" color="black" v-if="isLogin" text-color="white" router :to="{name:'PaymentPage'}">
+                     <p style="font-size:15px">{{ $store.state.userInfo.point }}</p>
+                     <img class="ml-1" height="16px" src="./assets/CPoint_icon.png">
                 </v-btn>
             </v-row>
         </v-app-bar>
