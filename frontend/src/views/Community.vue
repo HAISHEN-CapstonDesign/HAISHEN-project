@@ -1,6 +1,6 @@
 <template>
 <v-app>
-    <v-container fluid grid-list-sm pa-5>
+    <v-container fluid grid-list-sm pa-15>
         <v-row justify="center">
             <v-col>
                 <h3>{{title}} _ {{subtitle}}</h3>
@@ -8,12 +8,13 @@
         </v-row>
     <v-row cols="12">
         <v-col md="2">
+            <v-card flat tile outlined style="border: 2px solid #36B8B2;" class="text-center">공용 채팅방</v-card>
             <Subtitle v-bind:title="title" @changeSubtitle="changeSubtitle"></Subtitle>
         </v-col>
         <v-col md="6">
             <v-card height="668px">
-                <div class="content_div">
-                    흔히 트렌드란 뭔가 재빠르게 세상을 따라가고, 핫플레이스를 좋아하는 패피들로 연상됩니다. 하지만 저는 트렌드를, 팀원과의 소통에 관한 관점으로 얘기해보려 합니다. 트렌드는 어떠한 방향으로 쏠리는 사회적 추세, 경향을 뜻합니다. 소통은 사회성, 사람들과의 커뮤니케이션 활동입니다. 트렌드와 소통을 같은 선상에 놓고 비교하면, 트렌드는 앞서 나가는 멋진 사람에 대한 좁은 정의 뿐만 아니라, 사람(팀원)들이 자주 사용하는 언어와 행동, 도구를 파악하는 넓은 의미로도 비춰질 수 있습니다. 사람들과 더 잘 대화하고 함께 가기 위해 그들의 행동과 방향성을 읽고 공감하며, 그들의 언어로 대화를 나누는 것도 트렌드를 읽는 것입니다.
+                <div class="content_div pa-3" v-html="readText">
+                    {{readText}}
                 </div>
             </v-card>
         </v-col>
@@ -21,26 +22,22 @@
         <v-card min-height="650px">
             <div id="container"
             style="overflow-y:auto; overflow-x:hidden; min-height:430px; max-height:430px;">
-                <v-card
-                v-for="(item) in recvList"
-                v-bind:key="item.date"
+            <v-card
+                v-for="(item) in chat"
+                v-bind:key="item.time"
                 cols="12"
                 class="ma-1 pa-0"
                 flat 
                 >
-                    <v-row v-if="item.userName!=me" cols="12" justify="left">
-                        <v-col md="2" align="center">
-                            <v-avatar size="50px">
-                                <img :src="item.avatar">
-                            </v-avatar>
-                        </v-col>
+                    <v-row v-if="item.userNickname!=me" cols="12" justify="left">
                         <v-col md="10">
+                            <span>{{item.userNickname}}</span>
                             <v-card flat style="background-color: #ECDACE" width="70%">
                                 <v-card-text class="ma-0 pa-2">
-                                    {{item.content}}
+                                    {{item.text}}
                                 </v-card-text>
                             </v-card>
-                            <p>{{item.date}}</p>
+                            <p>{{item.time}}</p>
                         </v-col>
                     </v-row>
                     <v-row v-else justify="right">
@@ -53,13 +50,51 @@
                                     class="ma-1 pa-2"
                                     color="blue"
                                     outlined
-                                    v-for="tags in item.tagList"
+                                    v-for="tags in item.tagName"
+                                    :key="tags.name"
+                                    >{{tags.name}}</v-chip>
+                                    {{item.text}}
+                                    </v-card-text>
+                            </v-card>
+                            <p>{{item.time}}</p>
+                        </v-col>
+                    </v-row>
+                </v-card>
+                <v-card
+                v-for="(item) in recvList"
+                v-bind:key="item.time"
+                cols="12"
+                class="ma-1 pa-0"
+                flat 
+                >
+                    <v-row v-if="item.userName!=me" cols="12" justify="left">
+                        <v-col md="10">
+                            <span>{{item.userName}}</span>
+                            <v-card flat style="background-color: #ECDACE" width="70%">
+                                <v-card-text class="ma-0 pa-2">
+                                    {{item.content}}
+                                </v-card-text>
+                            </v-card>
+                            <p>{{item.time}}</p>
+                        </v-col>
+                    </v-row>
+                    <v-row v-else justify="right">
+                        <v-col align="right">
+                            <v-card flat style="background-color: #D5F3E9" width="60%">
+                                <v-card-text align="left" class="ma-0 pa-2">
+                                    <v-chip
+                                    small
+                                    text
+                                    class="ma-1 pa-2"
+                                    color="blue"
+                                    outlined
+                                    v-for="tags in item.tagName"
                                     :key="tags.name"
                                     >{{tags.name}}</v-chip>
                                     {{item.content}}
                                     </v-card-text>
                             </v-card>
-                            <p>{{item.date}}</p>
+                            <p>{{item.time}}</p>
                         </v-col>
                     </v-row>
                 </v-card>
@@ -135,18 +170,45 @@ export default {
         chat:[],
         roomId:0,
         text:'',
+        writerCrew:[],
+        postDetail:[],
+        readText:'',
     }),
     created() {
+        var color=['#FF8787','#FFBB67','#68BE66','#689CDD','#9668DD','#E778E0']
         this.title=this.$store.state.title;
         this.idp = this.$route.params.idp;
         this.ids = this.$route.params.ids;
-        this.subtitle=this.$store.state.subtitle[this.ids-1].text
-        axios ///{projectId}/index/{indexId}/roomId
-            .get(`api/project/${this.idp}/index/${this.ids}/CommunityBlob`)
+       // this.subtitle=this.$store.state.subtitle[this.ids-1].text
+        console.log("88")
+        axios
+            .get(`http://localhost:3000/api/project/${this.idp}/index/${this.ids}/CommunityBlob`)
                 .then(res => {
                     this.roomId = res.data.roomId;
                     this.chat = res.data.chat;
-                    this.connect()
+                    this.writerCrew = res.data.writerCrew;
+                    this.postDetail = res.data.postDetailList;
+                    if(this.postDetail ==null){
+                        this.readText = `[트렌드와 소통, 끊임없는 배움] <br>
+주중 저녁, 오랜만에 공동 창업을 하였던 친구를 만나 저녁을 먹었습니다. 친구의 사무실도 근처이기에, 얼른 퇴근을 하여 강남역 11번 출구 근처 중식당을 갔습니다. 만나자마자 인사도 제대로 하지 않고 편하게 밥을 먹으며 각자의 회사와 앞으로 배워야할 것들, 미래에 대해 시끄러운 이야기를 이어갔습니다. 그러다 자연스레 좋은 사업기획, 서비스기획자(PM/PO), 나아가 좋은 팀원이 되기 위해 갖추면 좋을 것들에 대해 얘기하게 되었습니다.
+<br>그러던 중 저는 작가분들과 함께 이것에 대해 구체적으로 글로 작성해보면 어떨까 생각하게 되었어요. 분명 독자분들도 알게 되면 좋은 것들로 글이 구성이 될것 같아요. 기획자 분들에게 도움 될 만한 정보, 기획자가 되고 싶은 분들께도 분명 좋은 정보가 되는 글 일 겁니다.`
+                    }
+                    else{
+                    for(var i=0; i<this.postDetail.length; i++){
+                let colorText = null;
+                let colorIndex = 0;
+                for(var j=0; j<this.writerCrew.length; j++){
+                  if(this.postDetail[i].writerName == this.writerCrew[j].writerName){
+                    colorIndex = j;
+                  }
+                }
+                if(this.postDetail[i].text.includes("<p></p>")) colorText = "<br>"
+                else colorText = this.postDetail[i].text.replace("<p>", `<p style="color:${color[colorIndex]};">`);
+
+                this.readText = this.readText + colorText;
+              }
+                    }
+                    this.connect(event)
                     console.log(res.data);
                 })
                 .catch((err) => {
@@ -166,7 +228,7 @@ export default {
             alert(this.items.length)
         },
     
-        scrollToEnd() {    	
+        scrollToEnd() {       
             var container = this.$el.querySelector("#container");
             container.scrollTop = container.scrollHeight;
         },
@@ -188,7 +250,6 @@ export default {
                     name:plusTag
                 })
             }
-
            // alert(writer+'에게 알람')
         },
         changeSubtitle(idx){
@@ -197,13 +258,12 @@ export default {
         sendBtn () {
         if(this.message !== ''){
             var clearTag = document.getElementsByClassName("writerTagBtn");
-            this.sendMessage()
+            this.sendMessage(event)
             for(var j=0; j<clearTag.length; j++){
                 clearTag[j].style.color = "black";
             }
             
             this.scrollToEnd();
-
       }
     },    
   /*  send() {
@@ -234,7 +294,9 @@ export default {
         time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm'),
         tagName:this.tagLists,
     };
-    this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`, {}, JSON.stringify(chatMessage));
+    console.log('보낸 message 정보'+chatMessage)
+    this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`
+    , JSON.stringify(chatMessage));
   }
   this.message = '';
   this.tagLists=[];
@@ -246,53 +308,43 @@ connect(event) {
   if (username) {
    // usernamePage.classList.add('hidden');
    // chatPage.classList.remove('hidden');
-
     var socket = new SockJS('http://localhost:3000/ws');
     this.stompClient = Stomp.over(socket);
-
     this.stompClient.connect({}, this.onConnected, this.onError);
   }
   event.preventDefault();
 },
     onMessageReceived(payload) {
   var message = JSON.parse(payload.body);
+  console.log('받는 message 정보'+message)
 console.log(message)
-  //var messageElement = document.createElement('li');
-
+this.recvList.push(message)
+  //var messageElement = document.createElement('li'); 
   
   //  messageElement.classList.add('chat-message');
-
-    var avatarElement = document.createElement('i');
-    var avatarText = document.createTextNode(message.sender[0]);
-    avatarElement.appendChild(avatarText);
-  //  avatarElement.style['background-color'] = getAvatarColor(message.sender);
-
-  //  messageElement.appendChild(avatarElement);
-
-    var usernameElement = document.createElement('span');
-    var usernameText = document.createTextNode(message.sender);
-    usernameElement.appendChild(usernameText);
-  //  messageElement.appendChild(usernameElement);
+//     var avatarElement = document.createElement('i');
+//     var avatarText = document.createTextNode(message.sender[0]);
+//     avatarElement.appendChild(avatarText);
+//   //  avatarElement.style['background-color'] = getAvatarColor(message.sender);
+//   //  messageElement.appendChild(avatarElement);
+//     var usernameElement = document.createElement('span');
+//     var usernameText = document.createTextNode(message.sender);
+//     usernameElement.appendChild(usernameText);
+//   //  messageElement.appendChild(usernameElement);
   
-
-  var textElement = document.createElement('p');
-  var messageText = document.createTextNode(message.content);
-  textElement.appendChild(messageText);
-
- // messageElement.appendChild(textElement);
-
- // messageArea.appendChild(messageElement);
+//   var textElement = document.createElement('p');
+//   var messageText = document.createTextNode(message.content);
+//   textElement.appendChild(messageText);
+//  // messageElement.appendChild(textElement);
+//  // messageArea.appendChild(messageElement);
 },
-
 enterRoom(roomId) {
   //Cookies.set('roomId', roomId);
   //roomIdDisplay.textContent = roomId;
   var topic = `/app/chat/${roomId}`;
-
   var currentSubscription = this.stompClient.subscribe(`/channel/${roomId}`, this.onMessageReceived); // eslint-disable-line no-unused-vars
-
+  console.log(currentSubscription)
   this.stompClient.send(`${topic}/addUser`,
-    {},
     JSON.stringify({sender: localStorage.getItem('nickname')})
   );
 },
@@ -319,7 +371,6 @@ onError(error) {
           // 이런형태를 pub sub 구조라고 합니다.
           this.stompClient.subscribe("/send", res => {
             console.log('구독으로 받은 메시지 입니다.', res.body);
-
             // 받은 데이터를 json으로 파싱하고 리스트에 넣어줍니다.
             this.recvList.push(JSON.parse(res.body))
           });
@@ -331,7 +382,6 @@ onError(error) {
         }
       );        
     },*/
-
         /*
         getcomment(){
         console.log("hy22")
