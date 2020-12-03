@@ -17,7 +17,11 @@
     <v-container style="width: 60%;">
     <v-layout column wrap>
         <v-flex>
+        <div align="center" class="mb-15">
+            <h2>프로젝트 시작하기</h2>
+        </div>
             <v-row>
+            
                 <v-col cols="6" md="4">
                     <p style="font-size:20px" class="text-center">프로젝트 주제</p>
                 </v-col>
