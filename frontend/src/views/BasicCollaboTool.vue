@@ -221,7 +221,7 @@ export default {
       this.ids = this.$route.params.ids;
       this.subtitle=this.$store.state.subtitle[this.ids-1].text
       this.title=this.$store.state.title;
-      axios.get(`http://localhost:3000/api/project/1/blob/basicTool/${this.ids}`)
+      axios.get(`http://localhost:3000/api/project/${this.idp}/blob/basicTool/${this.ids}`)
         .then((res) => {
           this.project = res.data;
           this.nowMainText = this.project.post;
@@ -231,7 +231,7 @@ export default {
           this.hisNickname = this.project.hisNickname;
           this.hisS3key = this.project.hisS3key;
           this.postDetail = this.project.postDetailList;
-          axios.get(`http://localhost:3000/api/project/1/writercrew`)
+          axios.get(`http://localhost:3000/api/project/${this.idp}/writercrew`)
             .then((res2) => {
               this.writerCrew = res2.data;
               for(var i=0; i<this.postDetail.length; i++){
@@ -256,14 +256,7 @@ export default {
           .catch(function (error) {
             console.log(error);
           });
-          axios.get(`http://localhost:3000/api/project/${this.idp}/index/0/makeChatRoom`)
-            .then((res) => {
-              
-              console.log(res.data);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
+          
           
     },
     data() {

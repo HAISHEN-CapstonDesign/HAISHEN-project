@@ -111,7 +111,7 @@ export default {
             .post('http://localhost:3000/api/collaboProj',{id:this.idp}, { headers: {'token': this.token}})
             .then(res => {
                 this.title = res.data.title
-               // this.introduction = res.data.introduction
+                this.introduction = res.data.introduction
                 this.mwn = res.data.mwn
                 this.image = res.data.image
                 this.target_d_day = res.data.target_d_day
