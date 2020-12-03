@@ -51,7 +51,29 @@ export default {
     props: ['title'],
     created() {
       // this.little_titles=this.$store.state.subtitle
-
+      axios
+        .post('http://localhost:3000/api/getindex',
+            { id: 1 }, 
+            { headers: {'token':localStorage.getItem('access_token') }})
+        .then(res => {
+            console.log("bi")
+            console.log(res.data);
+            console.log(res.data[0]);
+            for(var i = 0; i<res.data.length; i++){
+              this.little_titles.push({idx:res.data[i].id, text:res.data[i].title})
+            }
+            // this.little_titles=[{idx:1, text:"ddd"}]
+            // this.res.data.forEach(element => {
+            //     // this.little_titles.push({idx:element.id, text:element.title})
+            //     console.log(element)
+            // });
+          
+          
+        })
+        .catch((err) => {
+            console.log(err)
+            alert("에러가 발생했습니다. 다시 시도해주세요")
+        });
 
     },
     data() {
