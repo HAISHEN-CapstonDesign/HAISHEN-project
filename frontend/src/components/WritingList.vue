@@ -5,6 +5,7 @@
     class="mx-auto"
     elevation="8"
     max-width="820"
+    outlined="true"
   >
     <v-slide-group
       v-model="model"

@@ -110,8 +110,10 @@ export default {
     },
     created() {
         this.idp = this.$route.params.idp;
+        console.log("---------------------------")
+        console.log(this.idp)
         axios
-            .post('http://localhost:3000/api/collaboProj',{id:this.idp}, { headers: {'token': this.token}})
+            .post('http://localhost:3000/api/collaboProj',{id:this.idp}, { headers: {'token': localStorage.getItem('access_token')}})
             .then(res => {
                 this.title = res.data.title
                 this.introduction = res.data.introduction
@@ -127,7 +129,7 @@ export default {
                 console.log(err)
             });
         axios
-            .post('http://localhost:3000/api/mainorapply',{id:this.idp}, { headers: {'token': this.token}})
+            .post('http://localhost:3000/api/mainorapply',{id:this.idp}, { headers: {'token': localStorage.getItem('access_token')}})
             .then(res => {
                 //1이면 main, 0이면 sub
                 console.log(res.data)
