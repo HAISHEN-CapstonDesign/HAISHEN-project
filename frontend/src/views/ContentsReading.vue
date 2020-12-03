@@ -46,7 +46,7 @@
         >
 
 
-          <h2 style="display:inline">{{title}}</h2>
+          <h2 style="display:inline" id="title">{{title}}</h2>
           <v-btn id="dwn-btn">다운로드</v-btn>
             <v-row>
             <v-spacer></v-spacer>
@@ -68,7 +68,7 @@
           <div v-if="idc==1" class="pt-10">
            <h3>{{subtitle_1}}</h3>
            <v-spacer class = "pt-3"></v-spacer>
-           <subtitle-2 id="text-val">{{contents_1}}</subtitle-2>
+           <subtitle-2 id="pdf_wrap">{{contents_1}}</subtitle-2>
           </div>
 
           <div v-if="idc==1" class="pt-10">
@@ -203,6 +203,9 @@
 
 <script>
 // import ProjIndex fro m '../components/projIndex.vue'
+import $ from 'jquery';
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 import PostReply from '../components/reply.vue'
 import Advertising from './Advertising'
 import Subtitle from '../components/subtitleForReading';
@@ -410,31 +413,17 @@ export default {
     this.idp = this.$route.params.idp;
   },
   mounted(){
-     //다운로드 코드(아직 수정 안함)
-    function download(filename) {
-        var element = document.createElement('a');
-      //  var header = "<html>" + "<head><meta charset='utf-8'></head><body>";
-	//var footer = "</body></html>";
-	var text = document.getElementById("text-val");
-        element.setAttribute('href', 'data:application/pdf;base64,' + encodeURIComponent(text));
-        element.setAttribute('download', filename);
-
-        element.style.display = 'none';
-        document.body.appendChild(element);
-
-        element.click();
-
-        document.body.removeChild(element);
-      }
-      document.getElementById("dwn-btn").addEventListener("click", function(){
-      //  var text = document.getElementById("text-val").innerHTML;
-        var date = new Date().toLocaleString();
-      //  var title = document.getElementById("title").innerText;
-      //  var subtitle = document.getElementById("subtitle").innerText;
-        var filename = `test_${date}.pdf`;
-    
-        download(filename);
-      }, false);
+     $('#dwn-btn').click(function() {
+  //pdf_wrap을 canvas객체로 변환
+  html2canvas($('#pdf_wrap')[0]).then(function(canvas) {
+    var doc = new jsPDF('p', 'mm', 'a4'); //jspdf객체 생성
+    var imgData = canvas.toDataURL('image/png'); //캔버스를 이미지로 변환
+    doc.addImage(imgData, 'PNG', 0, 0); //이미지를 기반으로 pdf생성
+    var date = new Date().toLocaleString();
+    var title = document.getElementById("title").innerText
+    doc.save(`${title}_${date}.pdf`); //pdf저장
+  });
+});
       
   },
 
