@@ -42,8 +42,8 @@
                                     <h3 class="text-center">{{list.memberNum}} / {{list.targetNum}}</h3>
                                 </v-card-subtitle>
                                 <v-col align-content="center" >
-                                    <div class="text-center">
-                                        <v-chip v-for="member in list.members" :key="member" v-text="member"></v-chip>
+                                    <div class="text-center pl-2">
+                                        <v-chip class="mr-1" v-for="member in list.members" :key="member" v-text="member"></v-chip>
                                     </div>
                                 </v-col>
                                 <v-card-actions>
@@ -84,37 +84,37 @@ export default {
     //
     recruitWriterList: [
         {
-            genre:'여행',
-            title:'여행이란 무엇인가',
-            info:'여행이란 무엇인가, 여행에 대한 고찰',
+            genre:'IT',
+            title:'아이폰 12 화면 결함 소프트웨어 업데이트로 해결 예정',
+            info:'아이폰 12 화면 결함 소프트웨어 업데이트로 해결 예정',
             mainWriter:'철수',
             targetNum:4,
             memberNum:1,
-            members: ['철수'],
+            members: ['시류아','잉여공학도'],
             show: false,
-            img: require('../assets/sample_img.jpg'),
+            img: require('../assets/iphoneupdate.png'),
         },
         {
             genre:'요리',
-            title:'라면 끓이는법',
-            info:'라면 끓이는법에 대한 글',
+            title:'간장계란밥',
+            info:'엄마가 자주 해 주셨던 이유. 간장계란밥.',
             mainWriter:'영희',
             targetNum:2,
             memberNum:1,
-            members: ['영희'],
+            members: ['민현'],
             show: false,
-            img: require('../assets/sample_img.jpg'),
+            img: require('../assets/eggrice.png'),
         },
         {
             genre:'역사',
-            title:'한 눈에 보는 한국사',
-            info:'한국사의 모든 것을 목표로 하는 프로젝트',
-            mainWriter:'경수',
+            title:'이이제이',
+            info:'이이제이일까 아니면 그냥 힘없는 역사일까',
+            mainWriter:'멜아라',
             targetNum:6,
             memberNum:2,
-            members: ['경수','미영'],
+            members: ['멜아라','멜로디'],
             show: false,
-            img: require('../assets/sample_img.jpg'),
+            img: require('../assets/enomyenomyornot.jpg'),
         },
     ],
   }),
