@@ -83,7 +83,7 @@
                     outlined
                     height="100px"
                     ></v-textarea>
-                    <v-btn style="float: right" dark @click="sendMessage">작성</v-btn>
+                    <v-btn style="float: right" dark @click="sendBtn">작성</v-btn>
                 </v-col>
             </v-row>
         </v-card-actions>
@@ -130,18 +130,23 @@ export default {
         ],
         
         tagLists:[],
-       // userName: "",
-       // message: "",
         recvList: [],
+    //    lists:[],
+        chat:[],
+        roomId:0,
+        text:'',
     }),
     created() {
         this.title=this.$store.state.title;
         this.idp = this.$route.params.idp;
         this.ids = this.$route.params.ids;
         this.subtitle=this.$store.state.subtitle[this.ids-1].text
-        axios
+        axios ///{projectId}/index/{indexId}/roomId
             .get(`api/project/${this.idp}/index/${this.ids}/CommunityBlob`)
                 .then(res => {
+                    this.roomId = res.data.roomId;
+                    this.chat = res.data.chat;
+                    this.connect()
                     console.log(res.data);
                 })
                 .catch((err) => {
@@ -149,7 +154,7 @@ export default {
                     alert("에러가 발생했습니다. 다시 시도해주세요")
                 });
        // this.getcomment()
-        this.connect()
+       // this.connect()
       //  this.connect()
        // console.log('items url :'+this.items[0].avatar)
     },
@@ -160,26 +165,7 @@ export default {
         replyNum(){
             alert(this.items.length)
         },
-    /*    async pushSubmit(){
-            var clearTag = document.getElementsByClassName("writerTagBtn");
-            let today = this.$moment(new Date()).format('YYYY-MM-DD HH:mm');   
-            await this.items.push({
-             //   avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg', //여기서 본인 사진넣기
-                title: this.message,
-                subtitle: localStorage.getItem('nickname'),
-                date: today,
-                tagList:this.tagLists,
-            })
-            this.tagLists=[];
-            this.message='';
-            //버튼 색 초기화
-            for(var j=0; j<clearTag.length; j++){
-                clearTag[j].style.color = "black";
-            }
-            
-            this.scrollToEnd();
-
-        },*/
+    
         scrollToEnd() {    	
             var container = this.$el.querySelector("#container");
             container.scrollTop = container.scrollHeight;
@@ -208,12 +194,10 @@ export default {
         changeSubtitle(idx){
             this.$router.push(`/${this.idp}/${idx}/community`);
         },
-        sendMessage () {
+        sendBtn () {
         if(this.message !== ''){
             var clearTag = document.getElementsByClassName("writerTagBtn");
-            this.send()
-            this.message = '';
-            this.tagLists=[];
+            this.sendMessage()
             for(var j=0; j<clearTag.length; j++){
                 clearTag[j].style.color = "black";
             }
@@ -222,7 +206,7 @@ export default {
 
       }
     },    
-    send() {
+  /*  send() {
       console.log("Send message:" + this.message);
       if (this.stompClient && this.stompClient.connected) {
         const msg = { 
@@ -233,9 +217,95 @@ export default {
         };
         this.stompClient.send("/receive", JSON.stringify(msg), {});
       }
-    },    
+    },*/
+    sendMessage(event) {
+  var messageContent =  this.message;
+  if (messageContent.startsWith('/join ')) {
+   // var this.roomId = messageContent.substring('/join '.length);
+    this.enterRoom(this.roomId);
+    /*
+    while (messageArea.firstChild) {
+      messageArea.removeChild(messageArea.firstChild);
+    }*/
+  } else if (messageContent && this.stompClient) {
+    var chatMessage = {
+        userName: localStorage.getItem('nickname'),
+        content: this.message,
+        time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm'),
+        tagName:this.tagLists,
+    };
+    this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`, {}, JSON.stringify(chatMessage));
+  }
+  this.message = '';
+  this.tagLists=[];
+  event.preventDefault();
+},
+connect(event) {
+  var username = localStorage.getItem('nickname');
+  //Cookies.set('name', username);
+  if (username) {
+   // usernamePage.classList.add('hidden');
+   // chatPage.classList.remove('hidden');
+
+    var socket = new SockJS('http://localhost:3000/ws');
+    this.stompClient = Stomp.over(socket);
+
+    this.stompClient.connect({}, this.onConnected, this.onError);
+  }
+  event.preventDefault();
+},
+    onMessageReceived(payload) {
+  var message = JSON.parse(payload.body);
+console.log(message)
+  //var messageElement = document.createElement('li');
+
+  
+  //  messageElement.classList.add('chat-message');
+
+    var avatarElement = document.createElement('i');
+    var avatarText = document.createTextNode(message.sender[0]);
+    avatarElement.appendChild(avatarText);
+  //  avatarElement.style['background-color'] = getAvatarColor(message.sender);
+
+  //  messageElement.appendChild(avatarElement);
+
+    var usernameElement = document.createElement('span');
+    var usernameText = document.createTextNode(message.sender);
+    usernameElement.appendChild(usernameText);
+  //  messageElement.appendChild(usernameElement);
+  
+
+  var textElement = document.createElement('p');
+  var messageText = document.createTextNode(message.content);
+  textElement.appendChild(messageText);
+
+ // messageElement.appendChild(textElement);
+
+ // messageArea.appendChild(messageElement);
+},
+
+enterRoom(roomId) {
+  //Cookies.set('roomId', roomId);
+  //roomIdDisplay.textContent = roomId;
+  var topic = `/app/chat/${roomId}`;
+
+  var currentSubscription = this.stompClient.subscribe(`/channel/${roomId}`, this.onMessageReceived); // eslint-disable-line no-unused-vars
+
+  this.stompClient.send(`${topic}/addUser`,
+    {},
+    JSON.stringify({sender: localStorage.getItem('nickname')})
+  );
+},
+onConnected() {
+  this.enterRoom(this.roomId);
+  //connectingElement.classList.add('hidden');
+},
+onError(error) {
+  alert(error)
+},
+/*
     connect() {
-      const serverURL = "http://localhost:3000"
+      const serverURL = "http://localhost:3000/ws"
       let socket = new SockJS(serverURL);
       this.stompClient = Stomp.over(socket);
       console.log(`소켓 연결을 시도합니다. 서버 주소: ${serverURL}`)
@@ -260,7 +330,8 @@ export default {
           this.connected = false;
         }
       );        
-    }
+    },*/
+
         /*
         getcomment(){
         console.log("hy22")
