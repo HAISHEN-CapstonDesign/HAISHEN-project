@@ -24,12 +24,14 @@
         
         <v-card
             width="1200"
-            height="350"
+            height="100%"
             class="mt-5 pt-3 px-3"
-            color="grey"
+            color="white"
+            flat
         >
         <v-expansion-panels accordion
             width="1050"
+            
             
         >
             <v-expansion-panel 
@@ -48,6 +50,7 @@
             <v-expansion-panel-content>
                 <v-container>
                 <v-card
+                
                 width="1050"
                 height="100%"
                 color="white"
