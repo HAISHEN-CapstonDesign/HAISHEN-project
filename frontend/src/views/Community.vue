@@ -146,7 +146,7 @@ export default {
                 .then(res => {
                     this.roomId = res.data.roomId;
                     this.chat = res.data.chat;
-                    this.connect()
+                    this.connect(event)
                     console.log(res.data);
                 })
                 .catch((err) => {
@@ -197,7 +197,7 @@ export default {
         sendBtn () {
         if(this.message !== ''){
             var clearTag = document.getElementsByClassName("writerTagBtn");
-            this.sendMessage()
+            this.sendMessage(event)
             for(var j=0; j<clearTag.length; j++){
                 clearTag[j].style.color = "black";
             }
@@ -218,7 +218,7 @@ export default {
         this.stompClient.send("/receive", JSON.stringify(msg), {});
       }
     },*/
-    sendMessage() {
+    sendMessage(event) {
   var messageContent =  this.message;
   if (messageContent.startsWith('/join ')) {
    // var this.roomId = messageContent.substring('/join '.length);
@@ -234,13 +234,14 @@ export default {
         time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm'),
         tagName:this.tagLists,
     };
+    console.log('보낸 message 정보'+chatMessage)
     this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`, {}, JSON.stringify(chatMessage));
   }
   this.message = '';
   this.tagLists=[];
-  //event.preventDefault();
+  event.preventDefault();
 },
-connect() {
+connect(event) {
   var username = localStorage.getItem('nickname');
   //Cookies.set('name', username);
   if (username) {
@@ -252,10 +253,11 @@ connect() {
 
     this.stompClient.connect({}, this.onConnected, this.onError);
   }
- //event.preventDefault();
+  event.preventDefault();
 },
     onMessageReceived(payload) {
   var message = JSON.parse(payload.body);
+  console.log('받는 message 정보'+message)
 console.log(message)
   //var messageElement = document.createElement('li'); 
 
