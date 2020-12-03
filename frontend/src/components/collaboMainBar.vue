@@ -23,29 +23,30 @@
             @click="gotoWriterApply"
             class="bar_btn my-2"
             color="#36B8B2"
-            dark
+            outlined
             width="160"
             >
-            작가로 참여하기
+            <p style="color:white">작가로 참여하기</p>
             </v-btn>
             <v-btn
             @click="gotoChooseWriter"
             v-if='$store.state.mainornot'
             class="bar_btn my-2"
             color="#36B8B2"
+            
             width="160"
-            dark
+            
             >
-            지원자 확인하기
+            <p style="color:white">지원자 확인하기</p>
             </v-btn>
             <v-btn
             @click="gotoSupport"
             class="bar_btn my-1"
             color="#36B8B2"
             width="160"
-            dark
+           
             >
-            서포터로 후원하기
+            <p style="color:white">서포터로 후원하기</p>
             </v-btn>
             <v-btn
             v-if='$store.state.mainornot'
@@ -53,9 +54,9 @@
             class="bar_btn my-2"
             color="#36B8B2"
             width="160"
-            dark
+            
             >
-            프로젝트 시작
+            <p style="color:white">프로젝트 시작</p>
             </v-btn>
         </v-card-action>
     </v-card>
