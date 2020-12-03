@@ -40,7 +40,7 @@
                                     {{item.content}}
                                 </v-card-text>
                             </v-card>
-                            <p>{{item.date}}</p>
+                            <p>{{item.time}}</p>
                         </v-col>
                     </v-row>
                     <v-row v-else justify="right">
@@ -53,13 +53,13 @@
                                     class="ma-1 pa-2"
                                     color="blue"
                                     outlined
-                                    v-for="tags in item.tagList"
+                                    v-for="tags in item.tagName"
                                     :key="tags.name"
                                     >{{tags.name}}</v-chip>
                                     {{item.content}}
                                     </v-card-text>
                             </v-card>
-                            <p>{{item.date}}</p>
+                            <p>{{item.time}}</p>
                         </v-col>
                     </v-row>
                 </v-card>
