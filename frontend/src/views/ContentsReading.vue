@@ -47,7 +47,7 @@
 
 
           <h2 style="display:inline">{{title}}</h2>
-          <v-btn id="dwn_btn">다운로드</v-btn>
+          <v-btn id="dwn-btn">다운로드</v-btn>
             <v-row>
             <v-spacer></v-spacer>
               <v-rating
@@ -68,7 +68,7 @@
           <div v-if="idc==1" class="pt-10">
            <h3>{{subtitle_1}}</h3>
            <v-spacer class = "pt-3"></v-spacer>
-           <subtitle-2>{{contents_1}}</subtitle-2>
+           <subtitle-2 id="text-val">{{contents_1}}</subtitle-2>
           </div>
 
           <div v-if="idc==1" class="pt-10">
@@ -410,13 +410,13 @@ export default {
     this.idp = this.$route.params.idp;
   },
   mounted(){
-    /* 다운로드 코드(아직 수정 안함)
+     //다운로드 코드(아직 수정 안함)
     function download(filename) {
         var element = document.createElement('a');
-        var header = "<html>" + "<head><meta charset='utf-8'></head><body>";
-	var footer = "</body></html>";
-	var text = header+document.getElementById("text-val").innerHTML+footer;
-        element.setAttribute('href', 'data:' + 'application/vnd.ms-word' + ';charset=utf-8,' + encodeURIComponent(text));
+      //  var header = "<html>" + "<head><meta charset='utf-8'></head><body>";
+	//var footer = "</body></html>";
+	var text = document.getElementById("text-val");
+        element.setAttribute('href', 'data:application/pdf;base64,' + encodeURIComponent(text));
         element.setAttribute('download', filename);
 
         element.style.display = 'none';
@@ -429,13 +429,13 @@ export default {
       document.getElementById("dwn-btn").addEventListener("click", function(){
       //  var text = document.getElementById("text-val").innerHTML;
         var date = new Date().toLocaleString();
-        var title = document.getElementById("title").innerText;
-        var subtitle = document.getElementById("subtitle").innerText;
-        var filename = `${title}_${subtitle}_${date}.doc`;
+      //  var title = document.getElementById("title").innerText;
+      //  var subtitle = document.getElementById("subtitle").innerText;
+        var filename = `test_${date}.pdf`;
     
         download(filename);
       }, false);
-      */
+      
   },
 
 }
