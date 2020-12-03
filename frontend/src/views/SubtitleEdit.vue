@@ -77,6 +77,10 @@ export default {
             plusClick:false,
             newSubtitle:'',
             newIndex:0,
+
+            projectId: 1, //여기에 프로젝트 아이디 추가해주세요!
+            lastindex: 7, //여기에 새로 추가하는 index 넣어주세요!
+            lastindexTitle: '여기에 새로 추가하는 index title 연결해주세요!'
         }
     },
     created() {
@@ -100,6 +104,19 @@ export default {
         cardClick(idx, text){
             alert(idx, text);
         },
+
+        addLastIndexPost(){
+            axios
+                .post('http://localhost:3000/api//project/indexedit',{indexId: this.lastindex ,projectId: this.projectId ,title: this.lastindexTitle}, { headers: {'token': this.token}})
+                .then(res => {
+                    console.log(res.data);
+                    //성공하면 100으로 응답합니당
+                })
+                .catch((err) => {
+                    console.log(err)
+                    alert("에러가 발생했습니다. 다시 시도해주세요")
+                });
+        }
     },
 }
 </script>
