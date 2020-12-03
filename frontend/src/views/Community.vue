@@ -95,7 +95,7 @@
 </template>
 
 <script>
-//import axios from 'axios'
+import axios from 'axios'
 import Subtitle from '../components/subtitleList'
 import Stomp from 'webstomp-client'
 import SockJS from 'sockjs-client'
@@ -139,6 +139,15 @@ export default {
         this.idp = this.$route.params.idp;
         this.ids = this.$route.params.ids;
         this.subtitle=this.$store.state.subtitle[this.ids-1].text
+        axios
+            .get(`api/project/${this.idp}/index/${this.ids}/CommunityBlob`)
+                .then(res => {
+                    console.log(res.data);
+                })
+                .catch((err) => {
+                    console.log(err)
+                    alert("에러가 발생했습니다. 다시 시도해주세요")
+                });
        // this.getcomment()
         this.connect()
       //  this.connect()
