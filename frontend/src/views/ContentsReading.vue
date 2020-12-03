@@ -74,7 +74,7 @@
           
           
           <v-divider></v-divider>
-          <div v-if="idc==1" class="pt-10">
+          <div v-if="idc==1" class="pt-10" id="pdf_wrap">
            <h3>{{subtitle_1}}</h3>
            <v-spacer class = "pt-3"></v-spacer>
            <subtitle-2>{{contents_1}}</subtitle-2>

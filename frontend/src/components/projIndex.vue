@@ -45,16 +45,17 @@ export default {
         date: '2020.10.12 05:55',
         writer: ['김김김', '이이이', '박박박'],
         little_titles: [
-            { idx:1, text:'기획보고서란'},
-            { idx:2, text:'유사 제품 서비스 동향'},
-            { idx:3, text:'관련 기술 동향'},
-            { idx:4, text:'유저 스토리'},
-            { idx:5, text:'UX/UI 설계'},
-            { idx:6, text:'시스템 설계'},
-            { idx:7, text:'청춘예찬'},
-            { idx:8, text:'별헤는밤'},
+            // { idx:1, text:'기획보고서란'},
+            // { idx:2, text:'유사 제품 서비스 동향'},
+            // { idx:3, text:'관련 기술 동향'},
+            // { idx:4, text:'유저 스토리'},
+            // { idx:5, text:'UX/UI 설계'},
+            // { idx:6, text:'시스템 설계'},
+            // { idx:7, text:'청춘예찬'},
+            // { idx:8, text:'별헤는밤'},
            
         ],
+        project_id:1,
         selected_idx: 0,
         content: [
             '동산에는 우리 온갖 풀이 우리의 싶이 하였으며, 뿐이다. 이상, 귀는 그들에게 사랑의 용기가 만천하의 미묘한 것이다. 할지니, 수 듣기만 있는 할지라도 커다란 피다. 인간이 인간은 오직 그들의 만물은 찾아다녀도, 청춘의 것은 것이다. 우리의 가장 얼음에 넣는 없는 싸인 사막이다. 그러므로 살 청춘의 것이 꽃이 들어 칼이다. 자신과 피고, 대중을 청춘이 크고 이는 것이다. 귀는 타오르고 끝에 얼마나 교향악이다. 열매를 능히 노래하며 무엇을 품으며, 쓸쓸하랴?',
@@ -68,6 +69,9 @@ export default {
         ],  
         // selection:2,
     }),
+    created(){
+
+    },
     methods:{
       selectIndex: function(title_idx){
           this.selected_idx= title_idx
