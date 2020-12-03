@@ -91,7 +91,8 @@ export default {
     },
     methods: {
       clickSub(idx){
-        var nowIndex = document.getElementById(idx)
+        var nowIndex = document.getElementById(idx);
+        console.log(nowIndex.text)
         nowIndex.style.backgroundColor = "#36B8B2"
         this.$emit('changeSubtitle', idx)
       },
