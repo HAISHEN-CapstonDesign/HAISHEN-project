@@ -283,7 +283,8 @@ export default {
         temp_title_index:3,
         new_selected_idx: 1,
         comment_selected_idx: 3,
-        token: localStorage.getItem('access_token')
+        // token: localStorage.getItem('access_token'),
+        // idp:0,
   }),
   methods:{
     ...mapActions(['paymentpoint']),
@@ -336,13 +337,13 @@ export default {
     getFee_minuspoint(title_idx){
         console.log('title_idx'+title_idx)
         axios
-            .post('http://localhost:3000/api/getfee',{ id: parseInt(title_idx), projectId: parseInt(1) }, { headers: {'token': this.token}} )
+            .post('http://localhost:3000/api/getfee',{ id: this.idc, projectId:this.idp}, { headers: {'token': localStorage.getItem('access_token')}} )
             .then(res => {
                 // localStorage.setItem('point',this.chargePoint)
                 console.log(res.data)
                 
                 axios
-                  .post('http://localhost:3000/api/minuspoint', {id:parseInt(this.temp_title_index), projectId:1, fee: res.data},{ headers: {'token': this.token}})
+                  .post('http://localhost:3000/api/minuspoint', {id:this.idc, projectId:this.idp, fee: res.data},{ headers: {'token': localStorage.getItem('access_token')}})
                   .then(request=> {
                       console.log(request.data)
                       localStorage.setItem('point',request.data) //local storage 에 바뀐 포인트 저장해야함 수정필요

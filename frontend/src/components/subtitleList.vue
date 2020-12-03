@@ -7,6 +7,7 @@
         <v-list
           dense
           rounded
+          v-model="little_title"
         >
           <v-list-item>
             <v-list-item-content>
@@ -14,7 +15,7 @@
             </v-list-item-content>
           </v-list-item>
           <v-divider></v-divider>
-          <v-list-item
+          <v-list-item style="background: little_title.selected ? 'red' : "
           v-for="little_title in little_titles"
           :key="little_title"
           @click="clickSub(little_title.idx)"
@@ -61,8 +62,10 @@ export default {
             console.log(res.data);
             console.log(res.data[0]);
             for(var i = 0; i<res.data.length; i++){
-              this.little_titles.push({idx:res.data[i].id, text:res.data[i].title})
+              this.little_titles.push({idx:res.data[i].id, text:res.data[i].title, selected:false})
             }
+            console.log("@@@@")
+            console.log( this.little_titles[0])
             // this.little_titles=[{idx:1, text:"ddd"}]
             // this.res.data.forEach(element => {
             //     // this.little_titles.push({idx:element.id, text:element.title})
@@ -83,10 +86,14 @@ export default {
             little_titles: [],
             // project_id: 1,
             idp:0,
+            selected_idx:0,
         }
     },
     methods: {
       clickSub(idx){
+        this.selected_idx=idx,
+        this.$set(this.little_titles[idx], "selected", true)
+        console.log(this.little_titles[idx])
         this.$emit('changeSubtitle', idx)
       },
       // test(){

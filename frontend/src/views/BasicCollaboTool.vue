@@ -220,7 +220,7 @@ export default {
       this.idp = this.$route.params.idp;
       this.ids = this.$route.params.ids;
       
-      this.subtitle=this.$store.state.subtitle[this.ids-1].text
+    // this.subtitle=this.$store.state.subtitle[this.ids-1].text
       this.title=this.$store.state.title;
       axios.get(`http://localhost:3000/api/project/${this.idp}/blob/basicTool/${this.ids}`)
         .then((res) => {
@@ -287,7 +287,7 @@ export default {
         })
         .catch((err) => {
             console.log(err)
-            alert("에러가 발생했습니다. 다시 시도해주세요")
+            // alert("에러가 발생했습니다. 다시 시도해주세요")
         });
 
           
