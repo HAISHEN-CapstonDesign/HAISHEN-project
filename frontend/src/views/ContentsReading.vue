@@ -70,7 +70,8 @@
           
           
           <v-divider></v-divider>
-          <div v-if="idc==1" class="pt-10" id="pdf_wrap">
+          <div id="pdf_wrap">
+          <div v-if="idc==1" class="pt-10">
            <h3>{{subtitle_1}}</h3>
            <v-spacer class = "pt-3"></v-spacer>
            <subtitle-2>{{contents_1}}</subtitle-2>
@@ -83,13 +84,14 @@
           <div v-if="idc==1" style="text-align : center; width: 100%;" class="pt-5">
             <img src="../assets/partership.jpg" style="width: 100%; max-width: 760px;" >
           </div>
+          <br>
           <div v-if="idc==1" class="pt-10">
            <subtitle-2>{{contents_1_2}}</subtitle-2>
           </div>
           <div v-if="idc==1" class="pt-10">
            <subtitle-2>{{contents_1_3}}</subtitle-2>
           </div>
-
+        </div>
           <div v-if="idc==2" class="pt-10">
            <h3>{{subtitle_2}}</h3>
            <v-spacer class = "pt-3"></v-spacer>
@@ -110,6 +112,7 @@
            <v-spacer class = "pt-3"></v-spacer>
            <subtitle-2>{{contents_3}}</subtitle-2>
           </div>
+          
           <div v-if="idc==3" style="text-align : center; width: 100%;" class="pt-5">
             <img src="../assets/trend.jpg" style="width: 100%; max-width: 760px;" />
           </div>
@@ -423,7 +426,16 @@ export default {
   html2canvas($('#pdf_wrap')[0]).then(function(canvas) {
     var doc = new jsPDF('p', 'mm', 'a4'); //jspdf객체 생성
     var imgData = canvas.toDataURL('image/png'); //캔버스를 이미지로 변환
-    doc.addImage(imgData, 'PNG', 0, 0); //이미지를 기반으로 pdf생성
+    var imgWidth = 210; var pageHeight = 295; 
+    var imgHeight = canvas.height * imgWidth / canvas.width; 
+    var heightLeft = imgHeight; 
+    var position = 0; doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; 
+    while (heightLeft >= 0) {
+       position = heightLeft - imgHeight; doc.addPage(); 
+       doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); 
+       heightLeft -= pageHeight; 
+       }
+
     var date = new Date().toLocaleString();
     var title = document.getElementById("title").innerText
     doc.save(`${title}_${date}.pdf`); //pdf저장
