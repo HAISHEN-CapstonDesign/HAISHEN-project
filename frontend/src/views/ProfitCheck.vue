@@ -95,39 +95,36 @@
     >
         <bar_chart></bar_chart>
         <v-card
-          color="#73413D"
+          color="white"
           width="1050"
-          height="100%"
+          height="180"
         >
-        <div align="center">
-          <v-img
-          :src="profic_src"
-          max-width="600"
-          ></v-img>
+        <div align="center" class="mb-3">
+          <h1 style="font-size:15px; color:black">이 프로젝트에 참여한 작가들의 수익입니다</h1>
         </div>
         <v-row
-        :align="align"
+        justify="center"
         no-gutters
-        style="height: 150px;"
+        style="height: 100px;"
       >
         <v-col
           v-for="(item,n) in writers"
           :key="n"
         >
           <v-card
-            color="#BF5E3B"
-            width="150"
-            height="100%"
-            class="mx-16 pa-5"
+            color="white"
+            width="190"
+            height="30"
+            class="mx-13 pt-3 pl-2"
+            flat
         >
-            <h3>{{item.writer}}</h3>
-            <br>
-            <overline>월 수익 ${{item.write_profit}}</overline>
+            <h3 style="display:inline-block; font-size:15px; color:black" class="mr-3">{{item.writer}}</h3>
+            <overline style="font-size:15px; color:black">월 수익 {{item.write_profit}} \</overline>
         </v-card>
         </v-col>
       </v-row>
       <div style="text-align : center;">
-        <v-btn color="#F2CF63" class="mt-5" @click="overlay = false">닫기</v-btn>
+        <v-btn text color="#36B8B2" @click="overlay = false">닫기</v-btn>
       </div>
       </v-card>
     </v-card>
@@ -179,17 +176,17 @@ export default {
             {
                 writer: 'Jennie', //main = 1, sub = 0
                 profile: '프사',
-                write_profit: 50000
+                write_profit: '55,000'
             },
             {
                 writer: 'Rose', //main = 1, sub = 0
                 profile: '프사',
-                write_profit: 8000
+                write_profit: '15,000'
             },
             {
                 writer: 'Kai', //main = 1, sub = 0
                 profile: '프사',
-                write_profit: 7000
+                write_profit: '8,000'
             },
             ],
         headers: [
