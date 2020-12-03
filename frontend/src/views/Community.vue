@@ -21,19 +21,51 @@
         <v-card min-height="650px">
             <div id="container"
             style="overflow-y:auto; overflow-x:hidden; min-height:430px; max-height:430px;">
-                <v-card
-                v-for="(item) in recvList"
-                v-bind:key="item.date"
+            <v-card
+                v-for="(item) in chat"
+                v-bind:key="item.time"
                 cols="12"
                 class="ma-1 pa-0"
                 flat 
                 >
-                    <v-row v-if="item.userName!=me" cols="12" justify="left">
-                        <v-col md="2" align="center">
-                            <v-avatar size="50px">
-                                <img :src="item.avatar">
-                            </v-avatar>
+                    <v-row v-if="item.userNickname!=me" cols="12" justify="left">
+                        <v-col md="10">
+                            <v-card flat style="background-color: #ECDACE" width="70%">
+                                <v-card-text class="ma-0 pa-2">
+                                    {{item.text}}
+                                </v-card-text>
+                            </v-card>
+                            <p>{{item.time}}</p>
                         </v-col>
+                    </v-row>
+                    <v-row v-else justify="right">
+                        <v-col align="right">
+                            <v-card flat style="background-color: #D5F3E9" width="60%">
+                                <v-card-text align="left" class="ma-0 pa-2">
+                                    <v-chip
+                                    small
+                                    text
+                                    class="ma-1 pa-2"
+                                    color="blue"
+                                    outlined
+                                    v-for="tags in item.tagName"
+                                    :key="tags.name"
+                                    >{{tags.name}}</v-chip>
+                                    {{item.text}}
+                                    </v-card-text>
+                            </v-card>
+                            <p>{{item.time}}</p>
+                        </v-col>
+                    </v-row>
+                </v-card>
+                <v-card
+                v-for="(item) in recvList"
+                v-bind:key="item.time"
+                cols="12"
+                class="ma-1 pa-0"
+                flat 
+                >
+                    <v-row v-if="item.userNickName!=me" cols="12" justify="left">
                         <v-col md="10">
                             <v-card flat style="background-color: #ECDACE" width="70%">
                                 <v-card-text class="ma-0 pa-2">
