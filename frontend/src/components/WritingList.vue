@@ -37,7 +37,7 @@
       작가 목록
     </v-card-subtitle>
 
-    <div class="text-center">
+    <div class="ml-3">
       <v-chip class="mx-1" color="deep-purple" outlined v-for="member in chat.writers" :key="member" v-text="member"></v-chip>
     </div>    
     <!--<v-card-text v-text="chat.progress"></v-card-text>-->
