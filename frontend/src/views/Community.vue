@@ -173,6 +173,7 @@ export default {
         writerCrew:[],
         postDetail:[],
         readText:'',
+        little_titles:[],
     }),
     created() {
         var color=['#FF8787','#FFBB67','#68BE66','#689CDD','#9668DD','#E778E0']
@@ -215,6 +216,30 @@ export default {
                     console.log(err)
                     alert("에러가 발생했습니다. 다시 시도해주세요")
                 });
+                axios
+        .post('http://localhost:3000/api/getindex',
+            { id: this.idp }, 
+            { headers: {'token':localStorage.getItem('access_token') }})
+        .then(res => {
+            console.log("bi")
+            console.log(res.data);
+            console.log(res.data[0]);
+            for(var i = 0; i<res.data.length; i++){
+              this.little_titles.push({idx:res.data[i].id, text:res.data[i].title})
+            }
+            this.subtitle = this.little_titles[this.ids-1].text;
+            // this.little_titles=[{idx:1, text:"ddd"}]
+            // this.res.data.forEach(element => {
+            //     // this.little_titles.push({idx:element.id, text:element.title})
+            //     console.log(element)
+            // });
+          
+          
+        })
+        .catch((err) => {
+            console.log(err)
+            alert("에러가 발생했습니다. 다시 시도해주세요")
+        });
        // this.getcomment()
        // this.connect()
       //  this.connect()

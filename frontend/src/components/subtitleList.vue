@@ -91,10 +91,9 @@ export default {
     },
     methods: {
       clickSub(idx){
-        var nowIndex = document.getElementById(idx)
-        nowIndex.style.backgroundColor = "#36B8B2"
         this.$emit('changeSubtitle', idx)
       },
+
       // test(){
         
       // axios
