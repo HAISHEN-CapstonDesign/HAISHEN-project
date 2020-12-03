@@ -26,7 +26,7 @@
         <v-container fluid grid-list-sm pa-5>
             <v-row cols="12" justify="end">
                 <v-col md="8">
-                    <v-card max-height="500px">
+                    <v-card max-height="600px" max-width="700px">
                         <v-col align="center">
                             <v-btn text @click="mainInfo">Introduction</v-btn>
                         </v-col>
@@ -35,6 +35,7 @@
                                 readonly
                                 v-model="introduction"
                                 solo
+                                height="500px"
                                 flat="flase"
                                 ></v-textarea>
                             </div>
