@@ -1,6 +1,6 @@
 <template>
 <v-app>
-    <v-container fluid grid-list-sm pa-5>
+    <v-container fluid grid-list-sm pa-15>
         <v-row justify="center">
             <v-col>
                 <h3>{{title}} _ {{subtitle}}</h3>
@@ -8,12 +8,13 @@
         </v-row>
     <v-row cols="12">
         <v-col md="2">
+            <v-card flat tile outlined style="border: 2px solid #36B8B2;" class="text-center">공용 채팅방</v-card>
             <Subtitle v-bind:title="title" @changeSubtitle="changeSubtitle"></Subtitle>
         </v-col>
         <v-col md="6">
             <v-card height="668px">
                 <div class="content_div pa-3">
-                    흔히 트렌드란 뭔가 재빠르게 세상을 따라가고, 핫플레이스를 좋아하는 패피들로 연상됩니다. 하지만 저는 트렌드를, 팀원과의 소통에 관한 관점으로 얘기해보려 합니다. 트렌드는 어떠한 방향으로 쏠리는 사회적 추세, 경향을 뜻합니다. 소통은 사회성, 사람들과의 커뮤니케이션 활동입니다. 트렌드와 소통을 같은 선상에 놓고 비교하면, 트렌드는 앞서 나가는 멋진 사람에 대한 좁은 정의 뿐만 아니라, 사람(팀원)들이 자주 사용하는 언어와 행동, 도구를 파악하는 넓은 의미로도 비춰질 수 있습니다. 사람들과 더 잘 대화하고 함께 가기 위해 그들의 행동과 방향성을 읽고 공감하며, 그들의 언어로 대화를 나누는 것도 트렌드를 읽는 것입니다.
+                    {{readText}}
                 </div>
             </v-card>
         </v-col>
@@ -169,8 +170,12 @@ export default {
         chat:[],
         roomId:0,
         text:'',
+        writerCrew:[],
+        postDetail:[],
+        readText:'',
     }),
     created() {
+        var color=['#FF8787','#FFBB67','#68BE66','#689CDD','#9668DD','#E778E0']
         this.title=this.$store.state.title;
         this.idp = this.$route.params.idp;
         this.ids = this.$route.params.ids;
@@ -181,6 +186,21 @@ export default {
                 .then(res => {
                     this.roomId = res.data.roomId;
                     this.chat = res.data.chat;
+                    this.writerCrew = res.data.writerCrew;
+                    this.postDetail = this.res.data.postDetailList;
+                    for(var i=0; i<this.postDetail.length; i++){
+                let colorText = null;
+                let colorIndex = 0;
+                for(var j=0; j<this.writerCrew.length; j++){
+                  if(this.postDetail[i].writerName == this.writerCrew[j].writerName){
+                    colorIndex = j;
+                  }
+                }
+                if(this.postDetail[i].text.includes("<p></p>")) colorText = "<br>"
+                else colorText = this.postDetail[i].text.replace("<p>", `<p style="color:${color[colorIndex]};">`);
+
+                this.readText = this.readText + colorText;
+              }
                     this.connect(event)
                     console.log(res.data);
                 })
