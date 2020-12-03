@@ -127,7 +127,7 @@
         <!-- isEditing -->
         <div v-if="isEditing" style="background-color: #FFD0A1">
         <v-container>
-          <div style="background-color: white">
+          <div style="background-color: white" min-height="700px">
           <v-container>
         <v-card
         flat
