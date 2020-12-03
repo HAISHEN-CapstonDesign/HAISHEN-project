@@ -75,7 +75,8 @@
           
           
           <v-divider></v-divider>
-          <div v-if="idc==1" class="pt-10" id="pdf_wrap">
+          <div id="pdf_wrap">
+          <div v-if="idc==1" class="pt-10">
            <h3>{{subtitle_1}}</h3>
            <v-spacer class = "pt-3"></v-spacer>
            <subtitle-2>{{contents_1}}</subtitle-2>
@@ -88,13 +89,14 @@
           <div v-if="idc==1" style="text-align : center; width: 100%;" class="pt-5">
             <img src="../assets/partership.jpg" style="width: 100%; max-width: 760px;" >
           </div>
+          <br>
           <div v-if="idc==1" class="pt-10">
            <subtitle-2>{{contents_1_2}}</subtitle-2>
           </div>
           <div v-if="idc==1" class="pt-10">
            <subtitle-2>{{contents_1_3}}</subtitle-2>
           </div>
-
+        </div>
           <div v-if="idc==2" class="pt-10">
            <h3>{{subtitle_2}}</h3>
            <v-spacer class = "pt-3"></v-spacer>
@@ -115,6 +117,7 @@
            <v-spacer class = "pt-3"></v-spacer>
            <subtitle-2>{{contents_3}}</subtitle-2>
           </div>
+          
           <div v-if="idc==3" style="text-align : center; width: 100%;" class="pt-5">
             <img src="../assets/trend.jpg" style="width: 100%; max-width: 760px;" />
           </div>
