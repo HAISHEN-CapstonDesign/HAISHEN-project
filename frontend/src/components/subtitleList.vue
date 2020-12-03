@@ -97,7 +97,7 @@ export default {
         this.selected_idx=idx,
         this.$set(this.little_titles[idx], "selected", true)
         console.log(this.little_titles[idx])
-        this.$emit('changeSubtitle', idx)
+        this.$emit('changeSubtitle', idx+1)
       },
 
       // test(){

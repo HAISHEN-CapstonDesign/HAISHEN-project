@@ -290,7 +290,7 @@ export default {
             
             this.scrollToEnd();
       }
-    },    
+    },
   /*  send() {
       console.log("Send message:" + this.message);
       if (this.stompClient && this.stompClient.connected) {
