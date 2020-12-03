@@ -51,7 +51,7 @@
             <v-row>
             <div class="ml-4">
             <v-chip
-            class="mb-2"
+            class="mb-"
             outlined
             small
             >
