@@ -41,7 +41,7 @@
                             </div>
                     </v-card>
                     <br>
-                    <v-card min-height="500px" elevation="0">
+                    <v-card style="max-width:700px" height="500px">
                         <v-col align="center">
                             <v-btn text @click="supporter">Supporters</v-btn>
                         </v-col>
