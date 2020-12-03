@@ -18,36 +18,32 @@
     </div> -->
     </v-img>
 
-  <v-container fluid grid-list-sm>
-      <div style="float:right;">
-
+  <v-container class="pl-16 ml-10" fluid grid-list-sm>
+      <div style="float:right" class="mr-16">
+      <v-row class="pr-16">
       <v-btn
-            class="mx-2"
-            fab
+            
             dark
-            small
-            color="yellow darken-1"
+            normal
+            text
+            color="black"
             to='/myaccount'
           >
-            <v-icon dark>
-             mdi-cash-usd-outline
-            </v-icon>
+            계좌 등록하기
           </v-btn>
-
-    <v-btn
-      class="mx-2"
-      fab
-      dark
-      small
-      color="success"
-      to='/profitCheck'
-    >
-      <v-icon dark>
-        mdi-currency-usd
-      </v-icon>
-    </v-btn>
-    
+          <v-btn
+            
+            text
+            dark
+            normal
+            color="black"
+            to='/profitCheck'
+          >
+            수익 확인하기
+          </v-btn>
+      </v-row>
         </div>
+
         <br><br>
     <v-row no-gutters>
       <v-col
@@ -108,10 +104,10 @@
             <Complete></Complete>
             </v-row>
           </v-flex>
-          <v-flex>
-            <p>구독하는 작가들/좋아요 한 글</p>
+          <v-flex class="ml-7 mt-5">
+            <h3>구독하는 작가들/좋아요 한 글</h3>
           </v-flex>
-          <v-flex>
+          <v-flex class="ml-7">
             <v-row>
               <v-col>
               <v-row>

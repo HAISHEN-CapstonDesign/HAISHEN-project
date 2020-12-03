@@ -81,16 +81,18 @@ export default {
 
             projectId: 0,
             lastindex: 0,
-            lastindexTitle: ''
+            lastindexTitle: '',
+            idp:0,
         }
     },
     created() {
     //   this.little_titles=this.$store.state.subtitle;
-      
+    
+      this.idp = this.$route.params.idp;
       this.projectId = this.$route.params.idp;
       axios
         .post('http://localhost:3000/api/getindex',
-            { id: 1 }, 
+            { id: this.idp }, 
             { headers: {'token':localStorage.getItem('access_token') }})
         .then(res => {
             console.log("bi")
@@ -99,6 +101,8 @@ export default {
             for(var i = 0; i<res.data.length; i++){
               this.little_titles.push({idx:res.data[i].id, text:res.data[i].title})
             }
+            console.log(this.little_titles.length)
+            this.lastindex = this.little_titles.length+1;
             // this.little_titles=[{idx:1, text:"ddd"}]
             // this.res.data.forEach(element => {
             //     // this.little_titles.push({idx:element.id, text:element.title})
@@ -111,7 +115,9 @@ export default {
             console.log(err)
             alert("에러가 발생했습니다. 다시 시도해주세요")
         });
-        this.lastindex = this.little_titles.length+1;
+        
+        console.log("wowowowowowo")
+        console.log( this.lastindex )
     },
     methods:{
         async plusSubtitle(){
@@ -128,9 +134,12 @@ export default {
             alert(idx, text);
         },
         addLastIndexPost(){
+            console.log(this.lastindex)
+            console.log(this.idp)
+            console.log(this.lastindexTitle)
             axios
                 // .post('http://localhost:3000/api/project/indexedit',{indexId: 13 ,projectId: 1 ,title: "aaaaaa"}, { headers: {'token': localStorage.getItem('access_token')}})
-                .post('http://localhost:3000/api//project/indexedit',{indexId: this.lastindex ,projectId: this.projectId ,title: this.lastindexTitle}, { headers: {'token': this.token}})
+                .post('http://localhost:3000/api/project/indexedit',{indexId: this.lastindex ,projectId: this.idp ,title: this.lastindexTitle}, { headers: {'token': localStorage.getItem('access_token')}})
                 .then(res => {
                     console.log(res.data);
                     //성공하면 100으로 응답합니당

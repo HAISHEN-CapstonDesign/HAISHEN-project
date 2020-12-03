@@ -1,10 +1,11 @@
 <template>
-    <v-app>
-      <div>진행중인 집필 목록</div>
+    <v-app class="pl-10">
+      <h3 class="mb-3">진행중인 집필 목록</h3>
       <v-sheet
     class="mx-auto"
-    elevation="8"
+    elevation="1"
     max-width="820"
+    outlined="true"
   >
     <v-slide-group
       v-model="model"

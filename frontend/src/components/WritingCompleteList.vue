@@ -1,9 +1,9 @@
 <template>
-    <v-app>
-        <p>집필 완료 목록</p>
+    <v-app class="pl-10 mt-5">
+        <h3 class="mb-3" >집필 완료 목록</h3>
 <v-sheet
     class="mx-auto"
-    elevation="8"
+    elevation="1"
     max-width="800"
   >
     <v-slide-group

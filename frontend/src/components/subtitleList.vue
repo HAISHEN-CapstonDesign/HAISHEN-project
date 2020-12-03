@@ -25,7 +25,7 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
-        <v-btn @click="test()">test</v-btn>
+        <!-- <v-btn @click="test()">test</v-btn> -->
       </v-navigation-drawer>
       
     </v-card>
@@ -50,10 +50,11 @@ export default {
     },
     props: ['title'],
     created() {
+      this.idp = this.$route.params.idp;
       // this.little_titles=this.$store.state.subtitle
       axios
         .post('http://localhost:3000/api/getindex',
-            { id: 1 }, 
+            { id: this.idp }, 
             { headers: {'token':localStorage.getItem('access_token') }})
         .then(res => {
             console.log("bi")
@@ -81,32 +82,33 @@ export default {
             //sample
             little_titles: [],
             // project_id: 1,
+            idp:0,
         }
     },
     methods: {
       clickSub(idx){
         this.$emit('changeSubtitle', idx)
       },
-      test(){
+      // test(){
         
-      axios
-        .post('http://localhost:3000/api/getindex',
-            { id: 1 }, 
-            { headers: {'token':localStorage.getItem('access_token') }})
-        .then(res => {
-            console.log("bi")
-            console.log(res.data);
-            // this.res.data.forEach(element => {
-            //     this.little_titles.push({idx:element.id, text:element.title})
-            // });
+      // axios
+      //   .post('http://localhost:3000/api/getindex',
+      //       { id: 1 }, 
+      //       { headers: {'token':localStorage.getItem('access_token') }})
+      //   .then(res => {
+      //       console.log("bi")
+      //       console.log(res.data);
+      //       // this.res.data.forEach(element => {
+      //       //     this.little_titles.push({idx:element.id, text:element.title})
+      //       // });
           
           
-        })
-        .catch((err) => {
-            console.log(err)
-            alert("에러가 발생했습니다. 다시 시도해주세요")
-        });
-      }
+      //   })
+      //   .catch((err) => {
+      //       console.log(err)
+      //       alert("에러가 발생했습니다. 다시 시도해주세요")
+      //   });
+      // }
     },
 }
 </script>

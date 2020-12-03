@@ -1,6 +1,6 @@
 <template>
-    <v-app>
-      <v-container>
+    <v-app style="max-width:650px min-height:0% max-height:500px">
+      <v-container style="max-width:650px max-height:500px">
         <v-row>
             <v-col
             v-for="writer in items"
@@ -74,12 +74,7 @@ export default {
                 title: 'BBobley',
                 support_money: 800
               },
-              {
-                color: '#952175',
-                src: require('../assets/face_13.jpg'),
-                title: 'Sword',
-                support_money: 7400
-              },
+              
             ],
         }
     },

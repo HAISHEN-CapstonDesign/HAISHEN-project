@@ -1,11 +1,12 @@
 <template>
 <v-app>
     <div>
-        <v-app-bar color="white" absolute dense>
+        <v-app-bar elevation="2" color="white" absolute dense>
             <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
             <img src='./assets/crunch_logo2_1.png' height="45px" v-on:click="to_main"/>
             <v-row align="center" justify="end">
-            <v-row align="center" justify="center">
+            <v-row class="mb-3" align="center" justify="center">
+                
                 <v-combobox
                 v-model="select"
                 :items="items"
@@ -13,7 +14,7 @@
                 :search-input.sync="search"
                 dense
                 ></v-combobox>
-                <v-btn icon class="mr-2">
+                <v-btn icon class="mt-4">
                     <v-icon>mdi-magnify</v-icon>
                 </v-btn>
             </v-row>

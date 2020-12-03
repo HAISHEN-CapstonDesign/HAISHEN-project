@@ -1,40 +1,62 @@
 <template>
     <v-card id="mode_menu" style="top:0px;" max-width="250" align="center">
         <v-card-text>
-            <p v-show="target_funding_money">펀딩금액: 달성/{{target_funding_money}}</p>
-            <p v-show="!target_funding_money">펀딩 받지 않음</p>
-            <p v-show="target_d_day">목표 작업 기한: {{target_d_day}}</p>
-            <p v-show="!target_d_day">목표 작업 기한: 무기한</p>
-            <p>모집 작가 수: {{mwn}}</p>
+        <div align="left">
+            <h3 style="font-size:15px" v-show="target_funding_money">펀딩금액: 달성/{{target_funding_money}}</h3>
+            
+            <h3 style="font-size:15px" v-show="!target_funding_money">펀딩 받지 않음</h3>
+        </div>
+            <v-progress-linear color="#36B8B2" class="my-2" height="8" value="70"></v-progress-linear>
+        <div align="left">
+            <v-row>
+            <h3 class="ml-3" style="display:inline-block; font-size:15px" v-show="target_d_day">목표 작업 기한 {{target_d_day}}</h3>
+            <h3 class="ml-3" style="display:inline-block; font-size:15px" v-show="!target_d_day">목표 작업 기한</h3> 
+            <h3 class="ml-2" style="color:red; font-size:15px" v-show="!target_d_day">무기한</h3>
+            </v-row>
+            <h3 style="font-size:15px" >모집 작가 수: {{mwn}}</h3>
+        </div>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-action>
             <v-btn
             v-if='!$store.state.mainornot'
             @click="gotoWriterApply"
-            class="bar_btn"
-            text>
-            작가로 참여하기
+            class="bar_btn my-2"
+            color="#36B8B2"
+            
+            width="160"
+            >
+            <p style="color:white">작가로 참여하기</p>
             </v-btn>
             <v-btn
             @click="gotoChooseWriter"
             v-if='$store.state.mainornot'
-            class="bar_btn"
-            text>
-            지원자 확인하기
+            class="bar_btn my-2"
+            color="#36B8B2"
+            
+            width="160"
+            
+            >
+            <p style="color:white">지원자 확인하기</p>
             </v-btn>
             <v-btn
             @click="gotoSupport"
-            class="bar_btn"
-            text>
-            서포터로 후원하기
+            class="bar_btn my-1"
+            color="#36B8B2"
+            width="160"
+
+            >
+            <p style="color:white">서포터로 후원하기</p>
             </v-btn>
             <v-btn
             v-if='$store.state.mainornot'
             @click="projectStart"
-            class="bar_btn"
-            text>
-            프로젝트 시작
+            class="bar_btn my-2"
+            color="#36B8B2"
+            width="160"
+            
+            >
+            <p style="color:white">프로젝트 시작</p>
             </v-btn>
         </v-card-action>
     </v-card>

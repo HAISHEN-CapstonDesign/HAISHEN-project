@@ -13,11 +13,8 @@
                 height="100%"
                 class="mr-5 pl-15"
             >
-            <div class="ml-5 mb-5">
-                <v-img
-                src="../assets/profit_nanugi_icon.png"
-                width="230"
-                ></v-img>
+            <div align="center" class="mr-13 mt-2 mb-10">
+                <h1>수익 배분</h1>
             </div>
                 <v-row
                 v-for="(item, n) in writerlist"
@@ -44,11 +41,8 @@
                 height="100%"
                 class="mr-5"   
             >
-            <div class="ml-2 mb-5">
-                <v-img
-                src="../assets/fee_icon.png"
-                width="230"
-                ></v-img>
+            <div align="center" class="ml-1 mt-2 mb-11">
+                <h1>유&무료</h1>
             </div>
             <div class="ml-15">      
                 <v-row
@@ -69,7 +63,7 @@
                 <v-img
                 v-if="real_fee2"
                 src="../assets/real_fee2_icon.png"
-                width="200"
+                width="220"
                 ></v-img>   
             </div>
             
@@ -80,11 +74,8 @@
                 height="100%"
                 class="mr-5 pl-5"
             >
-                <div class="mb-5" align="center">
-                    <v-img
-                    src="../assets/index_edit_icon.png"
-                    width="400"
-                    ></v-img>
+                <div class="mb-10 mt-2" align="center">
+                    <h1>목차 별 금액 책정</h1>
                 </div>
 
                  <v-row
