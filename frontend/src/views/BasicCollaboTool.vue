@@ -127,7 +127,7 @@
         <!-- isEditing -->
         <div v-if="isEditing" style="background-color: #FFD0A1">
         <v-container>
-          <div style="background-color: white">
+          <div style="background-color: white" min-height="700px">
           <v-container>
         <v-card
         flat
@@ -157,7 +157,7 @@
         <div>
           <h3>{{title}}</h3>
           <h1>{{subtitle}}</h1>
-          <p>{{$moment(project.time).format('YYYY-MM-DD HH:mm:ss')}}, {{project.writerName}}</p>               
+          <p>{{$moment(project.time).format('YYYY-MM-DD HH:mm')}}, 작성자 {{project.writerName}}</p>               
         </div>
           </v-col>
           <v-col md="2" align="center" v-show="modifying">
@@ -232,6 +232,7 @@ export default {
           this.hisNickname = this.project.hisNickname;
           this.hisS3key = this.project.hisS3key;
           this.postDetail = this.project.postDetailList;
+          console.log(this.postDetail)
           axios.get(`http://localhost:3000/api/project/${this.idp}/writercrew`)
             .then((res2) => {
               this.writerCrew = res2.data;
@@ -338,7 +339,7 @@ export default {
 
         this.subObj.after = this.editText;
         this.subObj.commit_comment = this.comment;
-        this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+        this.subObj.time = this.$moment(new Date()).format('YYYY-MM-DD HH:mm')
         console.log(this.subObj)
         axios.post(`http://localhost:3000/api/project/file`, form2)
         .then((res) => {

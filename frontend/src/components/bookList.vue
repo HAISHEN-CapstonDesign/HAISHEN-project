@@ -11,7 +11,7 @@
                     md="3"
                     >
                     <!-- 임의로 ContentsReadingPage에 연결해둠 -->
-                        <v-card width="270px" @click="$router.push('/1/contents/1')">
+                        <v-card width="270px" height="280px" @click="$router.push('/1/contents/1')">
                             <!--
                             <v-img
                             :src="`https://picsum.photos/200/300?image=${getImage()}`"
@@ -23,17 +23,20 @@
                             ></v-img>
                             <v-card-title v-text="list.title" class="justify-center" style="font-size:15px"></v-card-title>
                             <div class="text-center">
-                                <v-chip class="mx-1" color="deep-purple" outlined v-for="member in list.members" :key="member" v-text="member"></v-chip>
+                                <v-chip class="mx-1" color="grey" outlined v-for="member in list.members" :key="member" v-text="member"></v-chip>
                             </div>
-                            <v-card-text class="text-right">
+                            <v-card-text>
+                                <div style="float:right">
                                 <v-icon>mdi-heart</v-icon>{{list.like}}
                                 <v-icon>mdi-bookmark</v-icon>{{list.subscribe}}
+                                </div>
                                 </v-card-text>       
                             </v-card>
                         </v-col>
                     </v-row>
                     <div class="text-center">
                         <v-pagination
+                        flat
                         v-model="page"
                         :length="numOfPages"
                         @input="changePage"

@@ -38,10 +38,47 @@
                     type="number"
                     style="width:50%"
                     ></v-text-field>
+                    <v-btn @click="dialogPT()">test</v-btn>
                 </v-col>
             </v-row>
         </v-container>
+
+
+<!-- dialog area point have-->
+      <v-dialog
+          v-model="dialog"
+          persistent
+          max-width="500"
+        >
+        <v-card>
+          <v-card-title class="headline">
+           서포터로 후원하시겠습니까?
+          </v-card-title>
+          <v-card-text>포인트가 차감됩니다</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="green darken-1"
+              text
+              @click="dialog = false"
+            >
+              아니요
+            </v-btn>
+            <v-btn
+              color="green darken-1"
+              text
+              @click="getFee_minuspoint(new_selected_idx)"
+              >
+              네
+            </v-btn>
+          </v-card-actions>
+      </v-card>
+    </v-dialog> -->
+    <!-- dialog area endline-->
+
     </v-app>
+
+    
 </template>
 <script>
 
@@ -49,7 +86,22 @@ export default {
     data() {
         return {
             fundingMoney:0,
+            dialog: false,
+             overlay: false,
+             point:0
         }
-    },
+    },methods:{
+        getFee_minuspoint(){
+            //여기에 포인트 차감 짜야함
+            //text field 값 가져와서 this.point에 넣기만하면돼
+            this.point = localStorage.getItem('point') //여기에 빼기 text filed값
+            localStorage.setItem('point',this.point)
+            this.dialog = false
+        },
+        dialogPT(){
+            this.dialog = true
+            
+        }
+    }
 }
 </script>

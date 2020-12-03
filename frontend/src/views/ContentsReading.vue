@@ -53,7 +53,14 @@
           <v-btn dark id="dwn-btn">download PDF</v-btn>
           </v-col>
           </v-row>
+            
             <v-row>
+            <v-chip
+            color="grey"
+            class="ml-3 mb-2"
+            >
+            <p style="color:white">I T</p>
+            </v-chip>
             <v-spacer></v-spacer>
               <v-rating
                 background-color="grey"

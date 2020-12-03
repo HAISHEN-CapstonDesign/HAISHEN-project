@@ -215,5 +215,5 @@ export default new Vuex.Store({
         //             alert('post 요청 실패' + signUpObj)
         //         });
         // }
-    },
+    }
 })
