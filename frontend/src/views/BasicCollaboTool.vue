@@ -174,7 +174,6 @@
           <v-divider></v-divider>
           <br>
             <div class="content_div" v-html="readText"></div>
-            <pre>{{readText}}</pre>
           </v-card>
           </v-container>
           </div>
@@ -233,6 +232,7 @@ export default {
           this.hisNickname = this.project.hisNickname;
           this.hisS3key = this.project.hisS3key;
           this.postDetail = this.project.postDetailList;
+          console.log(this.postDetail)
           axios.get(`http://localhost:3000/api/project/${this.idp}/writercrew`)
             .then((res2) => {
               this.writerCrew = res2.data;
