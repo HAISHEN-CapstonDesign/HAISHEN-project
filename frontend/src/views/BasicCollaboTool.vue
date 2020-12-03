@@ -174,6 +174,7 @@
           <v-divider></v-divider>
           <br>
             <div class="content_div" v-html="readText"></div>
+            <pre>{{readText}}</pre>
           </v-card>
           </v-container>
           </div>
