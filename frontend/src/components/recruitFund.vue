@@ -87,14 +87,14 @@ export default {
     recruitFundList: [
         {
             genre:'건강',
-            title:'하루 10분 운동',
-            info:'집에서도 할 수 있는 간단한 운동 소개',
-            members: ['철수','민수','민지'],
+            title:'겨울엔 뛸까? 걸을까?',
+            info:'겨울엔 뛸까? 걸을까?',
+            members: ['석원PD','Diff'],
             targetFund:1000,
-            nowFund:350,
+            nowFund:345,
             dDay:'2020-12-15',
             show: false,
-            img: require('../assets/banner.jpg'),
+            img: require('../assets/walkingornot.jpg'),
         },
         {
             genre:'수학',
