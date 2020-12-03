@@ -219,6 +219,7 @@ export default {
       var color=['#FF8787','#FFBB67','#68BE66','#689CDD','#9668DD','#E778E0']
       this.idp = this.$route.params.idp;
       this.ids = this.$route.params.ids;
+      
       this.subtitle=this.$store.state.subtitle[this.ids-1].text
       this.title=this.$store.state.title;
       axios.get(`http://localhost:3000/api/project/${this.idp}/blob/basicTool/${this.ids}`)
@@ -256,11 +257,45 @@ export default {
           .catch(function (error) {
             console.log(error);
           });
+
+      this.idp = this.$route.params.idp;
+      // this.little_titles=this.$store.state.subtitle
+      axios
+        .post('http://localhost:3000/api/getindex',
+            { id: this.idp }, 
+            { headers: {'token':localStorage.getItem('access_token') }})
+        .then(res => {
+            console.log("bi")
+            console.log(res.data);
+            console.log(res.data[0]);
+            for(var i = 0; i<res.data.length; i++){
+              console.log("--------------")
+              console.log({idx:res.data[i].id, text:res.data[i].title})
+              this.little_titles.push({idx:res.data[i].id, text:res.data[i].title})
+            }
+            // console.log(this.ids)
+            // console.log(this.little_titles)
+            // console.log(this.little_titles[0].text)
+            this.subtitle = this.little_titles[this.ids-1].text;
+            // this.little_titles=[{idx:1, text:"ddd"}]
+            // this.res.data.forEach(element => {
+            //     // this.little_titles.push({idx:element.id, text:element.title})
+            //     console.log(element)
+            // });
+          
+          
+        })
+        .catch((err) => {
+            console.log(err)
+            alert("에러가 발생했습니다. 다시 시도해주세요")
+        });
+
           
           
     },
     data() {
         return{
+            little_titles:[],
             postDetail:[],
             modifying: false,
             hisNickname:'',

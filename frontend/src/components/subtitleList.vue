@@ -25,7 +25,7 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
-        <v-btn @click="test()">test</v-btn>
+        <!-- <v-btn @click="test()">test</v-btn> -->
       </v-navigation-drawer>
       
     </v-card>
