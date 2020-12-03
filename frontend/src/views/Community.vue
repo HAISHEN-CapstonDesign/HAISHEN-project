@@ -140,8 +140,10 @@ export default {
         this.title=this.$store.state.title;
         this.idp = this.$route.params.idp;
         this.ids = this.$route.params.ids;
-    //    this.subtitle=this.$store.state.subtitle[this.ids-1].text
-        axios.get(`http://localhost:3000/api/project/${this.idp}/index/${this.ids}/CommunityBlob`)
+       // this.subtitle=this.$store.state.subtitle[this.ids-1].text
+        console.log("88")
+        axios
+            .get(`http://localhost:3000/api/project/${this.idp}/index/${this.ids}/CommunityBlob`)
                 .then(res => {
                     this.roomId = res.data.roomId;
                     this.chat = res.data.chat;
@@ -233,8 +235,9 @@ export default {
         time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm'),
         tagName:this.tagLists,
     };
-   // console.log('보낸 message 정보'+chatMessage)
-    this.stompClient.send(`http://localhost:3000/app/chat/${this.roomId}/sendMessage`, JSON.stringify(chatMessage));
+    console.log('보낸 message 정보'+chatMessage)
+    this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`
+    , JSON.stringify(chatMessage));
   }
   this.message = '';
   this.tagLists=[];
@@ -242,6 +245,7 @@ export default {
 },
 connect(event) {
   var username = localStorage.getItem('nickname');
+
   //Cookies.set('name', username);
   if (username) {
    // usernamePage.classList.add('hidden');
@@ -255,37 +259,10 @@ connect(event) {
   event.preventDefault();
 },
     onMessageReceived(payload) {
-  var message = JSON.parse(payload.body);
-  console.log('받는 message 정보'+message)
-console.log(message)
-  //var messageElement = document.createElement('li'); 
-
-  
-  //  messageElement.classList.add('chat-message');
-/*
-    var avatarElement = document.createElement('i');
-    var avatarText = document.createTextNode(message.sender[0]);
-    avatarElement.appendChild(avatarText);
-  //  avatarElement.style['background-color'] = getAvatarColor(message.sender);
-
-  //  messageElement.appendChild(avatarElement);
-
-    var usernameElement = document.createElement('span');
-    var usernameText = document.createTextNode(message.sender);
-    usernameElement.appendChild(usernameText);
-  //  messageElement.appendChild(usernameElement);
-  
-
-  var textElement = document.createElement('p');
-  var messageText = document.createTextNode(message.content);
-  textElement.appendChild(messageText);
-
- // messageElement.appendChild(textElement);
-
- // messageArea.appendChild(messageElement);
- */
-},
-
+    var message = JSON.parse(payload.body);
+    console.log(message)
+    this.recvList.push((message))
+    },
 enterRoom(roomId) {
   //Cookies.set('roomId', roomId);
   //roomIdDisplay.textContent = roomId;
@@ -293,8 +270,9 @@ enterRoom(roomId) {
 
   var currentSubscription = this.stompClient.subscribe(`http://localhost:3000/channel/${roomId}`, this.onMessageReceived); // eslint-disable-line no-unused-vars
 
+  console.log(currentSubscription)
+
   this.stompClient.send(`${topic}/addUser`,
-    
     JSON.stringify({sender: localStorage.getItem('nickname')})
   );
 },
