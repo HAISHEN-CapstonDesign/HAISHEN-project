@@ -167,7 +167,7 @@ export default {
             alert(this.items.length)
         },
     
-        scrollToEnd() {    	
+        scrollToEnd() {       
             var container = this.$el.querySelector("#container");
             container.scrollTop = container.scrollHeight;
         },
@@ -189,7 +189,6 @@ export default {
                     name:plusTag
                 })
             }
-
            // alert(writer+'에게 알람')
         },
         changeSubtitle(idx){
@@ -204,7 +203,6 @@ export default {
             }
             
             this.scrollToEnd();
-
       }
     },    
   /*  send() {
@@ -245,33 +243,46 @@ export default {
 },
 connect(event) {
   var username = localStorage.getItem('nickname');
-
   //Cookies.set('name', username);
   if (username) {
    // usernamePage.classList.add('hidden');
    // chatPage.classList.remove('hidden');
-
     var socket = new SockJS('http://localhost:3000/ws');
     this.stompClient = Stomp.over(socket);
-
     this.stompClient.connect({}, this.onConnected, this.onError);
   }
   event.preventDefault();
 },
     onMessageReceived(payload) {
-    var message = JSON.parse(payload.body);
-    console.log(message)
-    this.recvList.push((message))
-    },
+  var message = JSON.parse(payload.body);
+  console.log('받는 message 정보'+message)
+console.log(message)
+this.recvList.push(message)
+  //var messageElement = document.createElement('li'); 
+  
+  //  messageElement.classList.add('chat-message');
+//     var avatarElement = document.createElement('i');
+//     var avatarText = document.createTextNode(message.sender[0]);
+//     avatarElement.appendChild(avatarText);
+//   //  avatarElement.style['background-color'] = getAvatarColor(message.sender);
+//   //  messageElement.appendChild(avatarElement);
+//     var usernameElement = document.createElement('span');
+//     var usernameText = document.createTextNode(message.sender);
+//     usernameElement.appendChild(usernameText);
+//   //  messageElement.appendChild(usernameElement);
+  
+//   var textElement = document.createElement('p');
+//   var messageText = document.createTextNode(message.content);
+//   textElement.appendChild(messageText);
+//  // messageElement.appendChild(textElement);
+//  // messageArea.appendChild(messageElement);
+},
 enterRoom(roomId) {
   //Cookies.set('roomId', roomId);
   //roomIdDisplay.textContent = roomId;
-  var topic = `http://localhost:3000/app/chat/${roomId}`;
-
-  var currentSubscription = this.stompClient.subscribe(`http://localhost:3000/channel/${roomId}`, this.onMessageReceived); // eslint-disable-line no-unused-vars
-
+  var topic = `/app/chat/${roomId}`;
+  var currentSubscription = this.stompClient.subscribe(`/channel/${roomId}`, this.onMessageReceived); // eslint-disable-line no-unused-vars
   console.log(currentSubscription)
-
   this.stompClient.send(`${topic}/addUser`,
     JSON.stringify({sender: localStorage.getItem('nickname')})
   );
@@ -285,7 +296,7 @@ onError(error) {
 },
 /*
     connect() {
-      const serverURL = "http://localhost:3000"
+      const serverURL = "http://localhost:3000/ws"
       let socket = new SockJS(serverURL);
       this.stompClient = Stomp.over(socket);
       console.log(`소켓 연결을 시도합니다. 서버 주소: ${serverURL}`)
@@ -299,7 +310,6 @@ onError(error) {
           // 이런형태를 pub sub 구조라고 합니다.
           this.stompClient.subscribe("/send", res => {
             console.log('구독으로 받은 메시지 입니다.', res.body);
-
             // 받은 데이터를 json으로 파싱하고 리스트에 넣어줍니다.
             this.recvList.push(JSON.parse(res.body))
           });
@@ -311,7 +321,6 @@ onError(error) {
         }
       );        
     },*/
-
         /*
         getcomment(){
         console.log("hy22")
