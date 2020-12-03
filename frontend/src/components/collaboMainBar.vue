@@ -62,6 +62,7 @@
 </template>
 <script>
 import $ from 'jquery';
+import axios from 'axios'
 export default {
     mounted(){
     //list가 스크롤을 따라오게 하는 코드
@@ -93,6 +94,14 @@ export default {
             this.$router.push(`/${this.idp}/chooseWriter`);
         },
         projectStart(){
+            axios.get(`http://localhost:3000/api/project/${this.idp}/index/0/makeChatRoom`)
+            .then((res) => {
+              
+              console.log(res.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
             this.$router.push(`/${this.idp}/basicCollaboTool/1`);
         },
     },
