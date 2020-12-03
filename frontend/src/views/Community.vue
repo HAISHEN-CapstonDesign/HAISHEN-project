@@ -140,7 +140,8 @@ export default {
         this.title=this.$store.state.title;
         this.idp = this.$route.params.idp;
         this.ids = this.$route.params.ids;
-        this.subtitle=this.$store.state.subtitle[this.ids-1].text
+       // this.subtitle=this.$store.state.subtitle[this.ids-1].text
+        console.log("88")
         axios
             .get(`http://localhost:3000/api/project/${this.idp}/index/${this.ids}/CommunityBlob`)
                 .then(res => {
@@ -235,7 +236,8 @@ export default {
         tagName:this.tagLists,
     };
     console.log('보낸 message 정보'+chatMessage)
-    this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`, {}, JSON.stringify(chatMessage));
+    this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`
+    , JSON.stringify(chatMessage));
   }
   this.message = '';
   this.tagLists=[];
@@ -243,6 +245,7 @@ export default {
 },
 connect(event) {
   var username = localStorage.getItem('nickname');
+
   //Cookies.set('name', username);
   if (username) {
    // usernamePage.classList.add('hidden');
@@ -264,26 +267,26 @@ console.log(message)
   
   //  messageElement.classList.add('chat-message');
 
-    var avatarElement = document.createElement('i');
-    var avatarText = document.createTextNode(message.sender[0]);
-    avatarElement.appendChild(avatarText);
-  //  avatarElement.style['background-color'] = getAvatarColor(message.sender);
+//     var avatarElement = document.createElement('i');
+//     var avatarText = document.createTextNode(message.sender[0]);
+//     avatarElement.appendChild(avatarText);
+//   //  avatarElement.style['background-color'] = getAvatarColor(message.sender);
 
-  //  messageElement.appendChild(avatarElement);
+//   //  messageElement.appendChild(avatarElement);
 
-    var usernameElement = document.createElement('span');
-    var usernameText = document.createTextNode(message.sender);
-    usernameElement.appendChild(usernameText);
-  //  messageElement.appendChild(usernameElement);
+//     var usernameElement = document.createElement('span');
+//     var usernameText = document.createTextNode(message.sender);
+//     usernameElement.appendChild(usernameText);
+//   //  messageElement.appendChild(usernameElement);
   
 
-  var textElement = document.createElement('p');
-  var messageText = document.createTextNode(message.content);
-  textElement.appendChild(messageText);
+//   var textElement = document.createElement('p');
+//   var messageText = document.createTextNode(message.content);
+//   textElement.appendChild(messageText);
 
- // messageElement.appendChild(textElement);
+//  // messageElement.appendChild(textElement);
 
- // messageArea.appendChild(messageElement);
+//  // messageArea.appendChild(messageElement);
 },
 
 enterRoom(roomId) {
@@ -293,8 +296,9 @@ enterRoom(roomId) {
 
   var currentSubscription = this.stompClient.subscribe(`/channel/${roomId}`, this.onMessageReceived); // eslint-disable-line no-unused-vars
 
+  console.log(currentSubscription)
+
   this.stompClient.send(`${topic}/addUser`,
-    {},
     JSON.stringify({sender: localStorage.getItem('nickname')})
   );
 },
