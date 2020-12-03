@@ -7,12 +7,25 @@
         max-width="100%"
         ></v-img>
         <!--기본 이미지-->
-        <v-img
+        
+        <v-sheet
         v-else
-        max-height="200"
-        max-width="100%"
-        src="../assets/banner.jpg"
-        ></v-img>
+        height="200"
+        width="100%"
+        color="grey"
+        >
+        <div>
+        <v-row >
+            <v-col
+                align="center"
+                justify="center"
+            >
+            <v-spacer class="mt-16"></v-spacer>
+            <p style="color:white">배너 이미지를 업로드 해주세요</p>
+            </v-col>
+        </v-row>
+        </div>
+        </v-sheet>
     <br>
     <v-container style="width: 60%;">
     <v-layout column wrap>
