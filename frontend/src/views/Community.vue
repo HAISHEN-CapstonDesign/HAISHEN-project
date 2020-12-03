@@ -65,7 +65,7 @@
                 class="ma-1 pa-0"
                 flat 
                 >
-                    <v-row v-if="item.userNickName!=me" cols="12" justify="left">
+                    <v-row v-if="item.userName!=me" cols="12" justify="left">
                         <v-col md="10">
                             <v-card flat style="background-color: #ECDACE" width="70%">
                                 <v-card-text class="ma-0 pa-2">
