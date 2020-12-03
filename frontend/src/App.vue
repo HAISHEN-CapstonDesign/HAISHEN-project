@@ -43,7 +43,7 @@
                     </v-btn>
                 </v-badge>
                 <v-btn text rounded small class="ma-2" color="black" v-if="isLogin" text-color="white" router :to="{name:'PaymentPage'}">
-                     <p style="font-size:15px">{{ $store.state.userInfo.point }}100</p>
+                     <p style="font-size:15px">{{ $store.state.userInfo.point }}</p>
                      <img class="ml-1" height="16px" src="./assets/CPoint_icon.png">
                 </v-btn>
             </v-row>
