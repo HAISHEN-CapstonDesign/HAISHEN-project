@@ -45,20 +45,15 @@
         tile
         >
 
-
-          <h2 style="display:inline">{{title}}</h2>
-          <v-btn id="dwn_btn">다운로드</v-btn>
+          <v-row cols="12">
+            <v-col md="9">
+          <h2 style="display:inline" id="title">{{title}}</h2>
+            </v-col>
+          <v-col md="3">
+          <v-btn dark id="dwn-btn">download PDF</v-btn>
+          </v-col>
+          </v-row>
             <v-row>
-            <div class="ml-4">
-            <v-chip
-            class="mb-2"
-            outlined
-            small
-
-            >
-              <p style="color:grey">I T</p>
-            </v-chip>
-            </div>
             <v-spacer></v-spacer>
               <v-rating
                 background-color="grey"
@@ -216,6 +211,9 @@
 
 <script>
 // import ProjIndex fro m '../components/projIndex.vue'
+import $ from 'jquery';
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 import PostReply from '../components/reply.vue'
 import Advertising from './Advertising'
 import Subtitle from '../components/subtitleForReading';
@@ -423,32 +421,27 @@ export default {
     this.idp = this.$route.params.idp;
   },
   mounted(){
-    /* 다운로드 코드(아직 수정 안함)
-    function download(filename) {
-        var element = document.createElement('a');
-        var header = "<html>" + "<head><meta charset='utf-8'></head><body>";
-	var footer = "</body></html>";
-	var text = header+document.getElementById("text-val").innerHTML+footer;
-        element.setAttribute('href', 'data:' + 'application/vnd.ms-word' + ';charset=utf-8,' + encodeURIComponent(text));
-        element.setAttribute('download', filename);
+     $('#dwn-btn').click(function() {
+  //pdf_wrap을 canvas객체로 변환
+  html2canvas($('#pdf_wrap')[0]).then(function(canvas) {
+    var doc = new jsPDF('p', 'mm', 'a4'); //jspdf객체 생성
+    var imgData = canvas.toDataURL('image/png'); //캔버스를 이미지로 변환
+    var imgWidth = 210; var pageHeight = 295; 
+    var imgHeight = canvas.height * imgWidth / canvas.width; 
+    var heightLeft = imgHeight; 
+    var position = 0; doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; 
+    while (heightLeft >= 0) {
+       position = heightLeft - imgHeight; doc.addPage(); 
+       doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); 
+       heightLeft -= pageHeight; 
+       }
 
-        element.style.display = 'none';
-        document.body.appendChild(element);
-
-        element.click();
-
-        document.body.removeChild(element);
-      }
-      document.getElementById("dwn-btn").addEventListener("click", function(){
-      //  var text = document.getElementById("text-val").innerHTML;
-        var date = new Date().toLocaleString();
-        var title = document.getElementById("title").innerText;
-        var subtitle = document.getElementById("subtitle").innerText;
-        var filename = `${title}_${subtitle}_${date}.doc`;
-    
-        download(filename);
-      }, false);
-      */
+    var date = new Date().toLocaleString();
+    var title = document.getElementById("title").innerText
+    doc.save(`${title}_${date}.pdf`); //pdf저장
+  });
+});
+      
   },
 
 }
