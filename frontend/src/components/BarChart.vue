@@ -12,7 +12,7 @@
           datasets: [
             {
               label: 'Monthly revenue',
-              backgroundColor: '#FF8F00',
+              backgroundColor: '#36B8B2',
               pointBackgroundColor: 'white',
               borderWidth: 1,
               pointBorderColor: '#249EBF',
