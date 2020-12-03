@@ -3,7 +3,7 @@
         <h3 class="mb-3" >집필 완료 목록</h3>
 <v-sheet
     class="mx-auto"
-    elevation="8"
+    elevation="1"
     max-width="800"
   >
     <v-slide-group
