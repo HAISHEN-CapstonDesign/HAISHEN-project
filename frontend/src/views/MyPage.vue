@@ -18,9 +18,9 @@
     </div> -->
     </v-img>
 
-  <v-container fluid grid-list-sm>
-      <div style="float:right;">
-
+  <v-container class="pl-16 ml-10" fluid grid-list-sm>
+      <div style="float:right" class="pr-16 mr-16">
+      <v-row class="pr-16">
       <v-btn
             fab
             dark
@@ -28,28 +28,27 @@
             text
             color="black"
             to='/myaccount'
-            class="pr-10"
+            
           >
             <v-icon dark>
              mdi-cash-usd-outline
             </v-icon>
           </v-btn>
-
-    <v-btn
-      fab
-      text
-      dark
-      normal
-      color="black"
-      to='/profitCheck'
-      class="pr-10"
-    >
-      <v-icon dark>
-        mdi-currency-usd
-      </v-icon>
-    </v-btn>
-    
+          <v-btn
+            fab
+            text
+            dark
+            normal
+            color="black"
+            to='/profitCheck'
+          >
+            <v-icon dark>
+              mdi-currency-usd
+            </v-icon>
+          </v-btn>
+      </v-row>
         </div>
+
         <br><br>
     <v-row no-gutters>
       <v-col
