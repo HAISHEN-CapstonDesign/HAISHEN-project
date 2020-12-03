@@ -23,7 +23,7 @@
             @click="gotoWriterApply"
             class="bar_btn my-2"
             color="#36B8B2"
-            outlined
+            
             width="160"
             >
             <p style="color:white">작가로 참여하기</p>
@@ -44,7 +44,7 @@
             class="bar_btn my-1"
             color="#36B8B2"
             width="160"
-           
+
             >
             <p style="color:white">서포터로 후원하기</p>
             </v-btn>
