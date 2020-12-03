@@ -48,11 +48,11 @@
                         </v-col>
                         <v-col cols=10 class="ml-2">
                             <div>
-                                {{item.subtitle}} -
-                                {{item.date}}
+                                <p style="font-size:14px; color:grey">{{item.subtitle}} -
+                                {{item.date}}</p>
                             </div>
                             <div>
-                                {{item.title}}
+                                <p>{{item.title}}</p>
                             </div>
                             
                         </v-col>
