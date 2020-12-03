@@ -1,18 +1,21 @@
 <template>
-    <div>
-        <v-app>
+    <div class="mt-15" style="background-color: #FDFAF9">
+        <v-app >
             <v-card
             flat
             tile
+            color="#FDFAF9"
+            width="1050px"
             >
                 <v-container
                 fluid
+                style="background-color: #FDFAF9"
                 >
                 <v-row>
-                    <v-header><h2>펀딩 진행중인 프로젝트</h2></v-header>
+                    <v-header class="ml-3"><p style="font-size:25px">펀딩 진행중인 프로젝트</p></v-header>
                     <v-spacer></v-spacer>
                     <v-btn
-                    color="deep-purple lighten-2"
+                    color="grey"
                     text
                     >더 보기</v-btn>
                 </v-row>
@@ -30,9 +33,9 @@
                                 :src="list.img"
                                 height="150px"
                                 ></v-img>
-                                <div style="height:100px;">
+                                <div style="height:70px; ">
                                 <v-card-title v-text="list.genre" class="justify-center"></v-card-title>
-                                <v-card-subtitle v-text="list.title" class="text-center"></v-card-subtitle>
+                                
                                 </div>
                                 <v-divider ></v-divider>
                                 <v-card-title class="justify-center">펀딩 진행률</v-card-title>
@@ -47,7 +50,7 @@
                                 </v-col>
                                 <v-card-actions>
                                     <v-btn
-                                    color="orange lighten-2"
+                                    color="grey"
                                     text
                                     @click="list.show = !list.show"
                                     >
@@ -62,9 +65,9 @@
                                     </v-btn>
                                 </v-card-actions>
                                 <v-expand-transition>
-                                    <div v-show="list.show">
-                                        <v-divider></v-divider>
-                                        <v-card-text v-text="list.info"></v-card-text>
+                                    <div v-show="list.show" style="background-color: #FDFAF9">
+                                        <v-divider ></v-divider>
+                                        <v-card-text  v-text="list.info"></v-card-text>
                                     </div>
                                 </v-expand-transition>
                             </v-card>

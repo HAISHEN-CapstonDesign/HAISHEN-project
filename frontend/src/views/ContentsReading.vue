@@ -16,10 +16,10 @@
           align="center"
           justify="center"
         >
-          <div class="display-1">기획자의 트렌드, 소통, 배움, 이타심</div>
+          <p style="font-size:40px">기획자의 트렌드, 소통, 배움, 이타심</p>
           <v-spacer class="pt-5"></v-spacer>
-          <div class="subtitle-1 font-italic">By. Jennie。hello</div>
-          <div class="caption">2020 년 11 월 22 일</div>
+          <div>By. Jennie。hello</div>
+          <div>2020 년 11 월 22 일</div>
         </v-col>
         </v-row>
     </v-img>
@@ -44,7 +44,26 @@
         flat
         tile
         >
-          <h2>{{title}}</h2>
+
+
+          <h2 style="display:inline">{{title}}</h2>
+          <v-btn id="dwn_btn">다운로드</v-btn>
+            <v-row>
+            <v-spacer></v-spacer>
+              <v-rating
+                background-color="grey"
+                color="yellow"
+                half-increments
+                size="20"
+                :value=rating_score
+                length="5"
+                dense
+                class="mr-3"
+            ></v-rating>
+            {{rating_score}}
+            </v-row>
+          
+          
           <v-divider></v-divider>
           <div v-if="idc==1" class="pt-10">
            <h3>{{subtitle_1}}</h3>
@@ -90,7 +109,7 @@
             <img src="../assets/trend.jpg" style="width: 100%; max-width: 760px;" />
           </div>
           <div class="pt-10">
-           <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
+           <PostReply :idp="idp" :idc="idc" @child_replySubmit="parent_replySubmit"></PostReply>
           </div>
            
              <!-- <PostReply @child_replySubmit="parent_replySubmit"></PostReply>
@@ -203,6 +222,8 @@ export default {
     
     data: () => ( 
         {
+        rating_size: 20,
+        rating_score: 4,
         click_like: false,
         contents_like: 0, //axios로 좋아요 수 가져와야함
         zIndex: 0,
@@ -240,6 +261,7 @@ export default {
         subtitle_3:'함께 만드는 것',
         contents_3:'글을 쓰다보니 내용이 적절하지 않은 듯도 하고, 엉켜서 의미가 분명하게 전달되지 않는 문장들도 참 많은거 같습니다. 이렇듯 미숙한 글을 통해 전달하고 싶은건, 미숙한 사람들이 함께 모여 함께 멋진 제품을 만드는 것. 협동하여 서로의 부족을 채워주는 것. 그러기 위해 끊임없이 배우는 것과 이타심의 가치입니다.',
         idc: 1,
+        idp:0,
         date: '2020.10.12 05:55',
         writer: ['김김김', '이이이', '박박박'],
         selected_idx: 0,
@@ -285,6 +307,21 @@ export default {
           this.$router.push({ name: 'ContentsReadingPage',params: {idc: title_idx} })
         }
     },
+    addbuyer(){
+          axios
+                .post('http://localhost:3000/api/addbuyercrew',
+                  {postindexId: 3,projectId:1,  purchaseDate:'2020-11-30'}, 
+                  { headers: {'token': localStorage.getItem('access_token')}}
+                )
+                .then(res => {
+                    console.log(res.data)
+                    
+                })
+                .catch((err) => {
+                    console.log(err)
+                    //alert("에러가 발생했습니다. 다시 시도해주세요")
+                });
+        },
     getFee_minuspoint(title_idx){
         console.log('title_idx'+title_idx)
         axios
@@ -292,6 +329,7 @@ export default {
             .then(res => {
                 // localStorage.setItem('point',this.chargePoint)
                 console.log(res.data)
+                
                 axios
                   .post('http://localhost:3000/api/minuspoint', {id:parseInt(this.temp_title_index), projectId:1, fee: res.data},{ headers: {'token': this.token}})
                   .then(request=> {
@@ -308,7 +346,7 @@ export default {
             })
             .catch((err) => {
                 console.log(err)
-                alert("에러가 발생했습니다. 다시 시도해주세요")
+                //alert("에러가 발생했습니다. 다시 시도해주세요")
             });
     },
     request_minus_point(){
@@ -358,7 +396,7 @@ export default {
               })
               .catch((err) => {
                   console.log(err)
-                  alert("에러가 발생했습니다. 다시 시도해주세요")
+                  //alert("에러가 발생했습니다. 다시 시도해주세요")
               });
       }
 //나중에 페이지 나누고 코드 수정 후 활성화
@@ -367,10 +405,38 @@ export default {
         //this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
      //},
   },
-  mounted(){ this.idc = this.$route.params.idc }
+  created(){ 
+    this.idc = this.$route.params.idc;
+    this.idp = this.$route.params.idp;
+  },
+  mounted(){
+    /* 다운로드 코드(아직 수정 안함)
+    function download(filename) {
+        var element = document.createElement('a');
+        var header = "<html>" + "<head><meta charset='utf-8'></head><body>";
+	var footer = "</body></html>";
+	var text = header+document.getElementById("text-val").innerHTML+footer;
+        element.setAttribute('href', 'data:' + 'application/vnd.ms-word' + ';charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
 
+        element.style.display = 'none';
+        document.body.appendChild(element);
 
+        element.click();
 
+        document.body.removeChild(element);
+      }
+      document.getElementById("dwn-btn").addEventListener("click", function(){
+      //  var text = document.getElementById("text-val").innerHTML;
+        var date = new Date().toLocaleString();
+        var title = document.getElementById("title").innerText;
+        var subtitle = document.getElementById("subtitle").innerText;
+        var filename = `${title}_${subtitle}_${date}.doc`;
+    
+        download(filename);
+      }, false);
+      */
+  },
 
 }
 </script>

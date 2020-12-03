@@ -6,7 +6,15 @@
         </div>
             <h3> {{ items.length}} </h3>
         <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
+        <v-rating
+                background-color="grey"
+                color="yellow"
+                half-increments
+                size="25"
+                length="5"
+                dense
+                class="mr-3"
+            ></v-rating>
         <div class="pb-1 pr-3">
             <v-btn @click="increment" icon color="deep-orange">
                 <v-icon>mdi-thumb-up</v-icon>
@@ -103,6 +111,7 @@ export default {
             },
         ]
     }),
+    props:['idp','idc'],
     created() {
       this.getcomment()
       console.log('items url :'+this.items[0].avatar)
@@ -129,10 +138,10 @@ export default {
             this.message='';
         },
         getcomment(){
-        console.log("hy22")
+        console.log(this.idp, this.idc)
         axios
             .post('http://localhost:3000/api/getcomment',
-            { projectId: 1 , postIndex: 3}, 
+            { projectId: this.idp , postIndex: this.idc}, 
             { headers: {'token': this.token}}
             )
             .then(res => {
@@ -142,7 +151,7 @@ export default {
                 })
                 .catch((err) => {
                     console.log(err)
-                    alert("에러가 발생했습니다. 다시 시도해주세요")
+                    //alert("에러가 발생했습니다. 다시 시도해주세요")
                 });
         },
         increment() {

@@ -1,7 +1,6 @@
 <template>
 <v-app>
     <div>
-        <!-- color="~" 여기에 원하는 색깔 코드 넣으면 됨-->
         <v-app-bar color="white" absolute dense>
             <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
             <img src='./assets/crunch_logo2_1.png' height="45px" v-on:click="to_main"/>
@@ -22,12 +21,32 @@
                 <v-btn dark small class="mr-2" v-if="isLogin" @click="logout">logout</v-btn>
                 <v-btn dark small class="mr-2" v-if="isLoginError" router :to="{name: 'SignUpPage'}">sign up</v-btn>
                 <v-btn dark small class="mr-2" v-if="isLogin" router :to="{name:'MyPage'}">My</v-btn>
-                <v-chip class="ma-2" color="orange" v-if="isLogin" text-color="white" router :to="{name:'PaymentPage'}">
+                
+                <v-badge
+                color="red"
+                v-if="isLogin"
+                :content="messages"
+                :value="messages"
+                overlap
+                >
+                    <v-btn
+                    fab
+                    dark
+                    x-small
+                    color="warning"
+                    @click="alarmPage"
+                    >
+                        <v-icon dark>
+                            mdi-bell
+                        </v-icon>
+                    </v-btn>
+                </v-badge>
+                <v-btn rounded small class="ma-2" color="success" v-if="isLogin" text-color="white" router :to="{name:'PaymentPage'}">
                     <v-icon left>
                         mdi-currency-usd
                     </v-icon>
                     Point : {{ $store.state.userInfo.point }} 
-                </v-chip>
+                </v-btn>
             </v-row>
         </v-app-bar>
         
@@ -112,13 +131,21 @@
                     </v-list-item-icon>
                     <v-list-item-title>Project</v-list-item-title>
                 </v-list-item>
-                <v-list-item>
+                <v-badge
+                v-show="isLogin"
+                color="red"
+                inline
+                :content="messages"
+                :value="messages"
+                >
+                <v-list-item style="padding-right:105px" @click="alarmPage">
                     <v-list-item-icon>
                         <v-icon>mdi-bell</v-icon>
                     </v-list-item-icon>
 
                     <v-list-item-title>Alarm</v-list-item-title>
                 </v-list-item>
+                </v-badge>
                 <v-list-item router :to="{name: 'PaymentPage'}">
                     <v-list-item-icon>
                         <v-icon>mdi-currency-usd-circle-outline</v-icon>
@@ -165,7 +192,8 @@ export default {
             'pink darken-2',
             'red lighten-1',
             'deep-purple accent-4',
-        ]
+        ],
+        messages: 0,
     }),
     computed: {
         menuProps(){
@@ -186,6 +214,10 @@ export default {
         to_main() {
             this.$router.push('/');
         },
+        alarmPage(){
+            this.messages =0;
+            this.$router.push("/alarm");
+        },
         ask_charge_point() {
 
         },
@@ -193,16 +225,28 @@ export default {
     },
 };
 </script>
-<!-- 글자 색 변경을 위한 style -->
+<!-- 스크롤 style -->
 <style>
-.body-blue {
-  color: blue;
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+html, body {
+  font-family: 'Nanum Gothic', sans-serif;
 }
-.body-red {
-  color: red;
+#app {
+  font-family: 'Nanum Gothic', sans-serif;
 }
-.body-black {
-  color: black;
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: gray;
+}
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
 }
 </style>
 <style scoped>

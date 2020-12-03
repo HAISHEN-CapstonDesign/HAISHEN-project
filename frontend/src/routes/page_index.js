@@ -13,6 +13,9 @@ import historyPage from '../views/History'
 import historyDetail from '../views/HistoryDetail'
 import writerList from '../views/WriterList'
 import funding from '../views/Funding'
+import alarm from '../views/Alarm'
+import supporter from '../views/Supporter'
+import subtitleEdit from '../views/SubtitleEdit'
 
 
 import diff from '../views/diffTest'
@@ -57,10 +60,6 @@ const SignUpPage = () => {
     return import ( /* webpackChunkName: "signuppage" */ '../views/SignUpPage.vue')
 }
 
-const AdvertisingPage = () => {
-    return import ( /* webpackChunkName: "advertisingpage" */ '../views/Advertising.vue')
-}
-
 const ContentsReadingPage = () => {
     return import ( /* webpackChunkName: "contentsreadingpage" */ '../views/ContentsReading.vue')
 }
@@ -73,6 +72,10 @@ const MyAccountPage = () => {
     return import ( /* webpackChunkName: "myaccountpage" */ '../views/MyAccount.vue')
 }
 
+const ProjectendPage = () => {
+    return import ( /* webpackChunkName: "projectendpage" */ '../views/Projectend.vue')
+}
+
 export default new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
@@ -82,12 +85,17 @@ export default new VueRouter({
             component: MainPage
         },
         {
+            path: '/projectend',
+            name: 'ProjectendPage',
+            // beforeEnter: rejectAuthUser,
+            component: ProjectendPage
+        },
+        {
             path: '/login',
             name: 'LoginPage',
             // beforeEnter: rejectAuthUser,
             component: LoginPage
         },
-        //광고 페이지는 component로 바꿔서 routing 안해도 됩니다!
         {
             path: '/accountlink',
             name: 'AccountLinkPage',
@@ -95,13 +103,7 @@ export default new VueRouter({
             component: AccountLinkPage
         },
         {
-            path: '/ad',
-            name: 'AdvertisingPage',
-            // beforeEnter: rejectAuthUser,
-            component: AdvertisingPage
-        },
-        {
-            path: '/contents/:idc',
+            path: '/:idp/contents/:idc',
             name: 'ContentsReadingPage',
             component: ContentsReadingPage,
 
@@ -171,7 +173,7 @@ export default new VueRouter({
             component: historyDetail,
         },
         {
-            path: '/community',
+            path: '/:idp/:ids/community',
             name: 'community',
             component: community,
         },
@@ -193,7 +195,22 @@ export default new VueRouter({
             path: '/:idp/WriterApply',
             name: WriterApply,
             component: WriterApply
-        }
+        },
+        {
+            path: '/alarm',
+            name: 'alarm',
+            component: alarm,
+        },
+        {
+            path: '/:idp/supporter',
+            name: 'supporter',
+            component: supporter,
+        },
+        {
+            path: '/:idp/subtitleEdit',
+            name: 'subtitleEdit',
+            component: subtitleEdit,
+        },
 
     ]
 })
