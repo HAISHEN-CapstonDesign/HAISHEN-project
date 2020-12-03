@@ -1,20 +1,20 @@
 <template>
 <v-container fill-height style="max-width:600px;">
     <v-layout align-center row wrap class="mt-15">
-        <div style="text-align : center;">
-            <p style="font-size:40px">현재 내가 보유 중인 크런치 포인트</p>
-            <v-spacer class="pa-3"></v-spacer>
-            <v-card class="pa-3" width="600px">
-                <subtitle-2>{{ currentpoint }} 포인트</subtitle-2>
+        <div>
+            <p style="font-size:20px">현재 내가 보유 중인 크런치 포인트</p>
+            <v-spacer class="pa-5"></v-spacer>
+            <v-card flat width="600px">
+                <subtitle-2 style="font-size:25px">{{ currentpoint }} 포인트</subtitle-2>
             </v-card>
         </div>
         <v-flex xs12>
-            <v-card>
-                <div class="pa-3" style="text-align : center;">
-                    <p style="font-size:40px">크런치 포인트 충전하기</p>
+            <v-card flat>
+                <div class="mb-5">
+                    <p style="font-size:20px">크런치 포인트 충전하기</p>
                 </div>
                 
-                <div class="pa-3" >
+                <div>
                     <v-select :items="items" v-model="chargePoint" label="포인트 충전 금액" required></v-select>
                 </div>
                 <v-card-actions >
