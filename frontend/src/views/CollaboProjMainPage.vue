@@ -100,9 +100,7 @@ export default {
             token: localStorage.getItem('access_token'),
             projectId : this.$route.query.projectId,
             image: null,
-            introduction: `이것은 프로젝트 소개글입니다.
-주제가 어떤게 올지 몰라서 대충 쓰고 있는데 나중에 누군가 수정하길 바라며
-아무 내용이나 적어두겠습니다.`,
+            introduction: `흔히 트렌드란 뭔가 재빠르게 세상을 따라가고, 핫플레이스를 좋아하는 패피들로 연상됩니다. 하지만 저는 트렌드를, 팀원과의 소통에 관한 관점으로 얘기해보려 합니다.`,
             mwn: null,
             target_d_day: null,
             target_funding_money: null,
