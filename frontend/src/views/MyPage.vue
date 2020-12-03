@@ -22,12 +22,13 @@
       <div style="float:right;">
 
       <v-btn
-            class="mx-2"
             fab
             dark
-            small
-            color="yellow darken-1"
+            normal
+            text
+            color="black"
             to='/myaccount'
+            class="pr-10"
           >
             <v-icon dark>
              mdi-cash-usd-outline
@@ -35,12 +36,13 @@
           </v-btn>
 
     <v-btn
-      class="mx-2"
       fab
+      text
       dark
-      small
-      color="success"
+      normal
+      color="black"
       to='/profitCheck'
+      class="pr-10"
     >
       <v-icon dark>
         mdi-currency-usd
@@ -108,10 +110,10 @@
             <Complete></Complete>
             </v-row>
           </v-flex>
-          <v-flex>
-            <p>구독하는 작가들/좋아요 한 글</p>
+          <v-flex class="ml-7 mt-5">
+            <h3>구독하는 작가들/좋아요 한 글</h3>
           </v-flex>
-          <v-flex>
+          <v-flex class="ml-7">
             <v-row>
               <v-col>
               <v-row>
