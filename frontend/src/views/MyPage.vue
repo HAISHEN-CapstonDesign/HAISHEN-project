@@ -25,19 +25,22 @@
             
             dark
             normal
-            text
-            color="black"
+            outlined
+            color="#36B8B2"
             to='/myaccount'
+            width="110"
+            class="mr-4"
           >
             계좌 등록하기
           </v-btn>
           <v-btn
             
-            text
+            outlined
             dark
             normal
-            color="black"
+            color="#36B8B2"
             to='/profitCheck'
+            width="110"
           >
             수익 확인하기
           </v-btn>
