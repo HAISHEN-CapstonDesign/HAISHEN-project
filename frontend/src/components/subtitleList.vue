@@ -15,7 +15,7 @@
             </v-list-item-content>
           </v-list-item>
           <v-divider></v-divider>
-          <v-list-item style="background: little_title.selected ? 'red' : "
+          <v-list-item 
           v-for="little_title in little_titles"
           :key="little_title"
           :id="little_title.idx"
@@ -95,9 +95,9 @@ export default {
     methods: {
       clickSub(idx){
         this.selected_idx=idx,
-        this.$set(this.little_titles[idx], "selected", true)
+      //  this.$set(this.little_titles[idx], "selected", true)
         console.log(this.little_titles[idx])
-        this.$emit('changeSubtitle', idx+1)
+        this.$emit('changeSubtitle', idx)
       },
 
       // test(){

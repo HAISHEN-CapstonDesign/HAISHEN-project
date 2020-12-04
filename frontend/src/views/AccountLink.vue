@@ -94,7 +94,7 @@
 
                 <v-btn
                 color="primary"
-                @click="enrollaccount()"
+                @click="submit_account()"
                 >
                 Continue
                 </v-btn>
@@ -110,14 +110,49 @@
 </v-container>
 </template>
 <script>
+import axios from 'axios'
 export default {
+    created(){
+        axios.post('http://localhost:3000/api/getaccounts', {tmp:0},
+            {
+                headers: {
+                    'token': localStorage.getItem('access_token')
+                }
+            })
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch(function (error) {
+                console.log(error.response);
+            });
+
+    }
+    ,
     data: () => ({
+        accountnumber:'',
+        bankname:'',
+        accountholder:'',
         items: ['국민은행', '기업은행', '농협은행', '신한은행','우체국','SC은행','하나은행','한국씨티은행','우리은행','경남은행','광주은행','대구은행','도이치은행','부산은행','산업은행','수협중앙회','전북은행','제주은행','새마을금고연합회','신용협동조합','저축은행','BOA은행','케이은행','카카오뱅크','지역농축협'],
         e1: 1
     }),
     methods: {
         enrollaccount(){
             alert('계좌등록이 완료되었습니다')
+        },
+        submit_account(){
+            console.log(this.accountnumber, this.accountholder, this.bankname)
+            axios.post('http://localhost:3000/api/submitaccount', {account_num: this.accountnumber, accountHolder:this.accountholder, bank:this.selected_item},
+            {
+                headers: {
+                    'token': localStorage.getItem('access_token')
+                }
+            })
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch(function (error) {
+                console.log(error.response);
+            });
         }
     }
 }

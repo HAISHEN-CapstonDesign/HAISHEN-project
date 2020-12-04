@@ -16,7 +16,8 @@
             <v-btn 
                 color="#36B8B2"
                 to='/myaccount'
-                text
+                
+                outlined
             >
             계좌 연동하기
             </v-btn>
