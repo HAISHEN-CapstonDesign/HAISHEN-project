@@ -121,7 +121,7 @@
                         type="number"
                         label="인원 수"
                         min="2"
-                        max="10"
+                        max="6"
                         outlined
                     ></v-text-field>
                 </v-col>
