@@ -112,7 +112,20 @@
         </v-btn>
       </v-col>
     <!-- 개별 작성 페이지-->
-    <v-container fluid grid-list-sm pa-5>
+    <v-container fluid grid-list-sm pa-5 pt-0>
+      <v-row col="12" class="ma-0 pa-0" justify="end">
+        <v-col md="3" class="ma-0 pa-0" align="center">
+          <v-avatar
+          v-for="(avatar, i) in avatars"
+          :key="avatar.src"
+          :id="'border'+i"
+          >
+            <v-img
+            :src="avatar.src"
+            ></v-img>
+          </v-avatar>
+        </v-col>
+      </v-row>
     <v-row cols="12">
         <v-col
         sm="4"
@@ -216,7 +229,7 @@ export default {
       Subtitle,
     },
     created() {
-      var color=['#FF8787','#FFBB67','#68BE66','#689CDD','#9668DD','#E778E0']
+      var color=['#ff7777','#ffc455','#68BE66','#689CDD','#9668DD','#ff62f5']
       this.idp = this.$route.params.idp;
       this.ids = this.$route.params.ids;
       
@@ -315,6 +328,12 @@ export default {
             imgUrl: require('../assets/partership.jpg'),
             dialog:false,
             cancelDialog: false,
+            avatars:[
+              {src:require('@/assets/jenny2.jpg')},
+              {src:require('@/assets/jenny2.jpg')},
+              {src:require('@/assets/jenny2.jpg')},
+              {src:require('@/assets/jenny2.jpg')},
+            ],
             comment:'',
             project: {},
             subObj:{
@@ -399,6 +418,24 @@ export default {
 <style scoped>
 .l_btn:hover{
   color: brown;
+}
+#border0{
+  border: 5px solid #ff7777;
+}
+#border1{
+  border: 5px solid #ffc455;
+}
+#border2{
+  border: 5px solid #68BE66;
+}
+#border3{
+  border: 5px solid #689CDD;
+}
+#border4{
+  border: 5px solid #9668DD;
+}
+#border5{
+  border: 5px solid #ff62f5;
 }
 </style>
 <style>
