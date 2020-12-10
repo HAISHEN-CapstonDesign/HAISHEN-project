@@ -14,7 +14,10 @@
                 length="5"
                 dense
                 class="mr-3"
+                v-model="star_rating"
+                value="star_rating"
             ></v-rating>
+            <v-btn class="mb-5" outlined @click="star()">별점 주기</v-btn>
         <div class="pb-1 pr-3">
             <v-btn @click="increment" icon color="deep-orange">
                 <v-icon>mdi-thumb-up</v-icon>
@@ -88,6 +91,7 @@ import axios from 'axios'
 export default {
     name: 'PostReply',
     data : () => ({
+        star_rating: 0,
         contents_like: 3, //axios로 좋아요 수 가져와야함
         message: '',
         click_like: false,
@@ -117,6 +121,11 @@ export default {
       console.log('items url :'+this.items[0].avatar)
     },
     methods:{
+        star(){
+           
+            alert("별점이 등록되었습니다!" )
+             this.star_rating = 0;
+        },
         clickmethod: function(){
             alert("dsfsdf")
         },
@@ -126,7 +135,7 @@ export default {
         pushSubmit(){
             let today = new Date();   
             this.items.push({
-                avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg', //여기서 본인 사진넣기
+                avatar: require('../assets/face_10.jpg'), //여기서 본인 사진넣기
                 title: this.message,
                 subtitle: localStorage.getItem('nickname'),
                 date: today.toLocaleString()

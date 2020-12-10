@@ -98,7 +98,7 @@
             </v-card>
             <div>
                 <v-btn>
-                    test
+                    제출
                 </v-btn>
             </div>
                 

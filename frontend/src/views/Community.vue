@@ -188,7 +188,9 @@ export default {
                     this.roomId = res.data.roomId;
                     this.chat = res.data.chat;
                     this.writerCrew = res.data.writerCrew;
-                    this.postDetail = res.data.postDetailList;
+                    this.postDetail = res.data.blobDTO.postDetailList;
+                 //   else this.postDetail = null;
+                    console.log(res.data)
                     if(this.postDetail ==null){
                         this.readText = `[트렌드와 소통, 끊임없는 배움] <br>
 주중 저녁, 오랜만에 공동 창업을 하였던 친구를 만나 저녁을 먹었습니다. 친구의 사무실도 근처이기에, 얼른 퇴근을 하여 강남역 11번 출구 근처 중식당을 갔습니다. 만나자마자 인사도 제대로 하지 않고 편하게 밥을 먹으며 각자의 회사와 앞으로 배워야할 것들, 미래에 대해 시끄러운 이야기를 이어갔습니다. 그러다 자연스레 좋은 사업기획, 서비스기획자(PM/PO), 나아가 좋은 팀원이 되기 위해 갖추면 좋을 것들에 대해 얘기하게 되었습니다.
@@ -227,7 +229,15 @@ export default {
             for(var i = 0; i<res.data.length; i++){
               this.little_titles.push({idx:res.data[i].id, text:res.data[i].title})
             }
-            this.subtitle = this.little_titles[this.ids-1].text;
+            //this.subtitle = this.little_titles[this.ids].text;
+           // console.log("로그 테스트"+ this.little_titles,this.ids)
+           if(this.ids >0){
+               this.subtitle = this.little_titles[this.ids-1].text;
+           }
+           else{
+               this.subtitle=''
+           }
+            console.log( this.little_titles[this.ids-1])
             // this.little_titles=[{idx:1, text:"ddd"}]
             // this.res.data.forEach(element => {
             //     // this.little_titles.push({idx:element.id, text:element.title})
@@ -278,6 +288,7 @@ export default {
            // alert(writer+'에게 알람')
         },
         changeSubtitle(idx){
+            console.log(idx+"받아오나??")
             this.$router.push(`/${this.idp}/${idx}/community`);
         },
         sendBtn () {

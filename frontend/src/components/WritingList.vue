@@ -54,15 +54,16 @@
 </template>
 
 <script>
-  export default {
+  export default {  
       name: 'Writing',
     methods: {
       goDetailPage(idx){
         //projectId 받아와서 변경하기 추가 필요
-        this.$router.push(`/1/basicCollaboTool/${idx}`);
+        this.$router.push(`/109/basicCollaboTool/${idx}`);
       }
     },
     data: () => ({
+
       project_src1:require('@/assets/student_1.jpg'),
       project_src2:require('@/assets/student_2.jpg'),
       list: [

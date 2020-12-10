@@ -24,8 +24,9 @@
 
         </v-row>
         <v-container fluid grid-list-sm pa-5>
-            <v-row cols="12" justify="end">
-                <v-col md="8">
+            <v-row justify="center">
+                <div align="right">
+                <v-col justify="end">
                     <v-card max-height="600px" max-width="700px">
                         <v-col align="center">
                             <v-btn text @click="mainInfo">Introduction</v-btn>
@@ -49,8 +50,10 @@
                     </v-card>          
      
                 </v-col>
+                </div>
                 
-                <v-col md="2">
+                <div>
+                <v-col >
 
                     
 
@@ -63,6 +66,8 @@
                     
                     ></Toolbar>
                 </v-col>
+                </div>
+                
             </v-row>
         </v-container>
     </v-app> 
