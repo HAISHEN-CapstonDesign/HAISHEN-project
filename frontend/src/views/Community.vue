@@ -106,11 +106,12 @@
                     <v-btn
                     text
                     class="writerTagBtn"
-                    v-for="writer in writers"
-                    :key="writer.nickname"
-                    @click="tag(writer.nickname)"
-                    :id="writer.nickname"
-                    >@{{writer.nickname}}</v-btn>
+                    v-for="writer in writerCrew"
+                    :key="writer.writerName"
+                    @click="tag(writer.writerName)"
+                    :id="writer.writerName"
+                    v-show="writer.writerName!=me"
+                    >@{{writer.writerName}}</v-btn>
                     <v-textarea
                     label="내용을 입력하세요."
                     v-model="message"
@@ -146,23 +147,6 @@ export default {
         me: localStorage.getItem('nickname') ,
         nowMainText:`<p>글 내용</p>`,
         message: '',
-        writers:[
-            {
-                avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-                nickname: '기획자할래',
-                tag: false,
-            },
-            {
-                avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-                nickname: 'crunch_good',
-                tag: false,
-            },
-            {
-                avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-                nickname: 'finn',
-                tag: false,
-            },
-        ],
         
         tagLists:[],
         recvList: [],
@@ -190,7 +174,7 @@ export default {
                     this.writerCrew = res.data.writerCrew;
                     this.postDetail = res.data.blobDTO.postDetailList;
                  //   else this.postDetail = null;
-                    console.log(res.data)
+                    console.log(res.data.writerCrew)
                     if(this.postDetail ==null){
                         this.readText = `[트렌드와 소통, 끊임없는 배움] <br>
 주중 저녁, 오랜만에 공동 창업을 하였던 친구를 만나 저녁을 먹었습니다. 친구의 사무실도 근처이기에, 얼른 퇴근을 하여 강남역 11번 출구 근처 중식당을 갔습니다. 만나자마자 인사도 제대로 하지 않고 편하게 밥을 먹으며 각자의 회사와 앞으로 배워야할 것들, 미래에 대해 시끄러운 이야기를 이어갔습니다. 그러다 자연스레 좋은 사업기획, 서비스기획자(PM/PO), 나아가 좋은 팀원이 되기 위해 갖추면 좋을 것들에 대해 얘기하게 되었습니다.

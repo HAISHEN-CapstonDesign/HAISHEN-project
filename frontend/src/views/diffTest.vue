@@ -1,73 +1,51 @@
 <template>
-<div>
-  <v-list>
-    <v-list-item
-      v-click-outside="onClickOutsideStandard"
-      @click="models[id].base = true"
+
+    <div>
+    <v-app-bar
+      absolute
+      color="white"
+      elevate-on-scroll
+      scroll-target="#scrolling-techniques-7"
     >
-      <v-list-item-title>Default Click Outside</v-list-item-title>
+      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
-      <v-list-item-action>
-        <v-icon :color="models[id].base ? 'green' : 'red'">
-          mdi-record
-        </v-icon>
-      </v-list-item-action>
-    </v-list-item>
+      <v-toolbar-title>Title</v-toolbar-title>
 
-    <v-list-item
-      v-click-outside="{
-        handler: onClickOutsideWithConditional,
-        closeConditional,
-      }"
-      @click="models[id].conditional = true"
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>
+    </v-app-bar>
+    <v-navigation-drawer v-model="drawer" absolute temporary>
+       <v-list dense>
+
+       </v-list>
+    </v-navigation-drawer>
+    <v-sheet
+      id="scrolling-techniques-7"
+      class="overflow-y-auto"
+      max-height="600"
     >
-      <v-list-item-title>Default w/ Close Conditional</v-list-item-title>
-
-      <v-list-item-action>
-        <v-icon :color="models[id].conditional ? 'green' : 'red'">
-          mdi-record
-        </v-icon>
-      </v-list-item-action>
-    </v-list-item>
-  </v-list>
-  {{id}}
-</div>
+      <v-container style="height: 1500px;">
+      </v-container>
+    </v-sheet>
+    </div>
 </template>
-
 <script>
-  export default {
-    data: () => ({
-      models: [
-        {
-        base: false,
-        conditional: false,
-      },
-      {
-        base: false,
-        conditional: false,
-      },
-      {
-        base: false,
-        conditional: false,
-      },
-      ],
-      id:0,
-    }),
-    created(){
-     // this.id=this.$route.params.id;
-     this.models[this.id].base=true;
-     //console.log(this.id)
-    },
-    methods: {
-      onClickOutsideStandard () {
-        this.models[this.id].base = false
-      },
-      onClickOutsideWithConditional () {
-        this.models[this.id].conditional = false
-      },
-      closeConditional (e) { // eslint-disable-line no-unused-vars
-        return this.models[this.id].conditional
-      },
-    },
+export default {
+  data(){
+    return{
+      drawer:false
+    }
   }
+}
 </script>
