@@ -147,7 +147,7 @@ export default {
     genres:[
             {
                 name: '여행',
-                post_name: 'Traval',
+                post_name: 'Travel',
                 post_img_id: '1'
             },
             {

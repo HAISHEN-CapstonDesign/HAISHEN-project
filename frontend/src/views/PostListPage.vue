@@ -32,18 +32,63 @@
                     <v-btn color="teal lighten-1" outlined rounded @click="showRecruitList">작가 모집중</v-btn>
                 </v-col >
             </v-row>
-            <CompleteList v-if="showComplete"></CompleteList>
-            <RecruitList v-else></RecruitList>
+            <art_write v-if="imgsrc_index == 9"></art_write>
+            <it_write v-if="imgsrc_index == 3"></it_write>
+            <build_write v-if="imgsrc_index == 3"></build_write>
+            <cook_write v-if="imgsrc_index == 3"></cook_write>
+            <economy_write v-if="imgsrc_index == 3"></economy_write>
+            <game_write v-if="imgsrc_index == 3"></game_write>
+            <health_write v-if="imgsrc_index == 3"></health_write>
+            <history_write v-if="imgsrc_index == 3"></history_write>
+            <love_write v-if="imgsrc_index == 3"></love_write>
+            <math_write v-if="imgsrc_index == 3"></math_write>
+            <parenting_write v-if="imgsrc_index == 3"></parenting_write>
+            <preview_write v-if="imgsrc_index == 3"></preview_write>
+            <science_write v-if="imgsrc_index == 3"></science_write>
+            <travel_write v-if="imgsrc_index == 3"></travel_write>
+            <work_write v-if="imgsrc_index == 3"></work_write>
         </v-container>
     </v-app>
 </template>
 <script>
-import CompleteList from '../components/bookList'
-import RecruitList from '../components/recruitList'
+// import CompleteList from '../components/bookList'
+// import RecruitList from '../components/recruitList'
+import art_write from '../components/postlist/art_write'
+import it_write from '../components/postlist/it_write'
+import build_write from '../components/postlist/build_write'
+import cook_write from '../components/postlist/cook_write'
+import economy_write from '../components/postlist/economy_write'
+import game_write from '../components/postlist/game_write'
+import health_write from '../components/postlist/health_write'
+import history_write from '../components/postlist/history_write'
+import love_write from '../components/postlist/love_write'
+import math_write from '../components/postlist/math_write'
+import parenting_write from '../components/postlist/parenting_write'
+import preview_write from '../components/postlist/preview_write'
+import science_write from '../components/postlist/science_write'
+import travel_write from '../components/postlist/travel_write'
+import work_write from '../components/postlist/work_write'
+
+
 export default {
     components:{
-        CompleteList,
-        RecruitList,
+        // CompleteList,
+        // RecruitList,
+        art_write,
+        it_write,
+        build_write,
+        cook_write,
+        economy_write,
+        game_write,
+        health_write,
+        history_write,
+        love_write,
+        math_write,
+        parenting_write,
+        preview_write,
+        science_write,
+        travel_write,
+        work_write
     },
     created(){
         //this.imgsrc_string = this.genres.map(function(e) { return e.img; }).indexOf(this.$route.params.postname);
@@ -60,7 +105,7 @@ export default {
             genres:[
             {
                 name: '여행',
-                post_name: 'Traval',
+                post_name: 'Travel',
                 post_img_id: '0',
                 img: require('../assets/여행.jpg')
             },
