@@ -36,6 +36,19 @@
       max-height="600"
     >
       <v-container style="height: 1500px;">
+         <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="primary"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
+          Bottom
+        </v-btn>
+      </template>
+      <span>Bottom tooltip</span>
+    </v-tooltip>
       </v-container>
     </v-sheet>
     </div>
