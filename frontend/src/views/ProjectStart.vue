@@ -55,7 +55,7 @@
                     <p style="font-size:20px" class="text-center">프로젝트 tag</p>
                 </v-col>
                 <v-col cols="12" sm="6" md="8">
-                    <v-autocomplete
+                    <v-combobox
                     v-model="tags"
                     :items="items"
                     hide-selected
@@ -64,7 +64,7 @@
                     multiple
                     small-chips
                     >
-                    </v-autocomplete>
+                    </v-combobox>
                 </v-col>
             </v-row>
         </v-flex>
@@ -121,7 +121,7 @@
                         type="number"
                         label="인원 수"
                         min="2"
-                        max="10"
+                        max="6"
                         outlined
                     ></v-text-field>
                 </v-col>
