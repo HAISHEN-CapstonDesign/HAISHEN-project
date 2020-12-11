@@ -1,10 +1,11 @@
 <template>
     <v-app>
+        <div>
         <v-img
         class="white--text"
         max-height="200"
         max-width="100%"
-        src="../assets/computer.jpeg"
+        :src="genres[imgsrc_index].img"
         gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
         >
         <v-row
@@ -16,11 +17,12 @@
           align="center"
           justify="center"
         >
-          <p style="font-size:40px">I T</p>
+          <p style="font-size:40px">{{$route.params.postname}}</p>
 
         </v-col>
         </v-row>
       </v-img>
+        </div>
         <v-container>
             <v-row justify="center" no-gutters class="mb-3 pt-5">
                 <v-col md="auto" class="pl-4">
@@ -43,9 +45,110 @@ export default {
         CompleteList,
         RecruitList,
     },
+    created(){
+        //this.imgsrc_string = this.genres.map(function(e) { return e.img; }).indexOf(this.$route.params.postname);
+        //console.log('정보 전부'+this.imgsrc_string)
+        this.imgsrc_index = this.genres.findIndex(search => search.name == this.$route.params.postname)
+        console.log('ww ' + this.imgsrc_index)        
+    },
     data(){
         return{
             showComplete:true,
+            imgsrc_string:null,
+            real_img:null,
+            imgsrc_index:0,
+            genres:[
+            {
+                name: '여행',
+                post_name: 'Traval',
+                post_img_id: '0',
+                img: require('../assets/여행.jpg')
+            },
+            {
+                name: '수학',
+                post_name: 'Math',
+                post_img_id: '1',
+                img: require('../assets/수학.jpg')
+            },
+            {
+                name: '과학',
+                post_name: 'Science',
+                post_img_id: '2',
+                img: require('../assets/과학.jpg')
+            },
+            {
+                name: 'IT',
+                post_name: 'IT',
+                post_img_id: '3',
+                img: require('../assets/IT.jpg')
+            },
+            {
+                name: '경제',
+                post_name: 'Economy',
+                post_img_id: '4',
+                img: require('../assets/경제.jpg')
+            },
+            {
+                name: '요리',
+                post_name: 'Cook',
+                post_img_id: '5',
+                img: require('../assets/요리.jpg')
+            },
+            {
+                name: '건강',
+                post_name: 'Health',
+                post_img_id: '6',
+                img: require('../assets/건강.jpg')
+            },
+            {
+                name: '역사',
+                post_name: 'History',
+                post_img_id: '7',
+                img: require('../assets/역사.jpg')
+            },
+            {
+                name: '건축',
+                post_name: 'Build',
+                post_img_id: '8',
+                img: require('../assets/건축.jpg')
+            },
+            {
+                name: '문화, 예술',
+                post_name: 'Art',
+                post_img_id: '9',
+                img: require('../assets/문화, 예술.jpg')
+            },
+            {
+                name: '시사',
+                post_name: 'Preview',
+                post_img_id: '10',
+                img: require('../assets/시사.jpg')
+            },
+            {
+                name: '직장',
+                post_name: 'Work',
+                post_img_id: '11',
+                img: require('../assets/직장.jpg')
+            },
+            {
+                name: '육아',
+                post_name: 'Parenting',
+                post_img_id: '12',
+                img: require('../assets/육아.jpg')
+            },
+            {
+                name: '게임',
+                post_name: 'Game',
+                post_img_id: '13',
+                img: require('../assets/게임.jpg')
+            },
+            {
+                name: '연애',
+                post_name: 'Love',
+                post_img_id: '14',
+                img: require('../assets/연애.jpg')
+            },
+        ],
         }
     },
     methods: {
@@ -54,6 +157,17 @@ export default {
         },
         showRecruitList(){
             this.showComplete = false
+        },
+        findbannerimg(){
+            //this.imgsrc_string = this.genres.map(function(e) { return e.img; }).indexOf(this.$route.params.postname);
+            //this.$route.params.postname
+            this.imgsrc_string = this.genres.findIndex(search => search.name == this.$route.params.postname)
+
+        },
+        findid(element,findname) {
+            if(element.post_name === findname){
+                return true;
+            }    
         },
     },
 }
