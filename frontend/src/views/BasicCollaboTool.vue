@@ -333,7 +333,7 @@ export default {
             readText:'',
             editText:'',
             editFiles:[],
-            writerCrew:[],
+            writerCrew:[], //프로필 사진 추가해야함 -> avatars로 대체중
             imgUrl: require('../assets/partership.jpg'),
             dialog:false,
             cancelDialog: false,

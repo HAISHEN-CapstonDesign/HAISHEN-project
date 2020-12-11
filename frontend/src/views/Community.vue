@@ -222,13 +222,6 @@ export default {
                this.subtitle=''
            }
             console.log( this.little_titles[this.ids-1])
-            // this.little_titles=[{idx:1, text:"ddd"}]
-            // this.res.data.forEach(element => {
-            //     // this.little_titles.push({idx:element.id, text:element.title})
-            //     console.log(element)
-            // });
-          
-          
         })
         .catch((err) => {
             console.log(err)
@@ -286,18 +279,6 @@ export default {
             this.scrollToEnd();
       }
     },
-  /*  send() {
-      console.log("Send message:" + this.message);
-      if (this.stompClient && this.stompClient.connected) {
-        const msg = { 
-          userName: localStorage.getItem('nickname'),
-          content: this.message,
-          time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm'),
-          tagName:this.tagLists,
-        };
-        this.stompClient.send("/receive", JSON.stringify(msg), {});
-      }
-    },*/
     sendMessage(event) {
   var messageContent =  this.message;
   if (messageContent.startsWith('/join ')) {
@@ -313,6 +294,8 @@ export default {
         content: this.message,
         time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm'),
         tagName:this.tagLists,
+        //state:"community",
+        //url:this.document.location.href,
     };
     console.log('보낸 message 정보'+chatMessage)
     this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`
@@ -340,23 +323,6 @@ connect(event) {
 console.log(message)
 this.recvList.push(message)
   //var messageElement = document.createElement('li'); 
-  
-  //  messageElement.classList.add('chat-message');
-//     var avatarElement = document.createElement('i');
-//     var avatarText = document.createTextNode(message.sender[0]);
-//     avatarElement.appendChild(avatarText);
-//   //  avatarElement.style['background-color'] = getAvatarColor(message.sender);
-//   //  messageElement.appendChild(avatarElement);
-//     var usernameElement = document.createElement('span');
-//     var usernameText = document.createTextNode(message.sender);
-//     usernameElement.appendChild(usernameText);
-//   //  messageElement.appendChild(usernameElement);
-  
-//   var textElement = document.createElement('p');
-//   var messageText = document.createTextNode(message.content);
-//   textElement.appendChild(messageText);
-//  // messageElement.appendChild(textElement);
-//  // messageArea.appendChild(messageElement);
 },
 enterRoom(roomId) {
   //Cookies.set('roomId', roomId);
@@ -375,52 +341,6 @@ onConnected() {
 onError(error) {
   alert(error)
 },
-/*
-    connect() {
-      const serverURL = "http://localhost:3000/ws"
-      let socket = new SockJS(serverURL);
-      this.stompClient = Stomp.over(socket);
-      console.log(`소켓 연결을 시도합니다. 서버 주소: ${serverURL}`)
-      this.stompClient.connect(
-        {},
-        frame => {
-          // 소켓 연결 성공
-          this.connected = true;
-          console.log('소켓 연결 성공', frame);
-          // 서버의 메시지 전송 endpoint를 구독합니다.
-          // 이런형태를 pub sub 구조라고 합니다.
-          this.stompClient.subscribe("/send", res => {
-            console.log('구독으로 받은 메시지 입니다.', res.body);
-            // 받은 데이터를 json으로 파싱하고 리스트에 넣어줍니다.
-            this.recvList.push(JSON.parse(res.body))
-          });
-        },
-        error => {
-          // 소켓 연결 실패
-          console.log('소켓 연결 실패', error);
-          this.connected = false;
-        }
-      );        
-    },*/
-        /*
-        getcomment(){
-        console.log("hy22")
-        axios
-            .post('http://localhost:3000/api/getcomment',
-            { projectId: 1 , postIndex: 3}, 
-            { headers: {'token': this.token}}
-            )
-            .then(res => {
-                    // localStorage.setItem('point',this.chargePoint)
-                    console.log((res.data))
-                
-                })
-                .catch((err) => {
-                    console.log(err)
-                    alert("에러가 발생했습니다. 다시 시도해주세요")
-                });
-        },
-        */
     }
 }
 </script>
