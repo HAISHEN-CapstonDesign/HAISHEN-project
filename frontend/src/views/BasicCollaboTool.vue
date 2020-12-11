@@ -419,6 +419,7 @@ export default {
       },
       uploadFile(fileText){
         this.nowMainText = fileText;
+      //  console.log(fileText)
         this.isEditing = true;
       },
       clickSubmit(newText, imgfile){

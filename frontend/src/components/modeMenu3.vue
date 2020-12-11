@@ -73,13 +73,12 @@ export default {
     },
     methods: {
         clickCommunity(){
-        this.$router.push('/community');
+        this.$router.push(`/${this.idp}/0/community`);
       },
       clickHistory(){
         this.$router.push(`/${this.idp}/${this.ids}/historyPage`);
       },
       clickMain(){
-        //나중에 경로 수정
         this.$router.push(`/${this.idp}/basicCollaboTool/${this.ids}`);
       },
       clickWriter(){

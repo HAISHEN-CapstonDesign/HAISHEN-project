@@ -34,6 +34,15 @@
                             <span>{{item.userNickname}}</span>
                             <v-card flat style="background-color: #ECDACE" width="70%">
                                 <v-card-text class="ma-0 pa-2">
+                                    <v-chip
+                                    small
+                                    text
+                                    class="ma-1 pa-2"
+                                    color="blue"
+                                    outlined
+                                    v-for="tags in item.tagNickname"
+                                    :key="tags"
+                                    >{{tags}}</v-chip>
                                     {{item.text}}
                                 </v-card-text>
                             </v-card>
@@ -50,9 +59,9 @@
                                     class="ma-1 pa-2"
                                     color="blue"
                                     outlined
-                                    v-for="tags in item.tagName"
-                                    :key="tags.name"
-                                    >{{tags.name}}</v-chip>
+                                    v-for="tags in item.tagNickname"
+                                    :key="tags"
+                                    >{{tags}}</v-chip>
                                     {{item.text}}
                                     </v-card-text>
                             </v-card>
@@ -72,6 +81,15 @@
                             <span>{{item.userName}}</span>
                             <v-card flat style="background-color: #ECDACE" width="70%">
                                 <v-card-text class="ma-0 pa-2">
+                                    <v-chip
+                                    small
+                                    text
+                                    class="ma-1 pa-2"
+                                    color="blue"
+                                    outlined
+                                    v-for="tags in item.tagName"
+                                    :key="tags.name"
+                                    >{{tags.name}}</v-chip>
                                     {{item.content}}
                                 </v-card-text>
                             </v-card>
@@ -174,7 +192,7 @@ export default {
                     this.writerCrew = res.data.writerCrew;
                     this.postDetail = res.data.blobDTO.postDetailList;
                  //   else this.postDetail = null;
-                    console.log(res.data.writerCrew)
+                    console.log(res.data.chat)
                     if(this.postDetail ==null){
                         this.readText = `[트렌드와 소통, 끊임없는 배움] <br>
 주중 저녁, 오랜만에 공동 창업을 하였던 친구를 만나 저녁을 먹었습니다. 친구의 사무실도 근처이기에, 얼른 퇴근을 하여 강남역 11번 출구 근처 중식당을 갔습니다. 만나자마자 인사도 제대로 하지 않고 편하게 밥을 먹으며 각자의 회사와 앞으로 배워야할 것들, 미래에 대해 시끄러운 이야기를 이어갔습니다. 그러다 자연스레 좋은 사업기획, 서비스기획자(PM/PO), 나아가 좋은 팀원이 되기 위해 갖추면 좋을 것들에 대해 얘기하게 되었습니다.
