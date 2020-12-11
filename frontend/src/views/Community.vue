@@ -222,13 +222,6 @@ export default {
                this.subtitle=''
            }
             console.log( this.little_titles[this.ids-1])
-            // this.little_titles=[{idx:1, text:"ddd"}]
-            // this.res.data.forEach(element => {
-            //     // this.little_titles.push({idx:element.id, text:element.title})
-            //     console.log(element)
-            // });
-          
-          
         })
         .catch((err) => {
             console.log(err)
@@ -286,18 +279,6 @@ export default {
             this.scrollToEnd();
       }
     },
-  /*  send() {
-      console.log("Send message:" + this.message);
-      if (this.stompClient && this.stompClient.connected) {
-        const msg = { 
-          userName: localStorage.getItem('nickname'),
-          content: this.message,
-          time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm'),
-          tagName:this.tagLists,
-        };
-        this.stompClient.send("/receive", JSON.stringify(msg), {});
-      }
-    },*/
     sendMessage(event) {
   var messageContent =  this.message;
   if (messageContent.startsWith('/join ')) {
@@ -313,6 +294,8 @@ export default {
         content: this.message,
         time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm'),
         tagName:this.tagLists,
+        //state:"community",
+        //url:this.document.location.href,
     };
     console.log('보낸 message 정보'+chatMessage)
     this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`
@@ -339,7 +322,7 @@ connect(event) {
   console.log('받는 message 정보'+message)
 console.log(message)
 this.recvList.push(message)
-
+  //var messageElement = document.createElement('li'); 
 },
 enterRoom(roomId) {
   //Cookies.set('roomId', roomId);
@@ -358,7 +341,6 @@ onConnected() {
 onError(error) {
   alert(error)
 },
-
     }
 }
 </script>
