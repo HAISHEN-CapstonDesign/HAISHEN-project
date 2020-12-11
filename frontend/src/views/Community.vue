@@ -149,19 +149,19 @@ export default {
         writers:[
             {
                 avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-                nickname: '기획자할래',
+                nickname: '서브작가2',
                 tag: false,
             },
             {
                 avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-                nickname: 'crunch_good',
+                nickname: '서브작가3',
                 tag: false,
             },
-            {
-                avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-                nickname: 'finn',
-                tag: false,
-            },
+            // {
+            //     avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+            //     nickname: 'finn',
+            //     tag: false,
+            // },
         ],
         
         tagLists:[],

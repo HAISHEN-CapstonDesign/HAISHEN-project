@@ -248,6 +248,7 @@ export default {
                 introduction: this.intro,
                 image: this.imageUrl,
                 //add tag or genre
+                tags: this.tags,
                 mwn: this.member_num,
                 target_d_day: this.date,
                 target_funding_money: this.target_funding_money,              
