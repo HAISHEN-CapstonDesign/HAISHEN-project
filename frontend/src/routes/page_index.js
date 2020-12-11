@@ -137,7 +137,7 @@ const vueRouter = new VueRouter({
             component: SignUpPage
         },
         {
-            path: '/postlist',
+            path: '/postlist/:postname',
             name: 'PostListPage',
             component: postListPage,
         },

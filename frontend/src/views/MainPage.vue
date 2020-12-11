@@ -63,10 +63,11 @@
                                 outlined="false"
                                 hover="true"
                                 class="text-center"
-                                @click="$router.push('/postlist')"
+                                
+                                @click="$router.push({path:`/postlist/${genre.post_name}`})"
                                 >
                                    <div style="position: absolute; top: 40%; width:100%">
-                                    <h3 style="font-size:14px; color:grey">{{genre}}</h3>
+                                    <h3 style="font-size:14px; color:grey">{{genre.name}}</h3>
                                    </div>
                                 </v-card>
                             </v-col>
@@ -144,10 +145,66 @@ export default {
         },
     ],
     genres:[
-        '여행', '수학', '과학', 'IT',
-        '경제', '요리', '건강', '역사',
-        '건축', '문화, 예술', '시사',
-        '직장', '육아', '게임', '연애'
+            {
+                name: '여행',
+                post_name: 'Traval'
+            },
+            {
+                name: '수학',
+                post_name: 'Math'
+            },
+            {
+                name: '과학',
+                post_name: 'Science'
+            },
+            {
+                name: 'IT',
+                post_name: 'IT'
+            },
+            {
+                name: '경제',
+                post_name: 'Economy'
+            },
+            {
+                name: '요리',
+                post_name: 'Cook'
+            },
+            {
+                name: '건강',
+                post_name: 'Health'
+            },
+            {
+                name: '역사',
+                post_name: 'History'
+            },
+            {
+                name: '건축',
+                post_name: 'Build'
+            },
+            {
+                name: '문화, 예술',
+                post_name: 'Art'
+            },
+            {
+                name: '시사',
+                post_name: 'Preview'
+            },
+            {
+                name: '직장',
+                post_name: 'Work'
+            },
+            {
+                name: '육아',
+                post_name: 'Parenting'
+            },
+            {
+                name: '게임',
+                post_name: 'Game'
+            },
+            {
+                name: '연애',
+                post_name: 'Love'
+            },
         ],
   }),
   methods: {
@@ -156,6 +213,7 @@ export default {
         const max = 560
         return Math.floor(Math.random() * (max - min + 1)) + min
       },
+      
   },
 }
 </script>
