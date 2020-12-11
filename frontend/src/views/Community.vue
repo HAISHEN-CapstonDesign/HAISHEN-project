@@ -190,6 +190,7 @@ export default {
                     this.roomId = res.data.roomId;
                     this.chat = res.data.chat;
                     this.writerCrew = res.data.writerCrew;
+                 //   if(this.ids!=0)
                     this.postDetail = res.data.blobDTO.postDetailList;
                  //   else this.postDetail = null;
                     console.log(res.data.chat)

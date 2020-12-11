@@ -1,5 +1,38 @@
 <template>
-<!-- 아직 짤리는거 수정 못했어요 -->
+  <div id="app">
+    <label class="text-reader">
+    <input type="file" @change="loadTextFromFile">
+  </label>
+    <textarea rows="10" v-model="text"></textarea>
+    <br>
+
+  </div>
+</template>
+
+<script>
+
+export default {
+  name: "app",
+  data: () => ({ text: "" }),
+  methods: {
+    loadTextFromFile(ev) {
+      const file = ev.target.files[0];
+      const reader = new FileReader();
+      var text = encodeURIComponent(file)
+      console.log(text)
+      reader.onload = e => (this.text= e.target.result);
+      reader.readAsText(file);
+    }
+  }
+};
+</script>
+
+
+
+
+
+<!--
+<template>
   <div>
     <v-container>
       <v-btn id="dwn-btn">pdf 테스트</v-btn>
@@ -64,3 +97,4 @@ export default {
   },
 }
 </script>
+-->
