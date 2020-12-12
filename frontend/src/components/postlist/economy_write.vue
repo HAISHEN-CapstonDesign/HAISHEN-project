@@ -54,19 +54,19 @@ export default {
             dataPerPage:8, //한 페이지에 나올 글의 수
             bookList: [
                 {
-                    title:'기획자의 트렌드, 소통, 배움, 이타심',
-                    info:'기획자의 트렌드, 소통, 배움, 이타심에 관한 글',
-                    src: require('../../assets/partership.jpg'),
-                    members: ['Jennie', 'hello'],
+                    title:'중국 11월 경제 회복 뚜렷',
+                    info:'중국 11월 경제 회복 뚜렷',
+                    src: require('../../assets/contents_picture/ec_china.jpg'),
+                    members: ['북경의','한국인'],
                     show: false,
                     like: 3,
                     subscribe: 2,
                 },
                 {
-                    title:'아이패드, 아이폰으로 보는 애플의 컬러 전략',
-                    info:'아이패드, 아이폰으로 보는 애플의 컬러 전략 대한 글',
-                    src: require('../../assets/Ipad-air.png'),
-                    members: ['전느림','테크리뷰'],
+                    title:'세계가 주목한 `탄소중립`과 우리 경제의 상관관계',
+                    info:'세계가 주목한 `탄소중립`과 우리 경제의 상관관계',
+                    src: require('../../assets/contents_picture/ec_co2.jpg'),
+                    members: ['그린피스','서울사무소'],
                     show: false,
                     like: 48,
                     subscribe: 29,
