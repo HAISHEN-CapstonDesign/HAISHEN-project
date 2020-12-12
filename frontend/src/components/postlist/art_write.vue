@@ -54,19 +54,19 @@ export default {
             dataPerPage:8, //한 페이지에 나올 글의 수
             bookList: [
                 {
-                    title:'런던, 템즈강에 흘려보낸 것들에 대하여',
-                    info:'런던, 템즈강에 흘려보낸 것들에 대하여',
-                    src: require('../../assets/contents_picture/travel_temz.jpg'),
-                    members: ['포그니', 'pogni'],
+                    title:'박아나의 일상뉴스',
+                    info:'박아나의 일상뉴스',
+                    src: require('../../assets/contents_picture/art01.jpg'),
+                    members: ['박아나'],
                     show: false,
                     like: 3,
                     subscribe: 2,
                 },
                 {
-                    title:'아이패드, 아이폰으로 보는 애플의 컬러 전략',
-                    info:'아이패드, 아이폰으로 보는 애플의 컬러 전략 대한 글',
-                    src: require('../../assets/Ipad-air.png'),
-                    members: ['전느림','테크리뷰'],
+                    title:'탐라는 제주',
+                    info:'탐라는 제주',
+                    src: require('../../assets/contents_picture/art02.jpg'),
+                    members: ['귤','귤귤'],
                     show: false,
                     like: 48,
                     subscribe: 29,
