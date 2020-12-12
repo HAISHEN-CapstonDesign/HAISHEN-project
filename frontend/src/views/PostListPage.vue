@@ -4,7 +4,7 @@
         class="white--text"
         max-height="200"
         max-width="100%"
-        src="../assets/computer.jpeg"
+        src=imgsrclist[0]
         gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
         >
         <v-row
@@ -38,14 +38,60 @@
 <script>
 import CompleteList from '../components/bookList'
 import RecruitList from '../components/recruitList'
+import axios from 'axios'
+
 export default {
     components:{
         CompleteList,
         RecruitList,
     },
+    created(){
+
+        axios    
+            .post('http://localhost:3000/api/getpostlist', { genre: '수학' }, { headers: {'token': localStorage.getItem('access_token')}})
+                .then(res => {
+                    console.log(res.data)
+                    // 이런형식으로 response 받음
+                    // {
+                    //     title: "adsgasdgas",
+                    //     writerList: ["mumu", "momo"],
+                    //     LikeNum: 0
+                    // }
+ 
+                    
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+
+        axios    
+            .post('http://localhost:3000/api/getrecruitingPost', { genre: '수학' }, { headers: {'token': localStorage.getItem('access_token')}})
+                .then(res => {
+                    console.log(res.data)
+                    // 아래 형태 Json 리스트 형식으로 반환됨
+                    // {
+                    //     applyingNum: 0
+                    //     mainWriter: "mumu"
+                    //     recruitingNum: 1
+                    //     targetDDay: null
+                    //     title: "sagadgawgwge"
+                    // }
+                    
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+    },
     data(){
         return{
             showComplete:true,
+            imgsrclist:[
+                'asdgsadgsgsd',
+                'dasgsgsgsdagdsg',
+                'sadgsadgdsgsdgsadg',
+
+            ],
+            math:'수학',
         }
     },
     methods: {
