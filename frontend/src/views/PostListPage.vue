@@ -104,6 +104,7 @@ export default {
                     // 이런형식으로 response 받음
                     // {
                     //     title: "adsgasdgas",
+                    //     projectId: "139",
                     //     writerList: ["mumu", "momo"],
                     //     LikeNum: 0
                     // }
@@ -125,6 +126,7 @@ export default {
                     //     recruitingNum: 1
                     //     targetDDay: null
                     //     title: "sagadgawgwge"
+                    //     projectId: "139"
                     // }
                     
                 })
