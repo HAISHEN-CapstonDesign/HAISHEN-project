@@ -34,19 +34,19 @@
             </v-row>
             <art_write v-if="imgsrc_index == 9"></art_write>
             <it_write v-if="imgsrc_index == 3"></it_write>
-            <build_write v-if="imgsrc_index == 3"></build_write>
-            <cook_write v-if="imgsrc_index == 3"></cook_write>
-            <economy_write v-if="imgsrc_index == 3"></economy_write>
-            <game_write v-if="imgsrc_index == 3"></game_write>
-            <health_write v-if="imgsrc_index == 3"></health_write>
-            <history_write v-if="imgsrc_index == 3"></history_write>
-            <love_write v-if="imgsrc_index == 3"></love_write>
-            <math_write v-if="imgsrc_index == 3"></math_write>
-            <parenting_write v-if="imgsrc_index == 3"></parenting_write>
-            <preview_write v-if="imgsrc_index == 3"></preview_write>
-            <science_write v-if="imgsrc_index == 3"></science_write>
-            <travel_write v-if="imgsrc_index == 3"></travel_write>
-            <work_write v-if="imgsrc_index == 3"></work_write>
+            <build_write v-if="imgsrc_index == 8"></build_write>
+            <cook_write v-if="imgsrc_index == 5"></cook_write>
+            <economy_write v-if="imgsrc_index == 4"></economy_write>
+            <game_write v-if="imgsrc_index == 13"></game_write>
+            <health_write v-if="imgsrc_index == 6"></health_write>
+            <history_write v-if="imgsrc_index == 7"></history_write>
+            <love_write v-if="imgsrc_index == 14"></love_write>
+            <math_write v-if="imgsrc_index == 1"></math_write>
+            <parenting_write v-if="imgsrc_index == 12"></parenting_write>
+            <preview_write v-if="imgsrc_index == 10"></preview_write>
+            <science_write v-if="imgsrc_index == 2"></science_write>
+            <travel_write v-if="imgsrc_index == 0"></travel_write>
+            <work_write v-if="imgsrc_index == 11"></work_write>
         </v-container>
     </v-app>
 </template>
