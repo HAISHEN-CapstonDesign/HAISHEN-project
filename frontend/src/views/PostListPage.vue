@@ -69,6 +69,7 @@ import science_write from '../components/postlist/science_write'
 import travel_write from '../components/postlist/travel_write'
 import work_write from '../components/postlist/work_write'
 
+import axios from 'axios'
 
 export default {
     components:{
@@ -94,9 +95,7 @@ export default {
         //this.imgsrc_string = this.genres.map(function(e) { return e.img; }).indexOf(this.$route.params.postname);
         //console.log('정보 전부'+this.imgsrc_string)
         this.imgsrc_index = this.genres.findIndex(search => search.name == this.$route.params.postname)
-        console.log('ww ' + this.imgsrc_index)        
-    },
-    created(){
+        console.log('ww ' + this.imgsrc_index)     
 
         axios    
             .post('http://localhost:3000/api/getpostlist', { genre: '수학' }, { headers: {'token': localStorage.getItem('access_token')}})
