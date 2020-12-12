@@ -137,7 +137,7 @@ const vueRouter = new VueRouter({
             component: SignUpPage
         },
         {
-            path: '/postlist',
+            path: '/postlist/:postname',
             name: 'PostListPage',
             component: postListPage,
         },
@@ -190,10 +190,6 @@ const vueRouter = new VueRouter({
             component: funding,
         },
         {
-            path: '/test',
-            component: diff,
-        },
-        {
             path: '/:idp/WriterApply',
             name: WriterApply,
             component: WriterApply
@@ -212,6 +208,10 @@ const vueRouter = new VueRouter({
             path: '/:idp/subtitleEdit',
             name: 'subtitleEdit',
             component: subtitleEdit,
+        },
+        {
+            path: '/test',
+            component: diff,
         },
 
     ]

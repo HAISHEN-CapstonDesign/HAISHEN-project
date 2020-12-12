@@ -128,7 +128,7 @@ export default {
                 this.target_d_day = res.data.target_d_day
                 this.target_funding_money = res.data.target_funding_money
                 
-                console.log(res)
+                console.log(res.data)
                 
             })
             .catch((err) => {

@@ -173,14 +173,15 @@ export default {
                 this.submit_selected.push(element.userId)
             });
             // this.submit_selected.push()
-            console.log(this.submit_selected)
+            // console.log(this.submit_selec?ted[0])
+            // console.log(this.submit_selected[1])
             axios
-                .post('http://localhost:3000/api/${this.idp}/submitStartFunding',this.submit_selected,{ headers: {'token': localStorage.getItem('access_token')}})
+                .post(`http://localhost:3000/api/${this.idp}/submitStartFunding`,this.submit_selected,{ headers: {'token': localStorage.getItem('access_token')}})
                 .then(res=>{
                     console.log(res.data)
                 //    this.adopt=true
                     axios
-                        .post('http://localhost:3000/api/endFunding', {d: this.idp}, { headers: {'token': localStorage.getItem('access_token')}})
+                        .post('http://localhost:3000/api/endFunding', {id: this.idp}, { headers: {'token': localStorage.getItem('access_token')}})
                         .then(res=>{
                             this.$router.push(`/${this.idp}/collaboProjMain`)
                             console.log(res.data)

@@ -165,7 +165,6 @@
         <br><br>
         <router-view :key="$route.fullPath"></router-view>
     </div>
-
 </v-app>
 </template>
 
