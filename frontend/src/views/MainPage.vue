@@ -63,10 +63,11 @@
                                 outlined="false"
                                 hover="true"
                                 class="text-center"
-                                @click="$router.push('/postlist')"
+                                
+                                @click="$router.push({path:`/postlist/${genre.name}`})"
                                 >
                                    <div style="position: absolute; top: 40%; width:100%">
-                                    <h3 style="font-size:14px; color:grey">{{genre}}</h3>
+                                    <h3 style="font-size:14px; color:grey">{{genre.name}}</h3>
                                    </div>
                                 </v-card>
                             </v-col>
@@ -144,10 +145,81 @@ export default {
         },
     ],
     genres:[
-        '여행', '수학', '과학', 'IT',
-        '경제', '요리', '건강', '역사',
-        '건축', '문화, 예술', '시사',
-        '직장', '육아', '게임', '연애'
+            {
+                name: '여행',
+                post_name: 'Travel',
+                post_img_id: '1'
+            },
+            {
+                name: '수학',
+                post_name: 'Math',
+                post_img_id: '2'
+            },
+            {
+                name: '과학',
+                post_name: 'Science',
+                post_img_id: '3'
+            },
+            {
+                name: 'IT',
+                post_name: 'IT',
+                post_img_id: '4'
+            },
+            {
+                name: '경제',
+                post_name: 'Economy',
+                post_img_id: '5'
+            },
+            {
+                name: '요리',
+                post_name: 'Cook',
+                post_img_id: '6'
+            },
+            {
+                name: '건강',
+                post_name: 'Health',
+                post_img_id: '7'
+            },
+            {
+                name: '역사',
+                post_name: 'History',
+                post_img_id: '8'
+            },
+            {
+                name: '건축',
+                post_name: 'Build',
+                post_img_id: '9'
+            },
+            {
+                name: '문화, 예술',
+                post_name: 'Art',
+                post_img_id: '10'
+            },
+            {
+                name: '시사',
+                post_name: 'Preview',
+                post_img_id: '11'
+            },
+            {
+                name: '직장',
+                post_name: 'Work',
+                post_img_id: '12'
+            },
+            {
+                name: '육아',
+                post_name: 'Parenting',
+                post_img_id: '13'
+            },
+            {
+                name: '게임',
+                post_name: 'Game',
+                post_img_id: '14'
+            },
+            {
+                name: '연애',
+                post_name: 'Love',
+                post_img_id: '15'
+            },
         ],
   }),
   methods: {
@@ -156,6 +228,7 @@ export default {
         const max = 560
         return Math.floor(Math.random() * (max - min + 1)) + min
       },
+      
   },
 }
 </script>

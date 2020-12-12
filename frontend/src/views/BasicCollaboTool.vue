@@ -392,7 +392,7 @@ export default {
           })
             .then((res) => {
             this.project = res.data;
-            location.reload();
+            location.reload(); //새로고침
             console.log(res);
           })
           .catch(function (error) {
