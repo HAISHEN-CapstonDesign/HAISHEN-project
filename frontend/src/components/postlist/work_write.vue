@@ -74,7 +74,7 @@ export default {
                 {
                     title:'스타트업 대표도 케어가 필요하다',
                     info:'스타트업 대표도 케어가 필요하다',
-                    src: require('../../assets/contents_picture/work03.jpg'),
+                    src: require('../../assets/contents_picture/work03.png'),
                     members: ['jane','ted'],
                     show: false,
                     like: 33,
