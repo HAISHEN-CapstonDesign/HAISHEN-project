@@ -95,6 +95,16 @@ export default {
             this.$router.push(`/${this.idp}/chooseWriter`);
         },
         projectStart(){
+            
+             axios
+                .post('http://localhost:3000/api/endRecruitingStartProject',{id:this.idp},{ headers: {'token': localStorage.getItem('access_token')}})
+                .then(res => {
+                    console.log(res.data)
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+
             axios.get(`http://localhost:3000/api/project/${this.idp}/index/0/makeChatRoom`)
             .then((res) => {
               
