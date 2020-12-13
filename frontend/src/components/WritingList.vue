@@ -76,7 +76,6 @@ import axios from 'axios'
                 writerList: element.writerNicknameList,
                 introduction: element.introduction,
                 // image: `${this.imgSrcList[index]}`
-                
                 image: require('../assets/partership.jpg')
               }
             )
