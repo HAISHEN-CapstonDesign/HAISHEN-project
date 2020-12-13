@@ -281,10 +281,9 @@ export default {
                     name:plusTag
                 })
             }
-           // alert(writer+'에게 알람')
         },
         changeSubtitle(idx){
-            console.log(idx+"받아오나??")
+        //    console.log(idx+"받아오나??")
             this.$router.push(`/${this.idp}/${idx}/community`);
         },
         sendBtn () {
@@ -301,12 +300,7 @@ export default {
     sendMessage(event) {
   var messageContent =  this.message;
   if (messageContent.startsWith('/join ')) {
-   // var this.roomId = messageContent.substring('/join '.length);
     this.enterRoom(this.roomId);
-    /*
-    while (messageArea.firstChild) {
-      messageArea.removeChild(messageArea.firstChild);
-    }*/
   } else if (messageContent && this.stompClient) {
     var chatMessage = {
         userName: localStorage.getItem('nickname'),

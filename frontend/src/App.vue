@@ -173,6 +173,8 @@ import {
     mapState,
     mapActions
 } from "vuex"
+import Stomp from 'webstomp-client'
+import SockJS from 'sockjs-client'
 
 export default {
     name: 'App',
@@ -207,9 +209,57 @@ export default {
             } else {
                 console.log(val)
             }
+        },
+        isLogin(aft, bef){
+            if(aft == true && bef == false){
+                this.connect
+                console.log('로그인 watch 테스트')
+            }
         }
     },
     methods: {
+        //alarm
+        connect() {
+            var socket = new SockJS('/greetings');
+            this.stompClient = Stomp.over(socket);
+            this.stompClient.connect({}, this.onConnected);
+        },
+        onConnected() {
+            var topic = `/app/session`; // eslint-disable-line no-unused-vars
+            var currentSubscription = this.stompClient.subscribe('/user/queue/greetings', this.onMessageReceived);
+            console.log(currentSubscription)
+            this.stompClient.send(`${topic}/addUser`,
+                JSON.stringify({sender: localStorage.getItem('nickname')})
+            );
+        },
+        onMessageReceived(payload) {
+            var message = JSON.parse(payload.body);
+            console.log('받는 message 정보'+message)
+        },
+        /*
+        sendMessage(event) {
+  var messageContent =  this.message;
+  if (messageContent.startsWith('/join ')) {
+    this.enterRoom(this.roomId);
+  } else if (messageContent && this.stompClient) {
+    var chatMessage = {
+        userName: localStorage.getItem('nickname'),
+        content: this.message,
+        time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm'),
+        tagName:this.tagLists,
+        //state:"community",
+        //url:this.document.location.href,
+    };
+    console.log('보낸 message 정보'+chatMessage)
+    this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`
+    , JSON.stringify(chatMessage));
+  }
+  this.message = '';
+  this.tagLists=[];
+  event.preventDefault();
+},
+        */
+
         to_main() {
             this.$router.push('/');
         },

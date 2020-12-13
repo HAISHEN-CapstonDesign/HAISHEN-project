@@ -300,12 +300,6 @@ export default {
             // console.log(this.little_titles)
             // console.log(this.little_titles[0].text)
             this.subtitle = this.little_titles[this.ids-1].text;
-            // this.little_titles=[{idx:1, text:"ddd"}]
-            // this.res.data.forEach(element => {
-            //     // this.little_titles.push({idx:element.id, text:element.title})
-            //     console.log(element)
-            // });
-          
           
         })
         .catch((err) => {
