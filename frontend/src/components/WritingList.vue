@@ -77,6 +77,7 @@ import axios from 'axios'
                 introduction: element.introduction,
                 // image: `${this.imgSrcList[index]}`
                 image: require('../assets/partership.jpg')
+                // image:''
               }
             )
             
