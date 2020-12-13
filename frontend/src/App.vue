@@ -233,9 +233,10 @@ export default {
                 JSON.stringify({sender: localStorage.getItem('nickname')})
             );
         },
-        onMessageReceived(greeting) {
-            var message = JSON.parse(greeting.body).name;
+        onMessageReceived(payload) {
+            var message = JSON.parse(payload.body);
             console.log('받는 message 정보'+message)
+            console.log(message)
         },
         /*
         sendMessage(event) {

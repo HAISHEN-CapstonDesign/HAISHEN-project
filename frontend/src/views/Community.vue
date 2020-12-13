@@ -307,8 +307,8 @@ export default {
         content: this.message,
         time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm'),
         tagName:this.tagLists,
-        //state:"community",
-        //url:this.document.location.href,
+        state:"community",
+       // url:this.document.location.href,
     };
     console.log('보낸 message 정보'+chatMessage)
     this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`
