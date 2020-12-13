@@ -31,11 +31,11 @@
     height="200px"
     ></v-img>
     <v-card-title v-text="chat.title"></v-card-title>
-    <v-card-text v-text="chat.intro"></v-card-text>
+    <v-card-text v-text="chat.introduction"></v-card-text>
     <v-card-subtitle>
       작가 목록
     </v-card-subtitle>
-    <v-card-text v-text="chat.writers"></v-card-text>
+    <v-card-text v-text="chat.writerList"></v-card-text>
     
     <v-card-text v-text="chat.progress"></v-card-text>
 
@@ -48,29 +48,60 @@
 </template>
 
 <script>
+import axios from 'axios'
   export default {
-      name: 'Complete',
+    name: 'Complete',
+    created(){
+      
+      axios
+        .post('http://localhost:3000/api/mypageCompleteProjectList',{tmp:1},{ headers: {'token': localStorage.getItem('access_token')}})
+        .then(res => {
+          console.log(res.data)
+          this.getList = res.data
+          this.getList.forEach(element => {
+            // console.log(this.imgSrcList[index])
+            
+            this.list.push(
+              {
 
+                title: element.title,
+                projectId: element.projectId,
+                writerList: element.writerNicknameList,
+                introduction: element.introduction,
+                // image: `${this.imgSrcList[index]}`
+                
+                image: 'https://cdn.vuetifyjs.com/images/cards/sunshine.jpg'
+                // image:''
+              }
+            )
+            
+          });
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+    },
     data: () => ({
+      getList:[],
       list: [
-        {
-          title:'제목1',
-          image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-          intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
-          writers: '김ㅇㅇ, 이ㅇㅇ, 박ㅇㅇ',
-        },
-        {
-          title:'제목2',
-          image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-          intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
-          writers: '김ㅁㅁ, 최ㅁㅁ, 강ㅁㅁ',
-        },
-        {
-          title:'제목3',
-          image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-          intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
-          writers: '한ㅇㅇ, 이ㅇㅇ, 김ㅇㅇ, 박ㅇㅇ',
-        },
+        // {
+        //   title:'제목1',
+        //   image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+        //   intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
+        //   writers: '김ㅇㅇ, 이ㅇㅇ, 박ㅇㅇ',
+        // },
+        // {
+        //   title:'제목2',
+        //   image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+        //   intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
+        //   writers: '김ㅁㅁ, 최ㅁㅁ, 강ㅁㅁ',
+        // },
+        // {
+        //   title:'제목3',
+        //   image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+        //   intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
+        //   writers: '한ㅇㅇ, 이ㅇㅇ, 김ㅇㅇ, 박ㅇㅇ',
+        // },
       ],
     }),
   }
