@@ -184,15 +184,7 @@ export default {
           console.log(err)
       });
 
-    //작성중인 프로젝트 목록 가져오기
-    axios
-      .post('http://localhost:3000/api/mypageWritingProjectList',{tmp:1},{ headers: {'token': localStorage.getItem('access_token')}})
-      .then(res => {
-        console.log(res.data)
-      })
-      .catch((err) => {
-          console.log(err)
-      });
+
 
   }
 };
