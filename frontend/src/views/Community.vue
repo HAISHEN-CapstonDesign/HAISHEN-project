@@ -42,7 +42,7 @@
                                     outlined
                                     v-for="tags in item.tagNickname"
                                     :key="tags"
-                                    >{{tags}}</v-chip>
+                                    >{{tags.name}}</v-chip>
                                     {{item.text}}
                                 </v-card-text>
                             </v-card>
@@ -61,7 +61,7 @@
                                     outlined
                                     v-for="tags in item.tagNickname"
                                     :key="tags"
-                                    >{{tags}}</v-chip>
+                                    >{{tags.name}}</v-chip>
                                     {{item.text}}
                                     </v-card-text>
                             </v-card>
