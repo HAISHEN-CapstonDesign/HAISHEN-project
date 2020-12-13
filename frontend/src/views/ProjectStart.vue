@@ -254,7 +254,7 @@ export default {
                 target_funding_money: this.target_funding_money,              
             }
             
-            axios.post('/api/project/startup', data, { headers: {'token': this.token}})
+            axios.post('/api/project/startup', data, { headers: {'token': localStorage.getItem('access_token')}})
                 .then(res => {
                     console.log(res)
                     this.projectId = res.data

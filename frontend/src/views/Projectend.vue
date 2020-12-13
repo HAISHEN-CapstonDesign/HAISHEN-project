@@ -23,7 +23,7 @@
                 no-gutters
                 >
                     <div class="pt-3">
-                    <h3>{{item.writer}}</h3>
+                    <h3>{{item.writerNick}}</h3>
                     </div>
                     <div class="ml-15" style="max-width:100px;">
                         <v-select 
@@ -85,19 +85,19 @@
                 no-gutters
                 >
                     <div class="pt-3">
-                    <h3>{{item.index_name}}</h3>
+                    <h3>{{item.title}}</h3>
                     </div>
                     <v-spacer></v-spacer>
                     <div class="mr-10" style="max-width:100px;">
                     <v-text-field
                         label="단위 : 원"
-                        v-model="item.selectprofit"
+                        v-model="item.fee"
                     ></v-text-field>
                     </div>
                 </v-row>
             </v-card>
             <div>
-                <v-btn>
+                <v-btn @click="submitEndProject()">
                     제출
                 </v-btn>
             </div>
@@ -114,53 +114,115 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
+    created(){
+        this.idp = this.$route.params.idp;
+        console.log("sdfsdgg")
+        console.log(this.idp);
+        axios      // 작가 목록
+            .post('http://localhost:3000/api/getWriterList',{id:this.idp},{ headers: {'token': localStorage.getItem('access_token')}})
+            .then(res => {
+                console.log(res.data)
+                // 리스트형식으로 옴
+                // {
+                //     userId: 78, 
+                //     nickname: "mumu", 
+                //     mainOrnot: 1
+                // }
+                this.getWriterList = res.data;
+                this.getWriterList.forEach(element=>{
+                    this.writerlist.push(
+                        {
+                            userId: element.userId,
+                            writerNick: element.nickname,
+                            selectprofit: null,
+
+                        }
+                    )
+                })
+                
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+        axios     // index 목록
+            .post('http://localhost:3000/api/getIndexList',{id:this.idp},{ headers: {'token': localStorage.getItem('access_token')}})
+            .then(res => {
+                console.log(res.data)
+                // 리스트형식으로 옴
+                // {
+                //     fee: 0,
+                //     postIndexIdentity: {id: 1, projectId: 157},
+                //     title: "assdgasgasdgasdgsdg"
+                // }
+                this.getindexList = res.data;
+                this.getindexList.forEach(element => {
+                    this.indexlist.push(
+                        {
+                            indexId: element.postIndexIdentity.id,
+                            title: element.title,
+                            fee: null
+                        }
+                    )
+                });
+
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+
+    },
     data:()=>({
+        idp:0,
         fee:['유료','무료'],
         real_fee: false,
         real_fee2: true,
         items: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        getindexList:[],
         indexlist:[
-            {
-                index_name:'트렌드와 소통'
-            },
-            {
-                index_name:'끊임없는 배움'
-            },
-            {
-                index_name:'수용성과 타인을 돕는 것'
-            },
-            {
-                index_name:'함께 만드는 것'
-            },
-            {
-                index_name:'그렇다면 어떻게 해야 할까'
-            },
-            {
-                index_name:'당부하고 싶은 말'
-            },
-            {
-                index_name:'글을 마무리 하면서'
-            },
+            // {
+            //     index_name:'트렌드와 소통'
+            // },
+            // {
+            //     index_name:'끊임없는 배움'
+            // },
+            // {
+            //     index_name:'수용성과 타인을 돕는 것'
+            // },
+            // {
+            //     index_name:'함께 만드는 것'
+            // },
+            // {
+            //     index_name:'그렇다면 어떻게 해야 할까'
+            // },
+            // {
+            //     index_name:'당부하고 싶은 말'
+            // },
+            // {
+            //     index_name:'글을 마무리 하면서'
+            // },
 
         ],
         writerlist:[
-            {
-                writer: '메인 작가 A', //main = 1, sub = 0
-                profile: '프사',
-                write_profit: 50000
-            },
-            {
-                writer: '서브 작가 B', //main = 1, sub = 0
-                profile: '프사',
-                write_profit: 8000
-            },
-            {
-                writer: '서브 작가 C', //main = 1, sub = 0
-                profile: '프사',
-                write_profit: 7000
-            },
-        ]
+            // {
+            //     writer: '메인 작가 A', //main = 1, sub = 0
+            //     profile: '프사',
+            //     write_profit: 50000
+            // },
+            // {
+            //     writer: '서브 작가 B', //main = 1, sub = 0
+            //     profile: '프사',
+            //     write_profit: 8000
+            // },
+            // {
+            //     writer: '서브 작가 C', //main = 1, sub = 0
+            //     profile: '프사',
+            //     write_profit: 7000
+            // },
+        ],
+        getWriterList:[]
     }),
     methods: {
         which_fee(item){
@@ -172,6 +234,31 @@ export default {
                 this.real_fee = false
                 this.real_fee2 = true
             }
+        },
+        submitEndProject(){
+            // var writer_profit = []
+            // this.writerlist.forEach(element=>{
+                
+                
+            // })
+            console.log(this.writerlist);
+            
+            axios
+                .post(`http://localhost:3000/api/submitWriterMoneyPercent/${this.idp}`,this.writerlist,{ headers: {'token': localStorage.getItem('access_token')}})
+                .then(res => {
+                    console.log(res.data)
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+            axios
+                .post(`http://localhost:3000/api/submitIndexProfit/${this.idp}`,this.indexlist,{ headers: {'token': localStorage.getItem('access_token')}})
+                .then(res => {
+                    console.log(res.data)
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
         }
     }
     

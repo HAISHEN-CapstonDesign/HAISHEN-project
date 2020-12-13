@@ -1,0 +1,111 @@
+<template>
+    <v-app>
+        <v-card flat>
+            <v-container>
+                <v-row>
+                    <v-col
+                    v-for="(list, i) in calData"
+                    :key="i"
+                    cols="12"
+                    sm="4"
+                    md="3"
+                    >
+                    <!-- 임의로 ContentsReadingPage에 연결해둠 -->
+                        <v-card width="270px" height="280px" @click="$router.push('/1/contents/1')">
+                            <!--
+                            <v-img
+                            :src="`https://picsum.photos/200/300?image=${getImage()}`"
+                            height="100px"
+                            ></v-img>-->
+                            <v-img
+                            :src="list.src"
+                            height="100px"
+                            ></v-img>
+                            <v-card-title v-text="list.title" class="justify-center" style="font-size:15px"></v-card-title>
+                            <div class="text-center">
+                                <v-chip class="mx-1" color="grey" outlined v-for="member in list.members" :key="member" v-text="member"></v-chip>
+                            </div>
+                            <v-card-text>
+                                <div style="float:right">
+                                <v-icon>mdi-heart</v-icon>{{list.like}}
+                                <v-icon>mdi-bookmark</v-icon>{{list.subscribe}}
+                                </div>
+                                </v-card-text>       
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                    <div class="text-center">
+                        <v-pagination
+                        flat
+                        v-model="page"
+                        :length="numOfPages"
+                        @input="changePage"
+                        ></v-pagination>
+                    </div>
+                </v-container>
+        </v-card>
+    </v-app>
+</template>
+<script>
+export default {
+    data(){
+        return{
+            page:1, //현재 페이지
+            dataPerPage:8, //한 페이지에 나올 글의 수
+            bookList: [
+                {
+                    title:'비빔밥 네가 고생이 많다',
+                    info:'비빔밥 네가 고생이 많다',
+                    src: require('../../assets/contents_picture/cook_bibi.jpg'),
+                    members: ['공촌'],
+                    show: false,
+                    like: 3,
+                    subscribe: 2,
+                },
+                {
+                    title:'배고픈데 반찬은 없을 때, 빨리 만드는 아침 식사',
+                    info:'배고픈데 반찬은 없을 때, 빨리 만드는 아침 식사',
+                    src: require('../../assets/contents_picture/cook_fast.jpg'),
+                    members: ['니랄리','야미'],
+                    show: false,
+                    like: 48,
+                    subscribe: 29,
+                },
+                {
+                    title:'연어 포일 구이',
+                    info:'연어 포일 구이',
+                    src: require('../../assets/contents_picture/cook_fish.jpg'),
+                    members: ['cook','무키'],
+                    show: false,
+                    like: 33,
+                    subscribe: 21,
+                }
+            ],
+        }
+    },
+    methods: {
+      getImage () {
+        const min = 550
+        const max = 560
+        return Math.floor(Math.random() * (max - min + 1)) + min
+      },
+      changePage(newPage){
+          this.page = newPage;
+      },
+    },
+    computed: {
+        startOffset() {
+        return ((this.page - 1) * this.dataPerPage);
+      },
+      endOffset() {
+        return (this.startOffset + this.dataPerPage);
+      },
+      calData() {
+        return this.bookList.slice(this.startOffset, this.endOffset)
+      },
+      numOfPages() {
+        return Math.ceil(this.bookList.length / this.dataPerPage);
+      },
+    },
+}
+</script>

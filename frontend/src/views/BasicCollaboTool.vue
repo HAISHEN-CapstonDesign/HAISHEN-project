@@ -107,7 +107,7 @@
         <v-btn class="l_btn" text @click="$router.push(`/${idp}/supporter`)">
           서포터
         </v-btn>
-        <v-btn to='/projectend' class="l_btn" text>
+        <v-btn @click="$router.push(`/${idp}/projectend`)" class="l_btn" text>
           프로젝트 종료
         </v-btn>
       </v-col>
@@ -392,7 +392,7 @@ export default {
           })
             .then((res) => {
             this.project = res.data;
-            location.reload();
+            location.reload(); //새로고침
             console.log(res);
           })
           .catch(function (error) {
