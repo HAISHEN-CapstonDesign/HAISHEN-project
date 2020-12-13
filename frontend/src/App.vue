@@ -212,7 +212,7 @@ export default {
         },
         isLogin(aft, bef){
             if(aft == true && bef == false){
-                this.connect
+                this.connect()
                 console.log('로그인 watch 테스트')
             }
         }
@@ -220,7 +220,8 @@ export default {
     methods: {
         //alarm
         connect() {
-            var socket = new SockJS('/greetings');
+            console.log('connect 테스트')
+            var socket = new SockJS('http://localhost:3000/greetings');
             this.stompClient = Stomp.over(socket);
             this.stompClient.connect({}, this.onConnected);
         },
@@ -232,8 +233,8 @@ export default {
                 JSON.stringify({sender: localStorage.getItem('nickname')})
             );
         },
-        onMessageReceived(payload) {
-            var message = JSON.parse(payload.body);
+        onMessageReceived(greeting) {
+            var message = JSON.parse(greeting.body).name;
             console.log('받는 message 정보'+message)
         },
         /*
