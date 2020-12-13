@@ -150,9 +150,11 @@ export default {
             })
             .then((res) => {
                 console.log(res.data);
+                this.$router.push('/myaccount')
             })
             .catch(function (error) {
                 console.log(error.response);
+                alert('error')
             });
         }
     }
