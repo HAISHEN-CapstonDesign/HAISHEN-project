@@ -221,13 +221,13 @@ export default {
         //alarm
         connect() {
             console.log('connect 테스트')
-            var socket = new SockJS('http://localhost:3000/greetings');
+            var socket = new SockJS('http://localhost:3000/ws');
             this.stompClient = Stomp.over(socket);
             this.stompClient.connect({}, this.onConnected);
         },
         onConnected() {
             var topic = `/app/session`; // eslint-disable-line no-unused-vars
-            var currentSubscription = this.stompClient.subscribe('/user/queue/greetings', this.onMessageReceived);
+            var currentSubscription = this.stompClient.subscribe('/server', this.onMessageReceived);
             console.log(currentSubscription)
             this.stompClient.send(`${topic}/addUser`,
                 JSON.stringify({sender: localStorage.getItem('nickname')})
