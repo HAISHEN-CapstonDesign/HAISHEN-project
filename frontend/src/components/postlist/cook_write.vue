@@ -55,7 +55,7 @@ export default {
         //console.log('정보 전부'+this.imgsrc_string)
 
         axios    
-            .post('http://localhost:3000/api/getpostlist', { genre: '여행' }, { headers: {'token': localStorage.getItem('access_token')}})
+            .post('http://localhost:3000/api/getpostlist', { genre: '요리' }, { headers: {'token': localStorage.getItem('access_token')}})
                 .then(res => {
                     console.log('찾는거 : '+res.data)
                     // 이런형식으로 response 받음

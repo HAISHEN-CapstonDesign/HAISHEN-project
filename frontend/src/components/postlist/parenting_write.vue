@@ -92,7 +92,7 @@ export default {
                 });
 
         axios    
-            .post('http://localhost:3000/api/getrecruitingPost', { genre: '수학' }, { headers: {'token': localStorage.getItem('access_token')}})
+            .post('http://localhost:3000/api/getrecruitingPost', { genre: '육아' }, { headers: {'token': localStorage.getItem('access_token')}})
                 .then(res => {
                     console.log(res.data)
                     // 아래 형태 Json 리스트 형식으로 반환됨
