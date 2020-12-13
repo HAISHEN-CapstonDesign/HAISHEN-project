@@ -47,9 +47,72 @@
     </v-app>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
+     created(){
+        //this.imgsrc_string = this.genres.map(function(e) { return e.img; }).indexOf(this.$route.params.postname);
+        //console.log('정보 전부'+this.imgsrc_string)
+
+        axios    
+            .post('http://localhost:3000/api/getpostlist', { genre: '시사' }, { headers: {'token': localStorage.getItem('access_token')}})
+                .then(res => {
+                    console.log('찾는거 : '+res.data)
+                    // 이런형식으로 response 받음
+                    // {
+                    //     title: "adsgasdgas",
+                    //     projectId: "139",
+                    //     writerList: ["mumu", "momo"], writerList를 member로 바꾸어서 주기
+                    //     LikeNum: 0 like로 바꿔서 주기
+                    // }
+                    // this.tempbookList = JSON.parse(this.bookList)
+                    // this.tempbookList.push(res.data)
+                    // this.bookList = JSON.stringify(this.tempbookList)
+                    //this.bookList.push.apply(this.bookList,res.data)
+                    this.tempbookList = res.data;
+                    this.tempbookList.forEach(element => {
+                        this.bookList.push(
+                            {
+                                title: element.title,
+                                info: element.info,
+                                src: require('../../assets/contents_picture/travel_temz.jpg'),
+                                members: element.writeList,
+                                show: false,
+                                like: element.LikeNum,
+                                subscribe: 2,
+                            }
+                            
+                        )
+                    })
+                    console.log('booklist :'+JSON.stringify(this.bookList))
+                    console.log('tempbooklist :'+JSON.stringify(this.tempbookList))
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+
+        axios    
+            .post('http://localhost:3000/api/getrecruitingPost', { genre: '수학' }, { headers: {'token': localStorage.getItem('access_token')}})
+                .then(res => {
+                    console.log(res.data)
+                    // 아래 형태 Json 리스트 형식으로 반환됨
+                    // {
+                    //     applyingNum: 0
+                    //     mainWriter: "mumu"
+                    //     recruitingNum: 1
+                    //     targetDDay: null
+                    //     title: "sagadgawgwge"
+                    //     projectId: "139"
+                    // }
+                    
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+    },
     data(){
         return{
+            tempbookList: [],
             page:1, //현재 페이지
             dataPerPage:8, //한 페이지에 나올 글의 수
             bookList: [

@@ -107,9 +107,7 @@ export default {
                     //     projectId: "139",
                     //     writerList: ["mumu", "momo"],
                     //     LikeNum: 0
-                    // }
- 
-                    
+                    // }                    
                 })
                 .catch((err) => {
                     console.log(err)
