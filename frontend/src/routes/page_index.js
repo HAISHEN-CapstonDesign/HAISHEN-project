@@ -87,7 +87,7 @@ const vueRouter = new VueRouter({
             component: MainPage
         },
         {
-            path: '/projectend',
+            path: '/:idp/projectend',
             name: 'ProjectendPage',
             // beforeEnter: rejectAuthUser,
             component: ProjectendPage

@@ -96,7 +96,7 @@ export default {
         },
         projectStart(){
             
-             axios
+            axios
                 .post('http://localhost:3000/api/endRecruitingStartProject',{id:this.idp},{ headers: {'token': localStorage.getItem('access_token')}})
                 .then(res => {
                     console.log(res.data)
