@@ -89,22 +89,22 @@
                 <v-col cols="6" md="4">
                     <p style="font-size:20px" class="text-center">배너 이미지 </p>
                 </v-col>
-                <v-col cols="12" sm="6" md="8">
+                <!-- <v-col cols="12" sm="6" md="8">
                     <input ref="imageInput" type="file" hidden @change="onChangeImages">
                     <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn>
+                </v-col> -->
+
+                <v-col cols="12" sm="6" md="8">
+                    <!-- <input ref="imageInput" type="file" hidden @change="onChangeImages">
+                    <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn> -->
+                    <v-row>
+                        <form method="post" enctype="multipart/form-data" action="'/api/project/startup/banner'">
+                            <input type="file" ref="photofile" name="photo" @change="onChangeImages"/>
+                            <!-- <v-btn @click="upload()">업로드</v-btn> -->
+                        </form>
+                    </v-row>
+
                 </v-col>
-            </v-row>
-            <v-row>
-                <!-- <input type="file" name="img" id="img">  -->
-                  <!-- <form method = "POST" action enctype = "multipart/form-data">
-                    <input
-                    
-                    type = "file"
-                    name = "file"
-                    
-                    @ change = "upload"
-                    />
-                </form> -->
             </v-row>
         </v-flex>
         <v-flex>
@@ -209,11 +209,7 @@
             프로젝트 등록하기</v-btn>
             </div>
             <!-- <v-btn @click="upload()">이미지 업로드</v-btn> -->
-            <form method="post" enctype="multipart/form-data" action="'/api/project/startup/banner'">
-                <input type="file" ref="photofile" name="photo"/>
-                <v-btn @click="upload()">업로드</v-btn>
-                <!-- <input type="submit"> -->
-            </form>
+
         </v-flex>
     </v-layout>
     </v-container>
@@ -263,7 +259,7 @@ export default {
             var file = this.$refs.photofile.files[0];
             data.append('img', file);
 
-            axios.post('/api/project/startup/banner', data)
+            axios.post('/api/project/startup/banner', data, {id:200})
             .then(res=>{
                 this.result = res.data;
             })
@@ -288,12 +284,25 @@ export default {
                 .then(res => {
                     console.log(res)
                     this.projectId = res.data
-                    this.$router.push({path:`/${res.data}/CollaboProjMain`, query: {projectId: res.data}})
+                    
                     
                 })
                 .catch((err) => {
                     console.log(err)
                 });
+
+            var imgData = new FormData();
+            var file = this.$refs.photofile.files[0];
+            imgData.append('img', file);
+
+            axios.post('/api/project/startup/banner', imgData, {id:this.projectId})
+            .then(res=>{
+                this.result = res.data;
+                this.$router.push({path:`/${res.data}/CollaboProjMain`, query: {projectId: res.data}})
+            })
+            .catch((err) => {
+                    console.log(err)
+            });
                 
         }
     },
