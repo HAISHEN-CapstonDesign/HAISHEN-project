@@ -498,7 +498,6 @@ export default {
         //this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
      //},
   },
-
   mounted(){
      $('#dwn-btn').click(function() {
   //pdf_wrap을 canvas객체로 변환
