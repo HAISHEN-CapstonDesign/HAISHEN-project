@@ -18,7 +18,7 @@ const AlarmSocket = new Vue({
     methods: {
         onConnected() {
             var topic = `/app/session`; // eslint-disable-line no-unused-vars
-            var currentSubscription = this.stompClient.subscribe('/server', this.onMessageReceived);
+            var currentSubscription = this.stompClient.subscribe('/channel/main', this.onMessageReceived);
             //    console.log('onconnect????')
             console.log(currentSubscription)
             this.stompClient.send(`${topic}/addUser`,
