@@ -11,7 +11,7 @@
                     md="3"
                     >
                     <!-- 임의로 ContentsReadingPage에 연결해둠 -->
-                        <v-card width="270px" height="280px" @click="$router.push({name:'ContentsReadingPage',params:{idp:i, idc:1}})">
+                        <v-card width="270px" height="280px" @click="$router.push({name:'ContentsReadingPage',params:{idp:list.projectId, idc:1}})">
                             <!--
                             <v-img
                             :src="`https://picsum.photos/200/300?image=${getImage()}`"
@@ -124,6 +124,7 @@ export default {
                     show: false,
                     like: 3,
                     subscribe: 2,
+                    projectId: 0
                 },
                 {
                     title:'아이패드, 아이폰으로 보는 애플의 컬러 전략',
@@ -133,6 +134,7 @@ export default {
                     show: false,
                     like: 48,
                     subscribe: 29,
+                    projectId: 1
                 },
                 {
                     title:'[책]알고리즘트레이딩을 위한 파이썬',
@@ -142,6 +144,7 @@ export default {
                     show: false,
                     like: 33,
                     subscribe: 21,
+                    projectId: 2
                 },
                 {
                     title:'이번 인스타그램 업데이트가 불편한 이유',
@@ -151,6 +154,7 @@ export default {
                     show: false,
                     like: 38,
                     subscribe: 25,
+                    projectId: 3
                 },
                 {
                     title:'휴대폰 청소하기',
@@ -160,6 +164,7 @@ export default {
                     show: false,
                     like: 38,
                     subscribe: 25,
+                    projectId: 4
                 },
                 {
                     title:'가로형과 세로형 이미지의 UX.',
@@ -169,6 +174,7 @@ export default {
                     show: false,
                     like: 38,
                     subscribe: 25,
+                    projectId: 5
                 },
                 {
                     title:'UX/UI의 10가지 심리학 법칙',
@@ -178,6 +184,7 @@ export default {
                     show: false,
                     like: 38,
                     subscribe: 25,
+                    projectId: 6
                 },
                 {
                     title:'“UX에 흔히 있는” 바람직하지 않은 UX조직',
@@ -187,6 +194,7 @@ export default {
                     show: false,
                     like: 38,
                     subscribe: 25,
+                    projectId: 7
                 },
                 {
                     title:'휴대폰 청소하기',
@@ -196,6 +204,7 @@ export default {
                     show: false,
                     like: 38,
                     subscribe: 25,
+                    projectId: 8
                 },
                 {
                     title:'[책]알고리즘트레이딩을 위한 파이썬',
@@ -205,6 +214,7 @@ export default {
                     show: false,
                     like: 33,
                     subscribe: 21,
+                    projectId: 9
                 },
             ],
         }
