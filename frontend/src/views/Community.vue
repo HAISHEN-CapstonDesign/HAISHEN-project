@@ -40,8 +40,8 @@
                                     class="ma-1 pa-2"
                                     color="blue"
                                     outlined
-                                    v-for="tags in item.tagNickname"
-                                    :key="tags"
+                                    v-for="(tags, i) in item.tagNickname"
+                                    :key="i+'bb'"
                                     >@{{tags.name}}</v-chip>
                                     {{item.text}}
                                 </v-card-text>
@@ -59,8 +59,8 @@
                                     class="ma-1 pa-2"
                                     color="blue"
                                     outlined
-                                    v-for="tags in item.tagNickname"
-                                    :key="tags+'a'"
+                                    v-for="(tags, i) in item.tagNickname"
+                                    :key="i+'aa'"
                                     >@{{tags.name}}</v-chip>
                                     {{item.text}}
                                     </v-card-text>
@@ -87,8 +87,8 @@
                                     class="ma-1 pa-2"
                                     color="blue"
                                     outlined
-                                    v-for="tags in item.tagName"
-                                    :key="tags+'a'"
+                                    v-for="(tags, i) in item.tagName"
+                                    :key="i+'a'"
                                     >@{{tags.name}}</v-chip>
                                     {{item.content}}
                                 </v-card-text>
@@ -106,8 +106,8 @@
                                     class="ma-1 pa-2"
                                     color="blue"
                                     outlined
-                                    v-for="tags in item.tagName"
-                                    :key="tags"
+                                    v-for="(tags, i) in item.tagName"
+                                    :key="i+'c'"
                                     >@{{tags.name}}</v-chip>
                                     {{item.content}}
                                     </v-card-text>
@@ -332,7 +332,7 @@ connect() {
 },
     onMessageReceived(payload) {
   var message = JSON.parse(payload.body);
-  console.log('커뮤-받는 message 정보'+message)
+  console.log('커뮤-받는 message 정보')
 console.log(message)
 this.recvList.push(message)
 },
@@ -344,6 +344,12 @@ enterRoom(roomId) {
   defSocket.stompClient.send(`${topic}/addUser`,
     JSON.stringify({sender: localStorage.getItem('nickname')})
   );
+  var currentSubscription = defSocket.stompClient.subscribe('/channel/main', this.onMessageReceived);
+            //    console.log('onconnect????')
+            console.log(currentSubscription)
+            defSocket.stompClient.send(`/private/session/addUser`,
+                JSON.stringify({ sender: localStorage.getItem('nickname') })
+            );
 },
 onConnected() {
     console.log("on-connect 시작")
