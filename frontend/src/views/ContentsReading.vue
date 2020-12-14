@@ -425,8 +425,8 @@ export default {
      //},
   },
   created(){ 
-    this.idc = this.$route.params.idc;
-    this.idp = this.$route.params.idp;
+    this.idc = this.$route.params.idc; //index 라우팅
+    this.idp = this.$route.params.idp; //page 라우팅
   },
   mounted(){
      $('#dwn-btn').click(function() {
