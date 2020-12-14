@@ -115,6 +115,7 @@ export default {
                                 show: false,
                                 like: element.LikeNum,
                                 subscribe: 2,
+                                projectId: element.projectId
                             }
                             
                         )

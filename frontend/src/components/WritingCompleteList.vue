@@ -15,7 +15,7 @@
       <v-slide-item
         v-for="chat in list"
         :key="chat.title"
-        v-slot:default="{ active, toggle }"
+        v-slot:default="{ active }"
       >
         <v-card
           :color="active ? undefined : 'white lighten-1'"
@@ -23,7 +23,7 @@
           width="350"
           outlined
           tile
-          @click="toggle"
+          @click="goDetailPage(chat.projectId,chat.genre)"
         >
 
     <v-img
@@ -35,9 +35,11 @@
     <v-card-subtitle>
       작가 목록
     </v-card-subtitle>
-    <v-card-text v-text="chat.writerList"></v-card-text>
     
-    <v-card-text v-text="chat.progress"></v-card-text>
+    <div class="ml-3">
+      <v-chip class="mx-1" color="deep-purple" outlined v-for="member in chat.writerList" :key="member" v-text="member"></v-chip>
+    </div> 
+    <!-- <v-card-text v-text="chat.progress"></v-card-text> -->
 
   </v-card>
       </v-slide-item>
@@ -77,6 +79,12 @@ import axios from 'axios'
         .catch((err) => {
             console.log(err)
         });
+    },
+    methods: {
+      goDetailPage(projectid,genre){
+        //projectId 받아와서 변경하기 추가 필요
+        this.$router.push({name:'ContentsReadingPage',params:{idp:projectid,idc:1,postname:genre}});
+      }
     },
     data: () => ({
       getList:[],
