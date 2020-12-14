@@ -126,14 +126,15 @@ export default {
     }),
     props:['idp','idc'],
     created() {
-      this.getcomment()
-      console.log('items url :'+this.items[0].avatar)
+        this.getcomment()
+        console.log('items url :'+this.items[0].avatar)
+        console.log("!!!!!!!!!!!!!")
 
 
     },
     methods:{
         star(){
-            console.log(this.star_rating)
+        console.log(this.star_rating)
            axios
                 .post('http://localhost:3000/api/addRating',
                     { projectId: this.idp, indexId: this.idc, rate: this.star_rating}, 
@@ -198,8 +199,6 @@ export default {
             this.message='';
         },
         getcomment(){
-        console.log("$$%$%$%$%$%")
-        console.log(this.idp, this.idc)
         axios
             .post('http://localhost:3000/api/getCommentList',
             { projectId: this.idp , postIndex: this.idc}, 

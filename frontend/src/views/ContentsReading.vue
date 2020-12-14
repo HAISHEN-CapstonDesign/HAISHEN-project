@@ -252,7 +252,7 @@ export default {
     data: () => ( 
         {
         rating_size: 20,
-        rating_score: 4,
+        rating_score:0,
         click_like: false,
         contents_like: 0, //axios로 좋아요 수 가져와야함
         zIndex: 0,
@@ -367,6 +367,22 @@ export default {
         .catch(function (error) {
             console.log(error.response);
         });
+
+	axios
+		.post('http://localhost:3000/api/getAvgRating',
+			{ projectId: this.idp, postIndex: this.idc}, 
+			{ headers: {'token':localStorage.getItem('access_token') }}
+		)
+		.then(res => {
+			console.log("!!!!!!!!!!!!!")
+			console.log((res.data)) 
+			this.rating_score = res.data
+
+		})
+		.catch((err) => {
+			console.log(err)
+			//alert("에러가 발생했습니다. 다시 시도해주세요")
+		});
 
   },
   methods:{
