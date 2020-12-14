@@ -115,7 +115,7 @@
     <v-container fluid grid-list-sm pa-5 pt-0>
       <v-row col="12" class="ma-0 pa-0" justify="end">
         <v-col md="3" class="ma-0 pa-0" align="center">
-          
+          <!-- 이미지 연결 되면 writerCrew로 변경 -->
           <v-avatar
           v-for="(avatar, i) in avatars"
           :key="i"
@@ -129,7 +129,7 @@
             :src="avatar.src"
             ></v-img>
             </template>
-          <span>{{avatar.name}}</span>
+          <span>{{avatar.writerName}}</span>
           </v-tooltip>
           </v-avatar>
           
@@ -334,19 +334,19 @@ export default {
             avatars:[
               {
                 src: require('@/assets/jenny2.jpg'),
-                name:"작가1"
+                writerName:"작가1"
               },
               {
                 src: require('@/assets/jenny2.jpg'),
-                name:"작가2"
+                writerName:"작가2"
               },
               {
                 src: require('@/assets/jenny2.jpg'),
-                name:"작가3"
+                writerName:"작가3"
               },
               {
                 src: require('@/assets/jenny2.jpg'),
-                name:"작가4"
+                writerName:"작가4"
               },
             ],
             comment:'',

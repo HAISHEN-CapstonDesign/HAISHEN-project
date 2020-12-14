@@ -62,7 +62,7 @@
           this.items = res.data;
           for(var i=0; i<res.data.length; i++){
             if(res.data[i].state == "community"){
-
+              state에 따라서 text 정하는 코드
             }
           }
           
@@ -96,7 +96,7 @@
           this.items.splice(this.deleteList[0]-i,1);
           this.deleteList.splice(0,1);
         }
-        /*
+        /* 삭제 후 list 보내기
         axios.post('/api/project/...', this.items, { headers: {'token': localStorage.getItem('access_token')}})
           .then(res => {
             console.log(res)   

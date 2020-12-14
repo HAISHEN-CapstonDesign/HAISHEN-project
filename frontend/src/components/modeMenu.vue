@@ -231,11 +231,12 @@ export default {
       },
       importFile(e) {
         this.file = e.target.files[0];
+        //input.accept = "text/plain";
         if (!this.file) {this.data = "No File Chosen"}
         var reader = new FileReader();
         reader.readAsText(this.file);
         reader.onload = () => {
-          this.data = reader.result;
+          this.data = reader.result
           console.log(reader.result)
           this.editing = !this.editing;
           this.$emit('uploadFile',this.data);
