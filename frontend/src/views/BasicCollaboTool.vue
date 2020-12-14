@@ -249,6 +249,8 @@ export default {
           { headers: {'token':localStorage.getItem('access_token') }})
         .then(res=>{
             this.projectTitle= res.data
+            this.title = res.data
+            
         })
         .catch((err) => {
                 console.log(err)
