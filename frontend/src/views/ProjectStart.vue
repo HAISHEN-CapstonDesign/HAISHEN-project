@@ -94,6 +94,18 @@
                     <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn>
                 </v-col>
             </v-row>
+            <v-row>
+                <!-- <input type="file" name="img" id="img">  -->
+                  <!-- <form method = "POST" action enctype = "multipart/form-data">
+                    <input
+                    
+                    type = "file"
+                    name = "file"
+                    
+                    @ change = "upload"
+                    />
+                </form> -->
+            </v-row>
         </v-flex>
         <v-flex>
             <v-row>
@@ -196,6 +208,12 @@
             >
             프로젝트 등록하기</v-btn>
             </div>
+            <!-- <v-btn @click="upload()">이미지 업로드</v-btn> -->
+            <form method="post" enctype="multipart/form-data" action="'/api/project/startup/banner'">
+                <input type="file" ref="photofile" name="photo"/>
+                <v-btn @click="upload()">업로드</v-btn>
+                <!-- <input type="submit"> -->
+            </form>
         </v-flex>
     </v-layout>
     </v-container>
@@ -240,7 +258,19 @@ export default {
             const file = e.target.files[0];
             this.imageUrl = URL.createObjectURL(file);
         },
-        
+        upload(){
+            var data = new FormData();
+            var file = this.$refs.photofile.files[0];
+            data.append('img', file);
+
+            axios.post('/api/project/startup/banner', data)
+            .then(res=>{
+                this.result = res.data;
+            })
+            .catch((err) => {
+                    console.log(err)
+            });
+        },        
         createProject(){
             
             var data = {

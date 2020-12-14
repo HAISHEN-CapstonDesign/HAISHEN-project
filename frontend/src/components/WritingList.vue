@@ -62,7 +62,6 @@ import axios from 'axios'
       axios
         .post('http://localhost:3000/api/mypageWritingProjectList',{tmp:1},{ headers: {'token': localStorage.getItem('access_token')}})
         .then(res => {
-          console.log(res.data)
           this.getList = res.data
           this.getList.forEach((element,index) => {
             console.log(this.imgSrcList[index])

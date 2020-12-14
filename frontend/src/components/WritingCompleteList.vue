@@ -56,27 +56,24 @@ import axios from 'axios'
       axios
         .post('http://localhost:3000/api/mypageCompleteProjectList',{tmp:1},{ headers: {'token': localStorage.getItem('access_token')}})
         .then(res => {
-          console.log(res.data)
-          this.getList = res.data
-          this.getList.forEach(element => {
-            // console.log(this.imgSrcList[index])
-            
-            this.list.push(
-              {
+			console.log("$$$$$$$$$$$$$$")
+			console.log(res.data)
+			this.getList = res.data
+			this.getList.forEach(element => {
+			this.list.push(
+				{
+					title: element.title,
+					projectId: element.projectId,
+					writerList: element.writerNicknameList,
+					introduction: element.introduction,
+					// image: `${this.imgSrcList[index]}`
+					genre: element.tagList,
+					image: 'https://cdn.vuetifyjs.com/images/cards/sunshine.jpg'
+					// image:''
+				})
 
-                title: element.title,
-                projectId: element.projectId,
-                writerList: element.writerNicknameList,
-                introduction: element.introduction,
-                // image: `${this.imgSrcList[index]}`
-                
-                image: 'https://cdn.vuetifyjs.com/images/cards/sunshine.jpg'
-                // image:''
-              }
-            )
-            
-          });
-        })
+		})
+		})
         .catch((err) => {
             console.log(err)
         });
