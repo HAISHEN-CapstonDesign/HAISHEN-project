@@ -23,7 +23,7 @@
           width="350"
           outlined
           tile
-          @click="goDetailPage(chat.projectId,chat.genre)"
+          @click="goDetailPage(chat.projectId,chat.genre[0])"
         >
 
     <v-img
