@@ -60,7 +60,7 @@
                                     color="blue"
                                     outlined
                                     v-for="tags in item.tagNickname"
-                                    :key="tags"
+                                    :key="tags+'a'"
                                     >@{{tags.name}}</v-chip>
                                     {{item.text}}
                                     </v-card-text>
@@ -88,7 +88,7 @@
                                     color="blue"
                                     outlined
                                     v-for="tags in item.tagName"
-                                    :key="tags.name"
+                                    :key="tags+'a'"
                                     >@{{tags.name}}</v-chip>
                                     {{item.content}}
                                 </v-card-text>
@@ -107,7 +107,7 @@
                                     color="blue"
                                     outlined
                                     v-for="tags in item.tagName"
-                                    :key="tags.name"
+                                    :key="tags"
                                     >@{{tags.name}}</v-chip>
                                     {{item.content}}
                                     </v-card-text>
@@ -152,7 +152,9 @@
 import axios from 'axios'
 import Subtitle from '../components/subtitleList'
 import Stomp from 'webstomp-client'
-import SockJS from 'sockjs-client'
+import defSocket from '../alarm_index.js'
+//import SockJS from 'sockjs-client'
+
 export default {
     components:{
         Subtitle,
@@ -247,7 +249,7 @@ export default {
             alert("에러가 발생했습니다. 다시 시도해주세요")
         });
        // this.getcomment()
-       // this.connect()
+        this.connect()
       //  this.connect()
        // console.log('items url :'+this.items[0].avatar)
     },
@@ -323,15 +325,15 @@ connect(event) {
   if (username) {
    // usernamePage.classList.add('hidden');
    // chatPage.classList.remove('hidden');
-    var socket = new SockJS('http://localhost:3000/ws');
-    this.stompClient = Stomp.over(socket);
+   // var socket = new SockJS('http://localhost:3000/ws');
+    this.stompClient = Stomp.over(defSocket.socket);
     this.stompClient.connect({}, this.onConnected, this.onError);
   }
   event.preventDefault();
 },
     onMessageReceived(payload) {
   var message = JSON.parse(payload.body);
-  console.log('받는 message 정보'+message)
+  console.log('커뮤-받는 message 정보'+message)
 console.log(message)
 this.recvList.push(message)
   //var messageElement = document.createElement('li'); 

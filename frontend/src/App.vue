@@ -173,8 +173,6 @@ import {
     mapState,
     mapActions
 } from "vuex"
-import Stomp from 'webstomp-client'
-import SockJS from 'sockjs-client'
 
 export default {
     name: 'App',
@@ -210,35 +208,10 @@ export default {
                 console.log(val)
             }
         },
-        isLogin(aft, bef){
-            if(aft == true && bef == false){
-                this.connect()
-                console.log('로그인 watch 테스트')
-            }
-        }
+
     },
     methods: {
-        //alarm
-        connect() {
-            console.log('connect 테스트')
-            var socket = new SockJS('http://localhost:3000/ws');
-            this.stompClient = Stomp.over(socket);
-            this.stompClient.connect({}, this.onConnected);
-        },
-        onConnected() {
-            var topic = `/app/session`; // eslint-disable-line no-unused-vars
-            var currentSubscription = this.stompClient.subscribe('/server', this.onMessageReceived);
-            console.log(currentSubscription)
-            this.stompClient.send(`${topic}/addUser`,
-                JSON.stringify({sender: localStorage.getItem('nickname')})
-            );
-        },
-        onMessageReceived(payload) {
-            var message = JSON.parse(payload.body);
-            console.log('받는 message 정보'+message)
-            console.log(message)
-        },
-
+       
 
         to_main() {
             this.$router.push('/');
