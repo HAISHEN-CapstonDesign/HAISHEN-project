@@ -16,9 +16,17 @@
           align="center"
           justify="center"
         >
-          <p style="font-size:40px">기획자의 트렌드, 소통, 배움, 이타심</p>
+          <p style="font-size:40px">{{title}}</p>
           <v-spacer class="pt-5"></v-spacer>
-          <div>By. Jennie。hello</div>
+          <!-- <div>By. Jennie。hello</div> -->
+          <v-row justify="center">
+                <div>By.  </div>
+                <div 
+                v-for="writer in writerList"
+                :key="writer"
+                >{{writer.nickname}}</div>
+          </v-row>
+          
           <div>2020 년 11 월 22 일</div>
         </v-col>
         </v-row>
@@ -32,7 +40,7 @@
         sm="4"
         md="3"
         >
-            <Subtitle v-bind:title="title" @selectIndex="selectIndex"></Subtitle>
+            <Subtitle v-bind:title="title" @selectIndex="selectIndex" v-bind:indexList="indexList"></Subtitle>
         </v-col>
         <v-col
         sm="6"
@@ -55,12 +63,15 @@
           </v-row>
             
             <v-row>
-            <v-chip
-            color="grey"
-            class="ml-3 mb-2"
-            >
-            <p style="color:white">I T</p>
-            </v-chip>
+              <v-chip
+                v-for="tag in tagList"
+                :key="tag"
+                v-text="tag"
+                color="grey"
+                class="ml-3 mb-2"
+              >
+              <!-- <p style="color:white"></p> -->
+              </v-chip>
             <v-spacer></v-spacer>
               <v-rating
                 background-color="grey"
@@ -100,7 +111,7 @@
           </div>
         </div>
           <div v-if="idc==2" class="pt-10">
-           <h3>{{subtitle_2}}</h3>
+           <h3>{{subtitle_1}}</h3>
            <v-spacer class = "pt-3"></v-spacer>
            <subtitle-2>{{contents_2}}</subtitle-2>
           </div>
@@ -123,6 +134,24 @@
           <div v-if="idc==3" style="text-align : center; width: 100%;" class="pt-5">
             <img src="../assets/trend.jpg" style="width: 100%; max-width: 760px;" />
           </div>
+
+          <div
+          v-for="(list,i) in contents_list"
+          :key="i"
+          >
+            <div
+            v-if="idc==i+1"
+            class="pt-10"
+            >
+            <subtitle-2>{{list.subtitle_1}}</subtitle-2>
+            <h1>test {{i}}</h1>
+            </div>
+
+          </div>
+
+
+
+
           <div class="pt-10">
            <PostReply :idp="idp" :idc="idc" @child_replySubmit="parent_replySubmit"></PostReply>
           </div>
@@ -241,7 +270,7 @@ export default {
     data: () => ( 
         {
         rating_size: 20,
-        rating_score: 4,
+        rating_score:0,
         click_like: false,
         contents_like: 0, //axios로 좋아요 수 가져와야함
         zIndex: 0,
@@ -278,11 +307,13 @@ export default {
         contents_2_2:'이렇듯 팀원을 향한 관심은 나 자신에게도 동일하게 적용됩니다. 제품은 함께 만들어지는 것이기에, 사업/개발/디자인/기획단의 동료들이 진행한 것들을 관심있게 보고, 사려깊은 마음으로 의견을 제시하는 것이 필요합니다. 또한 기획자는 사업/디자인/개발단에서 제품을 구현하는데 어려움이 발생하면, 최대한 관심을 기울이고 이를 해결하기 위해, 기꺼이 최선의 도움을 주는 태도를 가져야 합니다. 이러한 이타적인 태도를 통해서만 우리는 팀원의 도움과 협동을 이끌어낼 수 있으며, 우당탕탕 굴러가는 제품을 발전시켜 고객을 만족시키는 상품을 만들 수 있습니다.',
         subtitle_3:'함께 만드는 것',
         contents_3:'글을 쓰다보니 내용이 적절하지 않은 듯도 하고, 엉켜서 의미가 분명하게 전달되지 않는 문장들도 참 많은거 같습니다. 이렇듯 미숙한 글을 통해 전달하고 싶은건, 미숙한 사람들이 함께 모여 함께 멋진 제품을 만드는 것. 협동하여 서로의 부족을 채워주는 것. 그러기 위해 끊임없이 배우는 것과 이타심의 가치입니다.',
+        
         idc: 1,
         idp:0,
         date: '2020.10.12 05:55',
-        writer: ['김김김', '이이이', '박박박'],
+        writerList: [],
         selected_idx: 0,
+ 
         // router :to="{ 
         //       name: 'ContentsReadingPage',
         //       params: {idc: this.selected_idx}}"
@@ -290,9 +321,101 @@ export default {
         temp_title_index:3,
         new_selected_idx: 1,
         comment_selected_idx: 3,
+        indexList:[],
+        tagList:[],
+        contents_list:[
+          {
+            subtitle_1: 'hihihihihi'
+          },
+          {
+            subtitle_1: 'fdfdfdfdfdfdf'
+          },
+
+        ], // 여기에 새로 들어오는 contents 데이터 넣고
+        
         // token: localStorage.getItem('access_token'),
         // idp:0,
   }),
+    created(){ 
+    this.idc = this.$route.params.idc;
+    this.idp = this.$route.params.idp;
+    console.log('idc :'+this.idc);
+    console.log('idp :'+this.idp);
+    axios.post('http://localhost:3000/api/getContentsReading', 
+        {projectId: this.idp, postIndex:this.idc},
+        {
+            headers: {
+                'token': localStorage.getItem('access_token')
+            }
+        })
+        .then((res) => {
+            console.log(res.data);
+
+            this.title = res.data.title;
+            this.subtitle_1 = res.data.subtitle;
+            this.tagList = res.data.tagList
+            this.writerList = res.data.writerNicknameList
+
+            this.contents_list.title = res.data.title;
+            this.contents_list.subtitle_1 = res.data.subtitle;
+            this.contents_list.tagList = res.data.tagList
+            this.contents_list.writerList = res.data.writerNicknameList
+            // {
+            //   completePost: null
+            //   complete_time: null
+            //   projectId: 171
+            //   starRate: 4
+            //   subtitle: "크런치 프로젝트란"
+            //   tagList: []
+            //   title: "캡스톤디자인! 크런치 프로젝트의 운명은..? "
+            //   writerNicknameList: Array(1)
+            //     0: {userId: 78, nickname: "mumu"
+            // }
+        })
+        .catch(function (error) {
+            console.log(error.response);
+        });
+
+    axios.post('http://localhost:3000/api/getContentsReadingIndexList', 
+        {id: this.idp},
+        {
+            headers: {
+                'token': localStorage.getItem('access_token')
+            }
+        })
+        .then((res) => {
+            console.log(res.data);
+            // 리스트 형식
+            // {
+            //   fee: 100
+            //   indexId: 1
+            //   projectId: 171
+            //   title: "크런치 프로젝트란"
+            // }   
+            
+        this.indexList = res.data
+        })
+        .catch(function (error) {
+            console.log(error.response);
+        });
+
+	axios
+		.post('http://localhost:3000/api/getAvgRating',
+			{ projectId: this.idp, postIndex: this.idc}, 
+			{ headers: {'token':localStorage.getItem('access_token') }}
+		)
+		.then(res => {
+			console.log("!!!!!!!!!!!!!")
+			console.log((res.data)) 
+			this.rating_score = res.data
+
+		})
+		.catch((err) => {
+			console.log(err)
+			//alert("에러가 발생했습니다. 다시 시도해주세요")
+		});
+
+  },
   methods:{
     ...mapActions(['paymentpoint']),
     selectIndex(title_idx){
@@ -323,7 +446,8 @@ export default {
         else{
           // alert('무료컨텐츠 입니다.')
           // alert(title_idx)
-          this.$router.push({ name: 'ContentsReadingPage',params: {idc: title_idx} })
+          console.log("before route idp :"+this.idp + 'idc :'+this.idc + 'title_idx :'+title_idx)
+          this.$router.push({ name: 'ContentsReadingPage',params: {postname:'여행',idp:this.idp, idc: title_idx} })
         }
     },
     addbuyer(){
@@ -423,10 +547,6 @@ export default {
         //목차 클릭시 페이지 변경
         //this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
      //},
-  },
-  created(){ 
-    this.idc = this.$route.params.idc;
-    this.idp = this.$route.params.idp;
   },
   mounted(){
      $('#dwn-btn').click(function() {

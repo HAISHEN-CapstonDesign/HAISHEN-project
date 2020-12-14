@@ -15,7 +15,7 @@
       <v-slide-item
         v-for="chat in list"
         :key="chat.title"
-        v-slot:default="{ active, toggle }"
+        v-slot:default="{ active }"
       >
         <v-card
           :color="active ? undefined : 'white lighten-1'"
@@ -23,7 +23,7 @@
           width="350"
           outlined
           tile
-          @click="toggle"
+          @click="goDetailPage(chat.projectId,chat.genre[0])"
         >
 
     <v-img
@@ -31,13 +31,15 @@
     height="200px"
     ></v-img>
     <v-card-title v-text="chat.title"></v-card-title>
-    <v-card-text v-text="chat.intro"></v-card-text>
+    <v-card-text v-text="chat.introduction"></v-card-text>
     <v-card-subtitle>
       작가 목록
     </v-card-subtitle>
-    <v-card-text v-text="chat.writers"></v-card-text>
     
-    <v-card-text v-text="chat.progress"></v-card-text>
+    <div class="ml-3">
+      <v-chip class="mx-1" color="deep-purple" outlined v-for="member in chat.writerList" :key="member" v-text="member"></v-chip>
+    </div> 
+    <!-- <v-card-text v-text="chat.progress"></v-card-text> -->
 
   </v-card>
       </v-slide-item>
@@ -48,29 +50,63 @@
 </template>
 
 <script>
+import axios from 'axios'
   export default {
-      name: 'Complete',
+    name: 'Complete',
+    created(){
+      
+      axios
+        .post('http://localhost:3000/api/mypageCompleteProjectList',{tmp:1},{ headers: {'token': localStorage.getItem('access_token')}})
+        .then(res => {
+			console.log("$$$$$$$$$$$$$$")
+			console.log(res.data)
+			this.getList = res.data
+			this.getList.forEach(element => {
+			this.list.push(
+				{
+					title: element.title,
+					projectId: element.projectId,
+					writerList: element.writerNicknameList,
+					introduction: element.introduction,
+					// image: `${this.imgSrcList[index]}`
+					genre: element.tagList,
+					image: 'https://cdn.vuetifyjs.com/images/cards/sunshine.jpg'
+					// image:''
+				})
 
+		})
+		})
+        .catch((err) => {
+            console.log(err)
+        });
+    },
+    methods: {
+      goDetailPage(projectid,genre){
+        //projectId 받아와서 변경하기 추가 필요
+        this.$router.push({name:'ContentsReadingPage',params:{idp:projectid,idc:1,postname:genre}});
+      }
+    },
     data: () => ({
+      getList:[],
       list: [
-        {
-          title:'제목1',
-          image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-          intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
-          writers: '김ㅇㅇ, 이ㅇㅇ, 박ㅇㅇ',
-        },
-        {
-          title:'제목2',
-          image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-          intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
-          writers: '김ㅁㅁ, 최ㅁㅁ, 강ㅁㅁ',
-        },
-        {
-          title:'제목3',
-          image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-          intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
-          writers: '한ㅇㅇ, 이ㅇㅇ, 김ㅇㅇ, 박ㅇㅇ',
-        },
+        // {
+        //   title:'제목1',
+        //   image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+        //   intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
+        //   writers: '김ㅇㅇ, 이ㅇㅇ, 박ㅇㅇ',
+        // },
+        // {
+        //   title:'제목2',
+        //   image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+        //   intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
+        //   writers: '김ㅁㅁ, 최ㅁㅁ, 강ㅁㅁ',
+        // },
+        // {
+        //   title:'제목3',
+        //   image: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+        //   intro: '간단한 소개 간단한 소개 간단한 소개 간단한 소개 간단한 소개',
+        //   writers: '한ㅇㅇ, 이ㅇㅇ, 김ㅇㅇ, 박ㅇㅇ',
+        // },
       ],
     }),
   }

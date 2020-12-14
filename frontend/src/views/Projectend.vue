@@ -97,7 +97,7 @@
                 </v-row>
             </v-card>
             <div>
-                <v-btn @click="submitEndProject()">
+                <v-btn @click="dialog0 = true">
                     제출
                 </v-btn>
             </div>
@@ -106,9 +106,40 @@
                
             
         </v-row>
-
-
     </div>
+
+    <!-- dialog area -->
+      <v-dialog
+          v-model="dialog0"
+          persistent
+          max-width="500"
+        >
+        <v-card>
+          <v-card-title class="headline">
+            정말 프로젝트완료를 하시겠습니까?
+          </v-card-title>
+          <v-card-text>한번 선택하면 되돌릴 수 없습니다</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="green darken-1"
+              text
+              @click="dialog0 = false"
+            >
+              아니요
+            </v-btn>
+            <v-btn
+              color="green darken-1"
+              text
+              @click="submitEndProject()"
+              >
+              네
+            </v-btn>
+          </v-card-actions>
+      </v-card>
+    </v-dialog> -->
+    <!-- dialog area endline-->
+
     </v-layout>
     </v-container>
 </template>
@@ -179,6 +210,7 @@ export default {
         fee:['유료','무료'],
         real_fee: false,
         real_fee2: true,
+        dialog0: false,
         items: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         getindexList:[],
         indexlist:[
@@ -259,6 +291,8 @@ export default {
                 .catch((err) => {
                     console.log(err)
                 });
+            
+            this.$router.push("/")
         }
     }
     

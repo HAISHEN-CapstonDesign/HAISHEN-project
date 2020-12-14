@@ -89,9 +89,21 @@
                 <v-col cols="6" md="4">
                     <p style="font-size:20px" class="text-center">배너 이미지 </p>
                 </v-col>
-                <v-col cols="12" sm="6" md="8">
+                <!-- <v-col cols="12" sm="6" md="8">
                     <input ref="imageInput" type="file" hidden @change="onChangeImages">
                     <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn>
+                </v-col> -->
+
+                <v-col cols="12" sm="6" md="8">
+                    <!-- <input ref="imageInput" type="file" hidden @change="onChangeImages">
+                    <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn> -->
+                    <v-row>
+                        <form method="post" enctype="multipart/form-data" action="'/api/project/startup/banner'">
+                            <input type="file" ref="photofile" name="photo" @change="onChangeImages"/>
+                            <!-- <v-btn @click="upload()">업로드</v-btn> -->
+                        </form>
+                    </v-row>
+
                 </v-col>
             </v-row>
         </v-flex>
@@ -196,6 +208,8 @@
             >
             프로젝트 등록하기</v-btn>
             </div>
+            <!-- <v-btn @click="upload()">이미지 업로드</v-btn> -->
+
         </v-flex>
     </v-layout>
     </v-container>
@@ -240,7 +254,19 @@ export default {
             const file = e.target.files[0];
             this.imageUrl = URL.createObjectURL(file);
         },
-        
+        upload(){
+            // var data = new FormData();
+            // var file = this.$refs.photofile.files[0];
+            // data.append('img', file);
+
+            // axios.post('/api/project/startup/banner', data, {id:200})
+            // .then(res=>{
+            //     // this.result = res.data;
+            // })
+            // .catch((err) => {
+            //         console.log(err)
+            // });
+        },        
         createProject(){
             
             var data = {
@@ -258,12 +284,29 @@ export default {
                 .then(res => {
                     console.log(res)
                     this.projectId = res.data
-                    this.$router.push({path:`/${res.data}/CollaboProjMain`, query: {projectId: res.data}})
+                    alert("프로젝트가 등록되었습니다!")
+
+                    var imgData = new FormData();
+                    var file = this.$refs.photofile.files[0];
+                    imgData.append('img', file);
+
+                    axios.post(`/api/${this.projectId}/startup/banner`, imgData, {id:this.projectId} )
+                    .then(res=>{
+                        console.log(res.data);
+
+                        this.$router.push({path:`/${this.projectId}/CollaboProjMain`, query: {projectId: this.projectId}})
+                    })
+                    .catch((err) => {
+                            console.log(err)
+                    });
+                    
                     
                 })
                 .catch((err) => {
                     console.log(err)
                 });
+
+            
                 
         }
     },

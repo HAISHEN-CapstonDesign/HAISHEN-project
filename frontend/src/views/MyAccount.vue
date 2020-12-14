@@ -24,8 +24,10 @@
                         hover="true"
                         class="text-center"
                         >
-                            <div style="position: absolute; top: 40%; width:100%">
-                            <h3>등록된 계좌가 없습니다</h3>
+                            <div style="position: absolute; top: 20%; width:100%">
+                            <h3>예금주 : {{item.accountHolder}}</h3>
+                            <h3>계좌 번호 : {{item.account_num}}</h3>
+                            <h3>은행 : {{item.bank}}</h3>
                             </div>
                         </v-card>
                     </v-col>
@@ -57,14 +59,28 @@ import axios from 'axios'
 
 export default {
     data: () => ({
-      account: ['start'],
+      account: [],
+      tempaccount: [],
     }),
     created() {
             axios
                 .post('http://localhost:3000/api/getaccounts',{tmp:3}, { headers: {'token': localStorage.getItem('access_token')}})
                 .then(res => {
-                     console.log(res.data)
-                     })
+                    console.log(res.data)
+                    this.tempaccount = res.data;
+                    this.tempaccount.forEach(element => {
+                        this.account.push(
+                            {
+                                accountHolder: element.accountHolder,
+                                account_num: element.account_num,
+                                bank: element.bank
+                            }
+                        )    
+                    })
+                    console.log('tempaccount :'+JSON.stringify(this.tempaccount))
+                    console.log('account :'+JSON.stringify(this.account))
+
+                    })
                     .catch((err) => {
                          console.log(err)
                     alert("에러가 발생했습니다. 다시 시도해주세요")

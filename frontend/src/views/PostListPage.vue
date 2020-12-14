@@ -32,21 +32,38 @@
                     <v-btn color="teal lighten-1" outlined rounded @click="showRecruitList">작가 모집중</v-btn>
                 </v-col >
             </v-row>
-            <art_write v-if="imgsrc_index == 9"></art_write>
-            <it_write v-if="imgsrc_index == 3"></it_write>
-            <build_write v-if="imgsrc_index == 8"></build_write>
-            <cook_write v-if="imgsrc_index == 5"></cook_write>
-            <economy_write v-if="imgsrc_index == 4"></economy_write>
-            <game_write v-if="imgsrc_index == 13"></game_write>
-            <health_write v-if="imgsrc_index == 6"></health_write>
-            <history_write v-if="imgsrc_index == 7"></history_write>
-            <love_write v-if="imgsrc_index == 14"></love_write>
-            <math_write v-if="imgsrc_index == 1"></math_write>
-            <parenting_write v-if="imgsrc_index == 12"></parenting_write>
-            <preview_write v-if="imgsrc_index == 10"></preview_write>
-            <science_write v-if="imgsrc_index == 2"></science_write>
-            <travel_write v-if="imgsrc_index == 0"></travel_write>
-            <work_write v-if="imgsrc_index == 11"></work_write>
+            <art_write v-if="imgsrc_index == 9 && showComplete==true"></art_write>
+            <it_write v-if="imgsrc_index == 3 && showComplete==true"></it_write>
+            <build_write v-if="imgsrc_index == 8 && showComplete==true"></build_write>
+            <cook_write v-if="imgsrc_index == 5 && showComplete==true"></cook_write>
+            <economy_write v-if="imgsrc_index == 4 && showComplete==true"></economy_write>
+            <game_write v-if="imgsrc_index == 13 && showComplete==true"></game_write>
+            <health_write v-if="imgsrc_index == 6 && showComplete==true"></health_write>
+            <history_write v-if="imgsrc_index == 7 && showComplete==true"></history_write>
+            <love_write v-if="imgsrc_index == 14 && showComplete==true"></love_write>
+            <math_write v-if="imgsrc_index == 1 && showComplete==true"></math_write>
+            <parenting_write v-if="imgsrc_index == 12 && showComplete==true"></parenting_write>
+            <preview_write v-if="imgsrc_index == 10 && showComplete==true"></preview_write>
+            <science_write v-if="imgsrc_index == 2 && showComplete==true"></science_write>
+            <travel_write v-if="imgsrc_index == 0 && showComplete==true"></travel_write>
+            <work_write v-if="imgsrc_index == 11 && showComplete==true"></work_write>
+
+            <art_recurit v-if="imgsrc_index == 9 && showComplete==false"></art_recurit>
+            <it_recurit v-if="imgsrc_index == 3 && showComplete==false"></it_recurit>
+            <build_recurit v-if="imgsrc_index == 8 && showComplete==false"></build_recurit>
+            <cook_recurit v-if="imgsrc_index == 5 && showComplete==false"></cook_recurit>
+            <economy_recurit v-if="imgsrc_index == 4 && showComplete==false"></economy_recurit>
+            <game_recurit v-if="imgsrc_index == 13 && showComplete==false"></game_recurit>
+            <health_recurit v-if="imgsrc_index == 6 && showComplete==false"></health_recurit>
+            <history_recurit v-if="imgsrc_index == 7 && showComplete==false"></history_recurit>
+            <love_recurit v-if="imgsrc_index == 14 && showComplete==false"></love_recurit>
+            <math_recurit v-if="imgsrc_index == 1 && showComplete==false"></math_recurit>
+            <parenting_recurit v-if="imgsrc_index == 12 && showComplete==false"></parenting_recurit>
+            <preview_recurit v-if="imgsrc_index == 10 && showComplete==false"></preview_recurit>
+            <science_recurit v-if="imgsrc_index == 2 && showComplete==false"></science_recurit>
+            <travel_recurit v-if="imgsrc_index == 0 && showComplete==false"></travel_recurit>
+            <work_recurit v-if="imgsrc_index == 11 && showComplete==false"></work_recurit>
+
         </v-container>
     </v-app>
 </template>
@@ -69,6 +86,23 @@ import science_write from '../components/postlist/science_write'
 import travel_write from '../components/postlist/travel_write'
 import work_write from '../components/postlist/work_write'
 
+import art_recurit from '../components/recurit_postlist/art_recurit'
+import cook_recurit from '../components/recurit_postlist/cook_recurit'
+import economy_recurit from '../components/recurit_postlist/economy_recurit'
+import game_recurit from '../components/recurit_postlist/game_recurit'
+import health_recurit from '../components/recurit_postlist/health_recurit'
+import history_recurit from '../components/recurit_postlist/history_recurit'
+import it_recurit from '../components/recurit_postlist/it_recurit'
+import love_recurit from '../components/recurit_postlist/love_recurit'
+import math_recurit from '../components/recurit_postlist/math_recurit'
+import parenting_recurit from '../components/recurit_postlist/parenting_recurit'
+import preview_recurit from '../components/recurit_postlist/preview_recurit'
+import science_recurit from '../components/recurit_postlist/science_recurit'
+import travel_recurit from '../components/recurit_postlist/travel_recurit'
+import work_recurit from '../components/recurit_postlist/work_recurit'
+
+
+
 import axios from 'axios'
 
 export default {
@@ -89,7 +123,21 @@ export default {
         preview_write,
         science_write,
         travel_write,
-        work_write
+        work_write,
+        art_recurit,
+        cook_recurit,
+        economy_recurit,
+        game_recurit,
+        health_recurit,
+        history_recurit,
+        it_recurit,
+        love_recurit,
+        math_recurit,
+        parenting_recurit,
+        preview_recurit,
+        science_recurit,
+        travel_recurit,
+        work_recurit
     },
     created(){
         //this.imgsrc_string = this.genres.map(function(e) { return e.img; }).indexOf(this.$route.params.postname);
@@ -107,9 +155,7 @@ export default {
                     //     projectId: "139",
                     //     writerList: ["mumu", "momo"],
                     //     LikeNum: 0
-                    // }
- 
-                    
+                    // }                    
                 })
                 .catch((err) => {
                     console.log(err)

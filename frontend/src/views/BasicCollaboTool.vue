@@ -244,6 +244,17 @@ export default {
       
     // this.subtitle=this.$store.state.subtitle[this.ids-1].text
       this.title=this.$store.state.title;
+      axios.post('http://localhost:3000/api/getTitle', 
+          { projectId: this.idp}, 
+          { headers: {'token':localStorage.getItem('access_token') }})
+        .then(res=>{
+            this.projectTitle= res.data
+            this.title = res.data
+            
+        })
+        .catch((err) => {
+                console.log(err)
+        });
       axios.get(`http://localhost:3000/api/project/${this.idp}/blob/basicTool/${this.ids}`)
         .then((res) => {
           this.project = res.data;
@@ -312,6 +323,7 @@ export default {
     },
     data() {
         return{
+            projectTitle:'',
             little_titles:[],
             postDetail:[],
             modifying: false,

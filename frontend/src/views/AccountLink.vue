@@ -141,7 +141,8 @@ export default {
         },
         submit_account(){
             console.log(this.accountnumber, this.accountholder, this.bankname)
-            axios.post('http://localhost:3000/api/submitaccount', {account_num: this.accountnumber, accountHolder:this.accountholder, bank:this.selected_item},
+            axios.post('http://localhost:3000/api/submitaccount', 
+            {account_num: this.accountnumber, accountHolder:this.accountholder, bank:this.bankname},
             {
                 headers: {
                     'token': localStorage.getItem('access_token')
@@ -149,9 +150,11 @@ export default {
             })
             .then((res) => {
                 console.log(res.data);
+                this.$router.push('/myaccount')
             })
             .catch(function (error) {
                 console.log(error.response);
+                alert('error')
             });
         }
     }

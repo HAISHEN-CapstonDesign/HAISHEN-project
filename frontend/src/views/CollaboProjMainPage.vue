@@ -1,11 +1,13 @@
 <template>
     <v-app>
         <v-row>
+            <!-- src="../assets/img/projectBanner" -->
+            <!-- src="../assets/partership.jpg" -->
             <v-img
             class="white--text"
             max-height="200"
             max-width="100%"
-            src="../assets/partership.jpg"
+            :src="banner_src"
             gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
             >
             <v-row
@@ -111,11 +113,14 @@ export default {
             target_d_day: null,
             target_funding_money: null,
             title: null,
+            banner_src: ''
 
         }
     },
     created() {
         this.idp = this.$route.params.idp;
+        this.banner_src = require(`../assets/img/projectBanner/${this.idp}.jpg`)
+        console.log(this.banner_src)
         console.log("---------------------------")
         console.log(this.idp)
         axios

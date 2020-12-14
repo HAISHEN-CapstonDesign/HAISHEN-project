@@ -54,43 +54,42 @@ export default {
         //this.imgsrc_string = this.genres.map(function(e) { return e.img; }).indexOf(this.$route.params.postname);
         //console.log('정보 전부'+this.imgsrc_string)
 
-        axios    
-            .post('http://localhost:3000/api/getpostlist', { genre: 'IT' }, { headers: {'token': localStorage.getItem('access_token')}})
-                .then(res => {
-                    console.log('찾는거 : '+res.data)
-                    // 이런형식으로 response 받음
-                    // {
-                    //     title: "adsgasdgas",
-                    //     projectId: "139",
-                    //     writerList: ["mumu", "momo"], writerList를 member로 바꾸어서 주기
-                    //     LikeNum: 0 like로 바꿔서 주기
-                    // }
-                    // this.tempbookList = JSON.parse(this.bookList)
-                    // this.tempbookList.push(res.data)
-                    // this.bookList = JSON.stringify(this.tempbookList)
-                    //this.bookList.push.apply(this.bookList,res.data)
-                    this.tempbookList = res.data;
-                    this.tempbookList.forEach(element => {
-                        this.bookList.push(
-                            {
-                                title: element.title,
-                                info: element.info,
-                                src: require('../../assets/contents_picture/travel_temz.jpg'),
-                                members: element.writeList,
-                                show: false,
-                                like: element.LikeNum,
-                                subscribe: 2,
-                                projectId: element.projectId
-                            }
+        // axios    
+        //     .post('http://localhost:3000/api/getpostlist', { genre: 'IT' }, { headers: {'token': localStorage.getItem('access_token')}})
+        //         .then(res => {
+        //             console.log('찾는거 : '+res.data)
+        //             // 이런형식으로 response 받음
+        //             // {
+        //             //     title: "adsgasdgas",
+        //             //     projectId: "139",
+        //             //     writerList: ["mumu", "momo"], writerList를 member로 바꾸어서 주기
+        //             //     LikeNum: 0 like로 바꿔서 주기
+        //             // }
+        //             // this.tempbookList = JSON.parse(this.bookList)
+        //             // this.tempbookList.push(res.data)
+        //             // this.bookList = JSON.stringify(this.tempbookList)
+        //             //this.bookList.push.apply(this.bookList,res.data)
+        //             this.tempbookList = res.data;
+        //             this.tempbookList.forEach(element => {
+        //                 this.bookList.push(
+        //                     {
+        //                         title: element.title,
+        //                         info: element.info,
+        //                         src: require('../../assets/contents_picture/travel_temz.jpg'),
+        //                         members: element.writeList,
+        //                         show: false,
+        //                         like: element.LikeNum,
+        //                         subscribe: 2,
+        //                     }
                             
-                        )
-                    })
-                    console.log('booklist :'+JSON.stringify(this.bookList))
-                    console.log('tempbooklist :'+JSON.stringify(this.tempbookList))
-                })
-                .catch((err) => {
-                    console.log(err)
-                });
+        //                 )
+        //             })
+        //             console.log('booklist :'+JSON.stringify(this.bookList))
+        //             console.log('tempbooklist :'+JSON.stringify(this.tempbookList))
+        //         })
+        //         .catch((err) => {
+        //             console.log(err)
+        //         });
 
         axios    
             .post('http://localhost:3000/api/getrecruitingPost', { genre: 'IT' }, { headers: {'token': localStorage.getItem('access_token')}})
@@ -105,6 +104,22 @@ export default {
                     //     title: "sagadgawgwge"
                     //     projectId: "139"
                     // }
+                    this.temprecuritList = res.data;
+                    this.temprecuritList.forEach(element => {
+                        this.bookList.push(
+                            {
+                                title: element.title,
+                                info: element.info,
+                                src: require('../../assets/contents_picture/travel_temz.jpg'),
+                                members: element.mainWriter,
+                                show: false,
+                                like: element.LikeNum,
+                                subscribe: 2,
+                                projectId: element.projectId
+                            }
+                            
+                        )
+                    })
                     
                 })
                 .catch((err) => {
@@ -114,6 +129,7 @@ export default {
     data(){
         return{
             tempbookList: [],
+            temprecuritList: [],
             page:1, //현재 페이지
             dataPerPage:8, //한 페이지에 나올 글의 수
             bookList: [
@@ -138,6 +154,16 @@ export default {
                     projectId: 1
                 },
                 {
+                    title:'앤드류 응의 머신러닝(13-1):비지도학습 클러스터링',
+                    info:'앤드류 응의 머신러닝(13-1):비지도학습 클러스터링',
+                    src: require('../../assets/mclearning.png'),
+                    members: ['라인하트','andrew'],
+                    show: false,
+                    targetNum:4,
+                    memberNum:2,
+                    projectId: 2
+                },
+                {
                     title:'[책]알고리즘트레이딩을 위한 파이썬',
                     info:'[책]알고리즘트레이딩을 위한 파이썬',
                     src: require('../../assets/python_book.jpg'),
@@ -145,7 +171,7 @@ export default {
                     show: false,
                     like: 33,
                     subscribe: 21,
-                    projectId: 2
+                    projectId: 3
                 },
                 {
                     title:'이번 인스타그램 업데이트가 불편한 이유',
@@ -155,7 +181,7 @@ export default {
                     show: false,
                     like: 38,
                     subscribe: 25,
-                    projectId: 3
+                    projectId: 4
                 },
                 {
                     title:'휴대폰 청소하기',
@@ -165,7 +191,7 @@ export default {
                     show: false,
                     like: 38,
                     subscribe: 25,
-                    projectId: 4
+                    projectId: 5
                 },
                 {
                     title:'가로형과 세로형 이미지의 UX.',
@@ -175,7 +201,7 @@ export default {
                     show: false,
                     like: 38,
                     subscribe: 25,
-                    projectId: 5
+                    projectId: 6
                 },
                 {
                     title:'UX/UI의 10가지 심리학 법칙',
@@ -185,7 +211,7 @@ export default {
                     show: false,
                     like: 38,
                     subscribe: 25,
-                    projectId: 6
+                    projectId: 7
                 },
                 {
                     title:'“UX에 흔히 있는” 바람직하지 않은 UX조직',
@@ -195,7 +221,7 @@ export default {
                     show: false,
                     like: 38,
                     subscribe: 25,
-                    projectId: 7
+                    projectId: 8
                 },
                 {
                     title:'휴대폰 청소하기',
@@ -205,7 +231,7 @@ export default {
                     show: false,
                     like: 38,
                     subscribe: 25,
-                    projectId: 8
+                    projectId: 9
                 },
                 {
                     title:'[책]알고리즘트레이딩을 위한 파이썬',
@@ -215,7 +241,7 @@ export default {
                     show: false,
                     like: 33,
                     subscribe: 21,
-                    projectId: 9
+                    projectId: 10
                 },
             ],
         }

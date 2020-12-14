@@ -11,7 +11,7 @@
                     md="3"
                     >
                     <!-- 임의로 ContentsReadingPage에 연결해둠 -->
-                        <v-card width="270px" height="280px" @click="clickcontents(list)">
+                        <v-card width="270px" height="280px" @click="$router.push({name:'ContentsReadingPage',params:{idp:list.projectId, idc:1}})">
                             <!--
                             <v-img
                             :src="`https://picsum.photos/200/300?image=${getImage()}`"
@@ -55,42 +55,42 @@ export default {
         //this.imgsrc_string = this.genres.map(function(e) { return e.img; }).indexOf(this.$route.params.postname);
         //console.log('정보 전부'+this.imgsrc_string)
 
-        axios    
-            .post('http://localhost:3000/api/getpostlist', { genre: '문화, 예술' }, { headers: {'token': localStorage.getItem('access_token')}})
-                .then(res => {
-                    console.log('찾는거 : '+res.data)
-                    // 이런형식으로 response 받음
-                    // {
-                    //     title: "adsgasdgas",
-                    //     projectId: "139",
-                    //     writerList: ["mumu", "momo"], writerList를 member로 바꾸어서 주기
-                    //     LikeNum: 0 like로 바꿔서 주기
-                    // }
-                    // this.tempbookList = JSON.parse(this.bookList)
-                    // this.tempbookList.push(res.data)
-                    // this.bookList = JSON.stringify(this.tempbookList)
-                    //this.bookList.push.apply(this.bookList,res.data)
-                    this.tempbookList = res.data;
-                    this.tempbookList.forEach(element => {
-                        this.bookList.push(
-                            {
-                                title: element.title,
-                                info: element.info,
-                                src: require('../../assets/contents_picture/travel_temz.jpg'),
-                                members: element.writeList,
-                                show: false,
-                                like: element.LikeNum,
-                                subscribe: 2,
-                            }
+        // axios    
+        //     .post('http://localhost:3000/api/getpostlist', { genre: '문화, 예술' }, { headers: {'token': localStorage.getItem('access_token')}})
+        //         .then(res => {
+        //             console.log('찾는거 : '+res.data)
+        //             // 이런형식으로 response 받음
+        //             // {
+        //             //     title: "adsgasdgas",
+        //             //     projectId: "139",
+        //             //     writerList: ["mumu", "momo"], writerList를 member로 바꾸어서 주기
+        //             //     LikeNum: 0 like로 바꿔서 주기
+        //             // }
+        //             // this.tempbookList = JSON.parse(this.bookList)
+        //             // this.tempbookList.push(res.data)
+        //             // this.bookList = JSON.stringify(this.tempbookList)
+        //             //this.bookList.push.apply(this.bookList,res.data)
+        //             this.tempbookList = res.data;
+        //             this.tempbookList.forEach(element => {
+        //                 this.bookList.push(
+        //                     {
+        //                         title: element.title,
+        //                         info: element.info,
+        //                         src: require('../../assets/contents_picture/travel_temz.jpg'),
+        //                         members: element.writeList,
+        //                         show: false,
+        //                         like: element.LikeNum,
+        //                         subscribe: 2,
+        //                     }
                             
-                        )
-                    })
-                    console.log('booklist :'+JSON.stringify(this.bookList))
-                    console.log('tempbooklist :'+JSON.stringify(this.tempbookList))
-                })
-                .catch((err) => {
-                    console.log(err)
-                });
+        //                 )
+        //             })
+        //             console.log('booklist :'+JSON.stringify(this.bookList))
+        //             console.log('tempbooklist :'+JSON.stringify(this.tempbookList))
+        //         })
+        //         .catch((err) => {
+        //             console.log(err)
+        //         });
 
         axios    
             .post('http://localhost:3000/api/getrecruitingPost', { genre: '문화, 예술' }, { headers: {'token': localStorage.getItem('access_token')}})
@@ -105,6 +105,22 @@ export default {
                     //     title: "sagadgawgwge"
                     //     projectId: "139"
                     // }
+                    this.temprecuritList = res.data;
+                    this.temprecuritList.forEach(element => {
+                        this.bookList.push(
+                            {
+                                title: element.title,
+                                info: element.info,
+                                src: require('../../assets/contents_picture/travel_temz.jpg'),
+                                members: element.mainWriter,
+                                show: false,
+                                like: element.LikeNum,
+                                subscribe: 2,
+                                projectId: element.projectId
+                            }
+                            
+                        )
+                    })
                     
                 })
                 .catch((err) => {
@@ -114,6 +130,7 @@ export default {
     data(){
         return{
             tempbookList: [],
+            temprecuritList: [],
             page:1, //현재 페이지
             dataPerPage:8, //한 페이지에 나올 글의 수
             bookList: [
@@ -136,7 +153,17 @@ export default {
                     like: 48,
                     subscribe: 29,
                     projectId: 1
-                }
+                },
+                {
+                    title:'앤드류 응의 머신러닝(13-1):비지도학습 클러스터링',
+                    info:'앤드류 응의 머신러닝(13-1):비지도학습 클러스터링',
+                    src: require('../../assets/mclearning.png'),
+                    members: ['라인하트','andrew'],
+                    show: false,
+                    targetNum:4,
+                    memberNum:2,
+                    projectId: 2
+                },
             ],
         }
     },
@@ -149,10 +176,6 @@ export default {
       changePage(newPage){
           this.page = newPage;
       },
-      clickcontents(list){
-          
-          this.$router.push({name:'ContentsReadingPage',params:{idp:list.projectId, idc:1}})
-      }
     },
     computed: {
         startOffset() {

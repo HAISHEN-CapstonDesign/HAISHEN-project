@@ -105,7 +105,7 @@ const vueRouter = new VueRouter({
             component: AccountLinkPage
         },
         {
-            path: '/:idp/contents/:idc',
+            path: '/postlist/:postname/:idp/contents/:idc',
             name: 'ContentsReadingPage',
             component: ContentsReadingPage,
 
