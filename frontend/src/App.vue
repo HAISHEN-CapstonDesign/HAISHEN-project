@@ -238,29 +238,7 @@ export default {
             console.log('받는 message 정보'+message)
             console.log(message)
         },
-        /*
-        sendMessage(event) {
-  var messageContent =  this.message;
-  if (messageContent.startsWith('/join ')) {
-    this.enterRoom(this.roomId);
-  } else if (messageContent && this.stompClient) {
-    var chatMessage = {
-        userName: localStorage.getItem('nickname'),
-        content: this.message,
-        time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm'),
-        tagName:this.tagLists,
-        //state:"community",
-        //url:this.document.location.href,
-    };
-    console.log('보낸 message 정보'+chatMessage)
-    this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`
-    , JSON.stringify(chatMessage));
-  }
-  this.message = '';
-  this.tagLists=[];
-  event.preventDefault();
-},
-        */
+
 
         to_main() {
             this.$router.push('/');

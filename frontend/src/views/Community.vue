@@ -23,13 +23,13 @@
             <div id="container"
             style="overflow-y:auto; overflow-x:hidden; min-height:430px; max-height:430px;">
             <v-card
-                v-for="(item) in chat"
-                v-bind:key="item.time"
+                v-for="(item, i) in chat"
+                v-bind:key="'other'+i"
                 cols="12"
                 class="ma-1 pa-0"
                 flat 
                 >
-                    <v-row v-if="item.userNickname!=me" cols="12" justify="left">
+                    <v-row v-if="item.userNickname!=me" cols="12" justify="start">
                         <v-col md="10">
                             <span>{{item.userNickname}}</span>
                             <v-card flat style="background-color: #ECDACE" width="70%">
@@ -42,14 +42,14 @@
                                     outlined
                                     v-for="tags in item.tagNickname"
                                     :key="tags"
-                                    >{{tags.name}}</v-chip>
+                                    >@{{tags.name}}</v-chip>
                                     {{item.text}}
                                 </v-card-text>
                             </v-card>
                             <p>{{item.time}}</p>
                         </v-col>
                     </v-row>
-                    <v-row v-else justify="right">
+                    <v-row v-else justify="end">
                         <v-col align="right">
                             <v-card flat style="background-color: #D5F3E9" width="60%">
                                 <v-card-text align="left" class="ma-0 pa-2">
@@ -61,7 +61,7 @@
                                     outlined
                                     v-for="tags in item.tagNickname"
                                     :key="tags"
-                                    >{{tags.name}}</v-chip>
+                                    >@{{tags.name}}</v-chip>
                                     {{item.text}}
                                     </v-card-text>
                             </v-card>
@@ -70,13 +70,13 @@
                     </v-row>
                 </v-card>
                 <v-card
-                v-for="(item) in recvList"
-                v-bind:key="item.time"
+                v-for="(item, i) in recvList"
+                v-bind:key="'send'+i"
                 cols="12"
                 class="ma-1 pa-0"
                 flat 
                 >
-                    <v-row v-if="item.userName!=me" cols="12" justify="left">
+                    <v-row v-if="item.userName!=me" cols="12" justify="start">
                         <v-col md="10">
                             <span>{{item.userName}}</span>
                             <v-card flat style="background-color: #ECDACE" width="70%">
@@ -89,14 +89,14 @@
                                     outlined
                                     v-for="tags in item.tagName"
                                     :key="tags.name"
-                                    >{{tags.name}}</v-chip>
+                                    >@{{tags.name}}</v-chip>
                                     {{item.content}}
                                 </v-card-text>
                             </v-card>
                             <p>{{item.time}}</p>
                         </v-col>
                     </v-row>
-                    <v-row v-else justify="right">
+                    <v-row v-else justify="end">
                         <v-col align="right">
                             <v-card flat style="background-color: #D5F3E9" width="60%">
                                 <v-card-text align="left" class="ma-0 pa-2">
@@ -108,7 +108,7 @@
                                     outlined
                                     v-for="tags in item.tagName"
                                     :key="tags.name"
-                                    >{{tags.name}}</v-chip>
+                                    >@{{tags.name}}</v-chip>
                                     {{item.content}}
                                     </v-card-text>
                             </v-card>
@@ -265,10 +265,10 @@ export default {
         },
         tag(writer){
             var bodyTag = document.getElementById(writer);
-            var plusTag= "@" + writer
+        //    var plusTag= "@" + writer
             var check=false;
             for(var i=0; i<this.tagLists.length; i++){
-                if(this.tagLists[i].name==plusTag){
+                if(this.tagLists[i].name==writer){
                     check=true;
                     bodyTag.style.color = "black";
                     this.tagLists.splice(i,1);
@@ -278,7 +278,7 @@ export default {
             if(check == false){
                 bodyTag.style.color = "blue";
                 this.tagLists.push({
-                    name:plusTag
+                    name:writer
                 })
             }
         },
@@ -286,16 +286,15 @@ export default {
         //    console.log(idx+"받아오나??")
             this.$router.push(`/${this.idp}/${idx}/community`);
         },
-        sendBtn () {
+        async sendBtn () {
         if(this.message !== ''){
             var clearTag = document.getElementsByClassName("writerTagBtn");
-            this.sendMessage(event)
+            await this.sendMessage(event)
             for(var j=0; j<clearTag.length; j++){
                 clearTag[j].style.color = "black";
-            }
-            
+            }    
             this.scrollToEnd();
-      }
+        }
     },
     sendMessage(event) {
   var messageContent =  this.message;
