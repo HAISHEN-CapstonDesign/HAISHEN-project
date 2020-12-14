@@ -312,8 +312,8 @@ export default {
     created(){ 
     this.idc = this.$route.params.idc;
     this.idp = this.$route.params.idp;
-    console.log(this.idc);
-    console.log(this.idp);
+    console.log('idc :'+this.idc);
+    console.log('idp :'+this.idp);
     axios.post('http://localhost:3000/api/getContentsReading', 
         {projectId: this.idp, postIndex:this.idc},
         {
@@ -415,7 +415,8 @@ export default {
         else{
           // alert('무료컨텐츠 입니다.')
           // alert(title_idx)
-          this.$router.push({ name: 'ContentsReadingPage',params: {idc: title_idx} })
+          console.log("before route idp :"+this.idp + 'idc :'+this.idc + 'title_idx :'+title_idx)
+          this.$router.push({ name: 'ContentsReadingPage',params: {postname:'여행',idp:this.idp, idc: title_idx} })
         }
     },
     addbuyer(){

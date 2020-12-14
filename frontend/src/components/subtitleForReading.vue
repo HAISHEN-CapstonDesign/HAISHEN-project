@@ -17,7 +17,7 @@
           <v-list-item
           v-for="index in indexList"
           :key="index"
-          @click="clickSub(index.index)"
+          @click="clickSub(index.indexId)"
           link
           >
             <v-list-item-content>
