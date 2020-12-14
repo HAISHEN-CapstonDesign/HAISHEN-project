@@ -151,7 +151,7 @@
 <script>
 import axios from 'axios'
 import Subtitle from '../components/subtitleList'
-import Stomp from 'webstomp-client'
+//import Stomp from 'webstomp-client'
 import defSocket from '../alarm_index.js'
 //import SockJS from 'sockjs-client'
 
@@ -180,6 +180,7 @@ export default {
         little_titles:[],
     }),
     created() {
+        
         var color=['#FF8787','#FFBB67','#68BE66','#689CDD','#9668DD','#E778E0']
         this.title=this.$store.state.title;
         this.idp = this.$route.params.idp;
@@ -216,8 +217,8 @@ export default {
                 this.readText = this.readText + colorText;
               }
                     }
-                    this.connect(event)
-                    console.log(res.data);
+                    this.connect()
+                //    console.log(res.data);
                 })
                 .catch((err) => {
                     console.log(err)
@@ -249,7 +250,6 @@ export default {
             alert("에러가 발생했습니다. 다시 시도해주세요")
         });
        // this.getcomment()
-        this.connect()
       //  this.connect()
        // console.log('items url :'+this.items[0].avatar)
     },
@@ -288,67 +288,65 @@ export default {
         //    console.log(idx+"받아오나??")
             this.$router.push(`/${this.idp}/${idx}/community`);
         },
-        async sendBtn () {
+        sendBtn () {
         if(this.message !== ''){
             var clearTag = document.getElementsByClassName("writerTagBtn");
-            await this.sendMessage(event)
+            this.sendMessage()
             for(var j=0; j<clearTag.length; j++){
                 clearTag[j].style.color = "black";
             }    
             this.scrollToEnd();
         }
     },
-    sendMessage(event) {
+    sendMessage() {
   var messageContent =  this.message;
   if (messageContent.startsWith('/join ')) {
     this.enterRoom(this.roomId);
-  } else if (messageContent && this.stompClient) {
+  } else if (messageContent && defSocket.stompClient) {
     var chatMessage = {
         userName: localStorage.getItem('nickname'),
         content: this.message,
         time: this.$moment(new Date()).format('YYYY-MM-DD HH:mm'),
         tagName:this.tagLists,
         state:"community",
-       // url:this.document.location.href,
+       // url:document.location.href,
     };
     console.log('보낸 message 정보'+chatMessage)
-    this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`
+    defSocket.stompClient.send(`/app/chat/${this.roomId}/sendMessage`
     , JSON.stringify(chatMessage));
   }
   this.message = '';
   this.tagLists=[];
-  event.preventDefault();
+ // event.preventDefault();
 },
-connect(event) {
+connect() {
   var username = localStorage.getItem('nickname');
   //Cookies.set('name', username);
   if (username) {
-   // usernamePage.classList.add('hidden');
-   // chatPage.classList.remove('hidden');
    // var socket = new SockJS('http://localhost:3000/ws');
-    this.stompClient = Stomp.over(defSocket.socket);
-    this.stompClient.connect({}, this.onConnected, this.onError);
+    defSocket.stompClient
+    this.onConnected()
+    console.log("connect 실행")
   }
-  event.preventDefault();
+ // event.preventDefault();
 },
     onMessageReceived(payload) {
   var message = JSON.parse(payload.body);
   console.log('커뮤-받는 message 정보'+message)
 console.log(message)
 this.recvList.push(message)
-  //var messageElement = document.createElement('li'); 
 },
 enterRoom(roomId) {
-  //Cookies.set('roomId', roomId);
-  //roomIdDisplay.textContent = roomId;
+  console.log("커뮤 connect")
   var topic = `/app/chat/${roomId}`;
-  var currentSubscription = this.stompClient.subscribe(`/channel/${roomId}`, this.onMessageReceived); // eslint-disable-line no-unused-vars
-  console.log(currentSubscription)
-  this.stompClient.send(`${topic}/addUser`,
+  var commuSubscription = defSocket.stompClient.subscribe(`/channel/${roomId}`, this.onMessageReceived); // eslint-disable-line no-unused-vars
+  console.log(commuSubscription)
+  defSocket.stompClient.send(`${topic}/addUser`,
     JSON.stringify({sender: localStorage.getItem('nickname')})
   );
 },
 onConnected() {
+    console.log("on-connect 시작")
   this.enterRoom(this.roomId);
   //connectingElement.classList.add('hidden');
 },

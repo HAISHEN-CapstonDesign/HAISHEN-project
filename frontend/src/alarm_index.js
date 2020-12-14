@@ -10,12 +10,16 @@ const AlarmSocket = new Vue({
             stompClient: null,
         }
     },
+    created() {
+        this.socket = new SockJS("http://localhost:3000/ws");
+        this.stompClient = Stomp.over(this.socket);
+    },
 
     methods: {
         onConnected() {
             var topic = `/app/session`; // eslint-disable-line no-unused-vars
             var currentSubscription = this.stompClient.subscribe('/server', this.onMessageReceived);
-            console.log('onconnect????')
+            //    console.log('onconnect????')
             console.log(currentSubscription)
             this.stompClient.send(`${topic}/addUser`,
                 JSON.stringify({ sender: localStorage.getItem('nickname') })
@@ -28,8 +32,7 @@ const AlarmSocket = new Vue({
         },
         connectWs() {
             console.log('connect 테스트')
-            this.socket = new SockJS("http://localhost:3000/ws");
-            this.stompClient = Stomp.over(this.socket);
+
             this.stompClient.connect({}, this.onConnected);
 
 
