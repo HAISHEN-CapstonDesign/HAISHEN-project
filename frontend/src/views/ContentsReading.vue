@@ -16,9 +16,17 @@
           align="center"
           justify="center"
         >
-          <p style="font-size:40px">기획자의 트렌드, 소통, 배움, 이타심</p>
+          <p style="font-size:40px">{{title}}</p>
           <v-spacer class="pt-5"></v-spacer>
-          <div>By. Jennie。hello</div>
+          <!-- <div>By. Jennie。hello</div> -->
+          <v-row justify="center">
+                <div>By.  </div>
+                <div 
+                v-for="writer in writerList"
+                :key="writer"
+                >{{writer.nickname}}</div>
+          </v-row>
+          
           <div>2020 년 11 월 22 일</div>
         </v-col>
         </v-row>
@@ -32,7 +40,7 @@
         sm="4"
         md="3"
         >
-            <Subtitle v-bind:title="title" @selectIndex="selectIndex"></Subtitle>
+            <Subtitle v-bind:title="title" @selectIndex="selectIndex" v-bind:indexList="indexList"></Subtitle>
         </v-col>
         <v-col
         sm="6"
@@ -55,12 +63,15 @@
           </v-row>
             
             <v-row>
-            <v-chip
-            color="grey"
-            class="ml-3 mb-2"
-            >
-            <p style="color:white">I T</p>
-            </v-chip>
+              <v-chip
+                v-for="tag in tagList"
+                :key="tag"
+                v-text="tag"
+                color="grey"
+                class="ml-3 mb-2"
+              >
+              <!-- <p style="color:white"></p> -->
+              </v-chip>
             <v-spacer></v-spacer>
               <v-rating
                 background-color="grey"
@@ -281,8 +292,9 @@ export default {
         idc: 1,
         idp:0,
         date: '2020.10.12 05:55',
-        writer: ['김김김', '이이이', '박박박'],
+        writerList: [],
         selected_idx: 0,
+ 
         // router :to="{ 
         //       name: 'ContentsReadingPage',
         //       params: {idc: this.selected_idx}}"
@@ -290,9 +302,71 @@ export default {
         temp_title_index:3,
         new_selected_idx: 1,
         comment_selected_idx: 3,
+        indexList:[]
+        
         // token: localStorage.getItem('access_token'),
         // idp:0,
   }),
+    created(){ 
+    this.idc = this.$route.params.idc;
+    this.idp = this.$route.params.idp;
+    console.log(this.idc);
+    console.log(this.idp);
+    axios.post('http://localhost:3000/api/getContentsReading', 
+        {projectId: this.idp, postIndex:this.idc},
+        {
+            headers: {
+                'token': localStorage.getItem('access_token')
+            }
+        })
+        .then((res) => {
+            console.log(res.data);
+
+            this.title = res.data.title;
+            this.subtitle_1 = res.data.subtitle;
+            this.tagList = res.data.tagList
+            this.writerList = res.data.writerNicknameList
+            
+            // {
+            //   completePost: null
+            //   complete_time: null
+            //   projectId: 171
+            //   starRate: 4
+            //   subtitle: "크런치 프로젝트란"
+            //   tagList: []
+            //   title: "캡스톤디자인! 크런치 프로젝트의 운명은..? "
+            //   writerNicknameList: Array(1)
+            //     0: {userId: 78, nickname: "mumu"
+            // }
+        })
+        .catch(function (error) {
+            console.log(error.response);
+        });
+
+    axios.post('http://localhost:3000/api/getContentsReadingIndexList', 
+        {id: this.idp},
+        {
+            headers: {
+                'token': localStorage.getItem('access_token')
+            }
+        })
+        .then((res) => {
+            console.log(res.data);
+            // 리스트 형식
+            // {
+            //   fee: 100
+            //   indexId: 1
+            //   projectId: 171
+            //   title: "크런치 프로젝트란"
+            // }   
+            
+        this.indexList = res.data
+        })
+        .catch(function (error) {
+            console.log(error.response);
+        });
+
+  },
   methods:{
     ...mapActions(['paymentpoint']),
     selectIndex(title_idx){
@@ -424,10 +498,7 @@ export default {
         //this.$router.push(`/${this.$store.state.projectId}/basicCollaboTool/${idx}`);
      //},
   },
-  created(){ 
-    this.idc = this.$route.params.idc;
-    this.idp = this.$route.params.idp;
-  },
+
   mounted(){
      $('#dwn-btn').click(function() {
   //pdf_wrap을 canvas객체로 변환

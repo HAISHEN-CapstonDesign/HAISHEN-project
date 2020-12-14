@@ -15,22 +15,24 @@
           </v-list-item>
           <v-divider></v-divider>
           <v-list-item
-          v-for="little_title in little_titles"
-          :key="little_title"
-          @click="clickSub(little_title.idx)"
+          v-for="index in indexList"
+          :key="index"
+          @click="clickSub(index.index)"
           link
           >
             <v-list-item-content>
-              <v-list-item-title>{{little_title.idx}}. {{ little_title.text }}</v-list-item-title>
+              <v-list-item-title>{{index.indexId}}. {{ index.title }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+
         </v-list>
       </v-navigation-drawer>
-            </v-card>
+	</v-card>
 </template>
 <script>
 import $ from 'jquery';
 export default {
+
     mounted(){
     //list가 스크롤을 따라오게 하는 코드
     $(document).ready(function() {
@@ -44,13 +46,15 @@ export default {
 	}).scroll();
     });
     },
-    props: ['title', 'selectIndex'],
+    props: ['title', 'selectIndex', 'indexList'],
     created() {
-      this.little_titles=this.$store.state.subtitle
+		// this.little_titles=this.$store.state.subtitle
+
     },
     data() {
         return {
-            //sample
+			//sample
+			// subtitleList: this.indexList,
             little_titles: [],
         }
     },
