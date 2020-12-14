@@ -11,7 +11,7 @@
                     md="3"
                     >
                     <!-- 임의로 ContentsReadingPage에 연결해둠 -->
-                        <v-card width="270px" height="280px" @click="$router.push({name:'ContentsReadingPage',params:{idp:i, idc:1}})">
+                        <v-card width="270px" height="280px" @click="$router.push({name:'ContentsReadingPage',params:{idp:list.projectId, idc:1}})">
                             <!--
                             <v-img
                             :src="`https://picsum.photos/200/300?image=${getImage()}`"
@@ -139,6 +139,7 @@ export default {
                     show: false,
                     like: 3,
                     subscribe: 2,
+                    projectId: 0
                 },
                 {
                     title:'수학 문제를 질문할 때',
@@ -148,6 +149,7 @@ export default {
                     show: false,
                     like: 48,
                     subscribe: 29,
+                    projectId: 1
                 },
                 {
                     title:'좀 재밌는 수학 이야기',
@@ -157,6 +159,7 @@ export default {
                     show: false,
                     like: 33,
                     subscribe: 21,
+                    projectId: 2
                 },
                 {
                     title:'앤드류 응의 머신러닝(13-1):비지도학습 클러스터링',
@@ -166,6 +169,7 @@ export default {
                     show: false,
                     targetNum:4,
                     memberNum:2,
+                    projectId: 3
                 },
             ],
         }

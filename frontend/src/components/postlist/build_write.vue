@@ -11,7 +11,7 @@
                     md="3"
                     >
                     <!-- 임의로 ContentsReadingPage에 연결해둠 -->
-                        <v-card width="270px" height="280px" @click="$router.push({name:'ContentsReadingPage',params:{idp:i, idc:1}})">
+                        <v-card width="270px" height="280px" @click="$router.push({name:'ContentsReadingPage',params:{idp:list.projectId, idc:1}})">
                             <!--
                             <v-img
                             :src="`https://picsum.photos/200/300?image=${getImage()}`"
@@ -124,6 +124,7 @@ export default {
                     show: false,
                     like: 3,
                     subscribe: 2,
+                    projectId: 0
                 },
                 {
                     title:'건축=인생을 배우다.',
@@ -133,6 +134,7 @@ export default {
                     show: false,
                     like: 48,
                     subscribe: 29,
+                    projectId: 1
                 }
             ],
         }
