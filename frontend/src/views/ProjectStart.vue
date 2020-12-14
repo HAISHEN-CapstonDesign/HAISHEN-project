@@ -255,17 +255,17 @@ export default {
             this.imageUrl = URL.createObjectURL(file);
         },
         upload(){
-            var data = new FormData();
-            var file = this.$refs.photofile.files[0];
-            data.append('img', file);
+            // var data = new FormData();
+            // var file = this.$refs.photofile.files[0];
+            // data.append('img', file);
 
-            axios.post('/api/project/startup/banner', data, {id:200})
-            .then(res=>{
-                this.result = res.data;
-            })
-            .catch((err) => {
-                    console.log(err)
-            });
+            // axios.post('/api/project/startup/banner', data, {id:200})
+            // .then(res=>{
+            //     // this.result = res.data;
+            // })
+            // .catch((err) => {
+            //         console.log(err)
+            // });
         },        
         createProject(){
             
@@ -284,6 +284,21 @@ export default {
                 .then(res => {
                     console.log(res)
                     this.projectId = res.data
+                    alert("프로젝트가 등록되었습니다!")
+
+                    var imgData = new FormData();
+                    var file = this.$refs.photofile.files[0];
+                    imgData.append('img', file);
+
+                    axios.post(`/api/${this.projectId}/startup/banner`, imgData, {id:this.projectId} )
+                    .then(res=>{
+                        console.log(res.data);
+
+                        this.$router.push({path:`/${this.projectId}/CollaboProjMain`, query: {projectId: this.projectId}})
+                    })
+                    .catch((err) => {
+                            console.log(err)
+                    });
                     
                     
                 })
@@ -291,18 +306,7 @@ export default {
                     console.log(err)
                 });
 
-            var imgData = new FormData();
-            var file = this.$refs.photofile.files[0];
-            imgData.append('img', file);
-
-            axios.post('/api/project/startup/banner', imgData, {id:this.projectId})
-            .then(res=>{
-                this.result = res.data;
-                this.$router.push({path:`/${res.data}/CollaboProjMain`, query: {projectId: res.data}})
-            })
-            .catch((err) => {
-                    console.log(err)
-            });
+            
                 
         }
     },
