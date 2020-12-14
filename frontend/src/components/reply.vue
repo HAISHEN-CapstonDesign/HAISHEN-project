@@ -51,11 +51,11 @@
                         </v-col>
                         <v-col cols=10 class="ml-2">
                             <div>
-                                <p style="font-size:14px; color:grey">{{item.subtitle}} -
-                                {{item.date}}</p>
+                                <p style="font-size:14px; color:grey">{{item.nickname}} -
+                                {{item.time}}</p>
                             </div>
                             <div>
-                                <p>{{item.title}}</p>
+                                <p>{{item.text}}</p>
                             </div>
                             
                         </v-col>
@@ -98,33 +98,64 @@ export default {
         value: '댓글을 입력하세요',
         // replyNum: ,
         items: [
-            { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', 
-                title: `기획자의 트렌드에 대해서 알 수 있었습니다 감사합니다.`, 
-                subtitle: '기획자할래',
-                date: '2020.10.25'
-            },
-            { avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg', 
-                subtitle: 'crunch_good', 
-                title: '좋은글 감사합니다!', 
-                date: '2020.10.25'
-            },
-            { avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg', 
-                subtitle: 'finn', 
-                title: '추천 누르고 갑니다!',
-                date: '2020.10.25'
-            },
+            // { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', 
+            //     title: `기획자의 트렌드에 대해서 알 수 있었습니다 감사합니다.`, 
+            //     subtitle: '기획자할래',
+            //     date: '2020.10.25'
+            // },
+            // { avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg', 
+            //     subtitle: 'crunch_good', 
+            //     title: '좋은글 감사합니다!', 
+            //     date: '2020.10.25'
+            // },
+            // { avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg', 
+            //     subtitle: 'finn', 
+            //     title: '추천 누르고 갑니다!',
+            //     date: '2020.10.25'
+            // },
+            // ==============================================================
+            // {
+            //     indexId: 1
+            //     nickname: "mumu"
+            //     projectId: 174
+            //     text: "ㄴㅁㅇㅎㅁㄴㅇㅎㅁㄴㅇㅎㅁ"
+            //     time: "2020-12-14 00:00:00"
+            //     userId: 78
+            // }
         ]
     }),
     props:['idp','idc'],
     created() {
       this.getcomment()
       console.log('items url :'+this.items[0].avatar)
+
+
     },
     methods:{
         star(){
-           
-            alert("별점이 등록되었습니다!" )
-             this.star_rating = 0;
+            console.log(this.star_rating)
+           axios
+                .post('http://localhost:3000/api/addRating',
+                    { projectId: this.idp, indexId: this.idc, rate: this.star_rating}, 
+                    { headers: {'token':localStorage.getItem('access_token') }}
+                )
+                .then(res => {
+                    console.log((res.data)) 
+                    // res.data 는 true 아니면 false
+                    // true면 처음 별점 넣는거
+                    // false면 이미 별점 준거
+                    if(res.data ==true) alert("별점이 등록되었습니다!" )
+                    else if(res.data ==false) alert("이미 별점을 등록한 포스트 입니다")
+
+                })
+                .catch((err) => {
+                    console.log(err)
+                    //alert("에러가 발생했습니다. 다시 시도해주세요")
+                });
+            
+            this.star_rating = 0;
+
+
         },
         clickmethod: function(){
             alert("dsfsdf")
@@ -133,6 +164,24 @@ export default {
             alert(this.items.length)
         },
         pushSubmit(){
+            console.log("###########")
+            console.log(this.idp)
+            console.log(this.idc)
+            console.log(this.message)
+            axios
+                .post('http://localhost:3000/api/submitComment',
+                { projectId: this.idp , postindexId: this.idc, text:this.message }, 
+                { headers: {'token':localStorage.getItem('access_token') }}
+                )
+                .then(res => {
+                        // localStorage.setItem('point',this.chargePoint)
+                        console.log("~~~~~~~~~~~~~~~~~")
+                        console.log((res.data))                    
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        //alert("에러가 발생했습니다. 다시 시도해주세요")
+                    });
             let today = new Date();   
             this.items.push({
                 avatar: require('../assets/face_10.jpg'), //여기서 본인 사진넣기
@@ -142,20 +191,41 @@ export default {
             })
             this.textClear()
 
+
+
         },
         textClear(){
             this.message='';
         },
         getcomment(){
+        console.log("$$%$%$%$%$%")
         console.log(this.idp, this.idc)
         axios
-            .post('http://localhost:3000/api/getcomment',
+            .post('http://localhost:3000/api/getCommentList',
             { projectId: this.idp , postIndex: this.idc}, 
-            { headers: {'token': this.token}}
+            { headers: {'token': localStorage.getItem('access_token')}}
             )
             .then(res => {
                     // localStorage.setItem('point',this.chargePoint)
+                    console.log("~~~~~~~~~~~~~~~~~")
                     console.log((res.data))
+                    // {
+                    //     indexId: 1
+                    //     nickname: "mumu"
+                    //     projectId: 174
+                    //     text: "ㄴㅁㅇㅎㅁㄴㅇㅎㅁㄴㅇㅎㅁ"
+                    //     time: "2020-12-14 00:00:00"
+                    //     userId: 78
+                    // }
+                    this.items = res.data
+                    this.items.forEach((element, idx) => {
+                        var dateArr = element.time.split('-');
+                        var dateString = dateArr[0]+'년 '+ dateArr[1]+'월 '+ dateArr[2].split(" ")[0]+'일'
+                        this.items[idx].time = dateString
+                        this.items[idx].avatar = 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
+                        
+                    });
+
                 
                 })
                 .catch((err) => {

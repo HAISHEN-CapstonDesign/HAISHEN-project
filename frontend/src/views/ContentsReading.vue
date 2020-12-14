@@ -302,7 +302,9 @@ export default {
         temp_title_index:3,
         new_selected_idx: 1,
         comment_selected_idx: 3,
-        indexList:[]
+        indexList:[],
+        tagList:[],
+        
         
         // token: localStorage.getItem('access_token'),
         // idp:0,
