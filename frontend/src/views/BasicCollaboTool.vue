@@ -98,7 +98,7 @@
           <v-row justify="center">
                 <div>By.  </div>
                 <div 
-                v-for="writer in writerCrew"
+                v-for="writer in writerList"
                 :key="writer"
                 >{{writer.writerName}}</div>
           </v-row>
@@ -265,7 +265,7 @@ export default {
             // {userId: 78, nickname: "mumu", mainOrnot: 1}
             this.getData.forEach(element => {
               
-              this.writerCrew.push(element);
+              this.writerList.push(element);
             });
             
 
@@ -350,6 +350,7 @@ export default {
         return{
             // title:'',
             getData:'',
+            writerList:[],
             banner_src:'',
             projectTitle:'',
             little_titles:[],
