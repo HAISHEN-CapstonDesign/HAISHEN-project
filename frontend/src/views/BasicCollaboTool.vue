@@ -78,7 +78,7 @@
         class="white--text"
         max-height="200"
         max-width="100%"
-        v-bind:src="imgUrl"
+        v-bind:src="banner_src"
         gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
         >
         <v-row
@@ -90,9 +90,18 @@
           align="center"
           justify="center"
         >
+
           <p style="font-size:40px">{{projectTitle}}</p>
+
           <v-spacer class="pt-5"></v-spacer>
-          <div>By. Jennie。hello</div>
+          <!-- <div>By. Jennie。hello</div> -->
+          <v-row justify="center">
+                <div>By.  </div>
+                <div 
+                v-for="writer in writerCrew"
+                :key="writer"
+                >{{writer.nickname}}</div>
+          </v-row>
         </v-col>
         </v-row>
       </v-img>
@@ -241,11 +250,11 @@ export default {
       var color=['#ff7777','#ffc455','#68BE66','#689CDD','#9668DD','#ff62f5']
       this.idp = this.$route.params.idp;
       this.ids = this.$route.params.ids;
-      
+      this.banner_src = require(`../assets/img/projectBanner/${this.idp}.jpg`)
     // this.subtitle=this.$store.state.subtitle[this.ids-1].text
       this.title=this.$store.state.title;
       axios.post('http://localhost:3000/api/getTitle', 
-          { projectId: this.idp}, 
+          { id: this.idp}, 
           { headers: {'token':localStorage.getItem('access_token') }})
         .then(res=>{
             this.projectTitle= res.data
@@ -255,10 +264,28 @@ export default {
         .catch((err) => {
                 console.log(err)
         });
+      axios.post('http://localhost:3000/api/getWriterListOfBasicCollaboTool', 
+          { id: this.idp}, 
+          { headers: {'token':localStorage.getItem('access_token') }})
+        .then(res=>{
+            console.log(res.data)
+            this.getData=res.data;
+            // {userId: 78, nickname: "mumu", mainOrnot: 1}
+            this.getData.forEach(element => {
+              
+              this.writerCrew.push(element);
+            });
+            
+
+        })  
+        .catch((err) => {
+                console.log(err)
+        });
       axios.get(`http://localhost:3000/api/project/${this.idp}/blob/basicTool/${this.ids}`)
         .then((res) => {
           this.project = res.data;
           this.nowMainText = this.project.post;
+          
           //this.imgUrl = this.project.s3key;
           this.modifying = this.project.modifying;
           this.$store.commit('isModifying', this.modifying)
@@ -329,6 +356,9 @@ export default {
     },
     data() {
         return{
+            // title:'',
+            getData:'',
+            banner_src:'',
             projectTitle:'',
             little_titles:[],
             postDetail:[],
