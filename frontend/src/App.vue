@@ -207,9 +207,12 @@ export default {
             } else {
                 console.log(val)
             }
-        }
+        },
+
     },
     methods: {
+       
+
         to_main() {
             this.$router.push('/');
         },

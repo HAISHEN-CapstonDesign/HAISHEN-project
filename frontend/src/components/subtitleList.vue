@@ -9,7 +9,7 @@
           rounded
           v-model="little_title"
         >
-          <v-list-item>
+          <v-list-item @click="clickTitle">
             <v-list-item-content>
               <v-list-item-title>{{title}}</v-list-item-title>
             </v-list-item-content>
@@ -98,6 +98,9 @@ export default {
       //  this.$set(this.little_titles[idx], "selected", true)
         console.log(this.little_titles[idx])
         this.$emit('changeSubtitle', idx)
+      },
+      clickTitle(){
+        this.$emit('mainCommu')
       },
 
       // test(){

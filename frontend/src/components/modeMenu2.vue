@@ -82,21 +82,18 @@ export default {
     },
     methods: {
         clickCommunity(){
-        this.$router.push('/community');
+       this.$router.push(`/${this.idp}/0/community`);
       },
       clickHistory(){
         this.$router.push(`/${this.idp}/${this.ids}/historyPage`);
       },
       clickMain(){
-        //나중에 경로 수정
         this.$router.push(`/${this.idp}/basicCollaboTool/${this.ids}`);
       },
       clickWriter(){
-//페이지 이동
         this.$router.push(`/${this.idp}/writerList`);
       },
       clickRevert(){
-//되돌리기
         this.$emit('revert');
       },
     },
