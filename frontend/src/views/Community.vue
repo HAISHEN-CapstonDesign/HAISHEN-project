@@ -151,9 +151,9 @@
 <script>
 import axios from 'axios'
 import Subtitle from '../components/subtitleList'
-//import Stomp from 'webstomp-client'
-import defSocket from '../alarm_index.js'
-//import SockJS from 'sockjs-client'
+import Stomp from 'webstomp-client'
+//import this from '../alarm_index.js'
+import SockJS from 'sockjs-client'
 
 export default {
     components:{
@@ -302,7 +302,7 @@ export default {
   var messageContent =  this.message;
   if (messageContent.startsWith('/join ')) {
     this.enterRoom(this.roomId);
-  } else if (messageContent && defSocket.stompClient) {
+  } else if (messageContent && this.stompClient) {
     var chatMessage = {
         userName: localStorage.getItem('nickname'),
         content: this.message,
@@ -312,7 +312,7 @@ export default {
        // url:document.location.href,
     };
     console.log('보낸 message 정보'+chatMessage)
-    defSocket.stompClient.send(`/app/chat/${this.roomId}/sendMessage`
+    this.stompClient.send(`/app/chat/${this.roomId}/sendMessage`
     , JSON.stringify(chatMessage));
   }
   this.message = '';
@@ -323,8 +323,8 @@ connect() {
   var username = localStorage.getItem('nickname');
   //Cookies.set('name', username);
   if (username) {
-   // var socket = new SockJS('http://localhost:3000/ws');
-    defSocket.stompClient
+    var socket = new SockJS('http://localhost:3000/ws');
+    this.stompClient = Stomp.over(socket);
     this.onConnected()
     console.log("connect 실행")
   }
@@ -339,17 +339,11 @@ this.recvList.push(message)
 enterRoom(roomId) {
   console.log("커뮤 connect")
   var topic = `/app/chat/${roomId}`;
-  var commuSubscription = defSocket.stompClient.subscribe(`/channel/${roomId}`, this.onMessageReceived); // eslint-disable-line no-unused-vars
+  var commuSubscription = this.stompClient.subscribe(`/channel/${roomId}`, this.onMessageReceived); // eslint-disable-line no-unused-vars
   console.log(commuSubscription)
-  defSocket.stompClient.send(`${topic}/addUser`,
+  this.stompClient.send(`${topic}/addUser`,
     JSON.stringify({sender: localStorage.getItem('nickname')})
   );
-  var currentSubscription = defSocket.stompClient.subscribe('/channel/main', this.onMessageReceived);
-            //    console.log('onconnect????')
-            console.log(currentSubscription)
-            defSocket.stompClient.send(`/private/session/addUser`,
-                JSON.stringify({ sender: localStorage.getItem('nickname') })
-            );
 },
 onConnected() {
     console.log("on-connect 시작")

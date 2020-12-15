@@ -9,8 +9,8 @@ import VModal from 'vue-js-modal'
 import VueSplide from '@splidejs/vue-splide';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
-import alarm from './alarm_index.js'
-import $ from 'jquery';
+//import alarm from './alarm_index.js'
+//import $ from 'jquery';
 // import VueJsModal from 'plugin'
 
 
@@ -35,12 +35,12 @@ Vue.use(BootstrapVue)
     // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
-$(document).ready(function() {
+/*$(document).ready(function() {
     //  if (localStorage.getItem('nickname') != null) {
     alarm.connectWs();
     //  }
 
-});
+});*/
 
 new Vue({
     vuetify,
@@ -50,6 +50,6 @@ new Vue({
     },
     router, // add router
     store,
-    alarm,
+    //   alarm,
 
 }).$mount('#app')
