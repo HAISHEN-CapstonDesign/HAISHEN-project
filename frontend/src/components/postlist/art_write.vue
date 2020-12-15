@@ -76,13 +76,13 @@ export default {
                             {
                                 title: element.title,
                                 info: element.info,
-                                src: require('../../assets/contents_picture/travel_temz.jpg'),
+                                src: require(`../../assets/img/projectBanner/${element.projectId}.jpg`),
                                 members: element.writeList,
                                 show: false,
                                 like: element.LikeNum,
                                 subscribe: 2,
                             }
-                            
+                            //this.banner_src = require(`../assets/img/projectBanner/${this.idp}.jpg`)
                         )
                     })
                     console.log('booklist :'+JSON.stringify(this.bookList))

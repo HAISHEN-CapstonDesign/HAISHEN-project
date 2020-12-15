@@ -69,13 +69,15 @@ export default {
                     // this.tempbookList.push(res.data)
                     // this.bookList = JSON.stringify(this.tempbookList)
                     //this.bookList.push.apply(this.bookList,res.data)
+                    console.log('projectID :'+ res.data.projectId)
                     this.tempbookList = res.data;
                     this.tempbookList.forEach(element => {
                         this.bookList.push(
                             {
                                 title: element.title,
                                 info: element.info,
-                                src: require('../../assets/contents_picture/travel_temz.jpg'),
+                                //src: require(`../../assets/img/projectBanner/${element.projectId}.jpg`),
+                                src: require(`../../assets/img/projectBanner/${element.projectId}.jpg`),
                                 members: element.writeList,
                                 show: false,
                                 like: element.LikeNum,
@@ -85,6 +87,7 @@ export default {
                             
                         )
                     })
+                    console.log('projectID :'+ res.data.projectId)
                     console.log('booklist :'+JSON.stringify(this.bookList))
                     console.log('tempbooklist :'+JSON.stringify(this.tempbookList))
                 })

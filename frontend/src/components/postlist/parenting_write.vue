@@ -75,7 +75,7 @@ export default {
                             {
                                 title: element.title,
                                 info: element.info,
-                                src: require('../../assets/contents_picture/travel_temz.jpg'),
+                                src: require(`../../assets/img/projectBanner/${element.projectId}.jpg`),
                                 members: element.writeList,
                                 show: false,
                                 like: element.LikeNum,
