@@ -218,7 +218,7 @@ export default {
               }
                     }
                     this.connect()
-                //    console.log(res.data);
+                    console.log(res.data);
                 })
                 .catch((err) => {
                     console.log(err)
@@ -328,7 +328,7 @@ connect() {
   if (username) {
     var socket = new SockJS('http://localhost:3000/ws');
     this.stompClient = Stomp.over(socket);
-    this.onConnected()
+    this.stompClient.connect({},this.onConnected);
     console.log("connect 실행")
   }
  // event.preventDefault();
