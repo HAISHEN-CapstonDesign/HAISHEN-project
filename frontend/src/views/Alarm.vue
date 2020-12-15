@@ -12,7 +12,7 @@
           <v-card outlined tile>
             <v-list class="pa-0">
               <v-list-item-group
-              v-model="model"
+              v-model="deleteList"
               multiple
               >
                 <template v-for="(item, i) in items">
@@ -25,7 +25,7 @@
                   active-class="brown--text text--accent-4"
                   >
                     <template v-slot:default="{ active }">
-                      <v-list-item-content @click="$router.push(item.path)">
+                      <v-list-item-content @click="$router.push(item.url)">
                         <v-list-item-title v-text="item.text"></v-list-item-title>
                       </v-list-item-content>
 
@@ -53,33 +53,58 @@
 </template>
 
 <script>
+//import axios from 'axios'
   export default {
+    created(){
+      /*
+      axios.get(`http://localhost:3000/api/project/...`)
+        .then((res) => {
+          this.items = res.data;
+          for(var i=0; i<res.data.length; i++){
+            if(res.data[i].state == "community"){
+              state에 따라서 text 정하는 코드
+            }
+          }
+          
+          console.log(res.data);
+        })
+        .catch(function (error) {
+          console.log(error.config);
+        });
+      */
+    },
     data: () => ({
       items: [
         {
-          id:1,
           text:'(1번프로젝트-목차6번)의 커뮤니티에서 (닉네임)님을 태그하였습니다.1',
-          path:`/${1}/${6}/community`
+          url:`/${1}/${6}/community`
         },
         {
-          id:1,
           text:'(1번프로젝트-목차6번)의 커뮤니티에서 (닉네임)님을 태그하였습니다.2',
-          path:`/${1}/${6}/community`
+          url:`/${1}/${6}/community`
         },
         {
-          id:1,
           text:'(1번프로젝트-목차6번)의 커뮤니티에서 (닉네임)님을 태그하였습니다.3',
-          path:`/${1}/${6}/community`
+          url:`/${1}/${6}/community`
         },
       ],
-      model: [],
+      deleteList: [],
     }),
     methods:{
       deleteAlarm(){
-        for(var i=0; 0<this.model.length;i++){
-          this.items.splice(this.model[0]-i,1);
-          this.model.splice(0,1);
+        for(var i=0; 0<this.deleteList.length;i++){
+          this.items.splice(this.deleteList[0]-i,1);
+          this.deleteList.splice(0,1);
         }
+        /* 삭제 후 list 보내기
+        axios.post('/api/project/...', this.items, { headers: {'token': localStorage.getItem('access_token')}})
+          .then(res => {
+            console.log(res)   
+          })
+          .catch((err) => {
+            console.log(err)
+          });
+        */
       },
     },
   }
