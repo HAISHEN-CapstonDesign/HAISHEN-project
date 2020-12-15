@@ -100,7 +100,7 @@
                 <div 
                 v-for="writer in writerCrew"
                 :key="writer"
-                >{{writer.nickname}}</div>
+                >{{writer.writerName}}</div>
           </v-row>
         </v-col>
         </v-row>
@@ -123,24 +123,16 @@
     <!-- 개별 작성 페이지-->
     <v-container fluid grid-list-sm pa-5 pt-0>
       <v-row col="12" class="ma-0 pa-0" justify="end">
-        <v-col md="3" class="ma-0 pa-0" align="center">
-          <!-- 이미지 연결 되면 writerCrew로 변경 -->
-          <v-avatar
-          v-for="(avatar, i) in avatars"
+        <v-col md="2" class="ma-0 pa10" align="center">
+          
+          <div
+          style="width: 50px; float:right;"
+          v-for="(writers, i) in writerCrew"
           :key="i"
           :id="'border'+i"
           >
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-            <v-img
-            v-bind="attrs"
-          v-on="on"
-            :src="avatar.src"
-            ></v-img>
-            </template>
-          <span>{{avatar.writerName}}</span>
-          </v-tooltip>
-          </v-avatar>
+          {{writers.writerName}}
+          </div>
           
         </v-col>
       </v-row>
@@ -338,6 +330,12 @@ export default {
             // console.log(this.little_titles)
             // console.log(this.little_titles[0].text)
             this.subtitle = this.little_titles[this.ids-1].text;
+            // this.little_titles=[{idx:1, text:"ddd"}]
+            // this.res.data.forEach(element => {
+            //     // this.little_titles.push({idx:element.id, text:element.title})
+            //     console.log(element)
+            // });
+          
           
         })
         .catch((err) => {
@@ -377,19 +375,19 @@ export default {
             avatars:[
               {
                 src: require('@/assets/jenny2.jpg'),
-                writerName:"작가1"
+                name:"작가1"
               },
               {
                 src: require('@/assets/jenny2.jpg'),
-                writerName:"작가2"
+                name:"작가2"
               },
               {
                 src: require('@/assets/jenny2.jpg'),
-                writerName:"작가3"
+                name:"작가3"
               },
               {
                 src: require('@/assets/jenny2.jpg'),
-                writerName:"작가4"
+                name:"작가4"
               },
             ],
             comment:'',
@@ -456,7 +454,6 @@ export default {
       },
       uploadFile(fileText){
         this.nowMainText = fileText;
-      //  console.log(fileText)
         this.isEditing = true;
       },
       clickSubmit(newText, imgfile){

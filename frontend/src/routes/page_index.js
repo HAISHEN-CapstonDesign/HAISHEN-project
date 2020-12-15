@@ -214,7 +214,9 @@ const vueRouter = new VueRouter({
             component: diff,
         },
 
-    ]
+    ],
+    scrollBehavior(to, from, savedPosition) { return { x: 0, y: 0 } } // eslint-disable-line no-unused-vars
+
 })
 
 export default vueRouter;
