@@ -166,6 +166,17 @@ export default {
         this.ids = this.$route.params.ids;
        // this.subtitle=this.$store.state.subtitle[this.ids-1].text
         console.log("88")
+        axios.post('http://localhost:3000/api/getTitle', 
+          { id: this.idp}, 
+          { headers: {'token':localStorage.getItem('access_token') }})
+        .then(res=>{
+            console.log(res.data)
+            this.title = res.data
+            
+        })
+        .catch((err) => {
+                console.log(err)
+        });
         axios
             .get(`http://localhost:3000/api/project/${this.idp}/index/${this.ids}/CommunityBlob`)
                 .then(res => {

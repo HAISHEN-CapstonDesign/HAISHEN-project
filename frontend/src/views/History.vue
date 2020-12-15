@@ -4,8 +4,8 @@
             <v-row>
                 <v-col md="10">
                     <div style="float:right; font-size:25px; color:#A06641;">HISTORY</div>
-                    <div style="display: inline-block; font-size:25px; color:#A06641;">{{$store.state.title}}</div>
-                    <div style="display: inline-block; font-size:20px; color:#A06641;">_{{$store.state.subtitle[this.ids-1].text}}</div>
+                    <div style="display: inline-block; font-size:25px; color:#A06641;">{{title}}</div>
+                    <div style="display: inline-block; font-size:20px; color:#A06641;">_{{subtitle}}</div>
                     <v-card color="#FFEFD5">
                         <v-list color="#FFEFD5">
                             <v-list-item>
@@ -75,6 +75,28 @@ export default {
     created() {
         this.idp = this.$route.params.idp;
         this.ids = this.$route.params.ids;
+        axios.post('http://localhost:3000/api/getTitle', 
+          { id: this.idp}, 
+          { headers: {'token':localStorage.getItem('access_token') }})
+        .then(res=>{
+            console.log(res.data)
+            this.title = res.data
+            
+        })
+        .catch((err) => {
+                console.log(err)
+        });
+        axios.post('http://localhost:3000/api/getSubtitle', 
+          { projectId: this.idp, postIndex: this.ids }, 
+          { headers: {'token':localStorage.getItem('access_token') }})
+        .then(res=>{
+            console.log(res.data)
+            this.subtitle = res.data
+            
+        })
+        .catch((err) => {
+                console.log(err)
+        });
         axios.get(`http://localhost:3000/api/project/${this.idp}/commit/basicTool/${this.ids}`)
         .then((res) => {
           this.histories = res.data;
@@ -87,6 +109,9 @@ export default {
     },
     data(){
         return{
+
+            title:'',
+            subtitle:'',
             isHistory:2, //히스토리 페이지에서 클릭
             idp:0,
             ids:0,
