@@ -90,7 +90,7 @@
           align="center"
           justify="center"
         >
-          <p style="font-size:40px">기획자의 트렌드, 소통, 배움, 이타심</p>
+          <p style="font-size:40px">{{projectTitle}}</p>
           <v-spacer class="pt-5"></v-spacer>
           <div>By. Jennie。hello</div>
         </v-col>
@@ -250,7 +250,7 @@ export default {
         .then(res=>{
             this.projectTitle= res.data
             this.title = res.data
-            
+            console.log('projectTitle : '+this.projectTitle+'title : '+this.title)
         })
         .catch((err) => {
                 console.log(err)
@@ -323,9 +323,9 @@ export default {
             console.log(err)
             // alert("에러가 발생했습니다. 다시 시도해주세요")
         });
-
+      this.imgUrl=require(`../assets/img/projectBanner/${this.idp}.jpg`)
           
-          
+      
     },
     data() {
         return{
@@ -347,6 +347,7 @@ export default {
             editFiles:[],
             writerCrew:[], //프로필 사진 추가해야함 -> avatars로 대체중
             imgUrl: require('../assets/partership.jpg'),
+            //this.banner_src = require(`../assets/img/projectBanner/${this.idp}.jpg`)
             dialog:false,
             cancelDialog: false,
             avatars:[

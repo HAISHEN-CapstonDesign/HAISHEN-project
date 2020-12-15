@@ -142,20 +142,20 @@ export default {
                 .post('http://localhost:3000/api/project/indexedit',{indexId: this.lastindex ,projectId: this.idp ,title: this.lastindexTitle}, { headers: {'token': localStorage.getItem('access_token')}})
                 .then(res => {
                     axios.get(`http://localhost:3000/api/project/${this.idp}/index/${this.lastindex}/makeChatRoom`)
-            .then((res) => {
-              
-              console.log(res.data);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-                    console.log(res.data);
-                    //성공하면 100으로 응답합니당
-                })
-                .catch((err) => {
-                    console.log(err)
-                    alert("에러가 발생했습니다. 다시 시도해주세요")
-                });
+                        .then((res) => {
+                            //this.$router.go(-1)
+                        console.log(res.data);
+                        })
+                        .catch(function (error) {
+                        console.log(error);
+                        });
+                                console.log(res.data);
+                                //성공하면 100으로 응답합니당
+                            })
+                            .catch((err) => {
+                                console.log(err)
+                                alert("에러가 발생했습니다. 다시 시도해주세요")
+                            });
         }
     },
 }
