@@ -15,8 +15,9 @@
             </v-text-field>
             <v-text-field
               v-model="password"
-              label="패스워드를 입력하세요"
+              label="패스워드를 입력하세요(4자리 수 이상)"
               type="password"
+              :rules="pass_rules"
             >
             </v-text-field>
             <v-text-field
@@ -65,7 +66,8 @@ import router from '../routes/page_index.js'
 
   export default {
     data: () => ({
-      gender: ['male', 'female']
+      gender: ['male', 'female'],
+      pass_rules: [v => v.length >= 4 || 'Min 4 characters'],
     }),
     methods: {
       signUp(signUpObj) {

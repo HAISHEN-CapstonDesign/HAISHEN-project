@@ -8,8 +8,8 @@
         </v-row>
     <v-row cols="12">
         <v-col md="2">
-            <v-card flat tile outlined style="border: 2px solid #36B8B2;" class="text-center">공용 채팅방</v-card>
-            <Subtitle v-bind:title="title" @changeSubtitle="changeSubtitle"></Subtitle>
+            <v-card flat tile outlined style="border: 2px solid #36B8B2;" class="text-center" @click="$router.push(`/${idp}/basicCollaboTool/1`)">돌아가기</v-card>
+            <Subtitle v-bind:title="title" @changeSubtitle="changeSubtitle" @mainCommu="mainCommu"></Subtitle>
         </v-col>
         <v-col md="6">
             <v-card height="668px">
@@ -256,6 +256,9 @@ export default {
     methods:{
         clickmethod: function(){
             alert("dsfsdf")
+        },
+        mainCommu(){
+            this.$router.push(`/${this.idp}/0/community`);
         },
         replyNum(){
             alert(this.items.length)
