@@ -78,7 +78,7 @@ export default {
                                 info: element.info,
                                 //src: require(`../../assets/img/projectBanner/${element.projectId}.jpg`),
                                 src: require(`../../assets/img/projectBanner/${element.projectId}.jpg`),
-                                members: element.writeList,
+                                members: element.writerList,
                                 show: false,
                                 like: element.LikeNum,
                                 subscribe: 2,

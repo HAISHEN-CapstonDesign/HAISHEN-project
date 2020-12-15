@@ -143,7 +143,7 @@ export default {
                 .then(res => {
                     axios.get(`http://localhost:3000/api/project/${this.idp}/index/${this.lastindex}/makeChatRoom`)
                         .then((res) => {
-                            //this.$router.go(-1)
+                            this.$router.go(-1)
                         console.log(res.data);
                         })
                         .catch(function (error) {
