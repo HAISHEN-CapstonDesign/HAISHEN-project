@@ -92,10 +92,12 @@
           <div v-if="idc==1" class="pt-10">
            <h3>{{subtitle_1}}</h3>
            <v-spacer class = "pt-3"></v-spacer>
-           <subtitle-2>{{contents_1}}</subtitle-2>
+           <!-- <subtitle-2 >{{contents_1}}</subtitle-2>
+           < -->
+           <div v-html="contents_1"></div>
           </div>
 
-          <div v-if="idc==1" class="pt-10">
+          <!-- <div v-if="idc==1" class="pt-10">
            <subtitle-2>{{contents_1_1}}</subtitle-2>
           </div>
 
@@ -145,7 +147,7 @@
             >
             <subtitle-2>{{list.subtitle_1}}</subtitle-2>
             <h1>test {{i}}</h1>
-            </div>
+            </div> -->
 
           </div>
 
@@ -357,6 +359,7 @@ export default {
             this.subtitle_1 = res.data.subtitle;
             this.tagList = res.data.tagList
             this.writerList = res.data.writerNicknameList
+            this.contents_1 = res.data.completePost
 
             this.contents_list.title = res.data.title;
             this.contents_list.subtitle_1 = res.data.subtitle;
