@@ -68,12 +68,12 @@ export default {
                 title: 'SiverOo',
                 support_money: 2200
               },
-              {
-                color: '#952175',
-                src: require('../assets/face_11.jpg'),
-                title: 'BBobley',
-                support_money: 800
-              },
+              // {
+              //   color: '#952175',
+              //   src: require('../assets/face_11.jpg'),
+              //   title: 'BBobley',
+              //   support_money: 800
+              // },
               
             ],
         }

@@ -4,7 +4,7 @@
         class="white--text"
         max-height="200"
         max-width="100%"
-        v-bind:src="imgUrl"
+        :src="banner_src"
         gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
         >
         <v-row
@@ -16,7 +16,7 @@
           align="center"
           justify="center"
         >
-          <p style="font-size:40px">{{ title }}</p>
+          <p style="font-size:30px">{{ title }}</p>
         </v-col>
         </v-row>
       </v-img>
@@ -160,7 +160,8 @@ export default {
             chooseList:[],
             applicants:[],
             title: '',
-            submit_selected:[]
+            submit_selected:[],
+            banner_src:'',
         }
     },
     methods: {
@@ -199,6 +200,7 @@ export default {
     },
     created(){
         this.idp = this.$route.params.idp;
+        this.banner_src = require(`../assets/img/projectBanner/${this.idp}.jpg`)
         axios //title 불러오기
             .get(`http://localhost:3000/api/${this.idp}/choosewritertitle`)
             .then(res=>{

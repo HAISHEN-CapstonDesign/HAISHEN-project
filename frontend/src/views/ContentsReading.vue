@@ -4,7 +4,7 @@
         class="white--text"
         max-height="200"
         max-width="100%"
-        v-bind:src="imgUrl"
+        :src="banner_src"
         gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
         >
         <v-row
@@ -16,15 +16,15 @@
           align="center"
           justify="center"
         >
-          <p style="font-size:40px">{{title}}</p>
+          <p style="font-size:30px">{{title}}</p>
           <v-spacer class="pt-5"></v-spacer>
           <!-- <div>By. Jennie。hello</div> -->
           <v-row justify="center">
-                <div>By.  </div>
+                <div>By。  </div>
                 <div 
                 v-for="writer in writerList"
                 :key="writer"
-                >{{writer.nickname}}</div>
+                >{{writer.nickname}}。</div>
           </v-row>
           
           <div>2020 년 11 월 22 일</div>
@@ -269,6 +269,7 @@ export default {
     
     data: () => ( 
         {
+        banner_src: '',
         rating_size: 20,
         rating_score:0,
         click_like: false,
@@ -339,6 +340,7 @@ export default {
     created(){ 
     this.idc = this.$route.params.idc;
     this.idp = this.$route.params.idp;
+    this.banner_src = require(`../assets/img/projectBanner/${this.idp}.jpg`)
     console.log('idc :'+this.idc);
     console.log('idp :'+this.idp);
     axios.post('http://localhost:3000/api/getContentsReading', 

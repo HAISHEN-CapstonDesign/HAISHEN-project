@@ -3,7 +3,7 @@
         <v-img
         max-height="200"
         max-width="100%"
-        src='../assets/partership.jpg'
+        :src="banner_src"
         gradient="to top right, rgba(150,150,150,.60), rgba(52,52,52,.7)"
         >
         <v-row
@@ -15,7 +15,7 @@
           align="center"
           justify="center"
         >
-        <p style="font-size:50px; color: white;">기획자의 트렌드, 소통, 배움, 이타심</p>
+        <p style="font-size:30px; color: white;">{{title}}</p>
         </v-col>
         </v-row>
         </v-img>
@@ -107,11 +107,22 @@ export default {
     name: 'WriterApply',
     created() {
         this.idp = this.$route.params.idp;
+        // this.idp = this.$route.params.idp;
+        this.banner_src = require(`../assets/img/projectBanner/${this.idp}.jpg`)
+                axios.post('http://localhost:3000/api/getTitle', 
+          { id: this.idp}, 
+          { headers: {'token':localStorage.getItem('access_token') }})
+        .then(res=>{
+            console.log(res.data)
+            this.title = res.data
+            
+        })
         console.log(this.idp)
     },
 
     data() {
         return{
+            banner_src: '',
             title:'',
             idp:0,
             dialog0: false,

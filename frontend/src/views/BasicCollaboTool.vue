@@ -91,16 +91,17 @@
           justify="center"
         >
 
-          <p style="font-size:40px">{{projectTitle}}</p>
+          <p style="font-size:30px">{{projectTitle}}</p>
 
           <v-spacer class="pt-5"></v-spacer>
           <!-- <div>By. Jennie。hello</div> -->
           <v-row justify="center">
-                <div>By.  </div>
+                <div>By。</div>
                 <div 
                 v-for="writer in writerList"
                 :key="writer"
-                >{{writer.writerName}}</div>
+                >{{writer.nickname}}。</div>
+                
           </v-row>
         </v-col>
         </v-row>
@@ -260,6 +261,7 @@ export default {
           { id: this.idp}, 
           { headers: {'token':localStorage.getItem('access_token') }})
         .then(res=>{
+          console.log("@@@@@@@@@@@@@@@@@@@@@@@@")
             console.log(res.data)
             this.getData=res.data;
             // {userId: 78, nickname: "mumu", mainOrnot: 1}
